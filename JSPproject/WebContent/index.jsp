@@ -19,11 +19,7 @@
 	crossorigin="anonymous"></script>
 <script src="//code.jquery.com/jquery.min.js"></script>
 
-<script type="text/javascript">
-	function button1_click() {
-		alert("버튼1을 누르셨습니다.");
-	}
-</script>
+
 
 
 <html>
@@ -33,7 +29,7 @@
 </head>
 <body>
 	<center>
-		<header style="background-color: gray">아니</header>
+		<header class="btn-light"">유주빈</header>
 		<table width="1000" height="130">
 			<tr>
 				<td colspan="2"><a href="#">조달청</a>|<a href="#">나라장터 </a>|<a
@@ -63,31 +59,76 @@
 		</table>
 		<!-- 테이블 종료 -->
 
-		<table width="1000" border="1" height="130">
+		<table width="1080">
 			<tr>
-					<div class="btn-group">
-						<button  disabled="disabled" style="width:200px" type="button" class="btn btn-secondary">세부항목</button>
-						<button  border="1" style="width:80px" type="button" class="btn btn-secondary">CPU</button>
-						<button  style="width:80px" type="button" class="btn btn-secondary">RAM</button>
-						<button  style="width:80px" type="button" class="btn btn-secondary">메인보드</button>
-						<button  style="width:80px" type="button" class="btn btn-secondary">VGA</button>
-						<button  style="width:80px" type="button" class="btn btn-secondary">SSD</button>
-						<button  style="width:80px" type="button" class="btn btn-secondary">HDD</button>
-						<button  style="width:80px" type="button" class="btn btn-secondary">ODD</button>
-						<button  style="width:80px" type="button" class="btn btn-secondary">케이스</button>
-						<button  style="width:80px" type="button" class="btn btn-secondary">파워</button>
-						<button  style="width:80px" type="button" class="btn btn-secondary">키보드</button>
-						<button  style="width:80px" type="button" class="btn btn-secondary">마우스</button>
+				<td colspan="3">
+					<div class="btn-group" class="btn btn-primary">
+						<button disabled="disabled" style="width: 200px" type="button"
+							class="btn btn-secondary">세부항목</button>
+						<button id="CPUbtn" onclick="clickMainBtn(CPUbtn);"
+							style="width: 80px" type="button" class="btn btn-secondary">CPU</button>
+						<button id="RAMbtn" onclick="clickMainBtn(RAMbtn);"
+							style="width: 80px" type="button" class="btn btn-secondary">RAM</button>
+						<button id="MAiNBOARDbtn" onclick="clickMainBtn(MAiNBOARDbtn);"
+							style="width: 80px" type="button" class="btn btn-secondary">메인보드</button>
+						<button id="VGAbtn" onclick="clickMainBtn(VGAbtn);"
+							style="width: 80px" type="button" class="btn btn-secondary">VGA</button>
+						<button id="SSDbtn" onclick="clickMainBtn(SSDbtn);"
+							style="width: 80px" type="button" class="btn btn-secondary">SSD</button>
+						<button id="HDDbtn" onclick="clickMainBtn(HDDbtn);"
+							style="width: 80px" type="button" class="btn btn-secondary">HDD</button>
+						<button id="ODDbtn" onclick="clickMainBtn(ODDbtn);"
+							style="width: 80px" type="button" class="btn btn-secondary">ODD</button>
+						<button id="CASEbtn" onclick="clickMainBtn(CASEbtn);"
+							style="width: 80px" type="button" class="btn btn-secondary">케이스</button>
+						<button id="POWERbtn" onclick="clickMainBtn(POWERbtn);"
+							style="width: 80px" type="button" class="btn btn-secondary">파워</button>
+						<button id="KEYBOARDbtn" onclick="clickMainBtn(KEYBOARDbtn);"
+							style="width: 80px" type="button" class="btn btn-secondary">키보드</button>
+						<button id="MOUSEbtn" onclick="clickMainBtn(MOUSEbtn);"
+							style="width: 80px" type="button" class="btn btn-secondary">마우스</button>
 					</div>
+				</td>
+			</tr>
+			<tr>
+				<td width="200">
+					<div class="alert alert-primary" role="alert">
+						This is a primary alert—check it out!<br>
+					</div>
+				</td>
+				<td>
+				asd
+				</td>
+				<td>
+				asd
 				</td>
 			</tr>
 		</table>
 
+		<script>
+		<!--버튼 눌렀을 때 발생하는 색상 이벤트 -->
+			var CPUbtn = document.getElementById('CPUbtn');
+			var RAMbtn = document.getElementById('RAMbtn');
+			var MAiNBOARDbtn = document.getElementById('MAiNBOARDbtn');
+			var VGAbtn = document.getElementById('VGAbtn');
+			var SSDbtn = document.getElementById('SSDbtn');
+			var HDDbtn = document.getElementById('HDDbtn');
+			var ODDbtn = document.getElementById('ODDbtn');
+			var CASEbtn = document.getElementById('CASEbtn');
+			var POWERbtn = document.getElementById('POWERbtn');
+			var KEYBOARDbtn = document.getElementById('KEYBOARDbtn');
+			var MOUSEbtn = document.getElementById('MOUSEbtn');
+			var arrayBtn = Array(CPUbtn, RAMbtn, MAiNBOARDbtn, VGAbtn, SSDbtn,
+					HDDbtn, ODDbtn, CASEbtn, POWERbtn, KEYBOARDbtn, MOUSEbtn);
+			function clickMainBtn(xBtn) {
+				for (var i = 0; i < 11; ++i) {
+					arrayBtn[i].className = "btn btn-secondary";
+				}
+				xBtn.className = "btn  btn-dark";
+			}
+		</script>
 
-		<nav>
-			<!-- 로고 , 검색창  시작  -->
-		</nav>
-		<!-- 로고 , 검색창  시작  -->
+
 
 
 
