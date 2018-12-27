@@ -169,9 +169,9 @@
 				<td width="200" align="center">
 					<div class="alert alert-dark  btn-light" role="alert">
 					<form action="loginPerform.jsp" method="post">
-					<input class="form-control" type="text" placeholder="아이디 입력">
-					<input class="form-control" type="text" placeholder="비밀번호 입력">
-					<a href="join.jsp"><button  type="button" class="btn-dark">회원가입</button></a>
+					<input name="id" class="form-control" type="text" placeholder="아이디 입력">
+					<input name="pw" class="form-control" type="text" placeholder="비밀번호 입력">
+					<a href="joinForm.jsp"><button  type="button" class="btn-dark">회원가입</button></a>
 					<input width="200"class=" btn-dark" type="submit" value="로그인">
 					<!--↑ 네이버 로그인 연동해야함-->
 					</form>
