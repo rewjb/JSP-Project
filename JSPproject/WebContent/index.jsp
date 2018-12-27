@@ -41,8 +41,7 @@
     apiURL += "&state=" + state;
     session.setAttribute("state", state);
  %>
-  <center>
-	
+ <center>
 		<!-- 본문 시작 -->
 		<table width="1000" height="130">
 			<tr>
@@ -67,7 +66,7 @@
 		</table>
 		<!-- 테이블 종료 -->
 		<!-- 테이블 시작 : 메인버튼 및 전체적인 내용 넣기 -->
-		<table width="1080">
+		<table width="1000" border="1">
 			<!--↓ 메인버튼이 들어가 있는 1행 시작-->
 			<tr>
 				<td colspan="3">
@@ -166,7 +165,7 @@
 			<!--↓ 속성분류 , 주된 내용이 들어가는 테이블 시작-->
 			<tr>
 				<!--↓ 메인화면에 로그인 구역-->
-				<td width="200" align="center">
+				<td width="200" align="center" rowspan="2">
 					<div class="alert alert-dark  btn-light" role="alert">
 					<form action="loginPerform.jsp" method="post">
 					<input name="id" class="form-control" type="text" placeholder="아이디 입력">
@@ -180,10 +179,39 @@
 					  <a href="<%=apiURL%>"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
 					</div>
 				</td>
-				<!--↑ 메인화면에 로그인 구역-->
-				<td></td>
+				
+				<td colspan="2">슬라이드 쇼</td>
+			</tr>
+			
+			
+			<tr>
+			<td>
+			 추천
+			</td>
+			<td>
+			실시간 
+			</td>
+			
 			</tr>
 			<!--↑ 속성분류 , 주된 내용이 들어가는 테이블 종료-->
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 		</table>
 
 		<script>
@@ -229,14 +257,6 @@
 
 
 
-
-
-
-<button  type="button" class="btn btn-primary">Primary</button>
-
-
-
-<input class="form-control" type="text" placeholder="Default input">
 
 
 

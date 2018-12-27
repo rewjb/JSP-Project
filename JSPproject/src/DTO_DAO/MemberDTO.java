@@ -1,19 +1,29 @@
 package DTO_DAO;
 
-public class UserDTO {
+public class MemberDTO {
 
 	private String id;
-	// 회원 아이디
+	// 회원 아이디 (길이 : 15)
 	private String pw;
-	// 회원 비밀번호
+	// 회원 비밀번호(길이 : 15)
 	private String name;
-	// 회원 이름
+	// 회원 이름(길이 : 10)
+	private String birthDay;
+	// 회원 생년월일(ex : 1994-07-31 / 길이 : 11)
 	private String tel;
-	// 회원 전화번호
+	// 회원 전화번호 (ex : 010-xxxx-xxxx / 길이 : 15)
 	private String addr;
-	// 회원 주소
+	// 회원 주소 (길이 : 40)
 	private String email;
-	// 회원 이메일
+	// 회원 이메일 (길이 : 40)
+
+	public String getBirthDay() {
+		return birthDay;
+	}
+
+	public void setBirthDay(String birthDay) {
+		this.birthDay = birthDay;
+	}
 
 	public String getId() {
 		return id;
@@ -63,10 +73,10 @@ public class UserDTO {
 		this.email = email;
 	}
 
-	public UserDTO() {
-	}//기본 생성자
+	public MemberDTO() {
+	}// 기본 생성자
 
-	public UserDTO(String id, String pw, String name, String tel, String addr, String email) {
+	public MemberDTO(String id, String pw, String name, String tel, String addr, String email, String birthDay) {
 		super();
 		this.id = id;
 		this.pw = pw;
@@ -74,6 +84,8 @@ public class UserDTO {
 		this.tel = tel;
 		this.addr = addr;
 		this.email = email;
+		this.birthDay = birthDay;
+
 	}
-	
+
 }// 클래스 종료
