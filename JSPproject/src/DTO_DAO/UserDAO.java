@@ -1,7 +1,14 @@
 package DTO_DAO;
 
+import java.sql.Connection;
+
 public class UserDAO {
 
+	Connection con;
+	String url = "jdbc:oracle:thin:@localhost:1521:XE";
+	
+	
+	
 	private int DBconnectMethod() {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
