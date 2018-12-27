@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.security.SecureRandom" %>
+<%@ page import="java.math.BigInteger" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 
-
-<!-- 부트스트랩을 위한 소스 갖고오기  -->
-<link rel="stylesheet"
+  <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	crossorigin="anonymous">
@@ -22,32 +22,38 @@
 <script src="//code.jquery.com/jquery.min.js"></script>
 
 
-
-
 <html>
-<head>
-<meta charset="UTF-8">
-<title>장민 유주빈 김정태</title>
-</head>
-<body>
-	<center>
-		<header class="btn-light"">유주빈</header>
+  <head>
+    <title>네이버로그인</title>
+  </head>
+  <body>
+  
+		<!--네이버 로그인 연동 -->
+  
+  <%
+    String clientId = "IcCXaLO3qfRlkqm3HRU0";//애플리케이션 클라이언트 아이디값";
+    String redirectURI = URLEncoder.encode("http://localhost:9999/JSPproject/client/loginNaverPerform.jsp", "UTF-8");
+    SecureRandom random = new SecureRandom();
+    String state = new BigInteger(130, random).toString();
+    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
+    apiURL += "&client_id=" + clientId;
+    apiURL += "&redirect_uri=" + redirectURI;
+    apiURL += "&state=" + state;
+    session.setAttribute("state", state);
+ %>
+  <center>
+	
+		<!-- 본문 시작 -->
 		<table width="1000" height="130">
 			<tr>
-				<td colspan="2"><a href="#">조달청</a>|<a href="#">나라장터 </a>|<a
-					href="#">목록정보 </a>|<a href="#">벤처나라</a></td>
-			</tr>
-
-			<tr>
 				<td width="280">
-					<!-- 로고 삽입  --> <img src="img/icon/logo.gif" alt="로고" title="로고" />
+					<!-- 로고 삽입  --> <img src="img/icon/logo.jpg" alt="로고" title="로고" />
 				</td>
 				<td>
 					<!-- 검색창 삽입  -->
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
-							<select name="job" style="width: 300px"
-								class="custom-select">
+							<select name="job" style="width: 300px" class="custom-select">
 								<option value="보기1" class="dropdown-item">보기1</option>
 								<option value="보기2" class="dropdown-item">보기2</option>
 								<option value="보기3" class="dropdown-item">보기3</option>
@@ -60,8 +66,6 @@
 			</tr>
 		</table>
 		<!-- 테이블 종료 -->
-
-
 		<!-- 테이블 시작 : 메인버튼 및 전체적인 내용 넣기 -->
 		<table width="1080">
 			<!--↓ 메인버튼이 들어가 있는 1행 시작-->
@@ -72,7 +76,7 @@
 						aria-label="Button group with nested dropdown">
 						<!--메인 세부사항 선택못하는 버튼 시작 -->
 						<button disabled="disabled" style="width: 200px" type="button"
-							class="btn btn-secondary">세부항목</button>
+							class="btn btn-secondary">회원관리</button>
 						<!--메인 CPU 버튼 시작 -->
 						<div class="btn-group" role="group">
 							<button id="CPUbtn" onclick="clickMainBtn(CPUbtn);"
@@ -161,16 +165,23 @@
 			<!--↑ 메인버튼이 들어가 있는 1행 종료-->
 			<!--↓ 속성분류 , 주된 내용이 들어가는 테이블 시작-->
 			<tr>
-				<!--↓ 소분류 좌측 테이블-->
-				<td width="200">
+				<!--↓ 메인화면에 로그인 구역-->
+				<td width="200" align="center">
 					<div class="alert alert-dark  btn-light" role="alert">
-						This is a primary alert—check it out!<br>
-						<button type="button" class="btn btn-primary">Primary</button>
+					<form action="loginPerform.jsp" method="post">
+					<input class="form-control" type="text" placeholder="아이디 입력">
+					<input class="form-control" type="text" placeholder="비밀번호 입력">
+					<a href="join.jsp"><button  type="button" class="btn-dark">회원가입</button></a>
+					<input width="200"class=" btn-dark" type="submit" value="로그인">
+					<!--↑ 네이버 로그인 연동해야함-->
+					</form>
+					
+					네이버 로그인하기
+					  <a href="<%=apiURL%>"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
 					</div>
 				</td>
-				<!--↑ 소분류 좌측 테이블-->
-				<td>asd</td>
-				<td>asd</td>
+				<!--↑ 메인화면에 로그인 구역-->
+				<td></td>
 			</tr>
 			<!--↑ 속성분류 , 주된 내용이 들어가는 테이블 종료-->
 		</table>
@@ -198,6 +209,7 @@
 
 
 
+  
 
 
 
@@ -220,14 +232,17 @@
 
 
 
+<button  type="button" class="btn btn-primary">Primary</button>
 
 
 
+<input class="form-control" type="text" placeholder="Default input">
 
 
 
 
 
 	</center>
-</body>
+  
+  </body>
 </html>

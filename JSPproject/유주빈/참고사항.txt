@@ -1,7 +1,0 @@
-https://getbootstrap.com/docs/4.0/content/reboot/
-
-
-$("#버튼의 아이디").text("My NEW Text");
-
-<button type="button" class="btn btn-primary">Large button</button>
-<button type="button" class="btn btn-secondary">Large button</button>
