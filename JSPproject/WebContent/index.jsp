@@ -172,9 +172,8 @@
 					<input name="pw" class="form-control" type="text" placeholder="비밀번호 입력">
 					<a href="joinForm.jsp"><button  type="button" class="btn-dark">회원가입</button></a>
 					<input width="200"class=" btn-dark" type="submit" value="로그인">
-					<!--↑ 네이버 로그인 연동해야함-->
 					</form>
-					
+					<!--↑ 네이버 로그인 연동해야함-->
 					네이버 로그인하기
 					  <a href="<%=apiURL%>"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
 					</div>

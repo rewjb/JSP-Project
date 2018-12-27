@@ -3,6 +3,9 @@ package DTO_DAO;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import org.apache.catalina.connector.Request;
 
 public class MemberDAO {
 
@@ -12,6 +15,7 @@ public class MemberDAO {
 
 	private Connection DBconnectMethod() {
 		try {
+			
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			Connection con = DriverManager.getConnection(url, user, password);
 			return con;
@@ -20,8 +24,8 @@ public class MemberDAO {
 		}
 		return null;
 	}// DBconnectMethod() : 메서드 종료
-
-	private String joinMember(MemberDTO memberDTO) {
+	
+	public String joinMember(MemberDTO memberDTO) {
 		//회원가입을 하는 메서드
 		
 		// 1.회원 아이디 (길이 : 15)
@@ -48,7 +52,6 @@ public class MemberDAO {
 			ps.setString(5, memberDTO.getTel());
 			ps.setString(6, memberDTO.getAddr());
 			ps.setString(7, memberDTO.getEmail());
-			
 			ps.executeUpdate();
 			
 			return "회원가입이 완료되었습니다.";
@@ -59,28 +62,38 @@ public class MemberDAO {
 	
 	}// joinMember() : 메서드 종료
 	
-	private String loginMember(String id , String pw) {
+	public String loginMember(String id) {
 		//로그인을 하는 메서드
 		
 		Connection con= DBconnectMethod();
 		//DB 연결
-		String sql = "SELECT pw FROM member WHERE id = ?;";
+		System.out.println("ddddddddddddddddddd");
+		String sql = "SELECT pw FROM SYSTEM.\"member\"  WHERE id = ?;";
 		//sql 문 작성
 		try {
 			//오류 처리
 			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, id);
+			ResultSet result =  ps.executeQuery();
 			
+			String selectedPW = null;
 			
+			while (result.next()) {
+				selectedPW=result.getString("PW");
+			}//비밀번호 존재시 비밀번호 반환
 			
-			
-			ps.executeUpdate();
-			
-			return "회원가입이 완료되었습니다.";
+			return selectedPW;
+			//비밀번호 반환
 		} catch (Exception e) {
+			System.err.println("MemberDAO-loginMember(String id) : 메서드 오류");
 			e.printStackTrace();
-			return "회원가입에 오류가 생겼습니다.";
 		}
-	
+		return null;
 	}// joinMember() : 메서드 종료
+	
+	
+	
+	
+	
 
 }// 클래스 종료

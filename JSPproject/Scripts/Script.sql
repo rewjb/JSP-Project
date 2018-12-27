@@ -9,6 +9,6 @@ CREATE TABLE member
 );
 
 
-INSERT INTO SYSTEM."member" VALUES('aa', 'bb', 'cc', 'dd', 'ee', 'ff', 'gg');
+INSERT INTO member VALUES('aa', 'bb', 'cc', 'dd', 'ee', 'ff', 'gg');
 
 SELECT pw FROM SYSTEM."member";
