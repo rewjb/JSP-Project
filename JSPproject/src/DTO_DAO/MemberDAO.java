@@ -34,7 +34,8 @@ public class MemberDAO {
 		
 		Connection con= DBconnectMethod();
 		//DB 연결
-		String sql = "INSERT INTO member VALUES(?,?,?,?,?,?,?);";
+		String sql = "INSERT INTO SYSTEM.\"member\"  VALUES(?,?,?,?,?,?,?);";
+		
 		//sql 문 작성
 
 		try {
@@ -63,12 +64,14 @@ public class MemberDAO {
 		
 		Connection con= DBconnectMethod();
 		//DB 연결
-		String sql = "insert into member value (?,?,?,?,?,?,?);";
+		String sql = "SELECT pw FROM member WHERE id = ?;";
 		//sql 문 작성
-
 		try {
 			//오류 처리
 			PreparedStatement ps = con.prepareStatement(sql);
+			
+			
+			
 			
 			ps.executeUpdate();
 			

@@ -1,8 +1,3 @@
-
-
-
-
-
 CREATE TABLE member 
 (	ID VARCHAR2(15) NOT NULL ENABLE, 
 	PW VARCHAR2(15) NOT NULL ENABLE, 
@@ -12,3 +7,8 @@ CREATE TABLE member
 	ADDR VARCHAR2(40) NOT NULL ENABLE, 
 	EMAIL VARCHAR2(40) NOT NULL ENABLE
 );
+
+
+INSERT INTO SYSTEM."member" VALUES('aa', 'bb', 'cc', 'dd', 'ee', 'ff', 'gg');
+
+SELECT pw FROM SYSTEM."member";
