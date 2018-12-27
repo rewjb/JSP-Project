@@ -1,4 +1,4 @@
-package DTO_DAO;
+package dtodao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,14 +9,13 @@ import org.apache.catalina.connector.Request;
 
 public class MemberDAO {
 
-	private String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	private String user = "system";
+	private String url = "jdbc:mysql://localhost:3306/itwatch";
+	private String user = "root";
 	private String password = "1234";
 
 	private Connection DBconnectMethod() {
 		try {
-			
-			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection(url, user, password);
 			return con;
 		} catch (Exception e) {
@@ -38,7 +37,7 @@ public class MemberDAO {
 		
 		Connection con= DBconnectMethod();
 		//DB 연결
-		String sql = "INSERT INTO SYSTEM.\"member\"  VALUES(?,?,?,?,?,?,?);";
+		String sql = "INSERT INTO SYSTEM member VALUES(?,?,?,?,?,?,?);";
 		
 		//sql 문 작성
 
@@ -67,8 +66,7 @@ public class MemberDAO {
 		
 		Connection con= DBconnectMethod();
 		//DB 연결
-		System.out.println("ddddddddddddddddddd");
-		String sql = "SELECT pw FROM SYSTEM.\"member\"  WHERE id = ?;";
+		String sql = "SELECT pw FROM member  WHERE id = ?;";
 		//sql 문 작성
 		try {
 			//오류 처리

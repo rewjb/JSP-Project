@@ -1,26 +1,48 @@
-<%@ page import="DTO_DAO.*"%>  
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<jsp:useBean id="memberDAO" class="dtodao.MemberDAO" scope="page" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title><!--현재 페이지는 로그인을 담당하는 페이지입니다.(네이버 로그인 x)--></title>
+<title>로그인</title>
 </head>
 <body>
-   <%
-          String id = request.getParameter("id");
-          String pw = request.getParameter("pw");
-          //form태를 통해 넘어온 아이디 비밀번호
-          
-          // MemberDAO memberDAO = new MemberDAO();
-          //아이디 비밀번호 유효성 검사를 할 객체
-          
-   %>
-   
-   <%=id %>
-   <%=pw %>
+	<%
+		String id = request.getParameter("id");
+		String pw = request.getParameter("pw");
+		//아이디 패스워드 받기
 
+		String realPw = memberDAO.loginMember(id);
+		//해당하는 아이디의 패스워드 얻어오기
+
+		if (!(realPw == null)) {
+
+			if (pw.equals(realPw)) {
+
+				session.setAttribute("id", id);
+				out.println("<script type=\"text/javascript\">");
+				out.println("location.href=\"index.jsp\";");
+				out.println("</script>");
+				//다시 index 페이지로 이동
+			} else {
+				out.println("<script type=\"text/javascript\">");
+				out.println("alert('아이디 혹은 패스워드가 틀렸습니다.');");
+				out.println("location.href=\"index.jsp\";");
+				out.println("</script>");
+				//다시 index 페이지로 이동
+			}
+
+		} else {
+
+			out.println("<script type=\"text/javascript\">");
+			out.println("alert('아이디 혹은 패스워드가 틀렸습니다.');");
+			out.println("location.href=\"index.jsp\";");
+			out.println("</script>");
+			//다시 index 페이지로 이동
+
+		} //패스워드 유효성 검사
+	%>
 
 
 

@@ -3,6 +3,7 @@
 <%@ page import="java.net.HttpURLConnection"%>
 <%@ page import="java.io.BufferedReader"%>
 <%@ page import="java.io.InputStreamReader"%>
+<%@ page import="dtodao.NaverMemberDAO"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <html>
 <head>
@@ -31,7 +32,7 @@
 			con.setRequestMethod("GET");
 			int responseCode = con.getResponseCode();
 			BufferedReader br;
-			System.out.print("responseCode=" + responseCode);
+			System.out.println("responseCode=" + responseCode);
 			if (responseCode == 200) { // 정상 호출
 				br = new BufferedReader(new InputStreamReader(con.getInputStream()));
 			} else { // 에러 발생
@@ -42,13 +43,20 @@
 			while ((inputLine = br.readLine()) != null) {
 				res.append(inputLine);
 			}
+			System.out.println("여기 추가"+res.toString());
+			NaverMemberDAO naverIdDAO = new NaverMemberDAO();
+			String id =  naverIdDAO.getID(res);
+			session.setAttribute("id", id);
 			br.close();
 			if (responseCode == 200) {
 				out.println(res.toString());
 			}
+			response.sendRedirect("/JSPproject/index.jsp");
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+		
+		
 	%>
 </body>
 </html>
