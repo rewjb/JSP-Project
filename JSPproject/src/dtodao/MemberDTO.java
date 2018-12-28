@@ -3,19 +3,19 @@ package dtodao;
 public class MemberDTO {
 
 	private String id;
-	// 회원 아이디 (길이 : 15)
+	// 1. 회원 아이디 (길이 : 15)
 	private String pw;
-	// 회원 비밀번호(길이 : 15)
+	// 2. 회원 비밀번호(길이 : 15)
 	private String name;
-	// 회원 이름(길이 : 10)
+	// 3. 회원 이름(길이 : 10)
 	private String birthDay;
-	// 회원 생년월일(ex : 1994-07-31 / 길이 : 11)
+	// 4. 회원 생년월일(ex : 1994-07-31 / 길이 : 11)
 	private String tel;
-	// 회원 전화번호 (ex : 010-xxxx-xxxx / 길이 : 15)
+	// 5. 회원 전화번호 (ex : 010-xxxx-xxxx / 길이 : 15)
 	private String addr;
-	// 회원 주소 (길이 : 40)
+	// 6. 회원 주소 (길이 : 40)
 	private String email;
-	// 회원 이메일 (길이 : 40)
+	// 7. 회원 이메일 (길이 : 40)
 
 	public String getBirthDay() {
 		return birthDay;

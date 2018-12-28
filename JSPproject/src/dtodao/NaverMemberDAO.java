@@ -39,7 +39,7 @@ public class NaverMemberDAO {
 				response.append(inputLine);
 			}
 			br.close();
-
+			
 			token2 = (JSONObject) token1.parse(response.toString());
 			return "naver-" + ((String) ((JSONObject) token2.get("response")).get("email")).split("@")[0];
 		} catch (Exception e) {

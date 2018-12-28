@@ -3,39 +3,36 @@
 <%@ page import="java.math.BigInteger"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <html>
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	crossorigin="anonymous"></script>
+<script src="//code.jquery.com/jquery.min.js"></script>
+
+
+
+
 <head>
 <title>네이버로그인</title>
-<script type="text/javascript">
-	$(document).ready(function(){
-		var test=1;
-		if(test ==1){
-			$(".test").css("color" : "red");
-		}
-	});
-</script>
 </head>
 <body>
-	<h1 class="test">안녕하세요</h1>
 
 
-	<script type="text/javascript">
-	    document.write("Hello World")
-		document.write('<h1>안녕하세요 </h1>');
-		document.write('<h1>안녕하세요 </h1>');
-		document.write('<div>바쁘다바빠<div>');
-	</script>
 
 
-	<script type="text/javascript">
-		 
-		 for(int i ; i<9 ; ++i)
-		 
-						</script>
 
-	<script type="text/javascript">
-		 
-		   {    document.write('<div>바쁘다바빠<div>'); }
-		 
-						</script>
+
 </body>
 </html>
