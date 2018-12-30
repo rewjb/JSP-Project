@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data-sources>
+	<data-source id="mysql5-167f81521af-32d88190532216a9" provider="mysql" driver="mysql5" name="MySQL - itwatch" save-password="true" show-system-objects="true" show-util-objects="true" read-only="false">
+		<connection host="localhost" port="3306" server="" database="itwatch" url="jdbc:mysql://localhost:3306/itwatch" user="root" password="QlZVdCGi" home="C:\Program Files\MySQL\MySQL Server 5.5" type="dev">
+			<property name="connectTimeout" value="20000"/>
+		</connection>
+	</data-source>
+	<filters/>
+</data-sources>
