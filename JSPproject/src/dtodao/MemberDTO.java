@@ -1,7 +1,7 @@
 package dtodao;
 
 public class MemberDTO {
-
+	
 	private String id;
 	// 1. 회원 아이디 (길이 : 15)
 	private String pw;

@@ -131,11 +131,11 @@
 						<%
 							if (session.getAttribute("id") == null) {
 						%>
-						<form action="loginPerform.jsp" method="post">
+						<form action="/JSPproject/loginPerform.jsp" method="post">
 							<input name="id" class="form-control" type="text"
 								placeholder="아이디 입력"> <input name="pw"
 								class="form-control" type="text" placeholder="비밀번호 입력">
-							<a href="client/joinForm.jsp"><button type="button" class="btn-dark">회원가입</button></a>
+							<a href="client/joinFormAgree.jsp"><button type="button" class="btn-dark">회원가입</button></a>
 							<input width="200" class=" btn-dark" type="submit" value="로그인">
 						</form>
 						<br>
