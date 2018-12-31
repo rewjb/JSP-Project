@@ -1,0 +1,54 @@
+
+
+제이쿼리로 값 불러오기
+1. id 로 접근해서 가져오기
+= var value = $('#test_id').val();
+
+2. class 로 접근해서 가져오기
+= var value = $('.test_class').val();
+
+3. name으로 접근해서 가져오기
+=var value = $('input[name=test_name]').val();
+
+자바스크립트로 값 불러오기
+document.getElementById("test_id").getAttribute('name');
+document.getElementsByClassName('test_class')[0].getAttribute('name');
+document.getElementsByName('test_name')[0].className;
+
+
+	// 1. 회원 아이디 (길이 : 15)
+	// 2. 회원 비밀번호(길이 : 15)
+	// 3. 회원 이름(길이 : 10)
+	// 4. 회원 생년월일(ex : 1994-07-31 / 길이 : 11)
+	// 5. 회원 전화번호 (ex : 010-xxxx-xxxx / 길이 : 15)
+	// 6. 회원 주소 (길이 : 40)
+	// 7. 회원 이메일 (길이 : 40)
+	
+	
+	
+
+      // 뒤의 공백 제거          : str.replace(/\s+$/,'');
+      // 앞뒤 공백 제거          : str.replace(/^\s+|\s+$/g,'');
+	
+	
+		if (request.getParameter("agree")==null) {
+			out.println("<script type=\"text/javascript\">");
+			out.println("alert('잘못된 접근입니다.');");
+			out.println("location.replace('/JSPproject/client/joinFormAgree.jsp');");
+			out.println("</script>");
+		
+		} 이거 회원가입 폼페이지 맨 ㅜ이에 넣어야 함ㄴ다.
+		
+		비밀번호 1
+		비밀번호 2
+		
+		비밀번호 1
+		1: 입력되어야 한다(4글자 이상   15글자 이하)
+		2: 숫자 or 영어로 (4글자 이상 15글자 이하)
+		
+		  document.getElementById( 'abc' ).setAttribute( 'href', 'https://www.codingfactory.net' );
+		
+		
+	
+	
+	

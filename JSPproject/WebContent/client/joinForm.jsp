@@ -2,6 +2,7 @@
 <%@ page import="java.security.SecureRandom"%>
 <%@ page import="java.math.BigInteger"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
+
 <!DOCTYPE html>
 
 <link rel="stylesheet"
@@ -33,12 +34,6 @@
 	<!--네이버 로그인 연동 -->
 
 	<%
-		String agree = request.getParameter("agree");
-
-		if (!agree.equals("true")) {
-			response.sendRedirect("/JSPproject/client/joinFormAgree.jsp");
-		}
-
 		String clientId = "IcCXaLO3qfRlkqm3HRU0";//애플리케이션 클라이언트 아이디값";
 		String redirectURI = URLEncoder.encode("http://localhost:9999/JSPproject/client/loginNaverPerform.jsp",
 				"UTF-8");
@@ -50,6 +45,14 @@
 		apiURL += "&state=" + state;
 		session.setAttribute("state", state);
 	%>
+
+
+
+
+
+
+
+
 
 
 
@@ -205,61 +208,66 @@
 
 						<div class="input-group mb-3" style="margin-left: 150px">
 							<div class="input-group-prepend">
-								<span class="input-group-text" id="basic-addon3">아이디 </span>
+								<span class="input-group-text">아이디 </span>
 							</div>
-							<input type="text" class="form-control" id="basic-url"
+							<!-- 회원가입 아이디 입력란 -->
+							<input type="text" class="form-control" id="inputId"
+								name="inputId" placeholder="아이디를 입력하세요."
+								oninput="checkInputId();" style="margin-right: 350px;"
+								aria-describedby="basic-addon3" maxlength="15">
+						</div>
+
+						<div style="margin-left: 150px">
+							<font id="idCheckResult" color="red"></font>
+						</div> <br>
+						
+
+
+
+						<div class="input-group mb-3" style="margin-left: 150px">
+							<div class="input-group-prepend">
+								<span class="input-group-text" >비밀번호</span>
+							</div>
+							<input id="inputPw" type="password" class="form-control" oninput="checkInputPw();" 
 								style="margin-right: 350px" aria-describedby="basic-addon3"
-								value required>
-						</div>
-						<div style="margin-left: 150px">아이디 4글자 이상 + 존재 여부 + 특수기호
-							불가능 + 숫자로만 ㄴㄴ</div> <br>
-
-
-						<div class="input-group mb-3" style="margin-left: 150px">
-							<div class="input-group-prepend">
-								<span class="input-group-text" id="basic-addon3">비밀번호</span>
-							</div>
-							<input type="password" class="form-control" id="basic-url"
-								style="margin-right: 350px" aria-describedby="basic-addon3"
-								value required>
+								placeholder="비밀번호를 입력하세요.">
 						</div>
 
 						<div class="input-group mb-3" style="margin-left: 150px">
 							<div class="input-group-prepend">
-								<span class="input-group-text" id="basic-addon3">재확인</span>
+								<span class="input-group-text">재확인</span>
 							</div>
-							<input type="password" class="form-control" id="basic-url"
+							<input id="reInputPw" name="reInputPw" type="password" class="form-control"  oninput="checkInputPw();" disabled="disabled"
+								placeholder="비밀번호 재확인을 입력하세요." style="margin-right: 350px"
+								aria-describedby="basic-addon3">
+						</div>
+						<div style="margin-left: 150px"><font color="red" id="pwCheckResult"></font></div> <br>
+
+						<div class="input-group mb-3" style="margin-left: 150px">
+							<div class="input-group-prepend">
+								<span class="input-group-text">이름</span>
+							</div>
+							<input id="InputName" name="InputName" type="text" class="form-control" placeholder="이름을 입력하세요." oninput="checkInputName();"
 								style="margin-right: 350px" aria-describedby="basic-addon3">
 						</div>
-						<div style="margin-left: 150px">비밀번호 유효성 검사 (4글자 이상, 영문 대소문자
-							+ 숫자)</div> <br>
+						<div style="margin-left: 150px"><font color="red" id="nameCheckResult"></font></div> <br>
+
 
 						<div class="input-group mb-3" style="margin-left: 150px">
 							<div class="input-group-prepend">
-								<span class="input-group-text" id="basic-addon3">이름</span>
-							</div>
-							<input type="text" class="form-control" id="basic-url"
-								style="margin-right: 350px" aria-describedby="basic-addon3">
+								<span class="input-group-text">생년월일</span>
+							</div> 
+							<input id="InputDate" name="InputDate" type="date" class="form-control" oninput="checkInputDate();"
+								placeholder="생년월일 입력 하세요." style="margin-right: 350px"
+								aria-describedby="basic-addon3">
 						</div>
-						<div style="margin-left: 150px">이름 유효성 검사 (입력을 하며, 숫자, 특수기호
-							불가능 , 2글자 이상)</div> <br>
-
+						<div style="margin-left: 150px"><font id="dateCheckResult" color="red"></font></div> <br>
 
 						<div class="input-group mb-3" style="margin-left: 150px">
 							<div class="input-group-prepend">
-								<span class="input-group-text" id="basic-addon3">생년월일</span>
+								<span class="input-group-text" >전화번호</span>
 							</div>
-							<input type="text" class="form-control" id="basic-url"
-								style="margin-right: 350px" aria-describedby="basic-addon3">
-						</div>
-						<div style="margin-left: 150px">생년월일 유효성 검사</div> <br>
-
-
-						<div class="input-group mb-3" style="margin-left: 150px">
-							<div class="input-group-prepend">
-								<span class="input-group-text" id="basic-addon3">전화번호</span>
-							</div>
-							<input type="text" class="form-control" id="basic-url"
+							<input type="text" class="form-control"
 								style="margin-right: 350px" aria-describedby="basic-addon3">
 						</div>
 						<div style="margin-left: 150px">전화번호 유효성 검사</div> <br> <input
@@ -288,7 +296,7 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text" id="basic-addon3">이메일</span>
 							</div>
-							<input type="email" class="form-control" id="basic-url"
+							<input type="email" class="form-control"
 								style="margin-right: 350px" aria-describedby="basic-addon3">
 						</div>
 						<div style="margin-left: 150px">이메일 유효성 검사</div> <br>
@@ -296,8 +304,7 @@
 
 						<div style="margin-left: 400px">
 							<input type="submit" class="btn btn-dark" value="회원가입"
-								id="basic-url" style="margin-right: 350px"
-								aria-describedby="basic-addon3">
+								style="margin-right: 350px" aria-describedby="basic-addon3">
 						</div>
 				</form>
 
@@ -456,7 +463,7 @@
 						}
 						
 						
-						<!--버튼 눌렀을 때 발생하는 색상 이벤트 -->
+						// 버튼 눌렀을 때 발생하는 색상 이벤트 
 						var MBest = document.getElementById('MBest');
 						var FBest = document.getElementById('FBest');
 						var CBest = document.getElementById('CBest');
@@ -498,5 +505,116 @@
 
 						};
 					</script>
+					
+					
+					<script type="text/javascript">
+	                    
+	                    function checkInputId(){  // 아이디 유효성 검사
+	                    	
+	                         var checkLength = '아이디는 4글자 이상이어야 합니다.';
+	                         var checkExisting = '아이디의 존재 여부를 검사해야한다.';
+	                        
+	                         document.getElementById('inputId').value = document.getElementById('inputId').value.replace( /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣|]/g, "");
+	                         // 한글입력 제한
+	                         document.getElementById('inputId').value = document.getElementById('inputId').value.replace( /[\{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/g,'');
+	                         // 특수문자 제한
+	                         document.getElementById('inputId').value = document.getElementById('inputId').value.trim();
+	                         // 공백문자 제한
+	                         // 뒤의 공백 제거          : str.replace(/\s+$/,'');
+                             // 앞뒤 공백 제거          : str.replace(/^\s+|\s+$/g,'');
+	                        
+	                         if(document.getElementById('inputId').value.length<4){
+	                        	 document.getElementById('idCheckResult').innerHTML = checkLength;
+	                         }else{
+	                        	var regId = /[A-Za-z]/g;
+	                        	 if(!regId.test(document.getElementById('inputId').value))
+	                        	 {
+	                        	     document.getElementById('idCheckResult').innerHTML = '숫자로만 아이디를 입력할 수 없습니다.';
+	                        		 return false;
+	                        	 }
+	                        	 document.getElementById('idCheckResult').innerHTML = checkExisting;
+	                         }
+	                    }
+	                         
+	                    function checkInputPw(){  // 패스워드 유효성 검사
+	                    	
+	                         document.getElementById('inputPw').value = document.getElementById('inputPw').value.replace( /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣|]/g, "");
+	                         // 한글입력 제한
+	                         document.getElementById('inputPw').value = document.getElementById('inputPw').value.replace( /[\{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/g,'');
+	                         // 특수문자 제한
+	                         document.getElementById('inputPw').value = document.getElementById('inputPw').value.trim();
+	                         // 공백문자 제한
+	                         document.getElementById('reInputPw').value = document.getElementById('reInputPw').value.replace( /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣|]/g, "");
+	                         document.getElementById('reInputPw').value = document.getElementById('reInputPw').value.replace( /[\{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/g,'');
+	                         document.getElementById('reInputPw').value = document.getElementById('reInputPw').value.trim();
+	                         // 뒤의 공백 제거          : str.replace(/\s+$/,'');
+                            // 앞뒤 공백 제거          : str.replace(/^\s+|\s+$/g,'');
+	                        
+	                         if(document.getElementById('inputPw').value.length<4){
+	                        	 //inputPw
+	                        	 document.getElementById('pwCheckResult').setAttribute('color', "red");
+	                        	 document.getElementById('reInputPw').setAttribute( 'disabled', "disabled");
+	                        	 document.getElementById('pwCheckResult').innerHTML = '비밀번호는 4글자 이상입니다.';
+	                        	 document.getElementById('reInputPw').value = null;
+	                        	 return false;
+	                         }else{  
+	                        	 document.getElementById('reInputPw').removeAttribute('disabled');   
+	                        	 if(document.getElementById('inputPw').value == document.getElementById('reInputPw').value) {
+	                        	
+	                        		 document.getElementById('pwCheckResult').setAttribute('color', "green");
+	                        		 document.getElementById('pwCheckResult').innerHTML = '비밀번호가 일치합니다.';
+	                        	 }else{
+	                        		 document.getElementById('pwCheckResult').setAttribute('color', "red");
+	                        		 document.getElementById('pwCheckResult').innerHTML = '비밀번호가 불일치합니다.';
+	                        	 }
+	                         }
+	                    }
+	                    
+	                    function checkInputName(){ // 이름 유효성 검사
+	                        
+	                         document.getElementById('InputName').value = document.getElementById('InputName').value.replace( /[0-9]/g, "");
+	                         //숫자제한
+	                         document.getElementById('InputName').value = document.getElementById('InputName').value.replace( /[A-Za-z]/g, "");
+	                         // 영어입력 제한
+	                         document.getElementById('InputName').value = document.getElementById('InputName').value.replace( /[\{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/g,'');
+	                         // 특수문자 제한
+	                         document.getElementById('InputName').value = document.getElementById('InputName').value.trim();
+	                         // 공백문자 제한
+	                         // 뒤의 공백 제거          : str.replace(/\s+$/,''); /[A-Za-z]/g;
+                           // 앞뒤 공백 제거          : str.replace(/^\s+|\s+$/g,'');
+	                        
+	                         if(document.getElementById('InputName').value.length<2){
+	                        	 //inputPw
+	                        	 document.getElementById('nameCheckResult').setAttribute('color', "red");
+	                        	 document.getElementById('nameCheckResult').innerHTML = '이름은 2글자 이상입니다.';
+	                         }else{  
+	                        	 var regName = /[ㄱ-ㅎ|ㅏ-ㅣ]/g;
+	                        	 if(regName.test(document.getElementById('InputName').value)){
+	                        		 document.getElementById('nameCheckResult').setAttribute('color', "red");
+	                        		 document.getElementById('nameCheckResult').innerHTML = '이름은 2글자 이상입니다.';
+	                        	 }else{
+	                        		 document.getElementById('nameCheckResult').setAttribute('color', "green");
+	                        		 document.getElementById('nameCheckResult').innerHTML = '올바른 이름입니다.';
+	                        	 }
+	                         }
+	                    }
+	                    
+	                    function checkInputDate(){ // 생년월일 유효성 검사
+	                    	var regDate = /[0-9]/g;
+	                    	if(regDate.test(document.getElementById('InputDate').value)){
+	                    		 document.getElementById('dateCheckResult').setAttribute('color', "green");
+                        		 document.getElementById('dateCheckResult').innerHTML = '올바른 날짜입니다.';
+	                    	}
+	                    }
+	                    
+	                    function checkInputDate(){ // 전화번호 유효성 검사
+	                    	var regDate = /[0-9]/g;
+	                    	if(regDate.test(document.getElementById('InputDate').value)){
+	                    		 document.getElementById('dateCheckResult').setAttribute('color', "green");
+                        		 document.getElementById('dateCheckResult').innerHTML = '올바른 날짜입니다.';
+	                    	}
+	                    }
+						</script>
+					
 </body>
 </html>
