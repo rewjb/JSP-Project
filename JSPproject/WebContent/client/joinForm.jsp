@@ -198,7 +198,6 @@
 				<form method="post" action="joinPerform.jsp"
 					class="needs-validation" novalidate>
 
-
 					<td align="left" valign="top"><br>
 						<div align="center">
 							<span class="badge badge-secondary"><font size="5">가입
@@ -220,16 +219,13 @@
 						<div style="margin-left: 150px">
 							<font id="idCheckResult" color="red"></font>
 						</div> <br>
-						
-
-
 
 						<div class="input-group mb-3" style="margin-left: 150px">
 							<div class="input-group-prepend">
 								<span class="input-group-text" >비밀번호</span>
 							</div>
 							<input id="inputPw" type="password" class="form-control" oninput="checkInputPw();" 
-								style="margin-right: 350px" aria-describedby="basic-addon3"
+								style="margin-right: 350px" aria-describedby="basic-addon3" maxlength="15"
 								placeholder="비밀번호를 입력하세요.">
 						</div>
 
@@ -238,7 +234,7 @@
 								<span class="input-group-text">재확인</span>
 							</div>
 							<input id="reInputPw" name="reInputPw" type="password" class="form-control"  oninput="checkInputPw();" disabled="disabled"
-								placeholder="비밀번호 재확인을 입력하세요." style="margin-right: 350px"
+								placeholder="비밀번호 재확인을 입력하세요." style="margin-right: 350px" maxlength="15"
 								aria-describedby="basic-addon3">
 						</div>
 						<div style="margin-left: 150px"><font color="red" id="pwCheckResult"></font></div> <br>
@@ -248,7 +244,7 @@
 								<span class="input-group-text">이름</span>
 							</div>
 							<input id="InputName" name="InputName" type="text" class="form-control" placeholder="이름을 입력하세요." oninput="checkInputName();"
-								style="margin-right: 350px" aria-describedby="basic-addon3">
+								maxlength="10" style="margin-right: 350px" aria-describedby="basic-addon3">
 						</div>
 						<div style="margin-left: 150px"><font color="red" id="nameCheckResult"></font></div> <br>
 
@@ -258,7 +254,7 @@
 								<span class="input-group-text">생년월일</span>
 							</div> 
 							<input id="InputDate" name="InputDate" type="date" class="form-control" oninput="checkInputDate();"
-								placeholder="생년월일 입력 하세요." style="margin-right: 350px"
+								placeholder="생년월일 입력 하세요." style="margin-right: 350px" maxlength="10"
 								aria-describedby="basic-addon3">
 						</div>
 						<div style="margin-left: 150px"><font id="dateCheckResult" color="red"></font></div> <br>
@@ -267,22 +263,17 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text" >전화번호</span>
 							</div>
-							<input id="InputTel" name="InputTel" type="text" class="form-control"
-								style="margin-right: 350px" aria-describedby="basic-addon3">
+							<input id="InputTel" name="InputTel" type="text" class="form-control" oninput="checkInputTel();" placeholder="'-' 없이 입력해 주세요"
+							maxlength="10" style="margin-right: 350px" aria-describedby="basic-addon3">
 						</div>
-						<div style="margin-left: 150px">전화번호 유효성 검사</div> <br> <input
-						type="button" onclick="sample2_execDaumPostcode()"
-						style="margin-left: 150px" value="우편번호 찾기"> <input id="InputAddr1" name="InputAddr1"
-						type="text" style="margin-left: 150px; width: 300px;"
-						class="form-control" disabled id="sample2_postcode"
-						placeholder="우편번호"> <input type="text" name="InputAddr2"
-						style="margin-left: 150px; width: 300px;" class="form-control"
-						id="sample2_address" disabled placeholder="주소"> <input name="InputAddr3"
-						type="text" class="form-control" id="sample2_extraAddress"
-						style="margin-left: 150px; width: 300px;" disabled
-						placeholder="참고항목"> <input type="text" name="InputAddr4" id="InputAddr4"
-						class="form-control" id="sample2_detailAddress" placeholder="상세주소"
-						style="margin-left: 150px; width: 300px;"> <!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
+						<div style="margin-left: 150px"><font color="red" id="telCheckResult"></font></div> <br>
+
+						<input type="button" onclick="sample2_execDaumPostcode()" style="margin-left: 150px" value="우편번호 찾기">
+						<input  name="InputAddr" type="text" style="margin-left: 150px; width: 300px;" class="form-control" disabled id="sample2_postcode" oninput="checkInputAddr();" placeholder="우편번호">
+						<input type="text" name="InputAddr" style="margin-left: 150px; width: 300px;" class="form-control" id="sample2_address" disabled placeholder="주소">
+						<input name="InputAddr" type="text" class="form-control" id="sample2_extraAddress" style="margin-left: 150px; width: 300px;" disabled placeholder="참고항목">
+						<input type="text" name="InputAddr"  class="form-control" id="sample2_detailAddress" placeholder="상세주소" style="margin-left: 150px; width: 300px;" maxlength="20" oninput="checkInputAddr();">
+						<!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
 						<div id="layer"
 							style="display: none; position: fixed; overflow: hidden; z-index: 1; -webkit-overflow-scrolling: touch;">
 							<img src="//t1.daumcdn.net/postcode/resource/images/close.png"
@@ -290,18 +281,16 @@
 								style="cursor: pointer; position: absolute; right: -3px; top: -3px; z-index: 1"
 								onclick="closeDaumPostcode()" alt="닫기 버튼">
 						</div> <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-						<div style="margin-left: 150px">주소 검사 (맨 위에 그리고 맨 마지막에 내용이
-							비어있지 않도록..)</div> <br> <br>
+						<div style="margin-left: 150px"><font id="addrCheckResult" color="red"> </font>
+							</div> <br> <br>
 						<div class="input-group mb-3" style="margin-left: 150px">
 							<div class="input-group-prepend">
 								<span class="input-group-text" id="basic-addon3">이메일</span>
 							</div>
-							<input type="email" class="form-control" id="InputEmail" name="InputEmail"
+							<input type="email" class="form-control" id="InputEmail" name="InputEmail" maxlength="60" oninput="checkInputEmail();"
 								style="margin-right: 350px" aria-describedby="basic-addon3">
 						</div>
-						<div style="margin-left: 150px">이메일 유효성 검사</div> <br>
-
-
+						<div style="margin-left: 150px"><font id="emailCheckResult" color="red">이메일 유효성 검사</font></div> <br>
 						<div style="margin-left: 400px">
 							<input type="submit" class="btn btn-dark" value="회원가입"
 								style="margin-right: 350px" aria-describedby="basic-addon3">
@@ -607,14 +596,77 @@
 	                    	}
 	                    }
 	                    
-	                    function checkInputDate(){ // 전화번호 유효성 검사
-	                    	var regDate = /[0-9]/g;
-	                    	if(regDate.test(document.getElementById('InputDate').value)){
-	                    		 document.getElementById('dateCheckResult').setAttribute('color', "green");
-                        		 document.getElementById('dateCheckResult').innerHTML = '올바른 날짜입니다.';
-	                    	}
+	                    function checkInputTel(){ // 전화번호 유효성 검사
+	                    	//	telCheckResult / InputTel	
+	                        
+	                         document.getElementById('InputTel').value = document.getElementById('InputTel').value.replace( /[A-Za-z]/g, "");
+	                         // 영어입력 제한
+	                         document.getElementById('InputTel').value = document.getElementById('InputTel').value.replace( /[\{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/g,'');
+	                         // 특수문자 제한
+	                         document.getElementById('InputTel').value = document.getElementById('InputTel').value.trim();
+	                         // 공백문자 제한
+	                         document.getElementById('InputTel').value = document.getElementById('InputTel').value.replace( /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g,'');
+	                         // 한글입력 제한
+	                         
+	                         if(document.getElementById('InputTel').value.length>5){
+	                        	 document.getElementById('telCheckResult').setAttribute('color', "green");
+                        		 document.getElementById('telCheckResult').innerHTML = '올바른 전화번호 입니다.';
+	                         }else{
+	                        	 document.getElementById('telCheckResult').setAttribute('color', "red");
+                        		 document.getElementById('telCheckResult').innerHTML = '전화번호를 다시 입력해 주세요.';
+	                         }
 	                    }
+	                    
+	                    function checkInputAddr(){ // 주소 유효성 검사
+	                    //	addrCheckResult  / sample2_postcode /sample2_detailAddress
+	                         
+	                    	
+	                    
+	                         if(document.getElementById('sample2_postcode').value.length >0 && document.getElementById('sample2_detailAddress').value.length >0){
+	                        	 document.getElementById('addrCheckResult').setAttribute('color', "green");
+                        		 document.getElementById('addrCheckResult').innerHTML = '올바른 주소입니다.';
+	                         }else{
+	                        	 document.getElementById('addrCheckResult').setAttribute('color', "red");
+                        		 document.getElementById('addrCheckResult').innerHTML = '주소를 입력해 주세요.';
+	                         }
+	                    }
+	                    
+	                    function checkInputEmail(){ // 이메일 주소 유효성 검사
+	                    	//emailCheckResult / InputEmail
+	                    	
+	                    	var regEmail = /[@]/g;
+	                    	var regEmail2 = /[.]/g;
+	                    	
+	                    	
+	                    	document.getElementById('InputEmail').value = document.getElementById('InputEmail').value.replace( /[\{\}\[\]\/?,;:|\)*~`!^\-+<>\#$%&\\\=\(\'\"]/g,'');
+	                        // 특수문자 제한 ('.' , '@' 제외)
+	                        document.getElementById('InputEmail').value = document.getElementById('InputEmail').value.replace( /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g,'');
+	                        // 한글입력 제한
+	                        document.getElementById('InputEmail').value = document.getElementById('InputEmail').value.replace(/\s+$/,'');
+	                        // 공백문자 제한
+                            var tempCount = document.getElementById('InputEmail').value.match(/[@]/g);
+	                    	if(regEmail.test(document.getElementById('InputEmail').value) && regEmail2.test(document.getElementById('InputEmail').value) && tempCount.length==1){
+	                    	 document.getElementById('emailCheckResult').setAttribute('color', "green");
+                        	 document.getElementById('emailCheckResult').innerHTML = '올바른 이메일 주소입니다.';
+	                    		
+	                    	}else{
+	                    	 document.getElementById('emailCheckResult').setAttribute('color', "red");
+                       		 document.getElementById('emailCheckResult').innerHTML = '올바른 이메일 주소가 아닙니다.';
+	                    	}
+		                      
+		                         
+		                    }
 						</script>
-					
+						
+						
+var a = "개발asdfasdfasdf개발"; 
+var results = a.match(/개발/g); 
+if(results != null) {
+    alert(results.length); // 2개이므로 2가 출력된다!
+}
+
+						
+						   
+				
 </body>
 </html>

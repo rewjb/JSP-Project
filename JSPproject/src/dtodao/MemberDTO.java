@@ -9,13 +9,13 @@ public class MemberDTO {
 	private String name;
 	// 3. 회원 이름(길이 : 10)
 	private String birthDay;
-	// 4. 회원 생년월일(ex : 1994-07-31 / 길이 : 11)
+	// 4. 회원 생년월일(ex : 1994-07-31 / 길이 : 10)
 	private String tel;
 	// 5. 회원 전화번호 (ex : 010-xxxx-xxxx / 길이 : 15)
 	private String addr;
 	// 6. 회원 주소 (길이 : 40)
 	private String email;
-	// 7. 회원 이메일 (길이 : 40)
+	// 7. 회원 이메일 (길이 : 60)
 
 	public String getBirthDay() {
 		return birthDay;
