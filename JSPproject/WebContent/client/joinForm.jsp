@@ -267,20 +267,20 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text" >전화번호</span>
 							</div>
-							<input type="text" class="form-control"
+							<input id="InputTel" name="InputTel" type="text" class="form-control"
 								style="margin-right: 350px" aria-describedby="basic-addon3">
 						</div>
 						<div style="margin-left: 150px">전화번호 유효성 검사</div> <br> <input
 						type="button" onclick="sample2_execDaumPostcode()"
-						style="margin-left: 150px" value="우편번호 찾기"> <input
+						style="margin-left: 150px" value="우편번호 찾기"> <input id="InputAddr1" name="InputAddr1"
 						type="text" style="margin-left: 150px; width: 300px;"
 						class="form-control" disabled id="sample2_postcode"
-						placeholder="우편번호"> <input type="text"
+						placeholder="우편번호"> <input type="text" name="InputAddr2"
 						style="margin-left: 150px; width: 300px;" class="form-control"
-						id="sample2_address" disabled placeholder="주소"> <input
+						id="sample2_address" disabled placeholder="주소"> <input name="InputAddr3"
 						type="text" class="form-control" id="sample2_extraAddress"
 						style="margin-left: 150px; width: 300px;" disabled
-						placeholder="참고항목"> <input type="text"
+						placeholder="참고항목"> <input type="text" name="InputAddr4" id="InputAddr4"
 						class="form-control" id="sample2_detailAddress" placeholder="상세주소"
 						style="margin-left: 150px; width: 300px;"> <!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
 						<div id="layer"
@@ -296,7 +296,7 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text" id="basic-addon3">이메일</span>
 							</div>
-							<input type="email" class="form-control"
+							<input type="email" class="form-control" id="InputEmail" name="InputEmail"
 								style="margin-right: 350px" aria-describedby="basic-addon3">
 						</div>
 						<div style="margin-left: 150px">이메일 유효성 검사</div> <br>
