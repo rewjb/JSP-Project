@@ -14,7 +14,6 @@
 			
 			out.println("값이 존재는 한다");
 
-			
 			if (((String)request.getParameter("code")).equals((String)session.getAttribute("code"))) {
 
 				out.println("데이터에 들어 ?");

@@ -16,6 +16,7 @@ public class MemberDAO {
 	private String url = "jdbc:oracle:thin:@localhost:1521:orcl";
 	private String user = "system";
 	private String password = "1234";
+	
 
 	private Connection DBconnectMethod() {
 		try {
@@ -91,6 +92,32 @@ public class MemberDAO {
 			}//비밀번호 존재시 비밀번호 반환
 			
 			return selectedPW;
+			//비밀번호 반환
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}// loginMember() : 메서드 종료
+	
+	public String searchID(String id) {
+		//아이디각 존재하는지 검색 
+		
+		Connection con= DBconnectMethod();
+		//DB 연결
+		String sql = "SELECT ID FROM MEMBER  WHERE ID = '"+id+"'" ;
+		//sql 문 작성
+		try {
+			//오류 처리
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet result =  ps.executeQuery();
+			
+			String selectedID = null;
+			
+			while (result.next()) {
+				selectedID=result.getString("PW");
+			}//비밀번호 존재시 비밀번호 반환
+			
+			return selectedID;
 			//비밀번호 반환
 		} catch (Exception e) {
 			e.printStackTrace();

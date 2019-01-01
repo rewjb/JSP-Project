@@ -13,6 +13,8 @@ maxWait : 발급한 커넥션 갯수가 최대값에 도달한 상태에서 다�
 closeMethod : 톰캣 서버가 종료될 때, 자원 해제를 위해서 호출하는 메서드. 매개변수가 없어야 함.
 
 	글자 수 제한 주기!
+	
+	memberDAO를 싱글톤으로 돌리자!
 
 
 
@@ -91,6 +93,8 @@ document.getElementsByName('test_name')[0].className;
 		proper.put("mail.smtp.socketFactory.fallback", "false");
 		
 		proper.put("mail.smtp.ssl.trust", "smtp.naver.com");
+		
+		
 		
 		
 	
