@@ -1,4 +1,4 @@
-package util;
+package emialUtil;
 
 import java.security.MessageDigest;
 

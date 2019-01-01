@@ -13,7 +13,7 @@ public class MemberDTO {
 	private String tel;
 	// 5. 회원 전화번호 (ex : 010-xxxx-xxxx / 길이 : 15)
 	private String addr;
-	// 6. 회원 주소 (길이 : 40)
+	// 6. 회원 주소 (길이 : 60)
 	private String email;
 	// 7. 회원 이메일 (길이 : 60)
 

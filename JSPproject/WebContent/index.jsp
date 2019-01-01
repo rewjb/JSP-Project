@@ -24,7 +24,7 @@
 
 <html>
 <head>
-<title>네이버로그인</title>
+<title>IT 시계</title>
 </head>
 <body>
 

@@ -12,6 +12,8 @@ maxIdle : DataSource에서 유지될 수 있는 사용하지 않는 커넥션의
 maxWait : 발급한 커넥션 갯수가 최대값에 도달한 상태에서 다시 커넥션을 요청할 경우 커넥션을 준비하기 위해 기다리는 최대 밀리초. 최대 밀리초가 넘었는데도 반납되는 커넥션이 없으면 예외를 던진다. 기본값은 -1로서 커넥션 반납시까지 무제한 대기
 closeMethod : 톰캣 서버가 종료될 때, 자원 해제를 위해서 호출하는 메서드. 매개변수가 없어야 함.
 
+	글자 수 제한 주기!
+
 
 
   <resource-ref>
@@ -68,7 +70,30 @@ document.getElementsByName('test_name')[0].className;
 		2: 숫자 or 영어로 (4글자 이상 15글자 이하)
 		
 		  document.getElementById( 'abc' ).setAttribute( 'href', 'https://www.codingfactory.net' );
+		  
+		  
+		  proper.put("mail.smtp.user", from);
+
+		proper.put("mail.smtp.host", "smtp.naver.com");
+
+		proper.put("mail.smtp.port", "587");
+
+		proper.put("mail.smtp.starttls.enable", "true");
+
+		proper.put("mail.smtp.auth", "true");
+
+		proper.put("mail.smtp.debug", "true");
+
+		proper.put("mail.smtp.socketFactory.port", "465");
+
+		proper.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+
+		proper.put("mail.smtp.socketFactory.fallback", "false");
 		
+		proper.put("mail.smtp.ssl.trust", "smtp.naver.com");
+		
+		
+	
 		
 	
 	

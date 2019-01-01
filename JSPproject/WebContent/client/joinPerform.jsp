@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="dtodao.MemberDTO"%>
-<%@ page import="util.SHA256"%>
-<%@ page import="java.io.PrintWriter"%>
+<%@page import="emialUtil.SHA256"%>
+<%@page import="java.io.PrintWriter"%>
 <%@page import="javax.mail.Transport"%>
 <%@page import="javax.mail.Message"%>
 <%@page import="javax.mail.Address"%>
@@ -12,8 +12,8 @@
 <%@page import="javax.mail.Authenticator"%>
 <%@page import="java.util.Properties"%>
 <%@page import="java.io.PrintWriter"%>
-<%@page import="util.SHA256"%>
-<%@page import="util.mail"%>
+<%@page import="emialUtil.SHA256"%>
+<%@page import="emialUtil.mail"%>
 
 
 
@@ -46,27 +46,36 @@
 	for (int i = 0; i < tempAddr.length; i++) {
 		addr +=  tempAddr[i];
 	}
+   
+   
+	userDTO.setId(id);
+	userDTO.setPw(pw);
+	userDTO.setName(name);
+	userDTO.setBirthDay(birthDay);
+	userDTO.setTel(tel);
+	userDTO.setAddr(addr);
+	userDTO.setEmail(email);
 	
    
    session.setAttribute("code", SHA256.getSHA256(email));
    //암호 코드 세션에 저장
-   session.setAttribute("joinInfo", userDTO);
+   session.setAttribute("tempUserInfo", userDTO);
    //회원가입을 시도하는 유저 정보 저장
    
    // 사용자에게 보낼 메시지를 기입합니다.
 
-	String serverIP = "http://localhost:9999/JSPproject/client/";
+	String host = "http://localhost:9990/JSPproject/";
     // 서버의 주소! 추후 변경해야 ㅎ
 
 	String from = "rewjb@naver.com";
     
 	String to = email;
 
-	String subject = "회원가입을 위한 이메일 확인 메일입니다.";
+	String subject = "IT시계 사이트의 회원가입 인증을 해주세요.";
 
-	String content = "다음 링크에 접속하여 이메일 확인을 진행하세요." +
+	String content = "다음 링크에 접속하여 이메일 인증을 진행하세요.<br>" +
 
-		"<a href='" + serverIP + "emailCheckAction.jsp?code=" + session.getAttribute("code")+ "'>이메일 인증하기</a>";
+		"<a href='" + host + "client/emailCheckAction.jsp?code=" + session.getAttribute("code")+ "'>이메일 인증하기</a>";
 
 		// SMTP에 접속하기 위한 정보를 기입합니다.
 
@@ -74,7 +83,7 @@
 
 		proper.put("mail.smtp.user", from);
 
-		proper.put("mail.smtp.host", "smtp."+email.split("@")[1]);
+		proper.put("mail.smtp.host", "smtp.googlemail.com");
 
 		proper.put("mail.smtp.port", "465");
 
@@ -89,6 +98,8 @@
 		proper.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 
 		proper.put("mail.smtp.socketFactory.fallback", "false");
+		
+		
 		
 		
 		try{
@@ -114,43 +125,39 @@
 		    msg.setContent(content, "text/html;charset=UTF-8");
 
 		    Transport.send(msg);
+		    
+			out.println("<script type=\"text/javascript\">");
+			
+			out.println("alert('이메일 인증을 해주세요.');");
+			
+			out.println("location.href='https://www." + email.split("@")[1] + "';");
+			
+			out.println("</script>");
 
 		} catch(Exception e){
 
 		    e.printStackTrace();
 
-			PrintWriter script = response.getWriter();
+			out.println("<script>");
 
-			script.println("<script>");
+			out.println("alert('회원가입에 오류가 발생하였습니다.');");
 
-			script.println("alert('오류가 발생했습니다..');");
+			out.println("history.back();");
 
-			script.println("history.back();");
+			out.println("</script>");
 
-			script.println("</script>");
-
-			script.close();		
 
 		    return;
 
 		}
 
-	%>
-
-
-
-
-		 
 
 
 
 
    
    
-	out.println("<script type=\"text/javascript\">");
-	out.println("alert('이메일 인증을 해주세요.');");
-	out.println("location.href='https://www." + email.split("@")[1] + "';");
-	out.println("</script>");
+
     %>
     
 </body>

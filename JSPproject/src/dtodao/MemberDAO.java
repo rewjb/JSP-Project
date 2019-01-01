@@ -42,12 +42,12 @@ public class MemberDAO {
 		// 3.회원 이름(길이 : 10)
 		// 4.회원 생년월일(ex : 1994-07-31 / 길이 : 11)
 		// 5.회원 전화번호 (ex : 010-xxxx-xxxx / 길이 : 15)
-		// 6.회원 주소 (길이 : 40)
-		// 7.회원 이메일 (길이 : 40)
+		// 6.회원 주소 (길이 : 60)
+		// 7.회원 이메일 (길이 : 60)
 		
 		Connection con= DBconnectMethod();
 		//DB 연결
-		String sql = "INSERT INTO SYSTEM member VALUES(?,?,?,?,?,?,?);";
+		String sql = "INSERT INTO MEMBER VALUES(?,?,?,?,?,?,?)";
 		
 		//sql 문 작성
 
@@ -61,6 +61,7 @@ public class MemberDAO {
 			ps.setString(5, memberDTO.getTel());
 			ps.setString(6, memberDTO.getAddr());
 			ps.setString(7, memberDTO.getEmail());
+			
 			ps.executeUpdate();
 			
 			return "회원가입이 완료되었습니다.";
@@ -95,7 +96,7 @@ public class MemberDAO {
 			e.printStackTrace();
 		}
 		return null;
-	}// joinMember() : 메서드 종료
+	}// loginMember() : 메서드 종료
 	
 	
 	

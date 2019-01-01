@@ -47,15 +47,6 @@
 	%>
 
 
-
-
-
-
-
-
-
-
-
 	<center>
 		<!-- 본문 시작 -->
 		<table width="1000" height="130">
@@ -244,7 +235,7 @@
 								<span class="input-group-text">이름</span>
 							</div>
 							<input id="InputName" name="InputName" type="text" class="form-control" placeholder="이름을 입력하세요." oninput="checkInputName();"
-								maxlength="10" style="margin-right: 350px" aria-describedby="basic-addon3">
+								maxlength="6" style="margin-right: 350px" aria-describedby="basic-addon3">
 						</div>
 						<div style="margin-left: 150px"><font color="red" id="nameCheckResult"></font></div> <br>
 
