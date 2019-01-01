@@ -17,8 +17,6 @@
 
 
 
-출처: http://ndb796.tistory.com/40 [안경잡이개발자]
-
 
 
 <html>

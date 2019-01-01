@@ -1,5 +1,26 @@
+context.xml에 커넥션 풀 내용의미
+
+name : JNDI 이름. Context의 lookup()을 사용하여 자원을 찾을 때 사용. java:comp/env 디렉토리에서 찾을수 있음
+auth : 자원관리의 주체. Application 또는 Container가 가능
+type : 자원의 타입. 패키지 이름을 포함한 클래스 이름(fully-qualified java class name)
+driverClassName : JDBC 드라이버 클래스의 이름. 패키지 이름 포함
+url : DB 커넥션 URL
+username : DB 사용자 이름
+password : DB 사용자 암호
+maxActive : DataSource로 부터 꺼낼 수 있는 커넥션의 최대 개수. 기본값은 8개
+maxIdle : DataSource에서 유지될 수 있는 사용하지 않는 커넥션의 최대 개수. 최대 개수 초과시 반납되는 커넥션은 닫음. 기본값은 8개
+maxWait : 발급한 커넥션 갯수가 최대값에 도달한 상태에서 다시 커넥션을 요청할 경우 커넥션을 준비하기 위해 기다리는 최대 밀리초. 최대 밀리초가 넘었는데도 반납되는 커넥션이 없으면 예외를 던진다. 기본값은 -1로서 커넥션 반납시까지 무제한 대기
+closeMethod : 톰캣 서버가 종료될 때, 자원 해제를 위해서 호출하는 메서드. 매개변수가 없어야 함.
 
 
+
+  <resource-ref>
+  <description>Connection</description> 
+   <res-ref-name>jdbc/orcl</res-ref-name>
+   <res-type>javax.sql.DataSource</res-type>
+   <res-auth>Container</res-auth>
+  </resource-ref>
+  
 제이쿼리로 값 불러오기
 1. id 로 접근해서 가져오기
 = var value = $('#test_id').val();

@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data-sources>
-	<data-source id="mysql5-167f81521af-32d88190532216a9" provider="mysql" driver="mysql5" name="MySQL - itwatch" save-password="true" show-system-objects="true" show-util-objects="true" read-only="false">
-		<connection host="localhost" port="3306" server="" database="itwatch" url="jdbc:mysql://localhost:3306/itwatch" user="root" password="QlZVdCGi" home="C:\Program Files\MySQL\MySQL Server 5.5" type="dev">
-			<property name="connectTimeout" value="20000"/>
+	<data-source id="oracle_thin-16808a1e77e-3b6128ae5249997" provider="oracle" driver="oracle_thin" name="Oracle - orcl" save-password="true" show-system-objects="true" show-util-objects="true" read-only="false">
+		<connection host="localhost" port="1521" server="" database="orcl" url="jdbc:oracle:thin:@//localhost:1521/orcl" user="system" password="QlZVdCGi" home="D:\app\user\product\11.2.0\dbhome_1" type="dev">
+			<provider-property name="@dbeaver-always-use-dba-views@" value="false"/>
+			<provider-property name="@dbeaver-sid-service@" value="SERVICE"/>
+			<provider-property name="@dbeaver-use-rule-hint@" value="false"/>
+			<provider-property name="@dbeaver-connection-type@" value="BASIC"/>
+			<provider-property name="@dbeaver-check-schema-content@" value="true"/>
+			<provider-property name="@dbeaver-always-show-dba@" value="false"/>
 		</connection>
 	</data-source>
 	<filters/>

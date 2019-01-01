@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<context>
+ <Resource
+ 
+  name="jdbc/orcl"
+  auth="Container"
+  type="javax.sql.DataSource"
+  driverClassName="oracle.jdbc.OracleDriver"
+  url="jdbc:oracle:thin:@127.0.0.1:1521:orcl"
+  username="system"
+  password="1234"
+  maxTotal="20"
+  maxIdle="10"
+  MaxWaitMillis="-1"
+ 
+ />
+
+</context>

@@ -5,18 +5,28 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
+
 import org.apache.catalina.connector.Request;
 
 public class MemberDAO {
 
-	private String url = "jdbc:mysql://localhost:3306/itwatch";
-	private String user = "root";
+	private String url = "jdbc:oracle:thin:@localhost:1521:orcl";
+	private String user = "system";
 	private String password = "1234";
 
 	private Connection DBconnectMethod() {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection(url, user, password);
+			Context initCtx  = new InitialContext();
+			DataSource ds = (DataSource)initCtx.lookup("java:comp/env/jdbc/orcl");
+			Connection con = ds.getConnection();
+			
+//			Class.forName("oracle.jdbc.driver.OracleDriver");
+//			Connection con = DriverManager.getConnection(url, user, password);
+			
+			
 			return con;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -66,12 +76,11 @@ public class MemberDAO {
 		
 		Connection con= DBconnectMethod();
 		//DB 연결
-		String sql = "SELECT pw FROM member  WHERE id = ?;";
+		String sql = "SELECT PW FROM MEMBER  WHERE ID = '"+id+"'" ;
 		//sql 문 작성
 		try {
 			//오류 처리
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setString(1, id);
 			ResultSet result =  ps.executeQuery();
 			
 			String selectedPW = null;
@@ -83,7 +92,6 @@ public class MemberDAO {
 			return selectedPW;
 			//비밀번호 반환
 		} catch (Exception e) {
-			System.err.println("MemberDAO-loginMember(String id) : 메서드 오류");
 			e.printStackTrace();
 		}
 		return null;
