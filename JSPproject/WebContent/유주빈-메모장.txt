@@ -94,6 +94,15 @@ document.getElementsByName('test_name')[0].className;
 		
 		proper.put("mail.smtp.ssl.trust", "smtp.naver.com");
 		
+구글 애널리틱스		
+고려할 구글애널리틱스 기능
+카테고리 목록에서 가장 많이 클릭되는 버튼은?
+몇시에 가장 활발히 접속하는가?
+신규 방문자인가 재방문자인가?
+무슨 광고배너가 가장 인기가 많지?
+구매자는 어떤 결제 스텝에서 가장 이탈률이 높은가?
+(개인적으로 탐나는 기능)
+		
 		
 		
 		

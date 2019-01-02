@@ -114,7 +114,7 @@ public class MemberDAO {
 			String selectedID = null;
 			
 			while (result.next()) {
-				selectedID=result.getString("PW");
+				selectedID=result.getString("ID");
 			}//비밀번호 존재시 비밀번호 반환
 			
 			return selectedID;

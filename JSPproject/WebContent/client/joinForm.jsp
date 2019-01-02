@@ -186,7 +186,7 @@
 
 				<!--회원가입 하는 곳-->
 
-				<form method="post" action="joinPerform.jsp"
+				<form method="post" action="joinPerform.jsp" id="joinInfo" onsubmit="return finalCheck()"
 					class="needs-validation" novalidate>
 
 					<td align="left" valign="top"><br>
@@ -203,7 +203,7 @@
 							<!-- 회원가입 아이디 입력란 -->
 							<input type="text" class="form-control" id="inputId"
 								name="inputId" placeholder="아이디를 입력하세요."
-								oninput="checkInputId();" style="margin-right: 350px;"
+								onKeyUp="checkInputId();" style="margin-right: 350px;"
 								aria-describedby="basic-addon3" maxlength="15">
 						</div>
 
@@ -281,9 +281,9 @@
 							<input type="email" class="form-control" id="InputEmail" name="InputEmail" maxlength="60" oninput="checkInputEmail();"
 								style="margin-right: 350px" aria-describedby="basic-addon3">
 						</div>
-						<div style="margin-left: 150px"><font id="emailCheckResult" color="red">이메일 유효성 검사</font></div> <br>
+						<div style="margin-left: 150px"><font id="emailCheckResult" color="red"></font></div> <br>
 						<div style="margin-left: 400px">
-							<input type="submit" class="btn btn-dark" value="회원가입"
+							<input type="submit" class="btn btn-dark" value="회원가입" 
 								style="margin-right: 350px" aria-describedby="basic-addon3">
 						</div>
 				</form>
@@ -295,44 +295,6 @@
 				</td>
 			</tr>
 			<!--회원가입 하는 곳-->
-
-
-
-			<script type="text/javascript">
-		
-			</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 		</table>
@@ -488,33 +450,75 @@
 					
 					
 					<script type="text/javascript">
-	                    
+					//유효성을 검사하는 자바스크립트
+					
+					
+					   var request = new XMLHttpRequest();
+		               var id;
+		               
+		               var idCheck = false;
+		               var pwCheck = false;
+		               var nameCheck = false;
+		               var dateCheck = false;
+		               var telCheck = false;
+		               var placeCheck = false;
+		               var emailCheck = false;
+	                   
 	                    function checkInputId(){  // 아이디 유효성 검사
 	                    	
-	                         var checkLength = '아이디는 4글자 이상이어야 합니다.';
-	                         var checkExisting = '아이디의 존재 여부를 검사해야한다.';
-	                        
 	                         document.getElementById('inputId').value = document.getElementById('inputId').value.replace( /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣|]/g, "");
 	                         // 한글입력 제한
 	                         document.getElementById('inputId').value = document.getElementById('inputId').value.replace( /[\{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/g,'');
 	                         // 특수문자 제한
-	                         document.getElementById('inputId').value = document.getElementById('inputId').value.trim();
+	                         document.getElementById('inputId').value = document.getElementById('inputId').value.replace(/\s+$/,'');
 	                         // 공백문자 제한
 	                         // 뒤의 공백 제거          : str.replace(/\s+$/,'');
                              // 앞뒤 공백 제거          : str.replace(/^\s+|\s+$/g,'');
+	                         
+	                         var confirm  =  document.getElementById('inputId').value;
 	                        
+	                         //alert('db='+id+'\n'+'입력='+ document.getElementById('inputId').value);
+	                         
+	                        request.open("Post", "/JSPproject/UserSearchServlet?userName="+confirm,false);
+		                    request.onreadystatechange = searchProcess;
+		                    request.send(null);
+	                         
+	                         
 	                         if(document.getElementById('inputId').value.length<4){
-	                        	 document.getElementById('idCheckResult').innerHTML = checkLength;
+	                        	 document.getElementById('idCheckResult').setAttribute('color', "red")
+	                        	 document.getElementById('idCheckResult').innerHTML = '아이디는 4글자 이상이어야 합니다.';
+	                        	 idCheck = false;
 	                         }else{
 	                        	var regId = /[A-Za-z]/g;
 	                        	 if(!regId.test(document.getElementById('inputId').value))
 	                        	 {
+	                        		 document.getElementById('idCheckResult').setAttribute('color', "red")
 	                        	     document.getElementById('idCheckResult').innerHTML = '숫자로만 아이디를 입력할 수 없습니다.';
-	                        		 return false;
+	                        		 idCheck = false;
+	                        	 }else{
+                                      
+                                      if (confirm == id ) {
+                                    	document.getElementById('idCheckResult').setAttribute('color', "red")
+                                    	document.getElementById('idCheckResult').innerHTML = '이미 존재하는 아이디입니다.';
+                                    	idCheck = false;
+                                    	id = '';
+									}else{
+										 document.getElementById('idCheckResult').setAttribute('color', "green");
+										document.getElementById('idCheckResult').innerHTML = '사용 가능한 아이디입니다.';
+										idCheck = true;
+									}
 	                        	 }
-	                        	 document.getElementById('idCheckResult').innerHTML = checkExisting;
 	                         }
 	                    }
+		                    
+		                    function searchProcess() {
+		                    if (request.readyState == 4 && request.status ==200) {
+		                    	var object = eval('('+request.responseText+')');
+		                    	var result = object.result;
+		                    	id = String(result);
+		                     }
+		                    }
+		                    
 	                         
 	                    function checkInputPw(){  // 패스워드 유효성 검사
 	                    	
@@ -536,16 +540,18 @@
 	                        	 document.getElementById('reInputPw').setAttribute( 'disabled', "disabled");
 	                        	 document.getElementById('pwCheckResult').innerHTML = '비밀번호는 4글자 이상입니다.';
 	                        	 document.getElementById('reInputPw').value = null;
-	                        	 return false;
+	                        	 pwCheck = false;
 	                         }else{  
 	                        	 document.getElementById('reInputPw').removeAttribute('disabled');   
 	                        	 if(document.getElementById('inputPw').value == document.getElementById('reInputPw').value) {
 	                        	
 	                        		 document.getElementById('pwCheckResult').setAttribute('color', "green");
 	                        		 document.getElementById('pwCheckResult').innerHTML = '비밀번호가 일치합니다.';
+	                        		 pwCheck = true;
 	                        	 }else{
 	                        		 document.getElementById('pwCheckResult').setAttribute('color', "red");
 	                        		 document.getElementById('pwCheckResult').innerHTML = '비밀번호가 불일치합니다.';
+	                        		 pwCheck = false;
 	                        	 }
 	                         }
 	                    }
@@ -567,14 +573,17 @@
 	                        	 //inputPw
 	                        	 document.getElementById('nameCheckResult').setAttribute('color', "red");
 	                        	 document.getElementById('nameCheckResult').innerHTML = '이름은 2글자 이상입니다.';
+	                        	 nameCheck = false;
 	                         }else{  
 	                        	 var regName = /[ㄱ-ㅎ|ㅏ-ㅣ]/g;
 	                        	 if(regName.test(document.getElementById('InputName').value)){
 	                        		 document.getElementById('nameCheckResult').setAttribute('color', "red");
-	                        		 document.getElementById('nameCheckResult').innerHTML = '이름은 2글자 이상입니다.';
+	                        		 document.getElementById('nameCheckResult').innerHTML = '이름은 2글자 이상이며 , 자음만 사용은 불가능합니다.';
+	                        		 nameCheck = false;
 	                        	 }else{
 	                        		 document.getElementById('nameCheckResult').setAttribute('color', "green");
 	                        		 document.getElementById('nameCheckResult').innerHTML = '올바른 이름입니다.';
+	                        		 nameCheck = true;
 	                        	 }
 	                         }
 	                    }
@@ -584,6 +593,7 @@
 	                    	if(regDate.test(document.getElementById('InputDate').value)){
 	                    		 document.getElementById('dateCheckResult').setAttribute('color', "green");
                         		 document.getElementById('dateCheckResult').innerHTML = '올바른 날짜입니다.';
+                        		 dateCheck = true;
 	                    	}
 	                    }
 	                    
@@ -602,12 +612,16 @@
 	                         if(document.getElementById('InputTel').value.length>5){
 	                        	 document.getElementById('telCheckResult').setAttribute('color', "green");
                         		 document.getElementById('telCheckResult').innerHTML = '올바른 전화번호 입니다.';
+                        		 telCheck = true;
 	                         }else{
 	                        	 document.getElementById('telCheckResult').setAttribute('color', "red");
                         		 document.getElementById('telCheckResult').innerHTML = '전화번호를 다시 입력해 주세요.';
+                        		 telCheck = false;
 	                         }
 	                    }
 	                    
+	                    
+	                  
 	                    function checkInputAddr(){ // 주소 유효성 검사
 	                    //	addrCheckResult  / sample2_postcode /sample2_detailAddress
 	                         
@@ -616,9 +630,11 @@
 	                         if(document.getElementById('sample2_postcode').value.length >0 && document.getElementById('sample2_detailAddress').value.length >0){
 	                        	 document.getElementById('addrCheckResult').setAttribute('color', "green");
                         		 document.getElementById('addrCheckResult').innerHTML = '올바른 주소입니다.';
+                        		  placeCheck = true;
 	                         }else{
 	                        	 document.getElementById('addrCheckResult').setAttribute('color', "red");
                         		 document.getElementById('addrCheckResult').innerHTML = '주소를 입력해 주세요.';
+                        		  placeCheck = false;
 	                         }
 	                    }
 	                    
@@ -639,22 +655,29 @@
 	                    	if(regEmail.test(document.getElementById('InputEmail').value) && regEmail2.test(document.getElementById('InputEmail').value) && tempCount.length==1){
 	                    	 document.getElementById('emailCheckResult').setAttribute('color', "green");
                         	 document.getElementById('emailCheckResult').innerHTML = '올바른 이메일 주소입니다.';
+                        	 emailCheck = true;
 	                    		
 	                    	}else{
 	                    	 document.getElementById('emailCheckResult').setAttribute('color', "red");
                        		 document.getElementById('emailCheckResult').innerHTML = '올바른 이메일 주소가 아닙니다.';
-	                    	}
-		                      
-		                         
+                       		 emailCheck = false;
+	                    	 }
 		                    }
+	                    
+	                    
+	                    function finalCheck() {
+	                    	//마지막 보내기전 유효성 검사
+	                    	 if(idCheck == true && pwCheck == true && nameCheck == true && dateCheck == true &&  telCheck == true && placeCheck == true && emailCheck == true) {
+	                    		 return true;
+	                    		  }else{
+	                    	       alert("올바른 회원가입 정보를 입력해 주세요.");
+                 		           return false;
+	                    		  }
+	                    }
+	      
 						</script>
 						
 						
-var a = "개발asdfasdfasdf개발"; 
-var results = a.match(/개발/g); 
-if(results != null) {
-    alert(results.length); // 2개이므로 2가 출력된다!
-}
 
 						
 						   

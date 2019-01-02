@@ -12,16 +12,16 @@
 	<%
 		if (request.getParameter("code") != null && session.getAttribute("code") != null) {
 			
-			out.println("값이 존재는 한다");
 
 			if (((String)request.getParameter("code")).equals((String)session.getAttribute("code"))) {
 
-				out.println("데이터에 들어 ?");
 				session.removeAttribute("code");
 
 				MemberDAO memberDAO = new MemberDAO();
 
 				memberDAO.joinMember((MemberDTO) session.getAttribute("tempUserInfo"));
+				
+				out.println("location.href='/JSPproject/index.jsp';");
 				
 
 			}
