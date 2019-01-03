@@ -6,7 +6,7 @@ import javax.mail.Authenticator;
 
 import javax.mail.PasswordAuthentication;
 
-public class mail extends Authenticator {
+public class Mail extends Authenticator {
 
     @Override
     
