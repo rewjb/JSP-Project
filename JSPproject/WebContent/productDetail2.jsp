@@ -1,6 +1,6 @@
-<%@page import="models.ReviewBean"%>
+<%@page import="dtodao.ReviewBean"%>
 <%@page import="java.util.Vector"%>
-<%@page import="models.ReviewDAO"%>
+<%@page import="dtodao.ReviewDAO"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 
 <!DOCTYPE html>
@@ -38,6 +38,8 @@
 	ReviewDAO rdao = new ReviewDAO();
 
 	Vector<ReviewBean> vec = rdao.getPidReview(pid);
+	
+	ReviewBean bean;
 	
 	
 %>
@@ -247,7 +249,7 @@
  													<%
 													for (int i = 0; i < vec.size(); i++) {
 														//벡터에 저장되어 있는 빈클래스를 하나씩 추출
-														ReviewBean bean = vec.get(i); 
+														bean = vec.get(i); 
 													%>
 															<tr>
  																<td><span style="FONT-SIZE: 12pt"><%=i + 1%></span></td>
