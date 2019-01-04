@@ -14,7 +14,7 @@ closeMethod : 톰캣 서버가 종료될 때, 자원 해제를 위해서 호출�
 
 	글자 수 제한 주기!
 	
-	memberDAO를 싱글톤으로 돌리자!
+	memberDAO를 싱글톤으로 돌리자!                            
 
 
 
