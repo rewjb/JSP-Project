@@ -34,6 +34,14 @@
 	<!--네이버 로그인 연동 -->
 
 	<%
+	if (request.getParameter("agree")==null) {
+		out.println("<script type=\"text/javascript\">");
+		out.println("alert('잘못된 접근입니다.');");
+		out.println("location.replace('/JSPproject/client/joinFormAgree.jsp');");
+		out.println("</script>");
+	
+	} 
+	
 		String clientId = "IcCXaLO3qfRlkqm3HRU0";//애플리케이션 클라이언트 아이디값";
 		String redirectURI = URLEncoder.encode("http://localhost:9999/JSPproject/client/loginNaverPerform.jsp",
 				"UTF-8");

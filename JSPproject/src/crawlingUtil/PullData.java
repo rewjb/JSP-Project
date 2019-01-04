@@ -10,10 +10,15 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
+import dtodao.ProductDAO;
+import dtodao.ProductDTO;
 
 public class PullData {
 
@@ -29,6 +34,8 @@ public class PullData {
 				"http://gtwatch.co.kr/product/list.html?cate_no=324", // 브랜드 : 마크제이콥스
 				"http://gtwatch.co.kr/product/list.html?cate_no=28" // 브랜드 : 커플시계
 		};
+		
+		String brandArray[] = {"가이거","다니엘 웰링턴(남)","디젤","루미눅스","구찌","다니엘 웰링턴(여)","DKNY","마크제이콥스","커플시계"};
 
 		Document doc;
 		// jsoup 연결 doc
@@ -38,6 +45,20 @@ public class PullData {
 		// 고유 아이디를 갖고 있는 element
 		ArrayList<String[]> inURL;
 		// 안에 접속할 페이지
+		JSONParser startJson = new JSONParser();
+		// 처음 제이슨을 팔스할 객체
+		JSONObject Json;
+		// 선택 제이슨
+		String brand;
+		//브랜드
+		ArrayList<ProductDTO> productList = new ArrayList<>();
+		//DTO LIST !
+		ProductDTO productDTO;
+		//내용을 넣을 DTO
+		ProductDAO productDAO = new ProductDAO();
+		
+//		int testInt = 0;
+//		출력 갯수 표시용 인트
 
 		for (int j = 0; j < outURLarray.length; j++) {
 			// 총 갖고 있는 url
@@ -45,22 +66,68 @@ public class PullData {
 			doc = Jsoup.connect(outURLarray[j]).get();
 
 			element = doc.select("ul.prdList p.prdImg a[href]");
-
+			
 			subElement = doc.select("ul.prdList li[id^=anchorBoxId]");
 
 			inURL = new ArrayList<>();
-
+			
+			brand = brandArray[j];
+			
 			for (int i = 0; i < element.size(); i++) {
 				inURL.add(new String[] { new String("http://gtwatch.co.kr" + element.get(i).attr("href")),
 						new String(subElement.get(i).attr("id")) });
 			} // 이미지 클릭시 넘어가는 페이지 주소
+			
 
 			for (int i = 0; i < inURL.size(); i++) {
-				System.out.println("고유 아이디=" + inURL.get(i)[1]);
-				getDetailInfo(inURL.get(i)[0]);
+				
+				Json = (JSONObject)startJson.parse(getDetailInfo(inURL.get(i)[0]).toString());
+				//제품 상세내용이 있는 Json 객체 얻기
+				
+				if (Json.get("모델")==null || Json.get("상품명")==null || ((String)Json.get("판매가")).replaceAll(",", "").replaceAll("원", "")==null
+					|| ((String)Json.get("배송비")).split("원")[0].replaceAll(",", "")==null || ((String)Json.get("적립금")).split("원")[0].replaceAll(",", "")==null
+					|| (String)Json.get("구성품")==null)
+						 {
+					continue;
+				}
+				
+				
+				productDTO = new ProductDTO();
+				
+				productDTO.setId(inURL.get(i)[1]);
+				productDTO.setBrand(brand);
+				productDTO.setModelName((String)Json.get("모델"));
+				productDTO.setName((String)Json.get("상품명"));
+				productDTO.setPrice(Integer.parseInt(((String)Json.get("판매가")).replaceAll(",", "").replaceAll("원", "")));
+				productDTO.setDeliverPrice(Integer.parseInt(((String)Json.get("배송비")).split("원")[0].replaceAll(",", "")));
+				productDTO.setSaveMoney(Integer.parseInt(((String)Json.get("적립금")).split("원")[0].replaceAll(",", "")));
+				productDTO.setComponents((String)Json.get("구성품"));
+				productDTO.setImgaddr("/JSPproject/img/Cimage/"+inURL.get(i)[1]+"jpg");
+				
+				productList.add(productDTO);
+				
+				System.out.println(productDTO.getBrand());
+				System.out.println("아이디=" + productDTO.getId());
+				System.out.println("이미지 = "+productDTO.getImgaddr());
+				System.out.println("상품명 = "+productDTO.getName());
+				System.out.println("판매가 = "+productDTO.getPrice());
+				System.out.println("배송비 = "+productDTO.getDeliverPrice());
+				System.out.println("적립금 = "+productDTO.getSaveMoney());
+				System.out.println("모델 = "+productDTO.getModelName());
+				System.out.println("구성품 = "+productDTO.getComponents());
+//				DTO에 값이 잘 들어갔는지 확인
+				
+				imageSave((String)Json.get("이미지"), inURL.get(i)[1]);
+				
+//				getDetailInfo(inURL.get(i)[0]);
+//				제이슨 오류 찾기용
+				
+//				System.out.println(++testInt);
+//				출력 갯수 표시용
 			}
-
 		}
+		
+		productDAO.joinProduct(productList);
 
 	}// 크롤링() : 생성자 종료
 
@@ -75,36 +142,44 @@ public class PullData {
 
 		StringBuffer resultInfo = new StringBuffer();
 		// 결과값을 받을 stringbuffer
+		
+		resultInfo.append("{\n");
 
 		if (imageElements.attr("src").contains("http:")) {
-			resultInfo.append("이미지 주소=" + imageElements.attr("src") + "\n");
+			resultInfo.append("\"이미지\":" +"\""+ imageElements.attr("src") + "\",\n");
 //			System.out.println("아미지 주소=" + imageElements.attr("src"));
 //			값 확인용 출력
 		} else {
-			resultInfo.append("이미지 주소=" + "http:" + imageElements.attr("src") + "\n");
+			resultInfo.append("\"이미지\":" + "\"http:" + imageElements.attr("src") + "\",\n");
 //			 System.out.println("이미지 주소 ="+"http:"+imageElements.attr("src"));
 //			값 확인용 출력
 		}
 
-		for (int i = 0; i < subjectElements.size(); i++) {
+		
 
-			resultInfo.append(subjectElements.get(i).text() + "=");
-			resultInfo.append(contentElements.get(i).text() + "\n");
+		for (int i = 0; i < contentElements.size(); i++) {
 
-//			System.out.print(subjectElements.get(i).text() + "=");
-//			System.out.println(contentElements.get(i).text());
-//		         값 확인용 출력
+			resultInfo.append("\"" + subjectElements.get(i).text() + "\":");
+
+			if (i == (subjectElements.size() - 1)) {
+				resultInfo.append("\"" + contentElements.get(i).text().replaceAll("\"", "") + "\"");
+			} else {
+				resultInfo.append("\"" + contentElements.get(i).text().replaceAll("\"", "") + "\",\n");
+			}
+
+
 		}
+		resultInfo.append("\n}\n");
 
-		System.out.println(resultInfo.toString());
+//		System.out.println(resultInfo.toString());
 //		최종 값 확인용 
 		return resultInfo;
+
 	}// getDetailInfo() : 메서드 종료
 
 	private void imageSave(String source, String fileName) {
 		
-		File outputFile = new File("asdasd/"+fileName+".jpg");
-		outputFile.
+		File outputFile = new File("C:\\Users\\user\\Desktop\\JSP\\JSPproject\\WebContent\\img\\Cimage\\"+fileName+".jpg");
 		try {
 
 			URL url = new URL(source);
@@ -118,15 +193,16 @@ public class PullData {
 			e.printStackTrace();
 		}
 
+	}	// imageSave() : 메서드 종료
+		
+	
+	public static void main(String[] args) throws Exception {
+		new PullData();
 	}
 		
 		
 		
-		
-	}// imageSave() : 메서드 종료
 
-	public static void main(String[] args) throws Exception {
-		new asd();
-	}// main() : 메서드 종료
+
 
 }// 클래스 종료

@@ -2,6 +2,10 @@ package emialUtil;
 
 import java.security.MessageDigest;
 
+import dtodao.ProductDAO;
+
+
+
 public class SHA256 {
 
 	public static String getSHA256(String input) {
@@ -13,7 +17,7 @@ public class SHA256 {
 		try {
 
 			MessageDigest digest = MessageDigest.getInstance("SHA-256");
-
+			
 			byte[] sentence = "Do not do to others what angers you if done to you by others.".getBytes();
 			// 해킹 못하게 막는 글자
 

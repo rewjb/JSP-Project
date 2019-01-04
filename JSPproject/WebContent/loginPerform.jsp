@@ -28,7 +28,7 @@
 			} else {
 				out.println("<script type=\"text/javascript\">");
 				out.println("alert('아이디 혹은 패스워드가 틀렸습니다.');");
-				out.println("location.href=\"index.jsp\";");
+				out.println("history.back();");
 				out.println("</script>");
 				//다시 index 페이지로 이동
 			}
@@ -37,7 +37,7 @@
 
 			out.println("<script type=\"text/javascript\">");
 			out.println("alert('아이디 혹은 패스워드가 틀렸습니다.');");
-			out.println("location.href=\"index.jsp\";");
+			out.println("history.back();");
 			out.println("</script>");
 			//다시 index 페이지로 이동
 
