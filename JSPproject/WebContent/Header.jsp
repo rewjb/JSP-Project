@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.net.URLEncoder"%>
+<%@ page import="java.security.SecureRandom"%>
+<%@ page import="java.math.BigInteger"%>
     
    <meta charset="utf-8">
    
@@ -91,3 +94,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 		font-weight: 500;
 }
 </style>
+
+
+
+

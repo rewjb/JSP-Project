@@ -102,7 +102,7 @@ public class PullData {
 				productDTO.setDeliverPrice(Integer.parseInt(((String)Json.get("배송비")).split("원")[0].replaceAll(",", "")));
 				productDTO.setSaveMoney(Integer.parseInt(((String)Json.get("적립금")).split("원")[0].replaceAll(",", "")));
 				productDTO.setComponents((String)Json.get("구성품"));
-				productDTO.setImgaddr("/JSPproject/img/Cimage/"+inURL.get(i)[1]+"jpg");
+				productDTO.setImgaddr("/JSPproject/img/Cimage/"+inURL.get(i)[1]+".jpg");
 				
 				productList.add(productDTO);
 				

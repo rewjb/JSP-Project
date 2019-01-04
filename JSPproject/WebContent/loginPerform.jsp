@@ -22,7 +22,7 @@
 
 				session.setAttribute("id", id);
 				out.println("<script type=\"text/javascript\">");
-				out.println("location.href=\"index.jsp\";");
+				out.println("location.href=\"/JSPproject/index.jsp\";");
 				out.println("</script>");
 				//다시 index 페이지로 이동
 			} else {
