@@ -48,7 +48,7 @@
 
 	<center>
 		<!-- 본문 시작 -->
-		<table width="1000" height="130">
+		<table width="1000" style="margin:30px">
 			<tr>
 				<td width="280">
 					<!-- 로고 삽입  --> <img src="/JSPproject/img/icon/logo.jpg" alt="로고"
