@@ -1,5 +1,5 @@
 
-<%@page import="models.ReviewDAO"%>
+<%@page import="dtodao.ReviewDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -9,7 +9,7 @@
     %>
 <!-- 게시글 작성에 데이터를 한번에 읽어드림 -->
 
-<jsp:useBean id="reviewbean" class="models.ReviewBean">
+<jsp:useBean id="reviewbean" class="dtodao.ReviewBean">
 	<jsp:setProperty name="reviewbean" property="*"/>
 </jsp:useBean>
 

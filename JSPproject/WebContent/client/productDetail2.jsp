@@ -13,7 +13,7 @@
 <title>상세페이지</title>
 
 
-<jsp:include page="Header.jsp"></jsp:include>
+<jsp:include page="../Header.jsp"></jsp:include>
 
 </head>
 <body onload="init();">
