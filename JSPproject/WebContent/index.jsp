@@ -27,7 +27,7 @@
 
 	<div align="center">
 		<!-- 본문 시작 -->
-		<div style="margin: 0 auto; max-width: 1000px">
+		<div style="margin: 0 auto; max-width: 1100px">
 			<div
 				style="background: white; z-index: 1; position: fixed; top: 0px; margin: 0 auto;">
 
@@ -113,10 +113,10 @@
 										data-toggle="dropdown">남성시계 BEST</button>
 									<div style="width: 300px" class="dropdown-menu"
 										aria-labelledby="MBest">
-										<a class="dropdown-item" href="/JSPproject/client/productList.jsp?brand=gager">가이거</a> <a
-											class="dropdown-item" href="/JSPproject/client/productList.jsp?brand=danielm">다니엘 웰링턴</a> <a
-											class="dropdown-item" href="/JSPproject/client/productList.jsp?brand=digel">디젤</a> <a
-											class="dropdown-item" href="/JSPproject/client/productList.jsp?brand=loomi">루미녹스</a>
+										<a class="dropdown-item" href="/JSPproject/client/productList.jsp?brand=gager&page=1">가이거</a> <a
+											class="dropdown-item" href="/JSPproject/client/productList.jsp?brand=danielm&page=1">다니엘 웰링턴</a> <a
+											class="dropdown-item" href="/JSPproject/client/productList.jsp?brand=digel&page=1">디젤</a> <a
+											class="dropdown-item" href="/JSPproject/client/productList.jsp?brand=loomi&page=1">루미녹스</a>
 									</div>
 								</div>
 								<!--메인 FBest 버튼 시작 -->
@@ -128,15 +128,15 @@
 										aria-expanded="false">여성시계 BEST</button>
 									<div style="width: 300px" class="dropdown-menu"
 										aria-labelledby="FBest">
-										<a class="dropdown-item" href="/JSPproject/client/productList.jsp?brand=gucci">구찌</a> <a
-											class="dropdown-item" href="/JSPproject/client/productList.jsp?brand=danielf">다니엘 웰링턴</a> <a
-											class="dropdown-item" href="/JSPproject/client/productList.jsp?brand=dkny">DKNY</a> <a
-											class="dropdown-item" href="/JSPproject/client/productList.jsp?brand=mike">마크제이콥스</a>
+										<a class="dropdown-item" href="/JSPproject/client/productList.jsp?brand=gucci&page=1">구찌</a> <a
+											class="dropdown-item" href="/JSPproject/client/productList.jsp?brand=danielf&page=1">다니엘 웰링턴</a> <a
+											class="dropdown-item" href="/JSPproject/client/productList.jsp?brand=dkny&page=1">DKNY</a> <a
+											class="dropdown-item" href="/JSPproject/client/productList.jsp?brand=mike&page=1">마크제이콥스</a>
 									</div>
 								</div>
 								<!--메인 CBest 버튼 시작 -->
 								<div class="btn-group" role="group">
-									<a href="/JSPproject/client/productList.jsp?brand=couple"><button id="CBest" onclick="clickMainBtn(CBest);"
+									<a href="/JSPproject/client/productList.jsp?brand=couple&page=1"><button id="CBest" onclick="clickMainBtn(CBest);"
 										style="width: 300px" type="button" class="btn btn-secondary">커플시계
 										BEST</button></a>
 								</div>
@@ -213,20 +213,6 @@
 				<!--로그인 하는 곳-->
 				<td valign="top">
 				
-				<ul class="nav">
-  <li class="nav-item">
-    <a class="nav-link active" href="#">약관 동의</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">정보 입력</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link disabled" href="#">정보 확인</a>
-  </li>
-</ul>
-				sadasdasd
-				sad
-				asd
 				
 				
 				

@@ -90,10 +90,10 @@
 								BEST</button>
 							<div style="width: 300px" class="dropdown-menu"
 								aria-labelledby="MBest">
-								<a class="dropdown-item" href="#">가이거</a> <a
-									class="dropdown-item" href="#">다니엘 웰링턴</a> <a
-									class="dropdown-item" href="#">디젤</a> <a class="dropdown-item"
-									href="#">루미녹스</a>
+								<a class="dropdown-item" href="/JSPproject/client/productList.jsp?brand=gager&page=1">가이거</a> <a
+									class="dropdown-item" href="/JSPproject/client/productList.jsp?brand=danielm&page=1">다니엘 웰링턴</a> <a
+									class="dropdown-item" href="/JSPproject/client/productList.jsp?brand=digel&page=1">디젤</a> <a class="dropdown-item"
+									href="/JSPproject/client/productList.jsp?brand=loomi&page=1">루미녹스</a>
 							</div>
 						</div>
 						<!--메인 FBest 버튼 시작 -->
@@ -104,17 +104,17 @@
 								aria-haspopup="true" aria-expanded="false">여성시계 BEST</button>
 							<div style="width: 300px" class="dropdown-menu"
 								aria-labelledby="FBest">
-								<a class="dropdown-item" href="#">구찌</a> <a
-									class="dropdown-item" href="#">다니엘 웰링턴</a> <a
-									class="dropdown-item" href="#">DKNY</a> <a
-									class="dropdown-item" href="#">마크제이콥스</a>
+								<a class="dropdown-item" href="/JSPproject/client/productList.jsp?brand=gucci&page=1">구찌</a> <a
+									class="dropdown-item" href="/JSPproject/client/productList.jsp?brand=danielf&page=1">다니엘 웰링턴</a> <a
+									class="dropdown-item" href="/JSPproject/client/productList.jsp?brand=dkny&page=1">DKNY</a> <a
+									class="dropdown-item" href="/JSPproject/client/productList.jsp?brand=mike&page=1">마크제이콥스</a>
 							</div>
 						</div>
 						<!--메인 CBest 버튼 시작 -->
 						<div class="btn-group" role="group">
-							<button id="CBest" onclick="clickMainBtn(CBest);"
+							<a href="/JSPproject/client/productList.jsp?brand=couple&page=1"><button id="CBest" onclick="clickMainBtn(CBest);"
 								style="width: 300px" type="button" class="btn btn-secondary">커플시계
-								BEST</button>
+								BEST</button></a>
 						</div>
 						<!--↑메인버튼 그룹 종료-->
 					</div>
