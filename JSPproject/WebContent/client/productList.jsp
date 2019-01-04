@@ -290,7 +290,8 @@
 									<br> <font size="4" color="red">판매원 : <%=productList.get(index + i).getPrice()%>원
 									</font><br> <br> <font size="4">구성품 : <%=productList.get(index + i).getComponents()%></font><br>
 									<br>
-									<button type="button" class="btn btn-secondary">상세보기</button>
+									<a href="아이디 = <%=productList.get(index + i).getId()%>">
+									<button type="button" class="btn btn-secondary">상세보기</button></a>
 								</form>
 							</div>
 						</div>
@@ -315,7 +316,8 @@
 									<br> <font size="4" color="red">판매가 : <%=productList.get(index + i).getPrice()%>원
 									</font><br> <br> <font size="4">구성품 :<%=productList.get(index + i).getComponents()%></font><br>
 									<br>
-									<button type="button" class="btn btn-secondary">상세보기</button>
+									<a href="아이디 = <%=productList.get(index + i).getId()%>">
+									<button type="button" class="btn btn-secondary">상세보기</button></a>
 
 								</form>
 							</div>
