@@ -7,9 +7,9 @@
    <meta charset="utf-8">
    
    <!--리뷰와 문의게시판 탭 메뉴를 위한 css -->
-   <link rel="stylesheet" href="css/tab.css">	
-   <link rel="stylesheet" href="css/reviewList.css">	
-   <link rel="stylesheet" href="css/slide.css">	
+   <link rel="stylesheet" href="../css/tab.css">	
+   <link rel="stylesheet" href="../css/reviewList.css">	
+   <link rel="stylesheet" href="../css/slide.css">	
 
    <!--top 부분의 모양의 드롭다운 버튼을 작동하게 하는 필수 css와 스크립트-->
  	<link rel="stylesheet"
@@ -46,7 +46,7 @@
 .star-input>.input,
 .star-input>.input>label:hover,
 .star-input>.input>input:focus+label,
-.star-input>.input>input:checked+label{display: inline-block;vertical-align:middle;background:url('img/grade_img.png')no-repeat;}
+.star-input>.input>input:checked+label{display: inline-block;vertical-align:middle;background:url('../img/grade_img.png')no-repeat;}
 .star-input{display:inline-block; white-space:nowrap;width:225px;height:40px;padding:25px;line-height:30px;}
 .star-input>.input{display:inline-block;width:150px;background-size:150px;height:28px;white-space:nowrap;overflow:hidden;position: relative;}
 .star-input>.input>input{position:absolute;width:1px;height:1px;opacity:0;}

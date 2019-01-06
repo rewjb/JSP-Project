@@ -3,12 +3,12 @@ package dtodao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
+
 
 
 
@@ -87,146 +87,274 @@ public class ReviewDAO {
 		}
 	}
 
-	// 모든 게시글을 리턴해주는
-	public Vector<ReviewBean> getAllReview() {
-		// 리넡할 객체 선언
-		Vector<ReviewBean> v = new Vector<>();
-		System.out.println("num");
-
-		getCon();
-		System.out.println("num");
-
-		try {
-			// 쿼리 준비
-			String sql = "select * from review";
-			System.out.println("쿼리성공");
-			// 쿼리를 실행할객체 선언
-			pstmt = con.prepareStatement(sql);
-			// 쿼리실행 후 결과 저장
-			rs = pstmt.executeQuery();
-			System.out.println("쿼리성공");
-			// 데이터 개수가 몇개인지 모르기에 반복문을 이용하여 데이터를 추출
-			while (rs.next()) {
-				// 데이터를 패키징( 가방 = Board2bean 클래스를 이용)해줌
-
-				ReviewBean bean = new ReviewBean();
-
-				bean.setNum(rs.getInt("num"));
-				System.out.println("num");
-				bean.setMid(rs.getString("mid"));
-				System.out.println("mid");
-				bean.setPid(rs.getString("pid"));
-				System.out.println("pid");
-				bean.setContent(rs.getString("content"));
-				System.out.println("content");
-				bean.setGrade(rs.getString("grade"));
-				System.out.println("grade");
-				bean.setReg_date(rs.getDate("reg_date").toString());// 날짜를 스트링으로 받기 위해 toString을 사용
-				System.out.println("reg_date");
-				bean.setImg(rs.getString("img"));
-				// 패키징한 데이터를 벡터에 저장
-				v.add(bean);
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
+	// 해당제품에 대해 전체를 가져오는 메소드
+		public Vector<ReviewBean> getAllReview(String pid, int start, int end) {
+			
+			Vector<ReviewBean> v = new Vector<ReviewBean>();
+			
+			getCon();
+			
 			try {
-				// 자원 반납
-				if (rs != null)
-					con.close();
-				if (pstmt != null)
-					con.close();
-				if (con != null)
-					con.close();
+				// 쿼리 준비
+				String sql ="select *  from (select A.* , Rownum Rnum from (select * from review where pid=? order by reg_date desc ) A ) "
+	                    + " where Rnum >= ? and Rnum <= ?";
+				/* String sql = "select * from review"; */
+				System.out.println("쿼리성공");
+				// 쿼리를 실행할객체 선언
+				pstmt = con.prepareStatement(sql);
+				// 쿼리실행 후 결과 저장
+	            pstmt.setString(1, pid);
+	            pstmt.setInt(2, start);
+	            pstmt.setInt(3, end);
+				rs = pstmt.executeQuery();
+				System.out.println("쿼리성공");
+				// 데이터 개수가 몇개인지 모르기에 반복문을 이용하여 데이터를 추출
+				while (rs.next()) {
+					// 데이터를 패키징( 가방 = Board2bean 클래스를 이용)해줌
+
+					ReviewBean bean = new ReviewBean();
+
+					bean.setNum(rs.getInt("num"));
+
+					bean.setMid(rs.getString("mid"));
+
+					bean.setPid(rs.getString("pid"));
+
+					bean.setContent(rs.getString("content"));
+
+					bean.setGrade(rs.getString("grade"));
+
+					bean.setReg_date(rs.getDate("reg_date").toString());// 날짜를 스트링으로 받기 위해 toString을 사용
+
+					bean.setImg(rs.getString("img"));
+					// 패키징한 데이터를 벡터에 저장
+					v.add(bean);
+				}
+
 			} catch (Exception e) {
 				e.printStackTrace();
+			} finally {
+				try {
+					// 자원 반납
+					if (rs != null)
+						con.close();
+					if (pstmt != null)
+						con.close();
+					if (con != null)
+						con.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
+			return v;
+			
 		}
-		return v;
-	}
-	
-	// 하나의 제품에 대한 리뷰 전부를 리턴
-    public Vector<ReviewBean> getPidReview(String pid){
-        //리턴타입 선언
-    	
-    	Vector<ReviewBean> v = new Vector<>();
-    	
-    	
-        getCon();
-         
-        try{
-                                     
-            //쿼리준비
-            String sql ="select * from review where pid= ?";
-            //쿼리실행객체
-            pstmt=con.prepareStatement(sql);
-            pstmt.setString(1, pid);
-            //쿼리 실행후 결과를 리턴
-            System.out.println(pid);
-            
-            rs=pstmt.executeQuery();
-            
-            while(rs.next()){
-            	
-            	ReviewBean bean = new ReviewBean();
-            	
-            	System.out.println("성공");
-                bean.setNum(rs.getInt("num"));
-                bean.setMid(rs.getString("mid"));
-                bean.setContent(rs.getString("content"));   
-                bean.setGrade(rs.getString("grade"));
-                bean.setReg_date(rs.getDate("REG_DATE").toString());
-                System.out.println("성공2");
-				// 패키징한 데이터를 벡터에 저장
-				v.add(bean);
-            }
-        }catch(Exception e){
-            e.printStackTrace();
-        }finally {
+		
+		//해당 제품에 대한 등급별로 가져오는 메소드
+		public Vector<ReviewBean> getGradeReview(String pid, int start, int end) {
+			
+			Vector<ReviewBean> v = new Vector<ReviewBean>();
+			
+			getCon();
+			
 			try {
-				// 자원 반납
-				if (rs != null)
-					con.close();
-				if (pstmt != null)
-					con.close();
-				if (con != null)
-					con.close();
+				// 쿼리 준비
+				String sql ="select *  from (select A.* , Rownum Rnum from (select * from review where pid= ? order by grade desc) A ) "
+	                    + " where Rnum >= ? and Rnum <= ? ";
+				
+				System.out.println("쿼리성공");
+				// 쿼리를 실행할객체 선언
+				pstmt = con.prepareStatement(sql);
+				// 쿼리실행 후 결과 저장
+	            pstmt.setString(1, pid);
+	            pstmt.setInt(2, start);
+	            pstmt.setInt(3, end);
+				rs = pstmt.executeQuery();
+				System.out.println("쿼리성공");
+				// 데이터 개수가 몇개인지 모르기에 반복문을 이용하여 데이터를 추출
+				while (rs.next()) {
+					// 데이터를 패키징( 가방 = Board2bean 클래스를 이용)해줌
+
+					ReviewBean bean = new ReviewBean();
+
+					bean.setNum(rs.getInt("num"));
+
+					bean.setMid(rs.getString("mid"));
+
+					bean.setPid(rs.getString("pid"));
+
+					bean.setContent(rs.getString("content"));
+
+					bean.setGrade(rs.getString("grade"));
+
+					bean.setReg_date(rs.getDate("reg_date").toString());// 날짜를 스트링으로 받기 위해 toString을 사용
+
+					bean.setImg(rs.getString("img"));
+					// 패키징한 데이터를 벡터에 저장
+					v.add(bean);
+				}
+
 			} catch (Exception e) {
 				e.printStackTrace();
+			} finally {
+				try {
+					// 자원 반납
+					if (rs != null)
+						con.close();
+					if (pstmt != null)
+						con.close();
+					if (con != null)
+						con.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
+			return v;
+			
 		}
-		return v;
-    }
-    
-    //BoardInfo에서 하나의 게시글을 리넡하는 메소드
-    public ReviewBean getOneReview(int num, String mid){
-        //리턴타입 선언
-    	ReviewBean bean =new ReviewBean();
-        getCon();
-         
-        try{
-             
-            //쿼리준비
-            String sql ="select * from review where num=? and mid=?";
-            //쿼리실행객체
-            pstmt=con.prepareStatement(sql);
-            pstmt.setInt(1, num);
-            pstmt.setString(2, mid);
-            //쿼리 실행후 결과를 리턴
-            rs=pstmt.executeQuery();
-            if(rs.next()){
-                bean.setNum(rs.getInt("num"));
-                bean.setMid(rs.getString("mid"));
-                bean.setPid(rs.getString("pid"));
-                bean.setContent(rs.getString("content"));   
-                bean.setGrade(rs.getString("grade"));
-                bean.setReg_date(rs.getDate("REG_DATE").toString());           
-            }
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        return bean;
-    }
+		
+		//내 리뷰만 을 가져오는 메소드
+		public Vector<ReviewBean> getMyReview(String mid, String pid, int start, int end) {
+			
+			Vector<ReviewBean> v = new Vector<ReviewBean>();
+			
+			getCon();
+			
+			try {
+				// 쿼리 준비
+				String sql ="select *  from (select A.* , Rownum Rnum from (select * from review where mid = ? and pid=? order by reg_date desc ) A ) "
+	                    + " where Rnum >= ? and Rnum <= ?";
+				
+				System.out.println("쿼리성공");
+				// 쿼리를 실행할객체 선언
+				pstmt = con.prepareStatement(sql);
+				// 쿼리실행 후 결과 저장
+	            pstmt.setString(1, mid);
+	            pstmt.setString(2, pid);
+	            pstmt.setInt(3, start);
+	            pstmt.setInt(4, end);
+				rs = pstmt.executeQuery();
+				System.out.println("쿼리성공");
+				// 데이터 개수가 몇개인지 모르기에 반복문을 이용하여 데이터를 추출
+				while (rs.next()) {
+					// 데이터를 패키징( 가방 = Board2bean 클래스를 이용)해줌
 
+					ReviewBean bean = new ReviewBean();
+
+					bean.setNum(rs.getInt("num"));
+
+					bean.setMid(rs.getString("mid"));
+
+					bean.setPid(rs.getString("pid"));
+
+					bean.setContent(rs.getString("content"));
+
+					bean.setGrade(rs.getString("grade"));
+
+					bean.setReg_date(rs.getDate("reg_date").toString());// 날짜를 스트링으로 받기 위해 toString을 사용
+
+					bean.setImg(rs.getString("img"));
+					// 패키징한 데이터를 벡터에 저장
+					v.add(bean);
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					// 자원 반납
+					if (rs != null)
+						con.close();
+					if (pstmt != null)
+						con.close();
+					if (con != null)
+						con.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			return v;
+			
+		}
+		
+		 //해당 제품의 전체 글의 갯수를 리턴하는 메소드
+	    public int getAllPidCount(String pid){
+	        getCon();
+	        //게시글 전체수를 저장하는 변수
+	        int count =0;
+	        try{
+	            //쿼리준비
+	            String sql ="select count(*) from review where pid = ?";
+	            //쿼리를 실행할 객체 선언
+	            pstmt = con.prepareStatement(sql);
+	            //쿼리 실행 후 결과를 리턴
+	            pstmt.setString(1, pid);
+	            
+	            rs=pstmt.executeQuery();
+	            if(rs.next()){
+	            	
+	            	//젠체 게시글의 수
+	                count =rs.getInt(1);
+	            }
+	            con.close();
+	        }catch(Exception e){
+	            e.printStackTrace();
+	        }
+	        return count;
+	    }
+	    
+		//해당 제품에대해 특정 회원 아이디로 작성한 글만  카운트 하는 메소드
+	    public int getAllMidCount(String mid, String pid){
+	        getCon();
+	        //게시글 전체수를 저장하는 변수
+	        int count =0;
+	        try{
+	            //쿼리준비
+	            String sql ="select count(*) from review where mid = ? and pid = ?";
+	            //쿼리를 실행할 객체 선언
+	            pstmt = con.prepareStatement(sql);
+	            //쿼리 실행 후 결과를 리턴
+	            
+	            pstmt.setString(1, mid);
+	            pstmt.setString(2, pid);
+	            
+	            rs=pstmt.executeQuery();
+	            if(rs.next()){
+	            	
+	            	//젠체 게시글의 수
+	                count =rs.getInt(1);
+	            }
+	            con.close();
+	        }catch(Exception e){
+	            e.printStackTrace();
+	        }
+	        return count;
+	    }
+	    
+		 //해달 제품의 별점순 제품을 카운트 하는 메소드
+	    public int getAllGradeCount(String pid){
+	        getCon();
+	        //게시글 전체수를 저장하는 변수
+	        int count =0;
+	        try{
+	            //쿼리준비
+	            String sql ="select count(*) grade from review where pid = ?";
+	            //쿼리를 실행할 객체 선언
+	            pstmt = con.prepareStatement(sql);
+	            //쿼리 실행 후 결과를 리턴
+	            
+	            pstmt.setString(1, pid);
+	            
+	            rs=pstmt.executeQuery();
+	            if(rs.next()){
+	            	
+	            	//젠체 게시글의 수
+	                count =rs.getInt(1);
+	            }
+	            con.close();
+	        }catch(Exception e){
+	            e.printStackTrace();
+	        }
+	        return count;
+	    }
 }
