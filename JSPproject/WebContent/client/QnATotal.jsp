@@ -147,9 +147,7 @@
 																				        </table>
 
 																				</div>
-																				<div class="modal-footer">
-																					<input type="button" class="btn btn-success"  value="답글 쓰기" 
-																					onclick="location.href='BoardReWriteForm.jsp?num=<%=dto.getNum()%>&pid=<%="ffff2124"%>&ref=<%=dto.getRef()%>&re_step=<%=dto.getRe_step()%>&re_level=<%=dto.getRe_level()%>'"> 
+																				<div class="modal-footer">																		 
 																					<h6>문의 수정과 삭제는 마이페이지 에서 하실 수 있습니다.</h6><br><br>
 																					<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
 																				</div>
@@ -193,7 +191,7 @@
 																if(startPage >10){
 																prev =startPage-10;       
 															%>
-													      <a href="productdetail2.jsp?center2=QnATotal.jsp?pageNum=<%=prev%>" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+													      <a href="productDetail2.jsp?center2=QnATotal.jsp?pageNum=<%=prev%>" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
 													    </li>
 													    <%
 													    	}
@@ -201,7 +199,7 @@
 															 for(int i=startPage; i<=endPage; i++){
 															System.out.println("성공"); 
 														%>
-													    <li<% if(i == startRow );%>><a class="page-link" href="productdetail2.jsp?center2=QnATotal.jsp?pageNum=<%=i%>"><%=i%></a></li>
+													    <li<% if(i == startRow );%>><a class="page-link" href="productDetail2.jsp?center2=QnATotal.jsp?pageNum=<%=i%>"><%=i%></a></li>
 													    <%        
 														     }    
 														     //다음 이라는 링크를 만들건지 파악
@@ -209,7 +207,7 @@
 														    	 next=startPage+10;
 														  %>  
 													    <li>
-													      <a href="productdetail2.jsp?center2=QnATotal.jsp?pageNum=<%=next%>" aria-label="Next">
+													      <a href="productDetail2.jsp?center2=QnATotal.jsp?pageNum=<%=next%>" aria-label="Next">
 													        <span aria-hidden="true">&raquo;</span>
 													        <%
 																     }

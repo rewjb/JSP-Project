@@ -18,7 +18,7 @@
 	%>
 	<script>
 	    alert("로그인된 사용자만 리뷰를 등록 할 수 있습니다.");
-	    document.location.href="productdetail2.jsp";
+	    document.location.href="productDetail2.jsp";
 	</script>
 	<%
 		}else{

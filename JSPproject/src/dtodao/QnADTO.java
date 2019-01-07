@@ -8,8 +8,7 @@ public class QnADTO {
 	//  2. 회원아이디 호VARCHAR2 (10 Byte)
 		private String pid;
 	//  3. 제품 고유 아이디 VARCHAR2 (30 Byte)
-		private String subject;
-	//  4. 답변이 달릴 시 "답변" 이라는 제목이 들어가는 칸 varchar(50 byte)
+		
 		private String content;
 	//  4. 리뷰 내용 VARCHAR2 (350 Byte)
 		private int ref;
@@ -20,9 +19,8 @@ public class QnADTO {
 		
 		private String reg_date;
 
-		private int cheeckTrue;
+		private int checkTrue;
 
-		
 		public int getNum() {
 			return num;
 		}
@@ -45,14 +43,6 @@ public class QnADTO {
 
 		public void setPid(String pid) {
 			this.pid = pid;
-		}
-
-		public String getSubject() {
-			return subject;
-		}
-
-		public void setSubject(String subject) {
-			this.subject = subject;
 		}
 
 		public String getContent() {
@@ -95,14 +85,15 @@ public class QnADTO {
 			this.reg_date = reg_date;
 		}
 
-		public int getCheeckTrue() {
-			return cheeckTrue;
+		public int getCheckTrue() {
+			return checkTrue;
 		}
 
-		public void setCheeckTrue(int cheeckTrue) {
-			this.cheeckTrue = cheeckTrue;
+		public void setCheckTrue(int checkTrue) {
+			this.checkTrue = checkTrue;
 		}
-		
+
+
 		
 
 
