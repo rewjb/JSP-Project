@@ -23,10 +23,10 @@ public class InsertCartServlet extends HttpServlet {
 
 		response.setContentType("text/html;charset=UTF-8");
 
-		String pid = request.getParameter("pid");
+		String pid = request.getParameter("pid");   
 		String mid = request.getParameter("mid");
 
-		response.getWriter().write(registerCart());
+		response.getWriter().write(registerCart(pid,mid));
 	}
 
 	private String registerCart(String pid , String mid) {
