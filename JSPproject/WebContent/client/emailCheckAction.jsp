@@ -21,13 +21,16 @@
 
 				memberDAO.joinMember((MemberDTO) session.getAttribute("tempUserInfo"));
 				
+				out.println("<script type=\"text/javascript\">");
+				
 				out.println("location.href='/JSPproject/index.jsp';");
 				
-
+				out.println("</script>");
+				
 			}
 		} else {
 
-			out.println("<script>");
+			out.println("<script type=\"text/javascript\">");
 
 			out.println("alert('회원가입 인증에 오류가 발생하였습니다.');");
 
@@ -37,6 +40,7 @@
 
 		}
 	%>
+
 
 
 

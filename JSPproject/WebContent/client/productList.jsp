@@ -29,7 +29,7 @@
 		session.setAttribute("state", state);
 
 		//String id = request.getParameter("id");
-		String id = "유주빈";
+		String id = (String)session.getAttribute("id");
 		ArrayList<String> pidList = pidList = CartDAO.getInstance().selectPinfo(id);
 
 		String brand = request.getParameter("brand");
@@ -364,22 +364,22 @@
 												
 												function insertCart(btn) {
 													
-													if ('유주빈'==null) {
+													if ('<%=id%>'==null) {
 														alert('회원가입을 하셔야 이용이 가능한 서비스입니다.');
 														location.href = '/JSPproject/index.jsp';
 														return ;
-													}else {
+													}
+													
 														if (btn.getAttribute('class')=='btn btn-success') {
 															alert('이미 장바구니에 추가된 상품입니다.');
 														}else{
-															insertCartRequest.open("POST", "/JSPproject/InsertCartServlet?PID="+btn.getAttribute('alter')+"&MID="+<%=request.getParameter("id")%>, true)
+															insertCartRequest.open("POST", "/JSPproject/InsertCartServlet?PID="+btn.getAttribute('alter')+"&MID="+<%=id%>, true)
 															insertCartRequest.onreadystatechange = getRespone;
 															insertCartRequest.send(null);
 															btn.setAttribute('class', 'btn btn-success');
 														}
 														
 														
-													}
 												}
 												
 												

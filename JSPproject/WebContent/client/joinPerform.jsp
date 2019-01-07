@@ -13,7 +13,7 @@
 <%@page import="java.util.Properties"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="emialUtil.SHA256"%>
-<jsp:useBean id="auth" scope="page" class="emialUtil"/>
+<%@page import="emialUtil.Mail"%>
 
 
 
@@ -99,22 +99,9 @@
 
       		proper.put("mail.smtp.socketFactory.fallback", "false");
       		
-      		
-      		
-      		
-      		    Authenticator auth = new Mail();
-      		    
-      		    
-      		    
-      		    
-      		    
-      		    
-      		    
-      		    
-      		
-      		
-      		
       		try{
+      			
+      			Authenticator auth = new Mail();
 
       		    Session ses = Session.getInstance(proper, auth);
 
