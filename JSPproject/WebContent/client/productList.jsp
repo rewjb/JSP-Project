@@ -28,7 +28,8 @@
 		apiURL += "&state=" + state;
 		session.setAttribute("state", state);
 
-		String id = request.getParameter("id");
+		//String id = request.getParameter("id");
+		String id = "유주빈";
 		ArrayList<String> pidList = pidList = CartDAO.getInstance().selectPinfo(id);
 
 		String brand = request.getParameter("brand");
@@ -299,7 +300,7 @@
 									<table border="">
 										<tr>
 											<td><a
-												href="/JSPproject/client/reviewSideBar.jsp?pid=<%=productList.get(index + i).getId()%>">
+												href="/JSPproject/client/productDetail2.jsp?pid=<%=productList.get(index + i).getId()%>">
 													<button type="button" class="btn btn-secondary">상세보기</button>
 											</a>
 
@@ -332,7 +333,7 @@
 																<table width="250px">
 																	<tr>
 																		<td align="left"><a
-																			href="/JSPproject/client/reviewSideBar.jsp?pid=<%=productList.get(index + i).getId()%>">
+																			href="/JSPproject/client/productDetail2.jsp?pid=<%=productList.get(index + i).getId()%>">
 																				<button type="button" class="btn btn-secondary">상세보기</button>
 																		</a></td>
 																		<td align="right">
@@ -362,14 +363,22 @@
 												var mid;
 												
 												function insertCart(btn) {
-													alert(btn.getAttribute('alter')) 
-													location.href='/JSPproject/index.jsp';
-													if (<%=request.getParameter("id")%>==null) {
-														alert(btn.getAttribute('회원가입을 하셔야 이용이 가능한 서비스입니다.'));
-													}else if (condition) {
-														insertCartRequest.open("POST", "/JSPproject/InsertCartServlet?PID="+btn.getAttribute('alter')+"&MID="+<%=request.getParameter("id")%>, false)
-														insertCartRequest.onreadystatechange = getRespone;
-														insertCartRequest.send(null);
+													
+													if ('유주빈'==null) {
+														alert('회원가입을 하셔야 이용이 가능한 서비스입니다.');
+														location.href = '/JSPproject/index.jsp';
+														return ;
+													}else {
+														if (btn.getAttribute('class')=='btn btn-success') {
+															alert('이미 장바구니에 추가된 상품입니다.');
+														}else{
+															insertCartRequest.open("POST", "/JSPproject/InsertCartServlet?PID="+btn.getAttribute('alter')+"&MID="+<%=request.getParameter("id")%>, true)
+															insertCartRequest.onreadystatechange = getRespone;
+															insertCartRequest.send(null);
+															btn.setAttribute('class', 'btn btn-success');
+														}
+														
+														
 													}
 												}
 												

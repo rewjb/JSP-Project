@@ -13,7 +13,7 @@
 <%@page import="java.util.Properties"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="emialUtil.SHA256"%>
-<%@page import="emialUtil.Mail"%>
+<jsp:useBean id="auth" scope="page" class="emialUtil"/>
 
 
 
@@ -67,7 +67,7 @@
       	String host = "http://localhost:9999/JSPproject/";
           // 서버의 주소! 추후 변경해야 ㅎ
           
-      	String from = "rewjb@naver.com";
+      	String from = "dbwnqls01@gmail.com";
           
       	String to = email;
 
@@ -102,9 +102,19 @@
       		
       		
       		
-      		try{
-
       		    Authenticator auth = new Mail();
+      		    
+      		    
+      		    
+      		    
+      		    
+      		    
+      		    
+      		    
+      		
+      		
+      		
+      		try{
 
       		    Session ses = Session.getInstance(proper, auth);
 
