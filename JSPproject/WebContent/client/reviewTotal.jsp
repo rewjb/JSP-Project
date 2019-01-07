@@ -15,16 +15,7 @@
 	  height: 20px;
 	}   
     </style>
-    
-  	<!-- 리뷰 상세보기시 회원 비회원 체크-->																         
-	<script>
-	function checkLog(){
-		<%if(session.getAttribute("mid") == null){%>
-			alert("로그인 사용자만  상세리뷰를 볼 수 있습니다.");
-			document.location.href="productdetail2.jsp?center=reviewTotal.jsp";
-		<%}%>			
-	}
-	</script>
+
 	
 
 
@@ -32,7 +23,7 @@
         <div class="col-xs-12 col-sm-10" >
   			<div class="jumbotron">         
 				    <%
-         				    	int prev; //이전
+         				    										int prev; //이전
          				             				    			int next; //다음
          				             				    			//화면에 보여질 게시글의 개수를 지정
          				             				    			int pageSize=5;
@@ -40,7 +31,7 @@
          				             				    			String pageNum = request.getParameter("pageNum");
          				             				    			
          				             				    			//제품고유 번호를 읽어드림
-         				             				    			String pid = request.getParameter("id");
+         				             				    			String pid = request.getParameter("pid");
          				             				    			
          				             				    			
          				             				    			
@@ -50,11 +41,7 @@
          				             				    			String gradeNum3 = "3";
          				             				    			String gradeNum4 = "4";
          				             				    			String gradeNum5 = "5";
-         				             				    			
-         				             				    		
-         				             				    			if(pid == null){
-         				             				    				pid = "ffff2124";
-         				             				    			}
+
          				             				    			//만약 처음 productDetail.jsp를 클릭하거나 수정 삭제 등 다른 게시글에서 이 페이지로 넘어오면 pageNum값이 없기에 null 처리를 해줌
          				             				    			 if(pageNum==null){
          				             				    				 pageNum= "1";
@@ -80,6 +67,16 @@
          				             				    		    number =count - (currentPage -1 ) * pageSize;
          				             				    			System.out.print(count);
          				    %>
+         				    
+   <!-- 리뷰 상세보기시 회원 비회원 체크-->																         
+	<script>
+	function checkLog(){
+		<%if(session.getAttribute("mid") == null){%>
+			alert("로그인 사용자만  상세리뷰를 볼 수 있습니다.");
+			document.location.href="productdetail2.jsp?center=reviewTotal.jsp&pid=<%=pid%>";
+		<%}%>			
+	}
+	</script>
 				
 													<!--리뷰 리스트의 시작-->
 				
@@ -298,7 +295,7 @@
 															 for(int i=startPage; i<=endPage; i++){
 															System.out.println("성공"); 
 														%>
-													    <li<% if(i == startRow);%>><a class="page-link" href="productDetail2.jsp?center=reviewTotal.jsp?pageNum=<%=i%>"><%=i%></a></li>
+													    <li<% if(i == startRow);%>><a class="page-link" href="productDetail2.jsp?center=reviewTotal.jsp?pageNum=<%=i%>&pid=<%=pid %>"><%=i%></a></li>
 													    <%        
 														     }    
 														     //다음 이라는 링크를 만들건지 파악

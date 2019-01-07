@@ -54,7 +54,7 @@ public class ProductDetailDAO {
         try{
 
             //쿼리준비
-            String sql ="select * from product where pid=?";
+            String sql ="select * from product where id=?";
             //쿼리실행객체
             pstmt=con.prepareStatement(sql);
             pstmt.setString(1, pid);

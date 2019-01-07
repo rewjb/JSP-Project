@@ -26,11 +26,13 @@
 <%
 	String mid = request.getParameter("mid");
 	String pid = request.getParameter("pid");
+	System.out.println(pid);
 
     // Center 값을 변경해주기위해서 request 객체를 Center 값을 받아옴
     String center =request.getParameter("center");
     
     ProductDetailDAO pdao = new ProductDetailDAO();
+    
     pdto = pdao.getOneProduct(pid);
 
     
@@ -45,7 +47,7 @@
 	
 	
 	<div style="margin: 0 auto;  width: 900px; position: relative; right: 370px; top:300px; " >
-		<img src="img/Cimg/<%=pdto.getImgaddr() %>" class="rounded float" alt="#" width="500"
+		<img src="<%=pdto.getImgaddr() %>" class="rounded float" alt="#" width="500"
 			height="500" style="position: relative; left: 72px">
 
 
@@ -113,6 +115,18 @@
 								<div class="panel-body">
 									<form accept-charset="UTF-8" action="ReviewInsertProc.jsp"
 										method="POST">
+										<div class="custom-control custom-radio">
+										  <input type="radio" id="customRadio1" name="customRadio" value="리뷰" class="custom-control-input">
+										  <label class="custom-control-label" for="customRadio1">
+										  	<p style="position: relative; right: 375px; font-size: 11pt; ">리뷰 등록</p>
+										  	</label>
+										</div>
+										<div class="custom-control custom-radio">
+										  <input type="radio" id="customRadio2" name="customRadio" value="문의" class="custom-control-input">
+										  <label class="custom-control-label" for="customRadio2">
+										  <p style="position: relative; right: 375px; font-size: 11pt; ">문의 등록</p>
+										  </label>
+										</div>
 										<!--  별펑점을 위한 html-->
 										<span class="star-input"
 											style="position: relative; bottom: 25px;"> <span
@@ -133,7 +147,7 @@
 											placeholder="320자 까지 입력 가능합니다." rows="5"
 											style="margin-bottom: 10px; width: 800px; height: 130px;"></textarea>
 										<h6 class="pull-right" id="counter"></h6>
-										<input type="hidden" name="pid" value="ffff2124"> <input
+										<input type="hidden" name="pid" value="<%=pid%>"> <input
 											type="hidden" name="mid"
 											value="<%=session.getAttribute("mid")%>">
 										<button class="btn btn-info" type="submit">등록</button>
@@ -152,9 +166,7 @@
 									         
 									         
 									      </div><!--/row-->
-									     
-									         
-									 
+
 									    </div><!--/.container-->
 
 								</div>

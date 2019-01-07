@@ -61,22 +61,24 @@ public class QnADAO {
             }
             
     
-            System.out.println("�뿬湲곗꽌 �떎�뙣3");
-			String sql = " insert into qnaboard values(qna_seq.NEXTVAL,?,?,?,?,?,?,sysdate,0)";
+            
+			String sql = " insert into qnaboard values(qna_seq.NEXTVAL,?,?,?,?,?,?,?,sysdate,0)";
 			
 			pstmt = con.prepareStatement(sql);
 			// ?�뿉 媛믪쓣 留듯븨
-			pstmt.setString(1, dto.getMid());
+			pstmt.setString(1, dto.getPid());
 			
-			pstmt.setString(2, dto.getPid());
+			pstmt.setString(2, dto.getMid());
+			
+			pstmt.setString(3, dto.getGrade());
 
-			pstmt.setString(3, dto.getContent());
+			pstmt.setString(4, dto.getContent());
 
-			pstmt.setInt(4, ref);
+			pstmt.setInt(5, ref);
 
-			pstmt.setInt(5, re_step);
+			pstmt.setInt(6, re_step);
 
-			pstmt.setInt(6, re_level);
+			pstmt.setInt(7, re_level);
 
 			
 			pstmt.executeUpdate();
@@ -117,7 +119,7 @@ public class QnADAO {
 	            pstmt.setInt(2, start);
 	            pstmt.setInt(3, end);
 				rs = pstmt.executeQuery();
-				System.out.println("荑쇰━�꽦怨�");
+				
 				// �뜲�씠�꽣 媛쒖닔媛� 紐뉕컻�씤吏� 紐⑤Ⅴ湲곗뿉 諛섎났臾몄쓣 �씠�슜�븯�뿬 �뜲�씠�꽣瑜� 異붿텧
 				while (rs.next()) {
 					// �뜲�씠�꽣瑜� �뙣�궎吏�( 媛�諛� = Board2bean �겢�옒�뒪瑜� �씠�슜)�빐以�
@@ -129,18 +131,20 @@ public class QnADAO {
 					dto.setPid(rs.getString("pid"));
 	
 					dto.setMid(rs.getString("mid"));
+					
+					dto.setGrade(rs.getString("grade"));
 	
 					dto.setContent(rs.getString("content"));
 					
-					dto.setRef(rs.getInt(5));
+					dto.setRef(rs.getInt(6));
 					
-					dto.setRe_step(rs.getInt(6));
+					dto.setRe_step(rs.getInt(7));
 					
-					dto.setRe_level(rs.getInt(7));
+					dto.setRe_level(rs.getInt(8));
 
 					dto.setReg_date(rs.getDate("reg_date").toString());// �궇吏쒕�� �뒪�듃留곸쑝濡� 諛쏄린 �쐞�빐 toString�쓣 �궗�슜
 					
-					dto.setCheckTrue(rs.getInt(9));
+					dto.setCheckTrue(rs.getInt(10));
 	
 					// �뙣�궎吏뺥븳 �뜲�씠�꽣瑜� 踰≫꽣�뿉 ���옣
 					v.add(dto);
@@ -172,7 +176,7 @@ public class QnADAO {
 	    int count =0;
 	    try{
 	        //荑쇰━以�鍮�
-	        String sql ="select count(*) from qnaboard where pid = ?";
+	        String sql ="select count(*) from qnaboard where pid = anchorBoxId_24734?";
 	        //荑쇰━瑜� �떎�뻾�븷 媛앹껜 �꽑�뼵
 	        pstmt = con.prepareStatement(sql);
 	        //荑쇰━ �떎�뻾 �썑 寃곌낵瑜� 由ы꽩
