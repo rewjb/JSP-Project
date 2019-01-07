@@ -74,36 +74,6 @@
 									class="dropdown-menu alert alert-dark  btn-light"
 									aria-labelledby="MBest">
 
-									<div align="center">
-										<!--로그인 및 회원관리 -->
-
-										<%
-											if (session.getAttribute("id") == null) {
-										%>
-
-										<form action="/JSPproject/loginPerform.jsp" method="post">
-											<input name="id" class="form-control" type="text"
-												placeholder="아이디 입력"> <input name="pw"
-												class="form-control" type="text" placeholder="비밀번호 입력">
-											<a href="client/joinFormAgree.jsp"><button type="button"
-													class="btn-dark">회원가입</button></a> <input width="200"
-												class=" btn-dark" type="submit" value="로그인">
-										</form>
-										<h5>
-											<a href="<%=apiURL%>"><span class="badge badge-success">네이버로
-													로그인하기 </span></a>
-										</h5>
-										<%
-											} else {
-										%>
-										<%=session.getAttribute("id")%>님 환영합니다.<br>회원정보<br>
-										장바구니<br> 거래정보
-										<%
-											}
-										%>
-
-									</div>
-
 								</div>
 								<!--메인 MBest 버튼 시작 -->
 								<div class="btn-group" role="group">
@@ -113,10 +83,14 @@
 										data-toggle="dropdown">남성시계 BEST</button>
 									<div style="width: 300px" class="dropdown-menu"
 										aria-labelledby="MBest">
-										<a class="dropdown-item" href="/JSPproject/client/productList.jsp?brand=gager&page=1">가이거</a> <a
-											class="dropdown-item" href="/JSPproject/client/productList.jsp?brand=danielm&page=1">다니엘 웰링턴</a> <a
-											class="dropdown-item" href="/JSPproject/client/productList.jsp?brand=digel&page=1">디젤</a> <a
-											class="dropdown-item" href="/JSPproject/client/productList.jsp?brand=loomi&page=1">루미녹스</a>
+										<a class="dropdown-item"
+											href="/JSPproject/client/productList.jsp?brand=gager&page=1">가이거</a>
+										<a class="dropdown-item"
+											href="/JSPproject/client/productList.jsp?brand=danielm&page=1">다니엘
+											웰링턴</a> <a class="dropdown-item"
+											href="/JSPproject/client/productList.jsp?brand=digel&page=1">디젤</a>
+										<a class="dropdown-item"
+											href="/JSPproject/client/productList.jsp?brand=loomi&page=1">루미녹스</a>
 									</div>
 								</div>
 								<!--메인 FBest 버튼 시작 -->
@@ -128,17 +102,23 @@
 										aria-expanded="false">여성시계 BEST</button>
 									<div style="width: 300px" class="dropdown-menu"
 										aria-labelledby="FBest">
-										<a class="dropdown-item" href="/JSPproject/client/productList.jsp?brand=gucci&page=1">구찌</a> <a
-											class="dropdown-item" href="/JSPproject/client/productList.jsp?brand=danielf&page=1">다니엘 웰링턴</a> <a
-											class="dropdown-item" href="/JSPproject/client/productList.jsp?brand=dkny&page=1">DKNY</a> <a
-											class="dropdown-item" href="/JSPproject/client/productList.jsp?brand=mike&page=1">마크제이콥스</a>
+										<a class="dropdown-item"
+											href="/JSPproject/client/productList.jsp?brand=gucci&page=1">구찌</a>
+										<a class="dropdown-item"
+											href="/JSPproject/client/productList.jsp?brand=danielf&page=1">다니엘
+											웰링턴</a> <a class="dropdown-item"
+											href="/JSPproject/client/productList.jsp?brand=dkny&page=1">DKNY</a>
+										<a class="dropdown-item"
+											href="/JSPproject/client/productList.jsp?brand=mike&page=1">마크제이콥스</a>
 									</div>
 								</div>
 								<!--메인 CBest 버튼 시작 -->
 								<div class="btn-group" role="group">
-									<a href="/JSPproject/client/productList.jsp?brand=couple&page=1"><button id="CBest" onclick="clickMainBtn(CBest);"
-										style="width: 300px" type="button" class="btn btn-secondary">커플시계
-										BEST</button></a>
+									<a
+										href="/JSPproject/client/productList.jsp?brand=couple&page=1"><button
+											id="CBest" onclick="clickMainBtn(CBest);"
+											style="width: 300px" type="button" class="btn btn-secondary">커플시계
+											BEST</button></a>
 								</div>
 								<!--↑메인버튼 그룹 종료-->
 							</div>
@@ -147,105 +127,79 @@
 					<!--↑ 메인버튼이 들어가 있는 1행 종료-->
 				</table>
 				<!-- 메인 위 화면 -->
-			<!--↓ 속성분류 , 주된 내용이 들어가는 테이블 시작-->
-			
-			<table border="1" style="width:1100px;">
-			<tr>
-				<!--↓ 메인화면에 로그인 구역-->
-				<td width="200" valign="top" align="center" rowspan="2">
-					<div class="alert alert-dark  btn-light" role="alert">
+				<!--↓ 속성분류 , 주된 내용이 들어가는 테이블 시작-->
+
+				<table border="1" style="width: 1100px;">
+					<tr>
+						<!--↓ 메인화면에 로그인 구역-->
+						<td width="200" valign="top" align="center" rowspan="2">
+							<div class="alert alert-dark  btn-light" role="alert">
 
 
-						<%
-							if (session.getAttribute("id") == null) {
-						%>
-						<form action="/JSPproject/loginPerform.jsp" method="post">
-							<input name="id" class="form-control" type="text"
-								placeholder="아이디 입력"> <input name="pw"
-								class="form-control" type="text" placeholder="비밀번호 입력">
-							<a href="client/joinFormAgree.jsp"><button type="button" class="btn-dark">회원가입</button></a>
-							<input width="200" class=" btn-dark" type="submit" value="로그인">
-						</form>
-						<br>
-						<h5>
-							<span class="badge badge-success">네이버로 로그인하기 </span>
-						</h5>
-						<a href="<%=apiURL%>"><img height="50"
-							src="http://static.nid.naver.com/oauth/small_g_in.PNG" /></a>
-						<!--로그인 전 추천순위-->
-						<%
-							} else {
-						%>
-						<%=session.getAttribute("id")%>님 환영합니다.<br> 회원정보<br>
-						장바구니<br> 거래정보
-						<%
-							}
-						%>
-						<br> <br>
-						<h2>
-							<span class="badge badge-primary">추천순위</span>
-						</h2>
-						<div class="row">
-							<div class="col-4">
-								<div style="width: 150px" class="list-group" id="list-tab"
-									role="tablist">
-									<a class="list-group-item list-group-item-action active"
-										data-toggle="list" href="#list-home" role="tab"
-										aria-controls="home">Home</a> <a
-										class="list-group-item list-group-item-action"
-										data-toggle="list" href="#list-profile" role="tab"
-										aria-controls="profile">Profile</a> <a
-										class="list-group-item list-group-item-action"
-										data-toggle="list" href="#list-messages" role="tab"
-										aria-controls="messages">Messages</a> <a
-										class="list-group-item list-group-item-action"
-										data-toggle="list" href="#list-settings" role="tab"
-										aria-controls="settings">Settings</a> <a
-										class="list-group-item list-group-item-action"
-										data-toggle="list" href="#list-settings" role="tab"
-										aria-controls="settings">Settings</a>
+								<%
+									if (session.getAttribute("id") == null) {
+								%>
+								<form action="/JSPproject/loginPerform.jsp" method="post">
+									<input name="id" class="form-control" type="text"
+										placeholder="아이디 입력"> <input name="pw"
+										class="form-control" type="text" placeholder="비밀번호 입력">
+									<a href="client/joinFormAgree.jsp"><button type="button"
+											class="btn-dark">회원가입</button></a> <input width="200"
+										class=" btn-dark" type="submit" value="로그인">
+								</form>
+								<br>
+								<h5>
+									<span class="badge badge-success">네이버로 로그인하기 </span>
+								</h5>
+								<a href="<%=apiURL%>"><img height="50"
+									src="http://static.nid.naver.com/oauth/small_g_in.PNG" /></a>
+								<!--로그인 전 추천순위-->
+								<%
+									} else {
+								%>
+								<button type="button" class="btn btn-outline-info"><h5><%=session.getAttribute("id")%>님</h5><br>
+								환영합니다.
+								</button><br><br>
+								<a href="/JSPproject/client/privateInfoForm.jsp"><button type="button" class="btn btn-info">개인정보</button></a><br>
+								<a href="#"><button type="button" class="btn btn-info">장바구니</button></a><br>
+								<a href="#"><button type="button" class="btn btn-info">거래내역</button></a><br>
+								<%
+									}
+								%>
+								<br> <br>
+								<h2>
+									<span class="badge badge-primary">추천순위</span>
+								</h2>
+								<div class="row">
+									<div class="col-4">
+										<div style="width: 150px" class="list-group" id="list-tab"
+											role="tablist">
+											<a class="list-group-item list-group-item-action active"
+												data-toggle="list" href="#list-home" role="tab"
+												aria-controls="home">Home</a> <a
+												class="list-group-item list-group-item-action"
+												data-toggle="list" href="#list-profile" role="tab"
+												aria-controls="profile">Profile</a> <a
+												class="list-group-item list-group-item-action"
+												data-toggle="list" href="#list-messages" role="tab"
+												aria-controls="messages">Messages</a> <a
+												class="list-group-item list-group-item-action"
+												data-toggle="list" href="#list-settings" role="tab"
+												aria-controls="settings">Settings</a> <a
+												class="list-group-item list-group-item-action"
+												data-toggle="list" href="#list-settings" role="tab"
+												aria-controls="settings">Settings</a>
+										</div>
+									</div>
+									<!--로그인 전 추천순위 끝-->
 								</div>
-							</div>
-							<!--로그인 전 추천순위 끝-->
-						</div>
-				</td>
+						</td>
 
-				<!--로그인 하는 곳-->
-				<td valign="top">
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				</td>
-			</tr>
-			<!--로그인 하는 곳-->
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		
+						<!--로그인 하는 곳-->
+						<td valign="top"></td>
+					</tr>
+					<!--로그인 하는 곳-->
+				</table>
 
 
 
@@ -271,30 +225,49 @@
 
 
 
-	</center>
 
 
-	<script>
-	<!--버튼 눌렀을 때 발생하는 색상 이벤트 -->
-		var MBest = document.getElementById('MBest');
-		var FBest = document.getElementById('FBest');
-		var CBest = document.getElementById('CBest');
-		function clickMainToggleBtn(xBtn) {
 
-			MBest.className = "btn btn-secondary dropdown-toggle";
-			FBest.className = "btn btn-secondary dropdown-toggle";
-			CBest.className = "btn btn-secondary"
 
-			xBtn.className = "btn  btn-dark dropdown-toggle";
-		}
-		function clickMainBtn(xBtn) {
 
-			MBest.className = "btn btn-secondary dropdown-toggle";
-			FBest.className = "btn btn-secondary dropdown-toggle";
-			CBest.className = "btn btn-secondary"
 
-			xBtn.className = "btn  btn-dark";
-		}
-	</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+				</center>
+
+
+				<script>
+				<!--버튼 눌렀을 때 발생하는 색상 이벤트 -->
+					var MBest = document.getElementById('MBest');
+					var FBest = document.getElementById('FBest');
+					var CBest = document.getElementById('CBest');
+					function clickMainToggleBtn(xBtn) {
+
+						MBest.className = "btn btn-secondary dropdown-toggle";
+						FBest.className = "btn btn-secondary dropdown-toggle";
+						CBest.className = "btn btn-secondary"
+
+						xBtn.className = "btn  btn-dark dropdown-toggle";
+					}
+					function clickMainBtn(xBtn) {
+
+						MBest.className = "btn btn-secondary dropdown-toggle";
+						FBest.className = "btn btn-secondary dropdown-toggle";
+						CBest.className = "btn btn-secondary"
+
+						xBtn.className = "btn  btn-dark";
+					}
+				</script>
 </body>
 </html>

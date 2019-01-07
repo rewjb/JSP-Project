@@ -297,13 +297,21 @@
 									<br>
 
 
-									<table border="">
-										<tr>
-											<td><a
-												href="/JSPproject/client/productDetail2.jsp?pid=<%=productList.get(index + i).getId()%>">
-													<button type="button" class="btn btn-secondary">상세보기</button>
-											</a>
-
+									<table width="250px">
+																	<tr>
+																		<td align="left"><a
+																			href="/JSPproject/client/productDetail2.jsp?pid=<%=productList.get(index + i).getId()%>">
+																				<button type="button" class="btn btn-secondary">상세보기</button>
+																		</a></td>
+																		<td align="right">
+																		<%if (pidList.contains(productList.get(index + i).getId())){%>
+																			<button type="button" class="btn btn-success"  onclick="insertCart(this);">장바구니</button>
+																		<%}else { %>
+																			<button onclick="insertCart(this);" type="button" class="btn btn-secondary" alter="<%=productList.get(index + i).getId()%>">장바구니</button>
+																			<%}%>
+																		</td>
+																	</tr>
+																</table>
 
 												</form>
 												</div>
@@ -338,7 +346,7 @@
 																		</a></td>
 																		<td align="right">
 																		<%if (pidList.contains(productList.get(index + i).getId())){%>
-																			<button type="button" class="btn btn-success">장바구니</button>
+																			<button type="button" class="btn btn-success"  onclick="insertCart(this);">장바구니</button>
 																		<%}else { %>
 																			<button onclick="insertCart(this);" type="button" class="btn btn-secondary" alter="<%=productList.get(index + i).getId()%>">장바구니</button>
 																			<%}%>
@@ -360,32 +368,29 @@
 												<script type="text/javascript">
 												
 												insertCartRequest = new XMLHttpRequest();
-												var mid;
+												var mid = '<%=session.getAttribute("id")%>';
 												
 												function insertCart(btn) {
-													
-													if ('<%=id%>'==null) {
+													if (mid=='null') {
 														alert('회원가입을 하셔야 이용이 가능한 서비스입니다.');
 														location.href = '/JSPproject/index.jsp';
-														return ;
-													}
-													
+													}else{
 														if (btn.getAttribute('class')=='btn btn-success') {
 															alert('이미 장바구니에 추가된 상품입니다.');
 														}else{
-															insertCartRequest.open("POST", "/JSPproject/InsertCartServlet?PID="+btn.getAttribute('alter')+"&MID="+<%=id%>, true)
+															insertCartRequest.open("POST", "/JSPproject/InsertCartServlet?PID="+btn.getAttribute('alter')+"&MID=<%=session.getAttribute("id")%>", false)
 															insertCartRequest.onreadystatechange = getRespone;
 															insertCartRequest.send(null);
 															btn.setAttribute('class', 'btn btn-success');
 														}
-														
+													}	
 														
 												}
 												
 												
 												function getRespone() {
 													if (insertCartRequest.readyState==4 && insertCartRequest.status==200) {
-														 var object = eval('('+ insertCartRequest.responseText +')')
+														 var object = eval('('+ insertCartRequest.responseText +')');
 													}
 												}
 												</script>

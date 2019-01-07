@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -16,7 +17,13 @@ public class MemberDAO {
 //	private String url = "jdbc:oracle:thin:@localhost:1521:orcl";
 //	private String user = "system";
 //	private String password = "1234";
-
+	
+	
+	private static MemberDAO memberDAO = new MemberDAO();
+	
+	public static MemberDAO getInstance() {
+		return memberDAO;
+	}//싱글톤 객체 얻기
 
 	private Connection DBconnectMethod() {
 		try {
@@ -123,5 +130,62 @@ public class MemberDAO {
 		}
 		return null;
 	}// loginMember() : 메서드 종료
+	
+	public MemberDTO searchMemberInfo(String id) {
+		// 아이디각 존재하는지 검색
+
+		Connection con = DBconnectMethod();
+		// DB 연결
+		String sql = "SELECT * FROM MEMBER  WHERE ID = '" + id + "'";
+		// sql 문 작성
+		MemberDTO memberDTO = null;
+		try {
+			// 오류 처리
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet result = ps.executeQuery();
+
+
+			while (result.next()) {
+				memberDTO = new MemberDTO();
+				memberDTO.setId(result.getString("ID"));
+				memberDTO.setPw(result.getString("PW"));
+				memberDTO.setName(result.getString("NAME"));
+				memberDTO.setBirthDay(result.getString("BIRTHDAY"));
+				memberDTO.setAddr(result.getString("ADDR"));
+				memberDTO.setEmail(result.getString("EMAIL"));
+				memberDTO.setTel(result.getString("TEL"));
+			} // 비밀번호 존재시 비밀번호 반환
+
+			// 비밀번호 반환
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return memberDTO;
+	}// loginMember() : 메서드 종료
+	
+	public void updateMember(MemberDTO memberDTO) {
+//		public void updateMember(String id , String pw , String name , String tel , String addr) {
+		// 아이디각 존재하는지 검색
+
+		Connection con = DBconnectMethod();
+		// DB 연결
+		String sql = "UPDATE MEMBER SET PW=?,NAME=?,TEL=?,ADDR=?  WHERE ID=?";
+		// sql 문 작성
+		try {
+			// 오류 처리
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, memberDTO.getPw());
+			ps.setString(2, memberDTO.getName());
+			ps.setString(3, memberDTO.getTel());
+			ps.setString(4, memberDTO.getAddr());
+			ps.setString(5, memberDTO.getId());
+			
+			ps.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}// updateMember() : 메서드 종료
+
 
 }// 클래스 종료
