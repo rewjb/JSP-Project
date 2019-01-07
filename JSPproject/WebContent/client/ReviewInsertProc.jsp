@@ -21,9 +21,10 @@
 	    document.location.href="productDetail2.jsp";
 	</script>
 	<%
-		}else{
+		
+	}else{
 	%>
-
+	
 	<%
 	
 	 	//데이터 베이스 쪽으로 변경클래스를 넘겨줌

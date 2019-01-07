@@ -1,3 +1,4 @@
+<%@page import="dtodao.ProductDetailDAO"%>
 <%@page import="dtodao.ReviewBean"%>
 <%@page import="java.util.Vector"%>
 <%@page import="dtodao.ReviewDAO"%>
@@ -18,17 +19,24 @@
 <body>
 <body onload="init();">
 
+	<jsp:useBean id="pdto" class="dtodao.ProductDTO">
+		<jsp:setProperty name="pdto" property="*"/>
+	</jsp:useBean>
+
 <%
 	String mid = request.getParameter("mid");
+	String pid = request.getParameter("pid");
 
     // Center 값을 변경해주기위해서 request 객체를 Center 값을 받아옴
     String center =request.getParameter("center");
-    String center2 =request.getParameter("center2");
+    
+    ProductDetailDAO pdao = new ProductDetailDAO();
+    pdto = pdao.getOneProduct(pid);
+
     
     //처음 SessionMain.jsp 를 실행하면 null값이 실행되기에 null 처를 해줌
-    if(center ==null || center2==null){
+    if(center == null){
         center ="reviewTotal.jsp";
-        center2 = "QnATotal.jsp";
     }
 %>
 
@@ -37,47 +45,46 @@
 	
 	
 	<div style="margin: 0 auto;  width: 900px; position: relative; right: 370px; top:300px; " >
-		<img src="../img/watch02.jpg" class="rounded float" alt="#" width="500"
+		<img src="img/Cimg/<%=pdto.getImgaddr() %>" class="rounded float" alt="#" width="500"
 			height="500" style="position: relative; left: 72px">
 
 
-		<h2 style="width: 900px; position: relative; left: 650px; bottom: 450px;">[프리마
-			클라쎄 PRIMA CLASSE]</h2>
+		<h6 style="width: 900px; position: relative; left: 650px; bottom: 450px;"><%=pdto.getName() %></h6>
 		<br> <br>
 		<table style="position: relative; left: 650px; bottom: 450px;">
 			<tr>
 				<td width="30%" height="50">판매가</td>
 
-				<td>80000원</td>
+				<td><%=pdto.getPrice() %>원</td>
 
 			</tr>
 
 			<tr>
 				<td height="50">배송비</td>
-				<td>3000원</td>
+				<td><%=pdto.getDeliverPrice() %>원</td>
 			</tr>
 			<tr>
 				<td height="50">적립금(3%)</td>
-				<td>2400원</td>
+				<td><%=pdto.getSaveMoney() %>원</td>
 			</tr>
 			<tr>
 				<td height="50">모델</td>
-				<td>PC0013L03</td>
+				<td><%=pdto.getModelName() %></td>
 			</tr>
 			<tr>
 				<td height="50">구성품</td>
-				<td>정품케이스+정품보증서+고급팔찌</td>
+				<td><%=pdto.getComponents() %></td>
 			</tr>
 
 		</table>
 
 
 		<form name="form" method="get" style="position: relative; left: 650px; bottom: 450px;">
-			수량 : <input type=hidden name="sell_price" value="5500"> <input
-				type="text" name="amount" value="1" size="3" onchange="change();">
-			<input type="button" value=" + " onclick="add();"> <input
-				type="button" value=" - " onclick="del();"><br> 금액 : <input
-				type="text" name="sum" size="11" readonly>원 <br> <br>
+			수량 : <input type=hidden name="sell_price" value="<%=pdto.getPrice() %>"> 
+			<input type="text" name="amount" value="1" size="3" onchange="change();">
+			<input type="button" value=" + " onclick="add();"> 
+			<input type="button" value=" - " onclick="del();"><br> 금액 : 
+			<input type="text" name="sum" size="11" readonly>원 <br> <br>
 			<br>
 			<button type="button" class="btn btn-secondary" style="width: 400px;">카트추가</button>
 		</form>
@@ -177,9 +184,6 @@
 											<button class="btn btn-info" type="submit">등록</button>
 										</form>
 										<hr style="border: double 4px lightgray;">
-										<!--문의게시판 리스트의 시작-->
-										<jsp:include page="QnASideBar.jsp"/>
-										<jsp:include page="<%=center2 %>" />
 
 									</div>
 								</div>
