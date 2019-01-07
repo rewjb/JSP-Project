@@ -23,20 +23,23 @@ public class InsertCartServlet extends HttpServlet {
 
 		response.setContentType("text/html;charset=UTF-8");
 
-		String pid = request.getParameter("pid");   
-		String mid = request.getParameter("mid");
+		String pid = request.getParameter("PID");   
+		String mid = request.getParameter("MID");
 
 		response.getWriter().write(registerCart(pid,mid));
 	}
 
-	private String registerCart(String pid , String mid) {
+	private int registerCart(String pid , String mid) {
 		
 		CartDAO cartDAO = CartDAO.getInstance();
 		
-		cartDAO.registerCart(pid, mid);
-	
-		
-		return null;
+		try {
+			cartDAO.registerCart(pid, mid);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return  0;
+		}
+		return 1;
 	}
 
 }
