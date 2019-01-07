@@ -20,13 +20,13 @@ public class QnADAO {
 	public void getCon() {
 		
 		try {
-			// 외부에서 데이터를 읽어들어야 하기에
+			// �쇅遺��뿉�꽌 �뜲�씠�꽣瑜� �씫�뼱�뱾�뼱�빞 �븯湲곗뿉
 			Context initContext = new InitialContext();
-			// 톰켓 서버에 정보를 담아놓은 고으로 이동
+			// �넱耳� �꽌踰꾩뿉 �젙蹂대�� �떞�븘�넃�� 怨좎쑝濡� �씠�룞
 			Context envContext = (Context) initContext.lookup("java:comp/env/");
-			// 데이터 소스 객체를 선언
+			// �뜲�씠�꽣 �냼�뒪 媛앹껜瑜� �꽑�뼵
 			DataSource ds = (DataSource) envContext.lookup("jdbc/orcl");
-			// 데이터 소스를 기준으로 커넥션을 연결해주시오
+			// �뜲�씠�꽣 �냼�뒪瑜� 湲곗��쑝濡� 而ㅻ꽖�뀡�쓣 �뿰寃고빐二쇱떆�삤
 			con = ds.getConnection();
 			
 		} catch (Exception e) {
@@ -36,21 +36,21 @@ public class QnADAO {
 	}
     public void insertQnA(QnADTO dto) {
     	
-    	//dto에서 넘어오자 않았던 데이터를 초고회 해주어야 한다.
+    	//dto�뿉�꽌 �꽆�뼱�삤�옄 �븡�븯�뜕 �뜲�씠�꽣瑜� 珥덇퀬�쉶 �빐二쇱뼱�빞 �븳�떎.
     			
 		getCon();
 		
-		 //빈클래스에 넘어오지 않았던 데이터들을 초기화 해주어야 합니다.
-        int ref=0; //글그룹을 의미 = 쿼리를 실행시켜서 가장큰 ref 값을 자져온 후  +1을 더해주면됨
-        int re_step=1; //새글이기에 = 부모글
+		 //鍮덊겢�옒�뒪�뿉 �꽆�뼱�삤吏� �븡�븯�뜕 �뜲�씠�꽣�뱾�쓣 珥덇린�솕 �빐二쇱뼱�빞 �빀�땲�떎.
+        int ref=0; //湲�洹몃９�쓣 �쓽誘� = 荑쇰━瑜� �떎�뻾�떆耳쒖꽌 媛��옣�겙 ref 媛믪쓣 �옄�졇�삩 �썑  +1�쓣 �뜑�빐二쇰㈃�맖
+        int re_step=1; //�깉湲��씠湲곗뿉 = 遺�紐④�
         int re_level=1; 
        
 		
 		try {
-			//가장 큰 ref값을 읽어오는 쿼리 준비
+			//媛��옣 �겙 ref媛믪쓣 �씫�뼱�삤�뒗 荑쇰━ 以�鍮�
             String refsql ="select max(ref) from qnaboard ";
             
-           //쿼리실행 객체 
+           //荑쇰━�떎�뻾 媛앹껜 
             pstmt =con.prepareStatement(refsql);
 
 
@@ -61,34 +61,32 @@ public class QnADAO {
             }
             
     
-            System.out.println("여기서 실패3");
-			String sql = " insert into qnaboard values(qna_seq.NEXTVAL,?,?,?,?,?,?,?,sysdate,0)";
+            System.out.println("�뿬湲곗꽌 �떎�뙣3");
+			String sql = " insert into qnaboard values(qna_seq.NEXTVAL,?,?,?,?,?,?,sysdate,0)";
 			
 			pstmt = con.prepareStatement(sql);
-			// ?에 값을 맵핑
-			pstmt.setString(1, dto.getPid());
-			System.out.println(dto.getPid());
-			pstmt.setString(2, dto.getMid());
-			System.out.println(dto.getMid());
-			pstmt.setString(3, dto.getSubject());
-			System.out.println(dto.getSubject());
-			pstmt.setString(4, dto.getContent());
-			System.out.println(dto.getContent());
-			pstmt.setInt(5, ref);
-			System.out.println(ref);
-			pstmt.setInt(6, re_step);
-			System.out.println(re_step);
-			pstmt.setInt(7, re_level);
-			System.out.println(re_level);
+			// ?�뿉 媛믪쓣 留듯븨
+			pstmt.setString(1, dto.getMid());
+			
+			pstmt.setString(2, dto.getPid());
+
+			pstmt.setString(3, dto.getContent());
+
+			pstmt.setInt(4, ref);
+
+			pstmt.setInt(5, re_step);
+
+			pstmt.setInt(6, re_level);
+
 			
 			pstmt.executeUpdate();
 
-			// 쿼리를 실행하시오
+			// 荑쇰━瑜� �떎�뻾�븯�떆�삤
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			try {
-				// 자원 반납
+				// �옄�썝 諛섎궔
 				if (pstmt != null)
 					con.close();
 				if (con != null)
@@ -107,23 +105,22 @@ public class QnADAO {
 			getCon();
 			
 			try {
-				// 쿼리 준비
+				// 荑쇰━ 以�鍮�
 				String sql ="select *  from (select A.* , Rownum Rnum from (select * from qnaboard where pid=? order by ref desc,re_step asc ) A ) "
 	                    + " where Rnum >= ? and Rnum <= ?";
 				
 			
-				System.out.println("쿼리성공");
-				// 쿼리를 실행할객체 선언
+				// 荑쇰━瑜� �떎�뻾�븷媛앹껜 �꽑�뼵
 				pstmt = con.prepareStatement(sql);
-				// 쿼리실행 후 결과 저장
+				// 荑쇰━�떎�뻾 �썑 寃곌낵 ���옣
 	            pstmt.setString(1, pid);
 	            pstmt.setInt(2, start);
 	            pstmt.setInt(3, end);
 				rs = pstmt.executeQuery();
-				System.out.println("쿼리성공");
-				// 데이터 개수가 몇개인지 모르기에 반복문을 이용하여 데이터를 추출
+				System.out.println("荑쇰━�꽦怨�");
+				// �뜲�씠�꽣 媛쒖닔媛� 紐뉕컻�씤吏� 紐⑤Ⅴ湲곗뿉 諛섎났臾몄쓣 �씠�슜�븯�뿬 �뜲�씠�꽣瑜� 異붿텧
 				while (rs.next()) {
-					// 데이터를 패키징( 가방 = Board2bean 클래스를 이용)해줌
+					// �뜲�씠�꽣瑜� �뙣�궎吏�( 媛�諛� = Board2bean �겢�옒�뒪瑜� �씠�슜)�빐以�
 	
 					QnADTO dto = new QnADTO();
 	
@@ -133,21 +130,19 @@ public class QnADAO {
 	
 					dto.setMid(rs.getString("mid"));
 	
-					dto.setSubject(rs.getString("subject"));
-	
 					dto.setContent(rs.getString("content"));
 					
-					dto.setRef(rs.getInt(6));
+					dto.setRef(rs.getInt(5));
 					
-					dto.setRe_step(rs.getInt(7));
+					dto.setRe_step(rs.getInt(6));
 					
-					dto.setRe_level(rs.getInt(8));
+					dto.setRe_level(rs.getInt(7));
 
-					dto.setReg_date(rs.getDate("reg_date").toString());// 날짜를 스트링으로 받기 위해 toString을 사용
+					dto.setReg_date(rs.getDate("reg_date").toString());// �궇吏쒕�� �뒪�듃留곸쑝濡� 諛쏄린 �쐞�빐 toString�쓣 �궗�슜
 					
-					dto.setCheeckTrue(rs.getInt(10));
+					dto.setCheckTrue(rs.getInt(9));
 	
-					// 패키징한 데이터를 벡터에 저장
+					// �뙣�궎吏뺥븳 �뜲�씠�꽣瑜� 踰≫꽣�뿉 ���옣
 					v.add(dto);
 				}
 	
@@ -155,7 +150,7 @@ public class QnADAO {
 				e.printStackTrace();
 			} finally {
 				try {
-					// 자원 반납
+					// �옄�썝 諛섎궔
 					if (rs != null)
 						con.close();
 					if (pstmt != null)
@@ -170,23 +165,24 @@ public class QnADAO {
 			
 		}
 
-	//해당 제품의 전체 글의 갯수를 리턴하는 메소드
+	//�빐�떦 �젣�뭹�쓽 �쟾泥� 湲��쓽 媛��닔瑜� 由ы꽩�븯�뒗 硫붿냼�뱶
 	public int getAllPidCount(String pid){
 	    getCon();
-	    //게시글 전체수를 저장하는 변수
+	    //寃뚯떆湲� �쟾泥댁닔瑜� ���옣�븯�뒗 蹂��닔
 	    int count =0;
 	    try{
-	        //쿼리준비
+	        //荑쇰━以�鍮�
 	        String sql ="select count(*) from qnaboard where pid = ?";
-	        //쿼리를 실행할 객체 선언
+	        //荑쇰━瑜� �떎�뻾�븷 媛앹껜 �꽑�뼵
 	        pstmt = con.prepareStatement(sql);
-	        //쿼리 실행 후 결과를 리턴
+	        //荑쇰━ �떎�뻾 �썑 寃곌낵瑜� 由ы꽩
 	        pstmt.setString(1, pid);
 	        
 	        rs=pstmt.executeQuery();
+	        
 	        if(rs.next()){
 	        	
-	        	//젠체 게시글의 수
+	        	//�젨泥� 寃뚯떆湲��쓽 �닔
 	            count =rs.getInt(1);
 	        }
 	        con.close();
@@ -196,10 +192,10 @@ public class QnADAO {
 	    return count;
 	}
 	
-	  //답변글이 저장되는 메소드
+	  //�떟蹂�湲��씠 ���옣�릺�뒗 硫붿냼�뱶
 	
     public void reWriteQnA(QnADTO dto){
-        //부모글 그룹과 글레벨 글스텝을 읽어드림
+        //遺�紐④� 洹몃９怨� 湲��젅踰� 湲��뒪�뀦�쓣 �씫�뼱�뱶由�
     	
         int ref= dto.getRef();
         int re_step= dto.getRe_step();
@@ -209,26 +205,25 @@ public class QnADAO {
         getCon();
          
         try{
-            ////////////// 핵심 코드   ////////////////
-            //1.부모 글보다 큰 re_level 의 값을 전부 1씩 증가시켜줌
+            ////////////// �빑�떖 肄붾뱶   ////////////////
+            //1.遺�紐� 湲�蹂대떎 �겙 re_level �쓽 媛믪쓣 �쟾遺� 1�뵫 利앷��떆耳쒖쨲
             String levelsql= "update qnaboard set re_level = re_level+1 where ref=? and re_level > ?";
-            //쿼리실행객체 선언
+            //荑쇰━�떎�뻾媛앹껜 �꽑�뼵
             pstmt=con.prepareStatement(levelsql);
             pstmt.setInt(1, ref);
             pstmt.setInt(2, re_level);
-            //쿼리실행
+            //荑쇰━�떎�뻾
             pstmt.executeUpdate();
-            //답변글 데이터를 저장
-            String sql ="insert into qnaboard values(qna_seq.NEXTVAL, ? ,? , ?, ?, ?, ?,?,sysdate,0)";
+            //�떟蹂�湲� �뜲�씠�꽣瑜� ���옣
+            String sql ="insert into qnaboard values(qna_seq.NEXTVAL, ? ,? , ?, ?, ?, ?,sysdate,0)";
             pstmt =con.prepareStatement(sql);
-            //?에 값을 대입
+            //?�뿉 媛믪쓣 ���엯
             pstmt.setString(1, dto.getPid());
             pstmt.setString(2, dto.getMid());
-            pstmt.setString(3, dto.getSubject());
-            pstmt.setString(4, dto.getContent());
-            pstmt.setInt(5, ref); // 원래 글의 답글이기 때문에 원래글의 ref값을 넣어줌
-            pstmt.setInt(6, re_step+1); //답글이기에 원래 글의 re_step에 1을 더해줌
-            pstmt.setInt(7, re_level+1);
+            pstmt.setString(3, dto.getContent());
+            pstmt.setInt(4, ref); // �썝�옒 湲��쓽 �떟湲��씠湲� �븣臾몄뿉 �썝�옒湲��쓽 ref媛믪쓣 �꽔�뼱以�
+            pstmt.setInt(5, re_step+1); //�떟湲��씠湲곗뿉 �썝�옒 湲��쓽 re_step�뿉 1�쓣 �뜑�빐以�
+            pstmt.setInt(6, re_level+1);
 
             pstmt.executeUpdate();
         }catch(Exception e){

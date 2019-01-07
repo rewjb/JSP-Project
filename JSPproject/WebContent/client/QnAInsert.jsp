@@ -28,7 +28,7 @@
 	   	 qdao.insertQnA(qnadto);
 	   
 	      //게시글저장후 전체게시글 보기
-	      response.sendRedirect("productdetail2.jsp?center2=QnATotal.jsp");
+	      response.sendRedirect("productDetail2.jsp?center2=QnATotal.jsp");
 	 %>
 	 
  <% System.out.print("문의글등록 성공"); %>

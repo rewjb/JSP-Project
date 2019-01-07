@@ -156,36 +156,36 @@
 																				            
 																									if(bean.getGrade().equals(gradeNum1)){
 																								%>
-																									<div style="CLEAR: both;	PADDING-RIGHT: 0px;	PADDING-LEFT: 0px;	BACKGROUND: url(img/star2.gif) 0px 0px;	FLOAT: left;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	WIDTH: 90px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
-																									<p style="WIDTH: 20%; PADDING-RIGHT:0px;	PADDING-LEFT:0px;	BACKGROUND: url(img/star.gif) 0px 0px;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
+																									<div style="CLEAR: both;	PADDING-RIGHT: 0px;	PADDING-LEFT: 0px;	BACKGROUND: url(../img/star2.gif) 0px 0px;	FLOAT: left;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	WIDTH: 90px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
+																									<p style="WIDTH: 20%; PADDING-RIGHT:0px;	PADDING-LEFT:0px;	BACKGROUND: url(../img/star.gif) 0px 0px;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
 																									</p>
 																									</div>
 																								<%
 																									}else if(bean.getGrade().equals(gradeNum2)){
 																								%>
-																									<div style="CLEAR: both;	PADDING-RIGHT: 0px;	PADDING-LEFT: 0px;	BACKGROUND: url(img/star2.gif) 0px 0px;	FLOAT: left;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	WIDTH: 90px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
-																									<p style="WIDTH: 40%; PADDING-RIGHT:0px;	PADDING-LEFT:0px;	BACKGROUND: url(img/star.gif) 0px 0px;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
+																									<div style="CLEAR: both;	PADDING-RIGHT: 0px;	PADDING-LEFT: 0px;	BACKGROUND: url(../img/star2.gif) 0px 0px;	FLOAT: left;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	WIDTH: 90px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
+																									<p style="WIDTH: 40%; PADDING-RIGHT:0px;	PADDING-LEFT:0px;	BACKGROUND: url(../img/star.gif) 0px 0px;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
 																									</p>
 																									</div>
 																								<%
 																									}else if(bean.getGrade().equals(gradeNum3)){
 																								%>
-																									<div style="CLEAR: both;	PADDING-RIGHT: 0px;	PADDING-LEFT: 0px;	BACKGROUND: url(img/star2.gif) 0px 0px;	FLOAT: left;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	WIDTH: 90px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
-																									<p style="WIDTH: 60%; PADDING-RIGHT:0px;	PADDING-LEFT:0px;	BACKGROUND: url(img/star.gif) 0px 0px;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
+																									<div style="CLEAR: both;	PADDING-RIGHT: 0px;	PADDING-LEFT: 0px;	BACKGROUND: url(../img/star2.gif) 0px 0px;	FLOAT: left;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	WIDTH: 90px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
+																									<p style="WIDTH: 60%; PADDING-RIGHT:0px;	PADDING-LEFT:0px;	BACKGROUND: url(../img/star.gif) 0px 0px;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
 																									</p>
 																									</div>
 																								<%
 																									}else if(bean.getGrade().equals(gradeNum4)){
 																								%>
-																									<div style="CLEAR: both;	PADDING-RIGHT: 0px;	PADDING-LEFT: 0px;	BACKGROUND: url(img/star2.gif) 0px 0px;	FLOAT: left;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	WIDTH: 90px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
-																									<p style="WIDTH: 80%; PADDING-RIGHT:0px;	PADDING-LEFT:0px;	BACKGROUND: url(img/star.gif) 0px 0px;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
+																									<div style="CLEAR: both;	PADDING-RIGHT: 0px;	PADDING-LEFT: 0px;	BACKGROUND: url(../img/star2.gif) 0px 0px;	FLOAT: left;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	WIDTH: 90px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
+																									<p style="WIDTH: 80%; PADDING-RIGHT:0px;	PADDING-LEFT:0px;	BACKGROUND: url(../img/star.gif) 0px 0px;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
 																									</p>
 																									</div>
 																								<%
 																									}else{
 																								%>
-																									<div style="CLEAR: both;	PADDING-RIGHT: 0px;	PADDING-LEFT: 0px;	BACKGROUND: url(img/star2.gif) 0px 0px;	FLOAT: left;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	WIDTH: 90px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
-																									<p style="WIDTH: 100%; PADDING-RIGHT:0px;	PADDING-LEFT:0px;	BACKGROUND: url(img/star.gif) 0px 0px;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
+																									<div style="CLEAR: both;	PADDING-RIGHT: 0px;	PADDING-LEFT: 0px;	BACKGROUND: url(../img/star2.gif) 0px 0px;	FLOAT: left;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	WIDTH: 90px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
+																									<p style="WIDTH: 100%; PADDING-RIGHT:0px;	PADDING-LEFT:0px;	BACKGROUND: url(../img/star.gif) 0px 0px;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
 																									</p>
 																									</div>
 																								<%
@@ -216,36 +216,36 @@
 																<%
 																	if(bean.getGrade().equals(gradeNum1)){
 																%>
-																	<div style="CLEAR: both;	PADDING-RIGHT: 0px;	PADDING-LEFT: 0px;	BACKGROUND: url(img/star2.gif) 0px 0px;	FLOAT: left;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	WIDTH: 90px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
-																	<p style="WIDTH: 20%; PADDING-RIGHT:0px;	PADDING-LEFT:0px;	BACKGROUND: url(img/star.gif) 0px 0px;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
+																	<div style="CLEAR: both;	PADDING-RIGHT: 0px;	PADDING-LEFT: 0px;	BACKGROUND: url(../img/star2.gif) 0px 0px;	FLOAT: left;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	WIDTH: 90px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
+																	<p style="WIDTH: 20%; PADDING-RIGHT:0px;	PADDING-LEFT:0px;	BACKGROUND: url(../img/star.gif) 0px 0px;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
 																	</p>
 																	</div>
 																<%
 																	}else if(bean.getGrade().equals(gradeNum2)){
 																%>
-																	<div style="CLEAR: both;	PADDING-RIGHT: 0px;	PADDING-LEFT: 0px;	BACKGROUND: url(img/star2.gif) 0px 0px;	FLOAT: left;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	WIDTH: 90px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
-																	<p style="WIDTH: 40%; PADDING-RIGHT:0px;	PADDING-LEFT:0px;	BACKGROUND: url(img/star.gif) 0px 0px;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
+																	<div style="CLEAR: both;	PADDING-RIGHT: 0px;	PADDING-LEFT: 0px;	BACKGROUND: url(../img/star2.gif) 0px 0px;	FLOAT: left;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	WIDTH: 90px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
+																	<p style="WIDTH: 40%; PADDING-RIGHT:0px;	PADDING-LEFT:0px;	BACKGROUND: url(../img/star.gif) 0px 0px;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
 																	</p>
 																	</div>
 																<%
 																	}else if(bean.getGrade().equals(gradeNum3)){
 																%>
-																	<div style="CLEAR: both;	PADDING-RIGHT: 0px;	PADDING-LEFT: 0px;	BACKGROUND: url(img/star2.gif) 0px 0px;	FLOAT: left;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	WIDTH: 90px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
-																	<p style="WIDTH: 60%; PADDING-RIGHT:0px;	PADDING-LEFT:0px;	BACKGROUND: url(img/star.gif) 0px 0px;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
+																	<div style="CLEAR: both;	PADDING-RIGHT: 0px;	PADDING-LEFT: 0px;	BACKGROUND: url(../img/star2.gif) 0px 0px;	FLOAT: left;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	WIDTH: 90px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
+																	<p style="WIDTH: 60%; PADDING-RIGHT:0px;	PADDING-LEFT:0px;	BACKGROUND: url(../img/star.gif) 0px 0px;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
 																	</p>
 																	</div>
 																<%
 																	}else if(bean.getGrade().equals(gradeNum4)){
 																%>
-																	<div style="CLEAR: both;	PADDING-RIGHT: 0px;	PADDING-LEFT: 0px;	BACKGROUND: url(img/star2.gif) 0px 0px;	FLOAT: left;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	WIDTH: 90px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
-																	<p style="WIDTH: 80%; PADDING-RIGHT:0px;	PADDING-LEFT:0px;	BACKGROUND: url(img/star.gif) 0px 0px;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
+																	<div style="CLEAR: both;	PADDING-RIGHT: 0px;	PADDING-LEFT: 0px;	BACKGROUND: url(../img/star2.gif) 0px 0px;	FLOAT: left;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	WIDTH: 90px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
+																	<p style="WIDTH: 80%; PADDING-RIGHT:0px;	PADDING-LEFT:0px;	BACKGROUND: url(../img/star.gif) 0px 0px;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
 																	</p>
 																	</div>
 																<%
 																	}else{
 																%>
-																	<div style="CLEAR: both;	PADDING-RIGHT: 0px;	PADDING-LEFT: 0px;	BACKGROUND: url(img/star2.gif) 0px 0px;	FLOAT: left;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	WIDTH: 90px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
-																	<p style="WIDTH: 100%; PADDING-RIGHT:0px;	PADDING-LEFT:0px;	BACKGROUND: url(img/star.gif) 0px 0px;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
+																	<div style="CLEAR: both;	PADDING-RIGHT: 0px;	PADDING-LEFT: 0px;	BACKGROUND: url(../img/star2.gif) 0px 0px;	FLOAT: left;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	WIDTH: 90px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
+																	<p style="WIDTH: 100%; PADDING-RIGHT:0px;	PADDING-LEFT:0px;	BACKGROUND: url(../img/star.gif) 0px 0px;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
 																	</p>
 																	</div>
 																<%
@@ -290,7 +290,7 @@
 																if(startPage >10){
 																prev =startPage-10;       
 															%>
-													      <a href="productdetail2.jsp?center=reviewTotal.jsp?pageNum=<%=prev%>" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+													      <a href="productDetail2.jsp?center=reviewTotal.jsp?pageNum=<%=prev%>" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
 													    </li>
 													    <%
 													    	}
@@ -298,7 +298,7 @@
 															 for(int i=startPage; i<=endPage; i++){
 															System.out.println("성공"); 
 														%>
-													    <li<% if(i == startRow);%>><a class="page-link" href="productdetail2.jsp?center=reviewTotal.jsp?pageNum=<%=i%>"><%=i%></a></li>
+													    <li<% if(i == startRow);%>><a class="page-link" href="productDetail2.jsp?center=reviewTotal.jsp?pageNum=<%=i%>"><%=i%></a></li>
 													    <%        
 														     }    
 														     //다음 이라는 링크를 만들건지 파악
@@ -306,7 +306,7 @@
 														    	 next=startPage+10;
 														  %>  
 													    <li>
-													      <a href="productdetail2.jsp?center=reviewTotal.jsp?pageNum=<%=next%>" aria-label="Next">
+													      <a href="productDetail2.jsp?center=reviewTotal.jsp?pageNum=<%=next%>" aria-label="Next">
 													        <span aria-hidden="true">&raquo;</span>
 													        <%
 																  }
