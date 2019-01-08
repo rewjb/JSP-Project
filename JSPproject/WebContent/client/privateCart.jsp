@@ -1,17 +1,15 @@
-<%@page import="java.util.Set"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ page import="java.net.URLEncoder"%>
 <%@ page import="java.security.SecureRandom"%>
 <%@ page import="java.math.BigInteger"%>
-<%@ page import="dtodao.ProductDTO"%>
 <%@ page import="dtodao.CartDAO"%>
-<jsp:useBean id="productDAO" class="dtodao.ProductDAO" />
+<%@ page import="dtodao.ProductDTO"%>
 <!DOCTYPE html>
 
 <html>
 <head>
-<title>장바구니</title>
+<title>제품 목록 리스트</title>
 
 <jsp:include page="/Header.jsp"></jsp:include>
 </head>
@@ -28,57 +26,17 @@
 		apiURL += "&state=" + state;
 		session.setAttribute("state", state);
 
-		//String id = request.getParameter("id");
-		String id = (String)session.getAttribute("id");
-		ArrayList<String> pidList = pidList = CartDAO.getInstance().selectPinfo(id);
+		String mid = (String) session.getAttribute("id");
 
-		String brand = request.getParameter("brand");
-		int paging;
-		int index;
+		ArrayList<ProductDTO> cartProductList = CartDAO.getInstance().selectPrivateCart(mid);
 
+		String stringPage = request.getParameter("page");
+		int intPage;
 		try {
-			paging = Integer.parseInt(request.getParameter("page"));
+			intPage = Integer.parseInt(stringPage);
 		} catch (Exception e) {
-			paging = 1;
+			intPage = 1;
 		}
-
-		ArrayList<ProductDTO> productList;
-
-		if (brand == null) {
-			productList = productDAO.openProductPage("가이거");
-			brand = "가이거";
-		} else {
-
-			if (brand.equals("danielm")) {
-				productList = productDAO.openProductPage("다니엘 웰링턴(남)");
-				brand = "다니엘 웰링턴(남)";
-			} else if (brand.equals("digel")) {
-				productList = productDAO.openProductPage("디젤");
-				brand = "디젤";
-			} else if (brand.equals("loomi")) {
-				productList = productDAO.openProductPage("루미눅스");
-				brand = "루미눅스";
-			} else if (brand.equals("gucci")) {
-				productList = productDAO.openProductPage("구찌");
-				brand = "구찌";
-			} else if (brand.equals("danielf")) {
-				productList = productDAO.openProductPage("다니엘 웰링턴(여)");
-				brand = "다니엘 웰링턴(여)";
-			} else if (brand.equals("dkny")) {
-				productList = productDAO.openProductPage("DKNY");
-				brand = "DKNY";
-			} else if (brand.equals("mike")) {
-				productList = productDAO.openProductPage("마크제이콥스");
-				brand = "마크제이콥스";
-			} else if (brand.equals("couple")) {
-				productList = productDAO.openProductPage("커플시계");
-				brand = "커플시계";
-			} else {
-				productList = productDAO.openProductPage("가이거");
-				brand = "가이거";
-			}
-		}
-		int productCount = productList.size();
 	%>
 
 
@@ -215,50 +173,174 @@
 						</td>
 					</tr>
 					<!--↑ 메인버튼이 들어가 있는 1행 종료-->
-
 				</table>
 
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb" align="right">
-
-					<li class="breadcrumb-item"><a href="#"><%=session.getAttribute("id")%></a></li>
-						<li class="breadcrumb-item"><a href="#">장바구니</a></li>
-
+						<li class="breadcrumb-item"><a href="#"><%=session.getAttribute("id")%></a></li>
+						<li class="breadcrumb-item"><a href="#">개인정보</a></li>
 					</ol>
 				</nav>
 			</div>
+
 		</div>
+	</div>
+
+	<table class="table"
+		style="margin-top: 200px; text-align: center; vertical-align: center;"
+		border="1">
+		<thead>
+			<tr>
+				<th style="width: 60px" scope="col">번호</th>
+				<th style="width: 120px" scope="col">제품사진</th>
+				<th style="width: 120px" scope="col">브랜드</th>
+				<th style="width: 200px" scope="col">모델명</th>
+				<th style="width: 200px" scope="col">구성품</th>
+				<th style="width: 100px" scope="col">가격</th>
+				<th style="width: 80px" scope="col">수량</th>
+				<th scope="col">총가격</th>
+			</tr>
+		</thead>
+		<tbody>
+			<%
+				int pageProductListSize;
+				//해당 페이지에 보여줄 리스트 수량
+
+				if ((cartProductList.size() / 5 + 1) == intPage) {
+					pageProductListSize = cartProductList.size() % 5 + 5 * (intPage - 1);
+				} else {
+					pageProductListSize = 5 + 5 * (intPage - 1);
+				}
+				int productCount = 5 * (intPage);
+				for (int i = 5 * (intPage - 1); i < pageProductListSize; i++) {
+			%>
+			<tr>
+			 <form action="/JSPproject/client/cartBuy.jsp" method="POST">
+				<th scope="row"><%=i + 1%></th>
+				<td><img src="<%=cartProductList.get(i).getImgaddr()%>"
+					style="width: 80px; height: 80px" /></td>
+				<td><%=cartProductList.get(i).getBrand()%></td>
+				<td><%=cartProductList.get(i).getModelName()%></td>
+				<td><%=cartProductList.get(i).getComponents()%></td>
+				<td><%=cartProductList.get(i).getPrice()%></td>
+				<td><input id="quantity<%=i + 1%>" type="text" name="quantity"
+					onkeyup="calculatePrice(this,document.getElementById('total<%=i + 1%>'),<%=cartProductList.get(i).getPrice()%>);"
+					alert="<%=cartProductList.get(i).getId()%>"
+					style="width: 25px; text-align: right;" onblur="saveCartQuantity(this ,'<%=cartProductList.get(i).getId()%>');"
+					value="<%=cartProductList.get(i).getQuantity()%>">개</td>
+				<td><input id="total<%=i + 1%>" type="text" name="totalPrice"
+					style="width: 130px; text-align: right;" readonly="readonly" value="<%=cartProductList.get(i).getQuantity()*cartProductList.get(i).getPrice()%>">
+					총가격<br>
+				<br>
+				<br>
+				<input type="hidden" name="pid" value="<%=cartProductList.get(i).getId()%>">
+				<input type="submit" value="구매" alert="buy" onclick="">
+				<input type="submit" value="삭제" alert="cancel" onclick="">
+				</form>
+			</tr>
+			<%
+				}
+			%>
+		</tbody>
+	</table>
+
+
+	<script type="text/javascript">
+		
+function calculatePrice( input, result , price) {	
+	
+	input.value = input.value.replace( /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣|]/g, "");
+	// 한글입력 제한
+	input.value = input.value.replace( /[\{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/g,'');
+	// 특수문자 제한
+	input.value = input.value.trim();
+	// 공백문자 제한
+	input.value = input.value.replace( /[A-Za-z]/g, "");
+	// 영어입력 제한
+	
+	if( parseInt(input.value) >99){
+		alert('수량은 99를 넘을 수 없습니다.');
+		input.value=99;
+	}else{
+	 result.setAttribute('value', input.value * price);
+	}
+}
+
+var insertCartQuantityRequest = new XMLHttpRequest();
+
+function saveCartQuantity(input , pid) {
+	insertCartQuantityRequest.open("POST", "/JSPproject/InsertCartQuantity?MID=<%=session.getAttribute("id")%>&PID="+pid+"&QUANTITY="+input.value, false);
+	insertCartQuantityRequest.onreadystatechange = getRespone;
+	insertCartQuantityRequest.send(null);
+}
+
+function getRespone() {
+	if (insertCartQuantityRequest.readyState==4 && insertCartRequest.status==200) {
+		 var object = eval('('+ insertCartRequest.responseText +')');
+		 alert(object);
+	}
+}
+</script>
 
 
 
-												
-												
-												
-												
-												
+	<div style="text-align: center;">
+		<nav aria-label="..." style="margin-top: 20px">
+			<ul class="pagination pagination-lg" style="display: inline-block;">
+				<li class="page-item" style="float: left; display: inline-block;"><a
+					id="preBtn" class="page-link" href="#">0</a></li>
+				<li class="page-item" style="float: left; display: inline-block;"><a
+					id="nowBtn" class="page-link" href="#">0</a></li>
+				<li class="page-item" style="float: left; display: inline-block;"><a
+					id="nextBtn" class="page-link" href="#">2</a></li>
+			</ul>
+		</nav>
+	</div>
+
+
+	<script type="text/javascript">
+	window.onload = function() {
+		
+		var preBtn = document.getElementById('preBtn');
+		var nowBtn = document.getElementById('nowBtn');
+		var nextBtn = document.getElementById('nextBtn');
+
+		var page =<%=intPage%>;
+		
+		nowBtn.innerHTML = page;
+		
+
+		if ((page - 1) == 0) {
+			preBtn.innerHTML = '';
+			preBtn.setAttribute('class', '');
+		} else {
+			preBtn.innerHTML = page-1 ; 
+			preBtn.setAttribute('class', 'page-link');
+			preBtn.setAttribute('href', '<%=request.getRequestURI() + "?page=" + (intPage - 1)%>');
+		}
+		
+		if ((page)==<%=(int) (cartProductList.size() / 5 + 1)%>) {
+			nextBtn.innerHTML  = '';
+			nextBtn.setAttribute('class', '');
+		}else {
+			nextBtn.innerHTML = page+1;
+			nextBtn.setAttribute('class', 'page-link');
+			nextBtn.setAttribute('href', '<%=request.getRequestURI() + "?page=" + (intPage + 1)%>');
+	
+
+		}
+	}
+	
+	
+	
+	
+	
+	
+	</script>
 
 
 
 
 
-
-					
-					
-					<!-- 슬라이더를 위한 스크립트 --> <script
-													src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.7/vue.js'></script>
-												<script
-													src='https://rawgit.com/Wlada/vue-carousel-3d/master/dist/vue-carousel-3d.min.js'></script>
-												<script type="text/javascript">
-						new Vue({
-							el : '#carousel3d',
-							data : {
-								slides : 7
-							},
-							components : {
-								'carousel-3d' : Carousel3d.Carousel3d,
-								'slide' : Carousel3d.Slide
-							}
-						})
-					</script>
 </body>
 </html>

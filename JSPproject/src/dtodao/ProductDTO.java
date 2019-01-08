@@ -20,8 +20,16 @@ public class ProductDTO {
 	// 8. 제품 구성품  (30)
 	private String imgaddr;
 	// 9. 이미지 주소 (100)
+	private int quantity;
+	// 10. 제품을 갖고 올때만 쓰는 변수! 수량
 	
 	
+	public int getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
 	public String getId() {
 		return id;
 	}

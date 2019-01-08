@@ -96,6 +96,85 @@ public class CartDAO {
 			e.printStackTrace();
 		}
 		return pidList;
-	}// joinProduct() : 메서드 종료
+	}// selectPinfo() : 메서드 종료
+	
+	
+	public ArrayList<ProductDTO> selectPrivateCart(String mid) {
+		// 제품 페이지 이동시 제품 검색을 하는 기본적 메서드
+
+//		CREATE TABLE SYSTEM.DEAL (
+//				NUM NUMBER,
+//				MID VARCHAR2(100),
+//				PID VARCHAR2(100),
+//				DEALDATE VARCHAR2(100)
+//			);
+		
+		Connection con = DBconnectMethod();
+		// DB 연결
+		String sql ="SELECT CART.QUANTITY , PRODUCT.* FROM CART, PRODUCT WHERE PRODUCT.ID=CART.PID AND CART.MID=?";
+		
+		ProductDTO productDTO;
+		
+		ArrayList<ProductDTO> productList = new ArrayList<>();
+
+		// sql 문 작성
+
+		try {
+			// 오류 처리
+			PreparedStatement ps = con.prepareStatement(sql);
+
+				ps.setString(1, mid);
+				// 모든 값 세팅
+				ResultSet rs = ps.executeQuery();
+				// 삽입
+				
+				while (rs.next()) {
+					productDTO = new ProductDTO();
+					
+					productDTO.setId(rs.getString("ID"));
+					productDTO.setBrand(rs.getString("BRAND"));
+					productDTO.setModelName(rs.getString("MODELNAME"));
+					productDTO.setName(rs.getString("NAME"));
+					productDTO.setPrice(rs.getInt("PRICE"));
+					productDTO.setDeliverPrice(rs.getInt("DELIVERPRICE"));
+					productDTO.setSaveMoney(rs.getInt("SAVEMONEY"));
+					productDTO.setComponents(rs.getString("COMPONENTS"));
+					productDTO.setImgaddr(rs.getString("IMGADDR"));
+					productDTO.setQuantity(rs.getInt("QUANTITY"));
+					
+					productList.add(productDTO);
+				}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return productList;
+
+	}// selectPrivateCart() : 메서드 종료
+	
+	public void updateQuantity(String mid, String pid , int quantity) {
+		// 제품 페이지 이동시 제품 검색을 하는 기본적 메서드
+
+		Connection con = DBconnectMethod();
+		// DB 연결
+		
+		String sql = "UPDATE CART SET QUANTITY=? WHERE MID=? AND PID=?";
+		
+		try {
+			// 오류 처리
+			PreparedStatement ps = con.prepareStatement(sql);
+
+				ps.setInt(1, quantity);
+				ps.setString(2, mid);
+				ps.setString(3, pid);
+				// 모든 값 세팅
+				ps.executeUpdate();
+				// 삽입
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}// updateQuantity() : 메서드 종료
 
 }

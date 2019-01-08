@@ -452,8 +452,8 @@
 				}else {
 					nextBtn.innerHTML = page+1;
 					nextBtn.setAttribute('class', 'page-link');
-					nextBtn.setAttribute('href', '<%=request.getRequestURI() + "?brand=" + brand + "&page=" + (paging + 1)%>
-			');
+					nextBtn.setAttribute('href', '<%=request.getRequestURI() + "?brand=" + brand + "&page=" + (paging + 1)%>');
+			
 
 				}
 			}

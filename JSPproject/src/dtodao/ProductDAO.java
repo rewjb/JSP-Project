@@ -140,4 +140,7 @@ public class ProductDAO {
 		return productList;
 
 	}// openProductPage() : 메서드 종료
+	
+	
+	
 }// 클래스 종료
