@@ -1,3 +1,4 @@
+<%@page import="dtodao.ProductDetailDAO"%>
 <%@page import="dtodao.ReviewBean"%>
 <%@page import="java.util.Vector"%>
 <%@page import="dtodao.ReviewDAO"%>
@@ -18,17 +19,26 @@
 <body>
 <body onload="init();">
 
+	<jsp:useBean id="pdto" class="dtodao.ProductDTO">
+		<jsp:setProperty name="pdto" property="*"/>
+	</jsp:useBean>
+
 <%
 	String mid = request.getParameter("mid");
+	String pid = request.getParameter("pid");
+	System.out.println(pid);
 
     // Center 값을 변경해주기위해서 request 객체를 Center 값을 받아옴
     String center =request.getParameter("center");
-    String center2 =request.getParameter("center2");
+    
+    ProductDetailDAO pdao = new ProductDetailDAO();
+    
+    pdto = pdao.getOneProduct(pid);
+
     
     //처음 SessionMain.jsp 를 실행하면 null값이 실행되기에 null 처를 해줌
-    if(center ==null || center2==null){
+    if(center == null){
         center ="reviewTotal.jsp";
-        center2 = "QnATotal.jsp";
     }
 %>
 
@@ -37,47 +47,46 @@
 	
 	
 	<div style="margin: 0 auto;  width: 900px; position: relative; right: 370px; top:300px; " >
-		<img src="../img/watch02.jpg" class="rounded float" alt="#" width="500"
+		<img src="<%=pdto.getImgaddr() %>" class="rounded float" alt="#" width="500"
 			height="500" style="position: relative; left: 72px">
 
 
-		<h2 style="width: 900px; position: relative; left: 650px; bottom: 450px;">[프리마
-			클라쎄 PRIMA CLASSE]</h2>
+		<h6 style="width: 900px; position: relative; left: 650px; bottom: 450px;"><%=pdto.getName() %></h6>
 		<br> <br>
 		<table style="position: relative; left: 650px; bottom: 450px;">
 			<tr>
 				<td width="30%" height="50">판매가</td>
 
-				<td>80000원</td>
+				<td><%=pdto.getPrice() %>원</td>
 
 			</tr>
 
 			<tr>
 				<td height="50">배송비</td>
-				<td>3000원</td>
+				<td><%=pdto.getDeliverPrice() %>원</td>
 			</tr>
 			<tr>
 				<td height="50">적립금(3%)</td>
-				<td>2400원</td>
+				<td><%=pdto.getSaveMoney() %>원</td>
 			</tr>
 			<tr>
 				<td height="50">모델</td>
-				<td>PC0013L03</td>
+				<td><%=pdto.getModelName() %></td>
 			</tr>
 			<tr>
 				<td height="50">구성품</td>
-				<td>정품케이스+정품보증서+고급팔찌</td>
+				<td><%=pdto.getComponents() %></td>
 			</tr>
 
 		</table>
 
 
 		<form name="form" method="get" style="position: relative; left: 650px; bottom: 450px;">
-			수량 : <input type=hidden name="sell_price" value="5500"> <input
-				type="text" name="amount" value="1" size="3" onchange="change();">
-			<input type="button" value=" + " onclick="add();"> <input
-				type="button" value=" - " onclick="del();"><br> 금액 : <input
-				type="text" name="sum" size="11" readonly>원 <br> <br>
+			수량 : <input type=hidden name="sell_price" value="<%=pdto.getPrice() %>"> 
+			<input type="text" name="amount" value="1" size="3" onchange="change();">
+			<input type="button" value=" + " onclick="add();"> 
+			<input type="button" value=" - " onclick="del();"><br> 금액 : 
+			<input type="text" name="sum" size="11" readonly>원 <br> <br>
 			<br>
 			<button type="button" class="btn btn-secondary" style="width: 400px;">카트추가</button>
 		</form>
@@ -106,6 +115,18 @@
 								<div class="panel-body">
 									<form accept-charset="UTF-8" action="ReviewInsertProc.jsp"
 										method="POST">
+										<div class="custom-control custom-radio">
+										  <input type="radio" id="customRadio1" name="customRadio" value="리뷰" class="custom-control-input">
+										  <label class="custom-control-label" for="customRadio1">
+										  	<p style="position: relative; right: 375px; font-size: 11pt; ">리뷰 등록</p>
+										  	</label>
+										</div>
+										<div class="custom-control custom-radio">
+										  <input type="radio" id="customRadio2" name="customRadio" value="문의" class="custom-control-input">
+										  <label class="custom-control-label" for="customRadio2">
+										  <p style="position: relative; right: 375px; font-size: 11pt; ">문의 등록</p>
+										  </label>
+										</div>
 										<!--  별펑점을 위한 html-->
 										<span class="star-input"
 											style="position: relative; bottom: 25px;"> <span
@@ -126,7 +147,7 @@
 											placeholder="320자 까지 입력 가능합니다." rows="5"
 											style="margin-bottom: 10px; width: 800px; height: 130px;"></textarea>
 										<h6 class="pull-right" id="counter"></h6>
-										<input type="hidden" name="pid" value="ffff2124"> <input
+										<input type="hidden" name="pid" value="<%=pid%>"> <input
 											type="hidden" name="mid"
 											value="<%=session.getAttribute("mid")%>">
 										<button class="btn btn-info" type="submit">등록</button>
@@ -145,9 +166,7 @@
 									         
 									         
 									      </div><!--/row-->
-									     
-									         
-									 
+
 									    </div><!--/.container-->
 
 								</div>
@@ -177,9 +196,6 @@
 											<button class="btn btn-info" type="submit">등록</button>
 										</form>
 										<hr style="border: double 4px lightgray;">
-										<!--문의게시판 리스트의 시작-->
-										<jsp:include page="QnASideBar.jsp"/>
-										<jsp:include page="<%=center2 %>" />
 
 									</div>
 								</div>

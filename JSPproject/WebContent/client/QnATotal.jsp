@@ -15,27 +15,19 @@
 	}   
     </style>
     
-    <!-- 리뷰 상세보기시 회원 비회원 체크-->
-   <script>
-	function checkLog(){
-		<%if(session.getAttribute("mid") == null){%>
-			alert("로그인 사용자만  상세리뷰를 볼 수 있습니다.");
-			document.location.href="productdetail2.jsp?center2=QnATotal.jsp";
-		<%}%>			
-	}
-	</script>
 	
         <div class="col-xs-12 col-sm-10" >
   			<div class="jumbotron">         
 				    <%
-         				    	int prev; //이전
+         				    										int prev; //이전
          				             				    			int next; //다음
          				             				    			//화면에 보여질 게시글의 개수를 지정
          				             				    			int pageSize=5;
          				             				    			//현재 카운터를 클릭한 번호값을 읽어옴
          				             				    			String pageNum = request.getParameter("pageNum");
-         				             				    			String pid = request.getParameter("id");
-         				             				    			String mid = request.getParameter("session.getAttribute('id')");
+         				             				    			String pid = request.getParameter("pid");
+         				             				    			String mid = request.getParameter("mid");
+         				             				    			System.out.print("qna pid : "+pid);
          				             				    			
          				             				    			// 평점과 비교해서 별모양을 그려주기 위한 변수
          				             				    			String gradeNum1 = "1";
@@ -44,12 +36,6 @@
          				             				    			String gradeNum4 = "4";
          				             				    			String gradeNum5 = "5";
          				             				    			
-         				             				    			if(pid == null){
-         				             				    				pid = "ffff2124";
-         				             				    			}
-         				             				     				if(mid == null){
-         				             				    				mid= "min";
-         				             				    			} 
          				             				    			
          				             				    			//만약 처음 productDetail.jsp를 클릭하거나 수정 삭제 등 다른 게시글에서 이 페이지로 넘어오면 pageNum값이 없기에 null 처리를 해줌
          				             				    			 if(pageNum==null){
@@ -64,8 +50,8 @@
          				             				    			QnADAO qdao = new QnADAO();
          				             				    			
          				             				    			//전체 게시글의 갯수를 읽어드린 메소드 호출
-         				             				    		    count =qdao.getAllPidCount(pid);
-         				             				    			
+         				             				    		    count = qdao.getAllPidCount(pid);
+         				             				    		    
          				             				    		    //현재 페이지에 보여줄 시작 번호를 설정 = 데이터 베이스에서 불러올 시작번호
          				             				    		    int startRow =(currentPage-1) *pageSize+1;
          				             				    		    int endRow =currentPage * pageSize;
@@ -74,8 +60,18 @@
          				             				    			
          				             				    			 //테이블에 표시할 번호를 지정
          				             				    		    number =count - (currentPage -1 ) * pageSize;
-         				             				    			System.out.print(count);
+         				             				    			System.out.print("문의 : "+count);
          				    %>
+         				    
+    <!-- 리뷰 상세보기시 회원 비회원 체크-->																         
+	<script>
+	function checkLog(){
+		<%if(session.getAttribute("mid") == null){%>
+			alert("로그인 사용자만  상세리뷰를 볼 수 있습니다.");
+			document.location.href="productdetail2.jsp?center=QnATotal.jsp&pid=<%=pid%>";
+		<%}%>			
+	}
+	</script>
 				
 													<!--리뷰 리스트의 시작-->
 				
@@ -199,7 +195,7 @@
 															 for(int i=startPage; i<=endPage; i++){
 															System.out.println("성공"); 
 														%>
-													    <li<% if(i == startRow );%>><a class="page-link" href="productDetail2.jsp?center2=QnATotal.jsp?pageNum=<%=i%>"><%=i%></a></li>
+													    <li<% if(i == startRow );%>><a class="page-link" href="productDetail2.jsp?center2=QnATotal.jsp?pageNum=<%=i%>&pid=<%=pid%>"><%=i%></a></li>
 													    <%        
 														     }    
 														     //다음 이라는 링크를 만들건지 파악
