@@ -191,7 +191,7 @@
 											<h6 class="pull-right" id="counter"></h6>
 											<input type="hidden" name="subject" value=""> <input
 												type="hidden" name="mid" value="min">
-											<input type="hidden" name="pid" value="ffff2124"> <input
+											<input type="hidden" name="pid" value=""> <input
 												type="hidden" name="mid" value="min">
 											<button class="btn btn-info" type="submit">등록</button>
 										</form>

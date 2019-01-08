@@ -1,5 +1,7 @@
 eclipse.preferences.version=1
 encoding//WebContent/\uC1FC\uD551\uBAB0\ \uAE30\uB2A5.txt=utf8
 encoding//src/dtodao/MemberDTO.java=utf8
+encoding//src/dtodao/ProductDetailDAO.java=UTF-8
 encoding//src/dtodao/QnADAO.java=UTF-8
 encoding//src/dtodao/QnADTO.java=UTF-8
+encoding//src/dtodao/ReviewDAO.java=UTF-8
