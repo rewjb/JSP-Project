@@ -48,9 +48,9 @@
 			return;
 		}
 	%>
-	
-	
-	
+
+
+
 
 
 	<center>
@@ -185,7 +185,7 @@
 				<!--회원가입 하는 곳-->
 
 				<form method="GET" action="memberInfoUpdate.jsp" id="joinInfo"
-					 onsubmit="return finalCheck()" class="needs-validation">
+					onsubmit="return finalCheck()" class="needs-validation">
 
 					<td align="left" valign="top"><br>
 						<div align="center">
@@ -328,8 +328,9 @@
 				</form>
 
 				<A
-					href="/JSPproject/client/dropOutPerform.jsp?id=<%=session.getAttribute("id")%>>"><button
-						class="btn btn-dark">탈퇴하기</button></A>
+					href="/JSPproject/client/dropOutPerform.jsp?id=<%=session.getAttribute("id")%>>">
+					<button class="btn btn-dark" onclick="return unjoinOperate();">탈퇴하기</button>
+				</A>
 				</div>
 
 
@@ -344,18 +345,16 @@
 
 
 	<script type="text/javascript">
-	
-	function unjoinOperate() {
-		
-		
-		
-	}
-	
-	
-	
-	
-	
-	
+		function unjoinOperate() {
+			var unjointrue = confirm('정말로 탈퇴하시겠습니까?');
+
+			if (unjointrue) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
 		// 우편번호 찾기 화면을 넣을 element
 		var element_layer = document.getElementById('layer');
 

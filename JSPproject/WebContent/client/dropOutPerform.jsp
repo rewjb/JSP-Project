@@ -8,7 +8,6 @@
 </head>
 <body>
 
-회원탈퇴 페이지 입니다.
 
 </body>
 </html>
