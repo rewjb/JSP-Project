@@ -13,14 +13,13 @@
 <body>
 
 <% 
-  request.setCharacterEncoding("utf-8");
+  request.setCharacterEncoding("UTF-8");
+  String aa = request.getParameter("addr");
   MemberDAO.getInstance().updateMember(memberDTO);
 %>
 
-<%= memberDTO.getId()%>
-<%= memberDTO.getAddr()%>
-
-
+<%=memberDTO.getAddr() %>
+<%=aa%>
 
 </body>
 </html>

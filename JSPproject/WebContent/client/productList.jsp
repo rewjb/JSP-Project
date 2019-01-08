@@ -29,7 +29,7 @@
 		session.setAttribute("state", state);
 
 		//String id = request.getParameter("id");
-		String id = (String)session.getAttribute("id");
+		String id = (String) session.getAttribute("id");
 		ArrayList<String> pidList = pidList = CartDAO.getInstance().selectPinfo(id);
 
 		String brand = request.getParameter("brand");
@@ -298,82 +298,100 @@
 
 
 									<table width="250px">
-																	<tr>
-																		<td align="left"><a
-																			href="/JSPproject/client/productDetail2.jsp?pid=<%=productList.get(index + i).getId()%>">
-																				<button type="button" class="btn btn-secondary">상세보기</button>
-																		</a></td>
-																		<td align="right">
-																		<%if (pidList.contains(productList.get(index + i).getId())){%>
-																			<button type="button" class="btn btn-success"  onclick="insertCart(this);">장바구니</button>
-																		<%}else { %>
-																			<button onclick="insertCart(this);" type="button" class="btn btn-secondary" alter="<%=productList.get(index + i).getId()%>">장바구니</button>
-																			<%}%>
-																		</td>
-																	</tr>
-																</table>
-
-												</form>
-												</div>
-												</div>
-												</div> <%
- 	}
+										<tr>
+											<td align="left"><a
+												href="/JSPproject/client/productDetail2.jsp?pid=<%=productList.get(index + i).getId()%>">
+													<button type="button" class="btn btn-secondary">상세보기</button>
+											</a></td>
+											<td align="right">
+												<%
+													if (pidList.contains(productList.get(index + i).getId())) {
+												%>
+												<button type="button" class="btn btn-success"
+													onclick="insertCart(this);">장바구니</button> <%
  	} else {
- 		index = (paging - 1) * 9;
- %> <%
- 	for (int i = 0; i < 9; i++) {
  %>
+												<button onclick="insertCart(this);" type="button"
+													class="btn btn-secondary"
+													alter="<%=productList.get(index + i).getId()%>">장바구니</button>
+												<%
+													}
+												%>
+											</td>
+										</tr>
+									</table>
 
-												<div class="col-xl-4">
-													<br>
-													<div class="card" style="width: 18rem; text-align: left;">
-														<img class="card-img-top"
-															src="<%=productList.get(index + i).getImgaddr()%>"
-															alt="Card image cap">
-														<div class="card-body">
-															<form action="productDetail2.jsp">
-																<font style="font-weight: bold" size="4">글제목 : <%=productList.get(index + i).getName()%></font><br>
-																<br> <font size="4" color="red">판매가 : <%=productList.get(index + i).getPrice()%>원
-																</font><br> <br> <font size="4">구성품 :<%=productList.get(index + i).getComponents()%></font><br>
-																<br>
+								</form>
+							</div>
+						</div>
+					</div>
+					<%
+						}
+						} else {
+							index = (paging - 1) * 9;
+					%>
+					<%
+						for (int i = 0; i < 9; i++) {
+					%>
+
+					<div class="col-xl-4">
+						<br>
+						<div class="card" style="width: 18rem; text-align: left;">
+							<img class="card-img-top"
+								src="<%=productList.get(index + i).getImgaddr()%>"
+								alt="Card image cap">
+							<div class="card-body">
+								<form action="productDetail2.jsp">
+									<font style="font-weight: bold" size="4">글제목 : <%=productList.get(index + i).getName()%></font><br>
+									<br> <font size="4" color="red">판매가 : <%=productList.get(index + i).getPrice()%>원
+									</font><br> <br> <font size="4">구성품 :<%=productList.get(index + i).getComponents()%></font><br>
+									<br>
 
 
-																<table width="250px">
-																	<tr>
-																		<td align="left"><a
-																			href="/JSPproject/client/productDetail2.jsp?pid=<%=productList.get(index + i).getId()%>">
-																				<button type="button" class="btn btn-secondary">상세보기</button>
-																		</a></td>
-																		<td align="right">
-																		<%if (pidList.contains(productList.get(index + i).getId())){%>
-																			<button type="button" class="btn btn-success"  onclick="insertCart(this);">장바구니</button>
-																		<%}else { %>
-																			<button onclick="insertCart(this);" type="button" class="btn btn-secondary" alter="<%=productList.get(index + i).getId()%>">장바구니</button>
-																			<%}%>
-																		</td>
-																	</tr>
-																</table>
-															</form>
-														</div>
-													</div>
-												</div> <%
- 	}
- 	}
+									<table width="250px">
+										<tr>
+											<td align="left"><a
+												href="/JSPproject/client/productDetail2.jsp?pid=<%=productList.get(index + i).getId()%>">
+													<button type="button" class="btn btn-secondary">상세보기</button>
+											</a></td>
+											<td align="right">
+												<%
+													if (pidList.contains(productList.get(index + i).getId())) {
+												%>
+												<button type="button" class="btn btn-success"
+													onclick="insertCart(this);">장바구니</button> <%
+ 	} else {
  %>
-												</div>
+												<button onclick="insertCart(this);" type="button"
+													class="btn btn-secondary"
+													alter="<%=productList.get(index + i).getId()%>">장바구니</button>
+												<%
+													}
+												%>
+											</td>
+										</tr>
+									</table>
+								</form>
+							</div>
+						</div>
+					</div>
+					<%
+						}
+						}
+					%>
+				</div>
 
-												</div>
-												</div>
-												
-												<script type="text/javascript">
+			</div>
+		</div>
+
+		<script type="text/javascript">
 												
 												insertCartRequest = new XMLHttpRequest();
 												var mid = '<%=session.getAttribute("id")%>';
 												
 												function insertCart(btn) {
 													if (mid=='null') {
-														alert('회원가입을 하셔야 이용이 가능한 서비스입니다.');
-														location.href = '/JSPproject/index.jsp';
+														alert('로그인을 하셔야 이용이 가능한 서비스입니다.');
 													}else{
 														if (btn.getAttribute('class')=='btn btn-success') {
 															alert('이미 장바구니에 추가된 상품입니다.');
@@ -394,36 +412,21 @@
 													}
 												}
 												</script>
-												
-												
-												
-												
-												
 
 
+		<nav aria-label="..." style="margin-top: 20px">
+			<ul class="pagination pagination-lg" style="display: inline-block;">
+				<li class="page-item" style="float: left; display: inline-block;"><a
+					id="preBtn" class="page-link" href="#">?</a></li>
+				<li class="page-item" style="float: left; display: inline-block;"><a
+					id="nowBtn" class="page-link" href="#">1</a></li>
+				<li class="page-item" style="float: left; display: inline-block;"><a
+					id="nextBtn" class="page-link" href="#">3</a></li>
+			</ul>
+		</nav>
 
 
-
-
-
-
-												<nav aria-label="..." style="margin-top: 20px">
-													<ul class="pagination pagination-lg"
-														style="display: inline-block;">
-														<li class="page-item"
-															style="float: left; display: inline-block;"><a
-															id="preBtn" class="page-link" href="#">?</a></li>
-														<li class="page-item"
-															style="float: left; display: inline-block;"><a
-															id="nowBtn" class="page-link" href="#">1</a></li>
-														<li class="page-item"
-															style="float: left; display: inline-block;"><a
-															id="nextBtn" class="page-link" href="#">3</a></li>
-													</ul>
-												</nav>
-
-												<button onclick="sdasd();">눌러</button> <a id="temp"> </a> <script
-													type="text/javascript">
+		<script type="text/javascript">
 			window.onload = function() {
 				var preBtn = document.getElementById('preBtn');
 				var nowBtn = document.getElementById('nowBtn');
@@ -449,25 +452,27 @@
 				}else {
 					nextBtn.innerHTML = page+1;
 					nextBtn.setAttribute('class', 'page-link');
-					nextBtn.setAttribute('href', '<%=request.getRequestURI() + "?brand=" + brand + "&page=" + (paging + 1)%>');
-						
-							}
-						}
-					</script> <!-- 슬라이더를 위한 스크립트 --> <script
-													src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.7/vue.js'></script>
-												<script
-													src='https://rawgit.com/Wlada/vue-carousel-3d/master/dist/vue-carousel-3d.min.js'></script>
-												<script type="text/javascript">
-						new Vue({
-							el : '#carousel3d',
-							data : {
-								slides : 7
-							},
-							components : {
-								'carousel-3d' : Carousel3d.Carousel3d,
-								'slide' : Carousel3d.Slide
-							}
-						})
-					</script>
+					nextBtn.setAttribute('href', '<%=request.getRequestURI() + "?brand=" + brand + "&page=" + (paging + 1)%>
+			');
+
+				}
+			}
+		</script>
+		<!-- 슬라이더를 위한 스크립트 -->
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.7/vue.js'></script>
+		<script
+			src='https://rawgit.com/Wlada/vue-carousel-3d/master/dist/vue-carousel-3d.min.js'></script>
+		<script type="text/javascript">
+			new Vue({
+				el : '#carousel3d',
+				data : {
+					slides : 7
+				},
+				components : {
+					'carousel-3d' : Carousel3d.Carousel3d,
+					'slide' : Carousel3d.Slide
+				}
+			})
+		</script>
 </body>
 </html>
