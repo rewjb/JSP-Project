@@ -304,7 +304,7 @@ public class ReviewDAO {
 	    }
 	    
 		//해당 제품에대해 특정 회원 아이디로 작성한 글만  카운트 하는 메소드
-	    public int getAllMidCount1(String mid, String pid){
+	    public int getAllMidCount(String mid, String pid){
 	        getCon();
 	        //게시글 전체수를 저장하는 변수
 	        int count =0;
@@ -332,14 +332,14 @@ public class ReviewDAO {
 	    }
 	    
 		 //해달 제품의 별점순 제품을 카운트 하는 메소드
-	    public int getAllGradeCoun1(String pid){
+	    public int getAllGradeCount(String pid){
 	        getCon();
 	        //게시글 전체수를 저장하는 변수
 	       int count = 0;
 	        
 	        try{
 	            //쿼리준비
-	            String sql ="select count(*) grade from review where pid = ? and grade = 1";
+	            String sql ="select count(*) grade from review where pid = ?";
 
 	            //쿼리를 실행할 객체 선언
 	            pstmt = con.prepareStatement(sql);
