@@ -184,7 +184,7 @@
 
 				<!--회원가입 하는 곳-->
 
-				<form method="POST" action="memberInfoUpdate.jsp" id="joinInfo"
+				<form method="GET" action="memberInfoUpdate.jsp" id="joinInfo"
 					 onsubmit="return finalCheck()" class="needs-validation">
 
 					<td align="left" valign="top"><br>
@@ -344,6 +344,18 @@
 
 
 	<script type="text/javascript">
+	
+	function unjoinOperate() {
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
 		// 우편번호 찾기 화면을 넣을 element
 		var element_layer = document.getElementById('layer');
 

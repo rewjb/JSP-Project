@@ -16,10 +16,13 @@
   request.setCharacterEncoding("UTF-8");
   String aa = request.getParameter("addr");
   MemberDAO.getInstance().updateMember(memberDTO);
+  
+	out.print("<script type=\"text/javascript\">");
+	out.print("alert('수정이 완료되었습니다.');");
+	out.print("location.href = '/JSPproject/index.jsp'; ");
+	out.print("</script>");
 %>
 
-<%=memberDTO.getAddr() %>
-<%=aa%>
 
 </body>
 </html>
