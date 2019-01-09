@@ -221,26 +221,5 @@
 
 				</table>
 
-				<nav aria-label="breadcrumb">
-					<ol class="breadcrumb" align="right">
-					
-					
-					
-	                        <%if (brand.equals("가이거") || brand.equals("다니엘 웰링턴(남)") || brand.equals("디젤") || brand.equals("루미눅스")) {%>
-                            <li class="breadcrumb-item"><a href="#">남성시계 BEST</a></li>
-					    	<li class="breadcrumb-item"><a href="#"><%=brand%></a></li>
-							<%} else if (brand.equals("커플시계")) {%>
-                            <li class="breadcrumb-item"><a href="#">커플시계 BEST</a></li>
-					    	<li class="breadcrumb-item"><a href="#"><%=brand%></a></li>
-							<%} else {%>
-                            <li class="breadcrumb-item"><a href="#">여성시계 BEST</a></li>
-					    	<li class="breadcrumb-item"><a href="#"><%=brand%></a></li>
-							<%}%>
-						
-						
-					</ol>
-				</nav>
-
-
 			</div>
 		</div>
