@@ -62,7 +62,7 @@ public class QnADAO {
             
     
             
-			String sql = " insert into qnaboard values(qna_seq.NEXTVAL,?,?,?,?,?,?,?,sysdate,0)";
+			String sql = " insert into qnaboard values(qna_seq.NEXTVAL,?,?,?,?,?,?,sysdate,0)";
 			
 			pstmt = con.prepareStatement(sql);
 			// ?�뿉 媛믪쓣 留듯븨
@@ -130,9 +130,7 @@ public class QnADAO {
 					dto.setPid(rs.getString("pid"));
 	
 					dto.setMid(rs.getString("mid"));
-					
-//					dto.setGrade(rs.getString("grade"));
-	
+						
 					dto.setContent(rs.getString("content"));
 					
 					dto.setRef(rs.getInt(5));
@@ -143,7 +141,7 @@ public class QnADAO {
 
 					dto.setReg_date(rs.getDate("reg_date").toString());// �궇吏쒕�� �뒪�듃留곸쑝濡� 諛쏄린 �쐞�빐 toString�쓣 �궗�슜
 					
-					dto.setCheckTrue(rs.getInt(8));
+					dto.setCheckTrue(rs.getInt(9));
 	
 					// �뙣�궎吏뺥븳 �뜲�씠�꽣瑜� 踰≫꽣�뿉 ���옣
 					v.add(dto);
