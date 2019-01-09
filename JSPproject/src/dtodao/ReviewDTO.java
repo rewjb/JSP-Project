@@ -1,14 +1,25 @@
 package dtodao;
  
-public class ReviewBean {
+public class ReviewDTO {
 	
     private int num;
-    private String mid;
     private String pid;
+    private String mid;
     private String content;
     private String grade;
     private String reg_date;	
     private String img;
+    
+//    CREATE TABLE SYSTEM.REVIEW
+//    (
+//      NUM       NUMBER not null,
+//      PID       VARCHAR2(30 BYTE) not null,
+//      MID       VARCHAR2(20 BYTE) not null,
+//      CONTENT   VARCHAR2(350 BYTE) not null,
+//      GRADE     VARCHAR2(10 BYTE) not null,
+//      REG_DATE  DATE not null,
+//      IMG       VARCHAR2(50 BYTE)
+//    );
     
     
     public int getNum() {
@@ -18,17 +29,17 @@ public class ReviewBean {
 	public void setNum(int num) {
 		this.num = num;
 	}
-	public String getMid() {
-		return mid;
-	}
-	public void setMid(String mid) {
-		this.mid = mid;
-	}
 	public String getPid() {
 		return pid;
 	}
 	public void setPid(String pid) {
 		this.pid = pid;
+	}
+	public String getMid() {
+		return mid;
+	}
+	public void setMid(String mid) {
+		this.mid = mid;
 	}
 	public String getContent() {
 		return content;

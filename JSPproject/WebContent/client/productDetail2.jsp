@@ -1,5 +1,5 @@
 <%@page import="dtodao.ProductDetailDAO"%>
-<%@page import="dtodao.ReviewBean"%>
+<%@page import="dtodao.ReviewDTO"%>
 <%@page import="java.util.Vector"%>
 <%@page import="dtodao.ReviewDAO"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
@@ -24,7 +24,7 @@
 	</jsp:useBean>
 
 <%
-	String mid = request.getParameter("mid");
+		
 	String pid = request.getParameter("pid");
 	System.out.println(pid);
 
@@ -149,7 +149,7 @@
 										<h6 class="pull-right" id="counter"></h6>
 										<input type="hidden" name="pid" value="<%=pid%>"> <input
 											type="hidden" name="mid"
-											value="<%=session.getAttribute("mid")%>">
+											value="<%=session.getAttribute("id")%>">
 										<button class="btn btn-info" type="submit">등록</button>
 									</form>
 									<hr style="width: 800px; border: double 4px lightgray; position: relative; right: 15px;">

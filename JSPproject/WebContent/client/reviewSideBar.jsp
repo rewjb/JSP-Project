@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+    
     <%
     	String pid = request.getParameter("pid");
-   		String mid = request.getParameter("mid");
+   		String mid = (String)session.getAttribute("id");
    		
-   		System.out.print("사이드바"+pid);
+   		System.out.println("사이드바pid"+pid);
+   		System.out.println("사이드바mid"+mid);
     
     %>
         <div class="col-xs-6 col-xs-3 sidebar-offcanvas" id="sidebar">

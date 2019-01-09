@@ -28,8 +28,9 @@
          				             				    			//현재 카운터를 클릭한 번호값을 읽어옴
          				             				    			String pageNum = request.getParameter("pageNum");
          				             				    			String pid = request.getParameter("pid");
-         				             				    			String mid = request.getParameter("mid");
-         				             				    			System.out.print("qna pid : "+pid);
+         				             				    			String mid = request.getParameter("id");
+         				             				    			System.out.println("qna pid : "+pid);
+         				             				    			System.out.println("qna mid : "+mid);
 
          				             				    			
          				             				    			
@@ -69,9 +70,9 @@
     <!-- 리뷰 상세보기시 회원 비회원 체크-->																         
 	<script>
 	function checkLog(){
-		<%if(session.getAttribute("mid") == null){%>
+		<%if(session.getAttribute("id") == null){%>
 			alert("로그인 사용자만  상세리뷰를 볼 수 있습니다.");
-			document.location.href="productdetail2.jsp?center=QnATotal.jsp&pid=<%=pid%>";
+			document.location.href="productDetail2.jsp?center=QnATotal.jsp&pid=<%=pid%>";
 		<%}%>			
 	}
 	</script>
@@ -100,7 +101,7 @@
 																<span style="FONT-SIZE: 11pt;" >
 																<!-- 모달기능을 이용하여 리뷰 내용이 버튼으로 안으로 들어가게  만듬 -->
 																
-																<button type="button" class="btn btn-link btn-xs" data-toggle="modal" data-target="#<%=dto.getNum()%>">
+																<button type="button" class="btn btn-link btn-xs" data-toggle="modal" data-target="#<%=dto.getNum()%>" onclick="checkLog()">
 
 																  <p align="left">
 																  	    <%

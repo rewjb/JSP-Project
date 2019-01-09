@@ -54,7 +54,7 @@ public class ReviewDAO {
 	}
 
 	// 하나의 새로운 게시글이 넘어와서 저장되는 메소드
-	public void insertReview(ReviewBean bean) {
+	public void insertReview(ReviewDTO bean) {
 		// 빈클래스에 넘어오지 않았던 데이터들을 초기화 해주어야 합니다.
 
 		getCon();
@@ -88,9 +88,9 @@ public class ReviewDAO {
 	}
 
 	// 해당제품에 대해 전체를 가져오는 메소드
-		public Vector<ReviewBean> getAllReview(String pid, int start, int end) {
+		public Vector<ReviewDTO> getAllReview(String pid, int start, int end) {
 			
-			Vector<ReviewBean> v = new Vector<ReviewBean>();
+			Vector<ReviewDTO> v = new Vector<ReviewDTO>();
 			
 			getCon();
 			
@@ -112,7 +112,7 @@ public class ReviewDAO {
 				while (rs.next()) {
 					// 데이터를 패키징( 가방 = Board2bean 클래스를 이용)해줌
 
-					ReviewBean bean = new ReviewBean();
+					ReviewDTO bean = new ReviewDTO();
 
 					bean.setNum(rs.getInt("num"));
 
@@ -151,9 +151,9 @@ public class ReviewDAO {
 		}
 		
 		//해당 제품에 대한 등급별로 가져오는 메소드
-		public Vector<ReviewBean> getGradeReview(String pid, int start, int end) {
+		public Vector<ReviewDTO> getGradeReview(String pid, int start, int end) {
 			
-			Vector<ReviewBean> v = new Vector<ReviewBean>();
+			Vector<ReviewDTO> v = new Vector<ReviewDTO>();
 			
 			getCon();
 			
@@ -175,7 +175,7 @@ public class ReviewDAO {
 				while (rs.next()) {
 					// 데이터를 패키징( 가방 = Board2bean 클래스를 이용)해줌
 
-					ReviewBean bean = new ReviewBean();
+					ReviewDTO bean = new ReviewDTO();
 
 					bean.setNum(rs.getInt("num"));
 
@@ -214,9 +214,9 @@ public class ReviewDAO {
 		}
 		
 		//내 리뷰만 을 가져오는 메소드
-		public Vector<ReviewBean> getMyReview(String mid, String pid, int start, int end) {
+		public Vector<ReviewDTO> getMyReview(String mid, String pid, int start, int end) {
 			
-			Vector<ReviewBean> v = new Vector<ReviewBean>();
+			Vector<ReviewDTO> v = new Vector<ReviewDTO>();
 			
 			getCon();
 			
@@ -239,7 +239,7 @@ public class ReviewDAO {
 				while (rs.next()) {
 					// 데이터를 패키징( 가방 = Board2bean 클래스를 이용)해줌
 
-					ReviewBean bean = new ReviewBean();
+					ReviewDTO bean = new ReviewDTO();
 
 					bean.setNum(rs.getInt("num"));
 

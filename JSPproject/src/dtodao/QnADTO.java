@@ -27,14 +27,14 @@ public class QnADTO {
 		
 //		CREATE TABLE SYSTEM.QNABOARD
 //		(
-//		  NUM        NUMBER,
-//		  PID        VARCHAR2(30 BYTE),
-//		  MID        VARCHAR2(20 BYTE),
-//		  CONTENT    VARCHAR2(350 BYTE),
-//		  REF        NUMBER,
-//		  RE_STEP    NUMBER,
-//		  RE_LEVEL   NUMBER,
-//		  REG_DATE   DATE,
+//		  NUM        NUMBER not null,
+//		  PID        VARCHAR2(30 BYTE) not null,
+//		  MID        VARCHAR2(20 BYTE) not null,
+//		  CONTENT    VARCHAR2(350 BYTE) not null,
+//		  REF        NUMBER not null,
+//		  RE_STEP    NUMBER not null,
+//		  RE_LEVEL   NUMBER not null,
+//		  REG_DATE   DATE not null,
 //		  CHECKTRUE  NUMBER
 //		);
 
