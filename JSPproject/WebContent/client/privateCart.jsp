@@ -215,7 +215,7 @@
 				for (int i = 5 * (intPage - 1); i < pageProductListSize; i++) {
 			%>
 			<tr>
-			 <form action="/JSPproject/client/cartBuy.jsp" method="POST">
+			 <form action="/JSPproject/client/cartBuyOrDelete.jsp" method="POST">
 				<th scope="row"><%=i + 1%></th>
 				<td><img src="<%=cartProductList.get(i).getImgaddr()%>"
 					style="width: 80px; height: 80px" /></td>
@@ -233,9 +233,10 @@
 					총가격<br>
 				<br>
 				<br>
+				<input type="hidden" id="or" name="or" value="asd">
 				<input type="hidden" name="pid" value="<%=cartProductList.get(i).getId()%>">
-				<input type="submit" value="구매" alert="buy" onclick="">
-				<input type="submit" value="삭제" alert="cancel" onclick="">
+				<input type="submit" value="구매" alert="buy" onclick="return buyOrCancel(this);">
+				<input type="submit" value="삭제" alert="cancel" onclick="return buyOrCancel(this);">
 				</form>
 			</tr>
 			<%
@@ -246,6 +247,30 @@
 
 
 	<script type="text/javascript">
+	
+	function buyOrCancel(btn) {
+		
+		
+		if (btn.getAttribute('alert') == 'buy') {
+			
+			document.getElementById('or').setAttribute('value','buy');
+			
+			return true;
+			
+		}if (btn.getAttribute('alert') == 'cancel'){
+		
+			document.getElementById('or').setAttribute('value','cancel');
+			
+			return true;
+		}
+		
+		 
+		
+		
+	}
+	
+	
+	
 		
 function calculatePrice( input, result , price) {	
 	

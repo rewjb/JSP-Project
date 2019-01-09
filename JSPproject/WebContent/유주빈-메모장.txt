@@ -102,6 +102,7 @@ document.getElementsByName('test_name')[0].className;
 무슨 광고배너가 가장 인기가 많지?
 구매자는 어떤 결제 스텝에서 가장 이탈률이 높은가?
 (개인적으로 탐나는 기능)
+유입분석 ( 모바일인지 컴퓨터인지)
 		
 		
 		

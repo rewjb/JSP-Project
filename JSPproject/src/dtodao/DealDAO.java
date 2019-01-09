@@ -15,10 +15,10 @@ public class DealDAO {
 //	private String user = "system";
 //	private String password = "1234";
 
-	private static CartDAO cartDAO = new CartDAO();
+	private static DealDAO dealDAO = new DealDAO();
 
-	public static CartDAO getInstance() {
-		return cartDAO;
+	public static DealDAO getInstance() {
+		return dealDAO;
 	}
 
 	private Connection DBconnectMethod() {
@@ -36,26 +36,20 @@ public class DealDAO {
 		return null;
 	}// DBconnectMethod() : 메서드 종료
 
-	public void registerCart(String pid, String mid) {
-
-//		CREATE TABLE SYSTEM.DEAL (
-//				NUM NUMBER,
-//				MID VARCHAR2(100),
-//				PID VARCHAR2(100),
-//				DEALDATE VARCHAR2(100)
-//			);
-
+	public void insertDealInfo(String mid, String pid , int quantity) {
+        //구매하는 메서드
 		Connection con = DBconnectMethod();
 		// DB 연결
-		String sql = "INSERT INTO DEAL VALUES(?,?,DEFAULT,sysdate)";
+		String sql = "INSERT INTO DEAL VALUES(DEALNUM.NEXTVAL,?,?,?,sysdate)";
 //		"INSERT INTO CART VALUES(?,?,DEFAULT,sysdate)";
 		// sql 문 작성
 		try {
 			// 오류 처리
 			PreparedStatement ps = con.prepareStatement(sql);
 
-			ps.setString(1, pid);
-			ps.setString(2, mid);
+			ps.setString(1, mid);
+			ps.setString(2, pid);
+			ps.setInt(3, quantity);
 			// 모든 값 세팅
 			ps.executeUpdate();
 			// 삽입
@@ -63,7 +57,7 @@ public class DealDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}// joinProduct() : 메서드 종료
+	}// insertDealInfo() : 메서드 종료
 
 
 
