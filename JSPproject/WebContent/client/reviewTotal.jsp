@@ -102,9 +102,9 @@
 																<td><span style="FONT-SIZE: 11pt;"><%=bean.getMid()%></span></td>
 																<td>
 																<span style="FONT-SIZE: 11pt;" >
-																<!-- 모달기능을 이용하여 리뷰 내용이 버튼으로 안으로 들어가게  만듬 -->
+																<!-- 모달기능을 이용하여 리뷰 내용이 버튼으로 안으로 들어가게  만듬 --><!-- onclick="checkLog(); -->
 																
-																<button type="button" class="btn btn-link btn-xs" data-toggle="modal" data-target="#<%=bean.getNum()%>"  onclick="checkLog();">
+																<button type="button" class="btn btn-link btn-xs" data-toggle="modal" data-target="#<%=bean.getNum()%>"  >
 																  <p><%=bean.getContent()%></p>
 																</button>
 																</span>	
@@ -199,7 +199,7 @@
 
 																				</div>
 																				<div class="modal-footer">
-																					<h6>리뷰 수정과 삭제는 마이페이지 에서 하실 수 있습니다.</h6><br><br>
+																					<button type="button" class="btn btn-secondary" >수정</button>
 																					<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>												
 																				</div>
 																			</div>														
