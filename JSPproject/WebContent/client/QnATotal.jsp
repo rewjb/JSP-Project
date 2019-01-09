@@ -28,13 +28,7 @@
          				             				    			String pid = request.getParameter("pid");
          				             				    			String mid = request.getParameter("mid");
          				             				    			System.out.print("qna pid : "+pid);
-         				             				    			
-         				             				    			// 평점과 비교해서 별모양을 그려주기 위한 변수
-         				             				    			String gradeNum1 = "1";
-         				             				    			String gradeNum2 = "2";
-         				             				    			String gradeNum3 = "3";
-         				             				    			String gradeNum4 = "4";
-         				             				    			String gradeNum5 = "5";
+
          				             				    			
          				             				    			
          				             				    			//만약 처음 productDetail.jsp를 클릭하거나 수정 삭제 등 다른 게시글에서 이 페이지로 넘어오면 pageNum값이 없기에 null 처리를 해줌

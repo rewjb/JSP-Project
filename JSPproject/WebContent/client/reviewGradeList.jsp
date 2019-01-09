@@ -66,7 +66,7 @@
 	function checkLog(){
 		<%if(session.getAttribute("mid") == null){%>
 			alert("로그인 사용자만  상세리뷰를 볼 수 있습니다.");
-			document.location.href="productdetail2.jsp?center=reviewTotal.jsp&pid=<%=pid%>";
+			document.location.href="productDetail2.jsp?center=reviewTotal.jsp&pid=<%=pid%>";
 		<%}%>			
 	}
 	</script>
