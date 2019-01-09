@@ -9,7 +9,7 @@
 
 <html>
 <head>
-<title>제품 목록 리스트</title>
+<title>장바구니</title>
 
 <jsp:include page="/Header.jsp"></jsp:include>
 </head>
@@ -132,8 +132,13 @@
 										<%
 											} else {
 										%>
-										<%=session.getAttribute("id")%>님 환영합니다.<br>회원정보<br>
-										장바구니<br> 거래정보
+											<button type="button" class="btn btn-outline-info"><h5><%=session.getAttribute("id")%>님</h5><br>
+								환영합니다.
+								</button><br><br>
+								<a href="/JSPproject/client/privateInfoForm.jsp"><button type="button" class="btn btn-info">개인정보</button></a><br>
+								<a href="/JSPproject/client/privateCart.jsp"><button type="button" class="btn btn-info">장바구니</button></a><br>
+								<a href="/JSPproject/client/dealListForm.jsp"><button type="button" class="btn btn-info">거래내역</button></a><br>
+								<a href="/JSPproject/logOutPerform.jsp"><button type="button" class="btn btn-info">로그아웃</button></a><br>
 										<%
 											}
 										%>
@@ -202,7 +207,7 @@
 
 		</div>
 	</div>
-
+ <form action="/JSPproject/client/cartBuyOrDelete.jsp" method="POST">
 	<table class="table"
 		style="margin-top: 200px; text-align: center; vertical-align: center;"
 		border="1">
@@ -232,7 +237,7 @@
 				for (int i = 5 * (intPage - 1); i < pageProductListSize; i++) {
 			%>
 			<tr>
-			 <form action="/JSPproject/client/cartBuyOrDelete.jsp" method="POST">
+			
 				<th scope="row"><%=i + 1%></th>
 				<td><img src="<%=cartProductList.get(i).getImgaddr()%>"
 					style="width: 80px; height: 80px" /></td>
@@ -254,14 +259,14 @@
 				<input type="hidden" name="pid" value="<%=cartProductList.get(i).getId()%>">
 				<input type="submit" value="구매" alert="buy" onclick="return buyOrCancel(this);">
 				<input type="submit" value="삭제" alert="cancel" onclick="return buyOrCancel(this);">
-				</form>
+				
 			</tr>
 			<%
 				}
 			%>
 		</tbody>
 	</table>
-
+</form>
 
 	<script type="text/javascript">
 	

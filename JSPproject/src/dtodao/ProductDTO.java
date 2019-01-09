@@ -22,8 +22,15 @@ public class ProductDTO {
 	// 9. 이미지 주소 (100)
 	private int quantity;
 	// 10. 제품을 갖고 올때만 쓰는 변수! 수량
+	private String date;
 	
 	
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
+	}
 	public int getQuantity() {
 		return quantity;
 	}

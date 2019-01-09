@@ -129,7 +129,7 @@ public class MemberDAO {
 			e.printStackTrace();
 		}
 		return null;
-	}// loginMember() : 메서드 종료
+	}// searchID() : 메서드 종료
 	
 	public MemberDTO searchMemberInfo(String id) {
 		// 아이디각 존재하는지 검색
@@ -180,6 +180,25 @@ public class MemberDAO {
 			ps.setString(4, memberDTO.getAddr());
 			ps.setString(5, memberDTO.getId());
 			
+			ps.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}// updateMember() : 메서드 종료
+	
+	public void unjoinMember(String mid) {
+//		public void updateMember(String id , String pw , String name , String tel , String addr) {
+		// 아이디각 존재하는지 검색
+
+		Connection con = DBconnectMethod();
+		// DB 연결
+		String sql = "DELETE FROM MEMBER WHERE ID=?";
+		// sql 문 작성
+		try {
+			// 오류 처리
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, mid);
 			ps.executeUpdate();
 
 		} catch (Exception e) {

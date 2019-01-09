@@ -27,7 +27,7 @@
 
 <html>
 <head>
-<title>회원가입</title>
+<title>개인정보</title>
 </head>
 <body>
 
@@ -48,10 +48,14 @@
 			return;
 		}
 		
+		if(pid.length()<6){
+			
+		}else{
+		
 		if (pid.subSequence(0, 5).equals("naver")) {
 			response.sendRedirect("https://nid.naver.com/user2/help/myInfo.nhn?lang=ko_KR");
 			return;
-		}
+		}}
 	%>
 
 
@@ -147,16 +151,13 @@
 				<td width="200" valign="top" align="center" rowspan="2">
 					<div class="alert alert-dark  btn-light" role="alert">
 
-						<button type="button" class="btn btn-outline-info">
-							<h5><%=session.getAttribute("id")%>님
-							</h5>
-							<br> 환영합니다.
-						</button>
-						<br> <br> <a
-							href="/JSPproject/client/privateInfoForm.jsp"><button
-								type="button" class="btn btn-info">개인정보</button></a><br> <a
-							href="#"><button type="button" class="btn btn-info">장바구니</button></a><br>
-						<a href="#"><button type="button" class="btn btn-info">거래내역</button></a><br>
+										<button type="button" class="btn btn-outline-info"><h5><%=session.getAttribute("id")%>님</h5><br>
+								환영합니다.
+								</button><br><br>
+								<a href="/JSPproject/client/privateInfoForm.jsp"><button type="button" class="btn btn-info">개인정보</button></a><br>
+								<a href="/JSPproject/client/privateCart.jsp"><button type="button" class="btn btn-info">장바구니</button></a><br>
+								<a href="/JSPproject/client/dealListForm.jsp"><button type="button" class="btn btn-info">거래내역</button></a><br>
+								<a href="/JSPproject/logOutPerform.jsp"><button type="button" class="btn btn-info">로그아웃</button></a><br>
 
 
 						<h2>
@@ -331,12 +332,10 @@
 
 							</div>
 				</form>
-
 				<A
-					href="/JSPproject/client/dropOutPerform.jsp?id=<%=session.getAttribute("id")%>>">
+					href="/JSPproject/client/dropOutPerform.jsp?">
 					<button class="btn btn-dark" onclick="return unjoinOperate();">탈퇴하기</button>
 				</A>
-				</div>
 
 
 
