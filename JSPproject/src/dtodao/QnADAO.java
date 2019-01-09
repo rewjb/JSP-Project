@@ -69,16 +69,14 @@ public class QnADAO {
 			pstmt.setString(1, dto.getPid());
 			
 			pstmt.setString(2, dto.getMid());
-			
-			pstmt.setString(3, dto.getGrade());
 
-			pstmt.setString(4, dto.getContent());
+			pstmt.setString(3, dto.getContent());
 
-			pstmt.setInt(5, ref);
+			pstmt.setInt(4, ref);
 
-			pstmt.setInt(6, re_step);
+			pstmt.setInt(5, re_step);
 
-			pstmt.setInt(7, re_level);
+			pstmt.setInt(6, re_level);
 
 			
 			pstmt.executeUpdate();
@@ -99,6 +97,7 @@ public class QnADAO {
 		}
 			
 	}
+    
     
 	public Vector<QnADTO> getAllReview(String pid, int start, int end) {
 			
@@ -132,19 +131,19 @@ public class QnADAO {
 	
 					dto.setMid(rs.getString("mid"));
 					
-					dto.setGrade(rs.getString("grade"));
+//					dto.setGrade(rs.getString("grade"));
 	
 					dto.setContent(rs.getString("content"));
 					
-					dto.setRef(rs.getInt(6));
+					dto.setRef(rs.getInt(5));
 					
-					dto.setRe_step(rs.getInt(7));
+					dto.setRe_step(rs.getInt(6));
 					
-					dto.setRe_level(rs.getInt(8));
+					dto.setRe_level(rs.getInt(7));
 
 					dto.setReg_date(rs.getDate("reg_date").toString());// �궇吏쒕�� �뒪�듃留곸쑝濡� 諛쏄린 �쐞�빐 toString�쓣 �궗�슜
 					
-					dto.setCheckTrue(rs.getInt(10));
+					dto.setCheckTrue(rs.getInt(8));
 	
 					// �뙣�궎吏뺥븳 �뜲�씠�꽣瑜� 踰≫꽣�뿉 ���옣
 					v.add(dto);
@@ -176,7 +175,7 @@ public class QnADAO {
 	    int count =0;
 	    try{
 	        //荑쇰━以�鍮�
-	        String sql ="select count(*) from qnaboard where pid = anchorBoxId_24734?";
+	        String sql ="select count(*) from qnaboard where pid = ?";
 	        //荑쇰━瑜� �떎�뻾�븷 媛앹껜 �꽑�뼵
 	        pstmt = con.prepareStatement(sql);
 	        //荑쇰━ �떎�뻾 �썑 寃곌낵瑜� 由ы꽩

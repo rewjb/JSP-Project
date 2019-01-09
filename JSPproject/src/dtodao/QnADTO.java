@@ -1,28 +1,26 @@
 package dtodao;
 
 public class QnADTO {
-	
+		
 		private int num;
 	//  1.글 고유 번호 NUMBER
 		private String mid;
 	//  2. 회원아이디 호VARCHAR2 (10 Byte)
 		private String pid;
 	//  3. 제품 고유 아이디 VARCHAR2 (30 Byte)
-		
-		private String grade;
-	//  4. 문의글 작성시 별점 등급이 넘어오는 것에 대한 컬럼을 맞춰주기 위한 변수  (10 Byte);
+	
 		private String content;
-	//  5. 리뷰 내용 VARCHAR2 (350 Byte)
+	//  4. 리뷰 내용 VARCHAR2 (350 Byte)
 		
 		private int ref;
-	//  6. 문의글 작성시 오리지날글에 대한 그룹들을 위한 변수 number
+	//  5. 문의글 작성시 오리지날글에 대한 그룹들을 위한 변수 number
 		
 		private int re_step;
-	//	7. 오리지날 글에 대한 여러개의 답변들의 그룹을 위한 변수 number
+	//	6. 오리지날 글에 대한 여러개의 답변들의 그룹을 위한 변수 number
 		private int re_level;
-	//	8. 답변 작성시 답변이 오리지날 글의 아래에 달리도록 해주는 변수 number	
+	//	7. 답변 작성시 답변이 오리지날 글의 아래에 달리도록 해주는 변수 number	
 		private String reg_date;
-	//  9. 날짜 변수 date
+	//  8. 날짜 변수 date
 
 		
 		
@@ -31,7 +29,6 @@ public class QnADTO {
 //		  NUM        NUMBER,
 //		  PID        VARCHAR2(30 BYTE),
 //		  MID        VARCHAR2(20 BYTE),
-//		  GRADE      VARCHAR2(10 BYTE),
 //		  CONTENT    VARCHAR2(350 BYTE),
 //		  REF        NUMBER,
 //		  RE_STEP    NUMBER,
@@ -68,14 +65,6 @@ public class QnADTO {
 
 		public void setPid(String pid) {
 			this.pid = pid;
-		}
-
-		public String getGrade() {
-			return grade;
-		}
-
-		public void setGrade(String grade) {
-			this.grade = grade;
 		}
 
 		public String getContent() {

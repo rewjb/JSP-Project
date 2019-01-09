@@ -64,8 +64,8 @@ public class ReviewDAO {
 			String sql = " insert into review values(review_seq.NEXTVAL, ? ,? , ?, ?, sysdate, ?)";
 			pstmt = con.prepareStatement(sql);
 			// ?에 값을 맵핑
-			pstmt.setString(1, bean.getMid());
-			pstmt.setString(2, bean.getPid());
+			pstmt.setString(1, bean.getPid());
+			pstmt.setString(2, bean.getMid());
 			pstmt.setString(3, bean.getContent());
 			pstmt.setString(4, bean.getGrade());
 			pstmt.setString(5, bean.getImg());
@@ -335,12 +335,15 @@ public class ReviewDAO {
 	    public int getAllGradeCount(String pid){
 	        getCon();
 	        //게시글 전체수를 저장하는 변수
-	        int count =0;
+	       int count = 0;
+	        
 	        try{
 	            //쿼리준비
 	            String sql ="select count(*) grade from review where pid = ?";
+
 	            //쿼리를 실행할 객체 선언
 	            pstmt = con.prepareStatement(sql);
+
 	            //쿼리 실행 후 결과를 리턴
 	            
 	            pstmt.setString(1, pid);
@@ -350,6 +353,7 @@ public class ReviewDAO {
 	            	
 	            	//젠체 게시글의 수
 	                count =rs.getInt(1);
+
 	            }
 	            con.close();
 	        }catch(Exception e){
@@ -357,4 +361,130 @@ public class ReviewDAO {
 	        }
 	        return count;
 	    }
+		 //해달 제품의 별점순 제품을 카운트 하는 메소드
+	    public int getAllGradeCoun2(String pid){
+	        getCon();
+	        //게시글 전체수를 저장하는 변수
+	       int count = 0;
+	        
+	        try{
+	            //쿼리준비
+	            String sql ="select count(*) grade from review where pid = ? and grade = 2";
+
+	            //쿼리를 실행할 객체 선언
+	            pstmt = con.prepareStatement(sql);
+
+	            //쿼리 실행 후 결과를 리턴
+	            
+	            pstmt.setString(1, pid);
+	            
+	            rs=pstmt.executeQuery();
+	            if(rs.next()){
+	            	
+	            	//젠체 게시글의 수
+	                count =rs.getInt(1);
+
+	            }
+	            con.close();
+	        }catch(Exception e){
+	            e.printStackTrace();
+	        }
+	        return count;
+	    }
+		 //해달 제품의 별점순 제품을 카운트 하는 메소드
+	    public int getAllGradeCount3(String pid){
+	        getCon();
+	        //게시글 전체수를 저장하는 변수
+	       int count = 0;
+	        
+	        try{
+	            //쿼리준비
+	            String sql ="select count(*) grade from review where pid = ? and grade = 3";
+
+	            //쿼리를 실행할 객체 선언
+	            pstmt = con.prepareStatement(sql);
+
+	            //쿼리 실행 후 결과를 리턴
+	            
+	            pstmt.setString(1, pid);
+	            
+	            rs=pstmt.executeQuery();
+	            if(rs.next()){
+	            	
+	            	//젠체 게시글의 수
+	                count =rs.getInt(1);
+
+	            }
+	            con.close();
+	        }catch(Exception e){
+	            e.printStackTrace();
+	        }
+	        return count;
+	    }
+		 //해달 제품의 별점순 제품을 카운트 하는 메소드
+	    public int getAllGradeCount4(String pid){
+	        getCon();
+	        //게시글 전체수를 저장하는 변수
+	       int count = 0;
+	        
+	        try{
+	            //쿼리준비
+	            String sql ="select count(*) grade from review where pid = ? and grade = 4";
+
+	            //쿼리를 실행할 객체 선언
+	            pstmt = con.prepareStatement(sql);
+
+	            //쿼리 실행 후 결과를 리턴
+	            
+	            pstmt.setString(1, pid);
+	            
+	            rs=pstmt.executeQuery();
+	            if(rs.next()){
+	            	
+	            	//젠체 게시글의 수
+	                count =rs.getInt(1);
+
+	            }
+	            con.close();
+	        }catch(Exception e){
+	            e.printStackTrace();
+	        }
+	        return count;
+	    }
+	    
+		 //해달 제품의 별점순 제품을 카운트 하는 메소드
+	    public int getAllGradeCount5(String pid){
+	        getCon();
+	        //게시글 전체수를 저장하는 변수
+	       int count = 0;
+	        
+	        try{
+	            //쿼리준비
+	            String sql ="select count(*) grade from review where pid = ? and grade = 5";
+
+	            //쿼리를 실행할 객체 선언
+	            pstmt = con.prepareStatement(sql);
+
+	            //쿼리 실행 후 결과를 리턴
+	            
+	            pstmt.setString(1, pid);
+	            
+	            rs=pstmt.executeQuery();
+	            if(rs.next()){
+	            	
+	            	//젠체 게시글의 수
+	                count =rs.getInt(1);
+
+	            }
+	            con.close();
+	        }catch(Exception e){
+	            e.printStackTrace();
+	        }
+	        return count;
+	    }
+	    
+	    
+	    
+	
+
 }
