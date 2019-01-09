@@ -47,6 +47,11 @@
 			out.print("</script>");
 			return;
 		}
+		
+		if (pid.subSequence(0, 5).equals("naver")) {
+			response.sendRedirect("https://nid.naver.com/user2/help/myInfo.nhn?lang=ko_KR");
+			return;
+		}
 	%>
 
 
