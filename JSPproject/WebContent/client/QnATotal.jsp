@@ -28,9 +28,9 @@
          				             				    			//현재 카운터를 클릭한 번호값을 읽어옴
          				             				    			String pageNum = request.getParameter("pageNum");
          				             				    			String pid = request.getParameter("pid");
-         				             				    			String mid = request.getParameter("id");
+         				             				    			String id = request.getParameter("id");
          				             				    			System.out.println("qna pid : "+pid);
-         				             				    			System.out.println("qna mid : "+mid);
+         				             				    			System.out.println("qna mid : "+id);
 
          				             				    			
          				             				    			
@@ -72,7 +72,7 @@
 	function checkLog(){
 		<%if(session.getAttribute("id") == null){%>
 			alert("로그인 사용자만  상세리뷰를 볼 수 있습니다.");
-			document.location.href="productDetail2.jsp?center=QnATotal.jsp&pid=<%=pid%>";
+			document.location.href="productDetail2.jsp?center=QnATotal.jsp&pid=<%=pid%>&id=<%=id%>";
 		<%}%>			
 	}
 	</script>
@@ -162,7 +162,8 @@
 																				            <td width="1000px" style="font-size: 12pt;"><%= dto.getContent()%></td>
 																				        </tr>
 																				        <tr>
-																				            <th width="1000px"><button type="button" class="btn btn-warning" id="radmin">관리자답변</button></th>
+
+																				            <th width="1000px"><button type="button" class="btn btn-warning" id="radmin" onclick="checkRoot()">관리자답변</button></th>
 																				            <td><textarea rows="3" cols="40" style="font-size: 10pt;" name="content" id="adminContent" readonly="" ></textarea></td>
 																				  
 																				        </tr>
@@ -179,20 +180,46 @@
 																					<input type="hidden" name="ref"  value="<%= dto.getRef() %>">
 																                    <input type="hidden" name="ref_step"  value="<%= dto.getRe_step() %>">
 																                    <input type="hidden" name="ref_level"  value="<%= dto.getRe_level() %>">
-																					<input type="hidden" name="content">
-																					<button type="submit" class="btn btn-secondary" id="radmin3" style="position: relative; right: 168px;bottom: 70px;">답변완료</button>
+																					<input type="hidden" name="content" value="">
+																					<button type="submit" class="btn btn-secondary" id="radmin3" style="position: relative; right: 168px;bottom: 70px;" onclick="checkRoot2()">답변완료</button>
 																					<button type="button" class="btn btn-primary" style="position: relative; right: 280px;">내 문의 수정</button>																					
 																					<button type="submit" class="btn btn-primary" style="position: relative; right: 275px;"> 수정 완료</button>																					
 																					<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-																					<script type="text/javascript"> 
-																					$(document).ready(function() { 
-																						$("#radmin2").click(function(){ 
-																							$("#adminContent").attr("readonly",true).attr("disabled",false);  }); 
-																						$("#radmin").click(function(){ 
-																							$("#adminContent").attr("readonly",false).attr("disabled",false);  });
-																						});
-														
 																					
+																					<script type="text/javascript"> 
+																					
+																					
+																				    /*관리자인지 아닌지 판별해서 답변을 달 수 있는 조건을 생성*/
+																				    function checkRoot() {
+																				    	 
+																							$(document).ready(function() { 
+																						 
+																								$("#radmin").click(function(){ 
+																									$("#adminContent").attr("readonly",false).attr("disabled",false);  });
+																								});
+																				        <%
+																				        if(!id.equals("root")){
+																				        %>
+																				        alert("관리자가 아닙니다.");
+																				        history.go(-1);
+																					    
+																						<%
+																				        }
+																				        %>
+																				    }
+																				        function checkRoot2() {
+	
+																				        <%
+																				        if(!id.equals("root")){
+																				        %>
+																				        alert("관리자가 아닙니다.");
+																				        history.go(-1);
+																						<%
+																				        }
+																				        %>
+																					   
+																				      }
+
 																					</script>
 																				</div>
 																			</div>

@@ -40,5 +40,5 @@
 	qdao.reInsertQnA(qnadto);
      
     //답변 데이터를 모두 저장후 전체 게시글 보기를 설정
-    response.sendRedirect("productDetail2.jsp?center=QnATotal.jsp&pid="+pid);
+    response.sendRedirect("productDetail2.jsp?center=QnATotal.jsp&pid="+pid+"&id="+mid);
 %>
