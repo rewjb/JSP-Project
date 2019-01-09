@@ -90,7 +90,7 @@
 		  QnADAO qdao = new QnADAO();
 		   
 		 //데이커 저장 메소드를 호출
-		    qdao.insertQnA2(qnadto);
+		    qdao.insertQnA(qnadto);
 		      
 		   	response.sendRedirect("productDetail2.jsp?QnATotal.jsp&pid="+pid);
 	
