@@ -11,6 +11,21 @@
 <body>
 
 	<%
+	
+	    if (session.getAttribute("id")==null) {
+	    	
+	    	out.println("<script>");
+
+			out.println("alert('잘못된 접근입니다.');");
+			
+			out.println("location.href ='/JSPproject/index.jsp';");
+			
+			out.println("</script>");
+			
+			return;
+	    	
+	    }
+	
 		String mid = (String) session.getAttribute("id");
 		String pid = (String) request.getParameter("pid");
 		int quantity = Integer.parseInt(request.getParameter("quantity"));

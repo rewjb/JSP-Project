@@ -15,6 +15,23 @@
 </head>
 <body style="max-width: 1100px; margin: 0 auto;">
 	<%
+	
+    if (session.getAttribute("id")==null) {
+    	
+    	out.println("<script>");
+
+		out.println("alert('로그인을 먼저 해주세요.');");
+		
+		out.println("location.href ='/JSPproject/index.jsp';");
+		
+		out.println("</script>");
+		
+		return;
+    	
+    }
+	
+	
+	
 		String clientId = "IcCXaLO3qfRlkqm3HRU0";//애플리케이션 클라이언트 아이디값";
 		String redirectURI = URLEncoder.encode("http://localhost:9999/JSPproject/client/loginNaverPerform.jsp",
 				"UTF-8");

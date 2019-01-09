@@ -86,5 +86,6 @@ public class MemberDTO {
 		this.email = email;
 		this.birthDay = birthDay;
 	}
+	
 
 }// 클래스 종료
