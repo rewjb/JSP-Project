@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원관리</title>
+<title>매출관리</title>
 </head>
 <body>
 <jsp:include page="adminTop.jsp"></jsp:include>

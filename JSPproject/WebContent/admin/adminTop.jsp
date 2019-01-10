@@ -15,69 +15,6 @@
 
 </head>
 <body style="max-width: 1100px; margin: 0 auto;">
-	<%
-		String clientId = "IcCXaLO3qfRlkqm3HRU0";//애플리케이션 클라이언트 아이디값";
-		String redirectURI = URLEncoder.encode("http://localhost:9999/JSPproject/client/loginNaverPerform.jsp",
-				"UTF-8");
-		SecureRandom random = new SecureRandom();
-		String state = new BigInteger(130, random).toString();
-		String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
-		apiURL += "&client_id=" + clientId;
-		apiURL += "&redirect_uri=" + redirectURI;
-		apiURL += "&state=" + state;
-		session.setAttribute("state", state);
-
-		String brand = request.getParameter("brand");
-		int paging;
-		int index;
-		
-		try {
-			paging = Integer.parseInt(request.getParameter("page"));
-		} catch (Exception e) {
-			paging = 1;
-		}
-
-		
-		
-		
-		ArrayList<ProductDTO> productList;
-
-		if (brand == null) {
-			productList = productDAO.openProductPage("가이거");
-			brand ="가이거";
-		} else {
-
-			if (brand.equals("danielm")) {
-				productList = productDAO.openProductPage("다니엘 웰링턴(남)");
-				brand ="다니엘 웰링턴(남)";
-			} else if (brand.equals("digel")) {
-				productList = productDAO.openProductPage("디젤");
-				brand ="디젤";
-			} else if (brand.equals("loomi")) {
-				productList = productDAO.openProductPage("루미눅스");
-				brand ="루미눅스";
-			} else if (brand.equals("gucci")) {
-				productList = productDAO.openProductPage("구찌");
-				brand ="구찌";
-			} else if (brand.equals("danielf")) {
-				productList = productDAO.openProductPage("다니엘 웰링턴(여)");
-				brand ="다니엘 웰링턴(여)";
-			} else if (brand.equals("dkny")) {
-				productList = productDAO.openProductPage("DKNY");
-				brand ="DKNY";
-			} else if (brand.equals("mike")) {
-				productList = productDAO.openProductPage("마크제이콥스");
-				brand ="마크제이콥스";
-			} else if (brand.equals("couple")) {
-				productList = productDAO.openProductPage("커플시계");
-				brand ="커플시계";
-			} else {
-				productList = productDAO.openProductPage("가이거");
-				brand ="가이거";
-			}
-		}
-		int productCount = productList.size();
-	%>
 
 
 
@@ -128,28 +65,28 @@
 								<!--회원관리 버튼 활성화 -->
 								<div class="btn-group" role="group">
 									<button id="MBest" onclick="clickMainToggleBtn(MBest);"
-										style="width: 300px" type="button"
+										style="width: 275px" type="button"
 										class="btn btn-secondary dropdown-toggle"
 										data-toggle="dropdown">관리자 기능</button>
-									<div style="width: 300px" class="dropdown-menu"
+									<div style="width: 275px" class="dropdown-menu"
 										aria-labelledby="MBest">
 										<a class="dropdown-item"
-											href="/JSPproject/client/productList.jsp?brand=gager&page=1">회원관리</a>
+											href="/JSPproject/admin/memberManager.jsp">회원관리</a>
 										<a class="dropdown-item"
-											href="/JSPproject/client/productList.jsp?brand=danielm&page=1">제품관리
+											href="/JSPproject/admin/productManager.jsp">제품관리
 											</a> <a class="dropdown-item"
-											href="/JSPproject/client/productList.jsp?brand=digel&page=1">매출관리</a>
+											href="/JSPproject/admin/salsesManager.jsp">매출관리</a>
 										<a class="dropdown-item"
-											href="/JSPproject/client/productList.jsp?brand=loomi&page=1">공지사항</a>
+											href="list.jsp">공지사항</a>
 									</div>
 								</div>
 								<!--메인 MBest 버튼 시작 -->
 								<div class="btn-group" role="group">
 									<button id="MBest" onclick="clickMainToggleBtn(MBest);"
-										style="width: 300px" type="button"
+										style="width: 275px" type="button"
 										class="btn btn-secondary dropdown-toggle"
 										data-toggle="dropdown">남성시계 BEST</button>
-									<div style="width: 300px" class="dropdown-menu"
+									<div style="width: 275px" class="dropdown-menu"
 										aria-labelledby="MBest">
 										<a class="dropdown-item"
 											href="/JSPproject/client/productList.jsp?brand=gager&page=1">가이거</a>
@@ -164,11 +101,11 @@
 								<!--메인 FBest 버튼 시작 -->
 								<div class="btn-group" role="group">
 									<button id="FBest" onclick="clickMainToggleBtn(FBest);"
-										style="width: 300px" type="button"
+										style="width: 275px" type="button"
 										class="btn btn-secondary dropdown-toggle"
 										data-toggle="dropdown" aria-haspopup="true"
 										aria-expanded="false">여성시계 BEST</button>
-									<div style="width: 300px" class="dropdown-menu"
+									<div style="width: 275px" class="dropdown-menu"
 										aria-labelledby="FBest">
 										<a class="dropdown-item"
 											href="/JSPproject/client/productList.jsp?brand=gucci&page=1">구찌</a>
