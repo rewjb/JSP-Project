@@ -43,7 +43,8 @@ public class QnADAO {
 		 //鍮덊겢�옒�뒪�뿉 �꽆�뼱�삤吏� �븡�븯�뜕 �뜲�씠�꽣�뱾�쓣 珥덇린�솕 �빐二쇱뼱�빞 �빀�땲�떎.
         int ref=0; //湲�洹몃９�쓣 �쓽誘� = 荑쇰━瑜� �떎�뻾�떆耳쒖꽌 媛��옣�겙 ref 媛믪쓣 �옄�졇�삩 �썑  +1�쓣 �뜑�빐二쇰㈃�맖
         int re_step=1; //�깉湲��씠湲곗뿉 = 遺�紐④�
-        int re_level=1; 
+        int re_level=1;
+        int checkTrue = 0;
        
 		
 		try {
@@ -62,7 +63,7 @@ public class QnADAO {
             
     
             
-			String sql = " insert into qnaboard values(qna_seq.NEXTVAL,?,?,?,?,?,?,sysdate,0)";
+			String sql = " insert into qnaboard values(qna_seq.NEXTVAL,?,?,?,?,?,?,sysdate,?)";
 			
 			pstmt = con.prepareStatement(sql);
 			// ?�뿉 媛믪쓣 留듯븨
@@ -71,14 +72,16 @@ public class QnADAO {
 			pstmt.setString(2, dto.getMid());
 
 			pstmt.setString(3, dto.getContent());
-
+			
 			pstmt.setInt(4, ref);
 
 			pstmt.setInt(5, re_step);
 
 			pstmt.setInt(6, re_level);
 
+			pstmt.setInt(7, checkTrue);
 			
+
 			pstmt.executeUpdate();
 
 			// 荑쇰━瑜� �떎�뻾�븯�떆�삤
@@ -132,7 +135,7 @@ public class QnADAO {
 					dto.setMid(rs.getString("mid"));
 						
 					dto.setContent(rs.getString("content"));
-					
+										
 					dto.setRef(rs.getInt(5));
 					
 					dto.setRe_step(rs.getInt(6));
@@ -195,7 +198,7 @@ public class QnADAO {
 	
 	  //�떟蹂�湲��씠 ���옣�릺�뒗 硫붿냼�뱶
 	
-    public void reWriteQnA(QnADTO dto){
+    public void reInsertQnA(QnADTO dto){
         //遺�紐④� 洹몃９怨� 湲��젅踰� 湲��뒪�뀦�쓣 �씫�뼱�뱶由�
     	
         int ref= dto.getRef();

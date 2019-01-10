@@ -5,7 +5,7 @@
 <html>
 <head>
 
-<jsp:useBean id="ReviewBean" class="dtodao.ReviewBean">
+<jsp:useBean id="ReviewBean" class="dtodao.ReviewDTO">
 	<jsp:setProperty name="ReviewBean" property="*" />
 </jsp:useBean>
 

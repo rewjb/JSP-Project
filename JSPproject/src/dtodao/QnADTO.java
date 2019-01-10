@@ -7,8 +7,7 @@ public class QnADTO {
 		private String mid;
 	//  2. 회원아이디 호VARCHAR2 (10 Byte)
 		private String pid;
-	//  3. 제품 고유 아이디 VARCHAR2 (30 Byte)
-	
+	//  3. 제품 고유 아이디 VARCHAR2 (30 Byte)	
 		private String content;
 	//  4. 리뷰 내용 VARCHAR2 (350 Byte)
 		
@@ -22,26 +21,22 @@ public class QnADTO {
 		private String reg_date;
 	//  8. 날짜 변수 date
 
+		private int checkTrue;
+	// 	답변 여부 체크
 		
 		
 //		CREATE TABLE SYSTEM.QNABOARD
 //		(
-//		  NUM        NUMBER,
-//		  PID        VARCHAR2(30 BYTE),
-//		  MID        VARCHAR2(20 BYTE),
-//		  CONTENT    VARCHAR2(350 BYTE),
-//		  REF        NUMBER,
-//		  RE_STEP    NUMBER,
-//		  RE_LEVEL   NUMBER,
-//		  REG_DATE   DATE,
+//		  NUM        NUMBER not null,
+//		  PID        VARCHAR2(30 BYTE) not null,
+//		  MID        VARCHAR2(20 BYTE) not null,
+//		  CONTENT    VARCHAR2(350 BYTE) not null,
+//		  REF        NUMBER not null,
+//		  RE_STEP    NUMBER not null,
+//		  RE_LEVEL   NUMBER not null,
+//		  REG_DATE   DATE not null,
 //		  CHECKTRUE  NUMBER
 //		);
-		
-		
-		
-		
-		private int checkTrue;
-		
 
 		public int getNum() {
 			return num;
@@ -114,7 +109,6 @@ public class QnADTO {
 		public void setCheckTrue(int checkTrue) {
 			this.checkTrue = checkTrue;
 		}
-		
 		
 
 }

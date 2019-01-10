@@ -9,7 +9,7 @@
 %>
 <!-- 게시글 작성에 데이터를 한번에 읽어드림 -->
 
-<jsp:useBean id="reviewbean" class="dtodao.ReviewBean">
+<jsp:useBean id="reviewbean" class="dtodao.ReviewDTO">
 	<jsp:setProperty name="reviewbean" property="*"/>
 </jsp:useBean>
 
@@ -19,11 +19,13 @@
 
 	<%
 		String pid = request.getParameter("pid");
-		String mid = request.getParameter("mid");
+		String mid = request.getParameter("id");
 		String grade = request.getParameter("grade");
 		String content = request.getParameter("content");
 		String radio = request.getParameter("customRadio");
 		System.out.print(content);
+		System.out.print(mid);
+		
 	%>
 	
 	<%if(radio == null || content == null){%>
