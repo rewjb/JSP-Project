@@ -1,3 +1,4 @@
+<%@page import="org.apache.catalina.connector.Request"%>
 <%@page import="java.util.Set"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
@@ -5,6 +6,7 @@
 <%@ page import="java.security.SecureRandom"%>
 <%@ page import="java.math.BigInteger"%>
 <%@ page import="dtodao.ProductDTO"%>
+<%@ page import="dtodao.ProductDAO"%>
 <%@ page import="dtodao.CartDAO"%>
 <jsp:useBean id="productDAO" class="dtodao.ProductDAO" />
 <!DOCTYPE html>
@@ -42,44 +44,12 @@
 			paging = 1;
 		}
 
-		ArrayList<ProductDTO> productList;
+		ArrayList<ProductDTO> productList = ProductDAO.getInstance().searchProduct( request.getParameter("type"), request.getParameter("content"));
 
-		if (brand == null) {
-			productList = productDAO.openProductPage("가이거");
-			brand = "가이거";
-		} else {
-
-			if (brand.equals("danielm")) {
-				productList = productDAO.openProductPage("다니엘 웰링턴(남)");
-				brand = "다니엘 웰링턴(남)";
-			} else if (brand.equals("digel")) {
-				productList = productDAO.openProductPage("디젤");
-				brand = "디젤";
-			} else if (brand.equals("loomi")) {
-				productList = productDAO.openProductPage("루미눅스");
-				brand = "루미눅스";
-			} else if (brand.equals("gucci")) {
-				productList = productDAO.openProductPage("구찌");
-				brand = "구찌";
-			} else if (brand.equals("danielf")) {
-				productList = productDAO.openProductPage("다니엘 웰링턴(여)");
-				brand = "다니엘 웰링턴(여)";
-			} else if (brand.equals("dkny")) {
-				productList = productDAO.openProductPage("DKNY");
-				brand = "DKNY";
-			} else if (brand.equals("mike")) {
-				productList = productDAO.openProductPage("마크제이콥스");
-				brand = "마크제이콥스";
-			} else if (brand.equals("couple")) {
-				productList = productDAO.openProductPage("커플시계");
-				brand = "커플시계";
-			} else {
-				productList = productDAO.openProductPage("가이거");
-				brand = "가이거";
-			}
-		}
 		int productCount = productList.size();
 	%>
+	
+	
 
 
 
@@ -99,7 +69,7 @@
 						</td>
 						<td>
 							<!-- 검색창 삽입  -->
-								<div class="input-group mb-3" method="GET">
+							<div class="input-group mb-3" method="GET">
 							<form action="/JSPproject/client/searchProductList.jsp">
 								<div class="input-group-prepend">
 									<select name="searchType" style="width: 300px" class="custom-select">
@@ -225,29 +195,8 @@
 
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb" align="right">
-
-
-
-						<%
-							if (brand.equals("가이거") || brand.equals("다니엘 웰링턴(남)") || brand.equals("디젤") || brand.equals("루미눅스")) {
-						%>
-						<li class="breadcrumb-item"><a href="#">남성시계 BEST</a></li>
-						<li class="breadcrumb-item"><a href="#"><%=brand%></a></li>
-						<%
-							} else if (brand.equals("커플시계")) {
-						%>
-						<li class="breadcrumb-item"><a href="#">커플시계 BEST</a></li>
-						<li class="breadcrumb-item"><a href="#"><%=brand%></a></li>
-						<%
-							} else {
-						%>
-						<li class="breadcrumb-item"><a href="#">여성시계 BEST</a></li>
-						<li class="breadcrumb-item"><a href="#"><%=brand%></a></li>
-						<%
-							}
-						%>
-
-
+	                    <li class="breadcrumb-item"><a href="#">검색</a></li>
+	                    <li class="breadcrumb-item"><a href="#"><%=request.getParameter("content")%></a></li>
 					</ol>
 				</nav>
 
@@ -448,7 +397,7 @@
 				} else {
 					preBtn.innerHTML = page-1 ; 
 					preBtn.setAttribute('class', 'page-link');
-					preBtn.setAttribute('href', '<%=request.getRequestURI() + "?brand=" + brand + "&page=" + (paging - 1)%>');
+					preBtn.setAttribute('href', '<%=request.getRequestURI() + "?page="+ (paging - 1)+"&type="+request.getParameter("type")+"&content="+request.getParameter("content")%>');
 				}
 				
 				if ((page)==<%=(int) (productCount / 9 + 1)%>) {
@@ -457,7 +406,7 @@
 				}else {
 					nextBtn.innerHTML = page+1;
 					nextBtn.setAttribute('class', 'page-link');
-					nextBtn.setAttribute('href', '<%=request.getRequestURI() + "?brand=" + brand + "&page=" + (paging + 1)%>');
+					nextBtn.setAttribute('href', '<%=request.getRequestURI() + "?page=" + (paging + 1)+"&type="+request.getParameter("type")+"&content="+request.getParameter("content")%>');
 			
 
 				}
@@ -479,5 +428,10 @@
 				}
 			})
 		</script>
+		
+		<script type="text/javascript">
+		
+		</script>
+		
 </body>
 </html>

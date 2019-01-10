@@ -64,17 +64,18 @@
 					title="로고" />
 				</td>
 				<td>
-					<!-- 검색창 삽입  -->
-					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<select name="job" style="width: 300px" class="custom-select">
-								<option value="보기1" class="dropdown-item">보기1</option>
-								<option value="보기2" class="dropdown-item">보기2</option>
-								<option value="보기3" class="dropdown-item">보기3</option>
-								<option value="보기4" class="dropdown-item">보기4</option>
-							</select> <input type="text" width="500" class="form-control"> <input
-								type="submit" class="btn btn-outline-secondary" value="검색">
-						</div>
+					<div class="input-group mb-3" method="GET">
+						<form action="/JSPproject/client/searchProductList.jsp">
+							<div class="input-group-prepend">
+								<select name="searchType" style="width: 300px"
+									class="custom-select">
+									<option value="subject" class="dropdown-item">제목</option>
+									<option value="brand" class="dropdown-item">브랜드</option>
+								</select> <input name="content" type="text" width="500"
+									class="form-control"> <input type="submit"
+									class="btn btn-outline-secondary" value="검색">
+							</div>
+						</form>
 					</div>
 				</td>
 			</tr>

@@ -179,7 +179,7 @@ public class PullData {
 
 	private void imageSave(String source, String fileName) {
 		
-		File outputFile = new File("C:\\Users\\user\\Desktop\\JSP\\JSPproject\\WebContent\\img\\Cimage\\"+fileName+".jpg");
+		File outputFile = new File("C:\\Users\\user\\git\\JSP-Project\\JSPproject\\WebContent\\img\\Cimage\\"+fileName+".jpg");
 		try {
 
 			URL url = new URL(source);
