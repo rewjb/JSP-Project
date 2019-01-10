@@ -16,6 +16,16 @@
 </head>
 <body style="max-width: 1100px; margin: 0 auto;">
 	<%
+		String clientId = "IcCXaLO3qfRlkqm3HRU0";//애플리케이션 클라이언트 아이디값";
+		String redirectURI = URLEncoder.encode("http://localhost:9999/JSPproject/client/loginNaverPerform.jsp",
+				"UTF-8");
+		SecureRandom random = new SecureRandom();
+		String state = new BigInteger(130, random).toString();
+		String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
+		apiURL += "&client_id=" + clientId;
+		apiURL += "&redirect_uri=" + redirectURI;
+		apiURL += "&state=" + state;
+		session.setAttribute("state", state);
 
 		String brand = request.getParameter("brand");
 		int paging;
@@ -116,33 +126,67 @@
 							<div class="btn-group" role="group"
 								aria-label="Button group with nested dropdown">
 								<!--회원관리 버튼 활성화 -->
-									<div class="btn-group" role="group">
+								<div class="btn-group" role="group">
 									<button id="MBest" onclick="clickMainToggleBtn(MBest);"
-										style="width: 275px" type="button"
-										class="btn btn-secondary "
-										data-toggle="dropdown">회원관리</button>
+										style="width: 300px" type="button"
+										class="btn btn-secondary dropdown-toggle"
+										data-toggle="dropdown">관리자 기능</button>
+									<div style="width: 300px" class="dropdown-menu"
+										aria-labelledby="MBest">
+										<a class="dropdown-item"
+											href="/JSPproject/client/productList.jsp?brand=gager&page=1">회원관리</a>
+										<a class="dropdown-item"
+											href="/JSPproject/client/productList.jsp?brand=danielm&page=1">제품관리
+											</a> <a class="dropdown-item"
+											href="/JSPproject/client/productList.jsp?brand=digel&page=1">매출관리</a>
+										<a class="dropdown-item"
+											href="/JSPproject/client/productList.jsp?brand=loomi&page=1">공지사항</a>
+									</div>
 								</div>
 								<!--메인 MBest 버튼 시작 -->
 								<div class="btn-group" role="group">
 									<button id="MBest" onclick="clickMainToggleBtn(MBest);"
-										style="width: 275px" type="button"
-										class="btn btn-secondary "
-										data-toggle="dropdown">상품관리</button>
+										style="width: 300px" type="button"
+										class="btn btn-secondary dropdown-toggle"
+										data-toggle="dropdown">남성시계 BEST</button>
+									<div style="width: 300px" class="dropdown-menu"
+										aria-labelledby="MBest">
+										<a class="dropdown-item"
+											href="/JSPproject/client/productList.jsp?brand=gager&page=1">가이거</a>
+										<a class="dropdown-item"
+											href="/JSPproject/client/productList.jsp?brand=danielm&page=1">다니엘
+											웰링턴</a> <a class="dropdown-item"
+											href="/JSPproject/client/productList.jsp?brand=digel&page=1">디젤</a>
+										<a class="dropdown-item"
+											href="/JSPproject/client/productList.jsp?brand=loomi&page=1">루미녹스</a>
+									</div>
 								</div>
 								<!--메인 FBest 버튼 시작 -->
 								<div class="btn-group" role="group">
 									<button id="FBest" onclick="clickMainToggleBtn(FBest);"
-										style="width: 275px" type="button"
-										class="btn btn-secondary "
+										style="width: 300px" type="button"
+										class="btn btn-secondary dropdown-toggle"
 										data-toggle="dropdown" aria-haspopup="true"
-										aria-expanded="false">매출관리</button>
+										aria-expanded="false">여성시계 BEST</button>
+									<div style="width: 300px" class="dropdown-menu"
+										aria-labelledby="FBest">
+										<a class="dropdown-item"
+											href="/JSPproject/client/productList.jsp?brand=gucci&page=1">구찌</a>
+										<a class="dropdown-item"
+											href="/JSPproject/client/productList.jsp?brand=danielf&page=1">다니엘
+											웰링턴</a> <a class="dropdown-item"
+											href="/JSPproject/client/productList.jsp?brand=dkny&page=1">DKNY</a>
+										<a class="dropdown-item"
+											href="/JSPproject/client/productList.jsp?brand=mike&page=1">마크제이콥스</a>
+									</div>
 								</div>
 								<!--메인 CBest 버튼 시작 -->
 								<div class="btn-group" role="group">
 									<a
 										href="/JSPproject/client/productList.jsp?brand=couple&page=1"><button
 											id="CBest" onclick="clickMainBtn(CBest);"
-											style="width: 275px" type="button" class="btn btn-secondary ">공지사항</button></a>
+											style="width: 300px" type="button" class="btn btn-secondary">커플시계
+											BEST</button></a>
 								</div>
 							</div>
 						</td>
@@ -150,15 +194,6 @@
 					<!--↑ 메인버튼이 들어가 있는 1행 종료-->
 
 				</table>
+
 			</div>
 		</div>
-
-		<nav aria-label="breadcrumb" style="margin-top: 140px"> 
-			<ol class="breadcrumb" align="right">
-
-				<li class="breadcrumb-item"><a href="#">관리자 페이지</a></li>
-
-
-
-			</ol>
-		</nav>
