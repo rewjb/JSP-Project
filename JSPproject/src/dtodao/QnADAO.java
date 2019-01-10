@@ -10,6 +10,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 
+
 public class QnADAO {
 	
 	Connection con;
@@ -233,6 +234,38 @@ public class QnADAO {
         }catch(Exception e){
             e.printStackTrace();
         }
+    }
+    
+  //qnaboardl에서 관리자 답변글을 리넡하는 메소드
+    public QnADTO getOnARoot(int ref){
+        //리턴타입 선언
+    	QnADTO dto =new QnADTO();
+        getCon();
+         
+        try{
+                    
+            //쿼리준비
+            String sql ="select * from qnaboard where mid='root' and ref=? ";
+            //쿼리실행객체
+            pstmt=con.prepareStatement(sql);
+            pstmt.setInt(1, ref);
+            //쿼리 실행후 결과를 리턴
+            rs=pstmt.executeQuery();
+            if(rs.next()){
+            	dto.setNum(rs.getInt("num"));
+            	dto.setPid(rs.getString("pid"));
+            	dto.setMid(rs.getString("mid"));
+            	dto.setContent(rs.getString("content"));
+            	dto.setRef(rs.getInt("ref"));
+            	dto.setRe_step(rs.getInt("RE_STEP"));
+            	dto.setRe_level(rs.getInt("RE_LEVEL"));
+            	dto.setReg_date(rs.getDate("REG_DATE").toString());
+            	dto.setCheckTrue(rs.getInt("checktrue"));
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return dto;
     }
 
 
