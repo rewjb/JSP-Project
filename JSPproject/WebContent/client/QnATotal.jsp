@@ -16,6 +16,7 @@
 	  height: 20px;
 	}   
     </style>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
     
 	
         <div class="col-xs-12 col-sm-10" >
@@ -29,15 +30,25 @@
          				             				    			String pageNum = request.getParameter("pageNum");
          				             				    			String pid = request.getParameter("pid");
          				             				    			String id = request.getParameter("id");
+         				             				    			
          				             				    			System.out.println("qna pid : "+pid);
          				             				    			System.out.println("qna mid : "+id);
+         				             				    			
+         				             			/* 	    			int ref;  
 
-         				             				    			
-         				             				    			
+         				             				    			try{
+         				             				    				ref	= Integer.parseInt(request.getParameter("ref"));
+         				             				    			}
+         				             				    			catch(Exception e){
+         				             				    				ref = 0 ;
+         				             				    				e.printStackTrace();
+         				             				    			}
+         				             				    			 */
          				             				    			//만약 처음 productDetail.jsp를 클릭하거나 수정 삭제 등 다른 게시글에서 이 페이지로 넘어오면 pageNum값이 없기에 null 처리를 해줌
          				             				    			 if(pageNum==null){
          				             				    			     pageNum="1";
          				             				    			 }
+         				             				    			
          				             				    			 int count =0; //전체 글의 갯수를 저장하는 변수
          				             				    			 int number =0; //페이지 넘버링 변수
          				             				    			  
@@ -48,6 +59,9 @@
          				             				    			
          				             				    			//전체 게시글의 갯수를 읽어드린 메소드 호출
          				             				    		    count = qdao.getAllPidCount(pid);
+         				             				    			
+         				             				    			// 관리자의 답변을 가져오기 위함
+         				             				    			
          				             				    		    
          				             				    		    //현재 페이지에 보여줄 시작 번호를 설정 = 데이터 베이스에서 불러올 시작번호
          				             				    		    int startRow =(currentPage-1) *pageSize+1;
@@ -93,6 +107,7 @@
 																for (int i = 0; i < vec.size(); i++) {
 																//벡터에 저장되어 있는 빈클래스를 하나씩 추출
 																QnADTO dto = vec.get(i);
+													
 															%>
 															<tr>
 																<td><span style="FONT-SIZE: 12pt"><%=number--%></span></td>
@@ -137,6 +152,12 @@
 																				<div class="modal-body">
 																					
 																					 <table>
+																					 	<% 
+																						 // 관리자의 답변을 가져오기 위함
+																						QnADTO rdto = qdao.getOnARoot(dto.getRef());
+																					 	System.out.println("ref : "+dto.getRef());
+																					 	
+																					 	%>
 																				        <tr>
 																				            <th width="300px">작성일</th>
 																				            <td width="500px" style="font-size: 12pt;"><%=dto.getReg_date()%></td>
@@ -163,9 +184,9 @@
 																				        </tr>
 																				        <tr>
 
-																				            <th width="1000px"><button type="button" class="btn btn-warning" id="radmin" onclick="checkRoot()">관리자답변</button></th>
-																				            <td><textarea rows="3" cols="40" style="font-size: 10pt;" name="content" id="adminContent" readonly="" ></textarea></td>
-																				  
+																				            <th width="1000px">관리자답변</th>
+																				            <td><textarea rows="3" cols="40" style="font-size: 10pt; border: 0;" name="content" id="adminContent<%=i%>"><%=rdto.getContent() %></textarea></td>
+																				  			
 																				        </tr>
 																				            
 																				        </table>
@@ -176,51 +197,19 @@
 																					
 																					<input type="hidden" name="num" value="<%=dto.getNum()%>">
 																					<input type="hidden" name="pid" value="<%=dto.getPid()%>">
-																					<input type="hidden" name="mid" value="<%=dto.getMid()%>">
+																					<input type="hidden" name="mid" value="<%=session.getAttribute("id")%>">
 																					<input type="hidden" name="ref"  value="<%= dto.getRef() %>">
 																                    <input type="hidden" name="ref_step"  value="<%= dto.getRe_step() %>">
 																                    <input type="hidden" name="ref_level"  value="<%= dto.getRe_level() %>">
-																					<input type="hidden" name="content" value="">
-																					<button type="submit" class="btn btn-secondary" id="radmin3" style="position: relative; right: 168px;bottom: 70px;" onclick="checkRoot2()">답변완료</button>
-																					<button type="button" class="btn btn-primary" style="position: relative; right: 280px;">내 문의 수정</button>																					
-																					<button type="submit" class="btn btn-primary" style="position: relative; right: 275px;"> 수정 완료</button>																					
+																					<input type="hidden" name="content" value="<%=rdto.getContent() %>">
+																					<button type="button" class="btn btn-primary" id="radmin" style="position: relative; right: 290px;" onclick="logcheck(document.getElementById('adminContent<%=i%>'))"  onloadstart="logcheck(document.getElementById('adminContent<%=i%>'))" >관리자 답변</button>																					
+																					<button type="submit" class="btn btn-primary" style="position: relative; right: 280px;"> 답변완료</button>																					
 																					<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
 																					
-																					<script type="text/javascript"> 
-																					
-																					
-																				    /*관리자인지 아닌지 판별해서 답변을 달 수 있는 조건을 생성*/
-																				    function checkRoot() {
-																				    	 
-																							$(document).ready(function() { 
-																						 
-																								$("#radmin").click(function(){ 
-																									$("#adminContent").attr("readonly",false).attr("disabled",false);  });
-																								});
-																				        <%
-																				        if(!id.equals("root")){
-																				        %>
-																				        alert("관리자가 아닙니다.");
-																				        history.go(-1);
-																					    
-																						<%
-																				        }
-																				        %>
-																				    }
-																				        function checkRoot2() {
-	
-																				        <%
-																				        if(!id.equals("root")){
-																				        %>
-																				        alert("관리자가 아닙니다.");
-																				        history.go(-1);
-																						<%
-																				        }
-																				        %>
-																					   
-																				      }
-
+																					<script type="text/javascript">
+																					document.getElementById('adminContent<%=i%>').readOnly = true;
 																					</script>
+																		
 																				</div>
 																			</div>
 																			</form>
@@ -235,26 +224,50 @@
 															</tr>
 														</tbody>
 													</table>
-													
-																		<!-- 페이지 카우터링 소스를 작성 -->
+
+
+		<script type="text/javascript"> 
+										
+			/*관리자인지 아닌지 판별해서 답변을 달 수 있는 조건을 생성*/
+			
+			var mid = '<%=session.getAttribute("id")%>';
+			
+
+			function logcheck(btn) {
+				if (mid=='root') {
+
+					if (btn.readOnly == false) {
+						btn.readOnly = true;
+					} else {
+						btn.readOnly = false;
+					}
+				}else{
+					alert("로그인 사용자만  상세리뷰를 볼 수 있습니다.");
+					document.location.href="productDetail2.jsp?center=reviewTotal.jsp&pid=<%=pid%>";
+				}
+			}
+		</script>
+
+													<!-- 페이지 카우터링 소스를 작성 -->
 													<%
-														if(count  >0){
-															         
-														int pageCount =count /pageSize + (count%pageSize == 0 ?  0 :1) ; //카우터링 숫자를 얼마까지 보여줄건지 결정
-															         
-														//시작 페이지 숫자를 설정
-														int startPage =1;
-															         
-														if(currentPage %10 !=0){
-														startPage =(int)(currentPage/10)*10+1;
-														 }else{
-															startPage =((int)(currentPage/10)-1)*10+1;
-														}
-															         
-														int pageBlock=10;//카운터링 처리 숫자
-														 int endPage =startPage+pageBlock-1;//화면에 보여질 페이지의 마지막 숫자
-														if(endPage > pageCount) endPage =pageCount;
-														%>
+														if (count > 0) {
+
+															int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1); //카우터링 숫자를 얼마까지 보여줄건지 결정
+
+															//시작 페이지 숫자를 설정
+															int startPage = 1;
+
+															if (currentPage % 10 != 0) {
+																startPage = (int) (currentPage / 10) * 10 + 1;
+															} else {
+																startPage = ((int) (currentPage / 10) - 1) * 10 + 1;
+															}
+
+															int pageBlock = 10;//카운터링 처리 숫자
+															int endPage = startPage + pageBlock - 1;//화면에 보여질 페이지의 마지막 숫자
+															if (endPage > pageCount)
+																endPage = pageCount;
+													%>
 													<nav style=" position: relative; left: 300px;">
 													  <ul class="pagination pagination-xs">
 													    <li>
@@ -291,3 +304,4 @@
 													</nav>
 	          			</div>
         </div><!--/.col-xs-12.col-sm-9-->
+        
