@@ -14,7 +14,6 @@ public class CartDTO {
 	public String getPid() {
 		return pid;
 	}   
-
 	public void setPid(String pid) {
 		this.pid = pid;
 	}
