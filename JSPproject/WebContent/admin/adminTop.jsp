@@ -119,56 +119,23 @@
 									<div class="btn-group" role="group">
 									<button id="MBest" onclick="clickMainToggleBtn(MBest);"
 										style="width: 275px" type="button"
-										class="btn btn-secondary dropdown-toggle"
+										class="btn btn-secondary "
 										data-toggle="dropdown">회원관리</button>
-									<div style="width: 275px" class="dropdown-menu btn-light"
-										aria-labelledby="MBest" >
-										<a class="dropdown-item"
-											href="/JSPproject/client/productList.jsp?brand=gager&page=1">IT Watch 회원보기</a>
-										<a class="dropdown-item"
-											href="/JSPproject/client/productList.jsp?brand=danielm&page=1">NAVER 회원보기
-											</a> <a class="dropdown-item"
-											href="/JSPproject/client/productList.jsp?brand=digel&page=1">디젤</a>
-										<a class="dropdown-item"
-											href="/JSPproject/client/productList.jsp?brand=loomi&page=1">루미녹스</a>
-									</div>
 								</div>
 								<!--메인 MBest 버튼 시작 -->
 								<div class="btn-group" role="group">
 									<button id="MBest" onclick="clickMainToggleBtn(MBest);"
 										style="width: 275px" type="button"
-										class="btn btn-secondary dropdown-toggle"
+										class="btn btn-secondary "
 										data-toggle="dropdown">상품관리</button>
-									<div style="width: 275px" class="dropdown-menu btn-light"
-										aria-labelledby="MBest" >
-										<a class="dropdown-item"
-											href="/JSPproject/client/productList.jsp?brand=gager&page=1">가이거</a>
-										<a class="dropdown-item"
-											href="/JSPproject/client/productList.jsp?brand=danielm&page=1">다니엘
-											웰링턴</a> <a class="dropdown-item"
-											href="/JSPproject/client/productList.jsp?brand=digel&page=1">디젤</a>
-										<a class="dropdown-item"
-											href="/JSPproject/client/productList.jsp?brand=loomi&page=1">루미녹스</a>
-									</div>
 								</div>
 								<!--메인 FBest 버튼 시작 -->
 								<div class="btn-group" role="group">
 									<button id="FBest" onclick="clickMainToggleBtn(FBest);"
 										style="width: 275px" type="button"
-										class="btn btn-secondary dropdown-toggle"
+										class="btn btn-secondary "
 										data-toggle="dropdown" aria-haspopup="true"
 										aria-expanded="false">매출관리</button>
-									<div style="width: 275px" class="dropdown-menu btn-light"
-										aria-labelledby="FBest">
-										<a class="dropdown-item"
-											href="/JSPproject/client/productList.jsp?brand=gucci&page=1">구찌</a>
-										<a class="dropdown-item"
-											href="/JSPproject/client/productList.jsp?brand=danielf&page=1">다니엘
-											웰링턴</a> <a class="dropdown-item"
-											href="/JSPproject/client/productList.jsp?brand=dkny&page=1">DKNY</a>
-										<a class="dropdown-item"s
-											href="/JSPproject/client/productList.jsp?brand=mike&page=1">마크제이콥스</a>
-									</div>
 								</div>
 								<!--메인 CBest 버튼 시작 -->
 								<div class="btn-group" role="group">
