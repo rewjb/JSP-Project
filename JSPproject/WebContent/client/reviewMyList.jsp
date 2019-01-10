@@ -60,7 +60,7 @@
          				             				             				    			
          				             				             				    			 //테이블에 표시할 번호를 지정
          				             				             				    		    number =count - (currentPage -1 ) * pageSize;
-         				             				             				    			System.out.print(count);
+         				             				             				    			
          				    %>
          				    
      <!-- 리뷰 상세보기시 회원 비회원 체크-->																         
@@ -281,7 +281,7 @@
 													    	}
 															 //페이징 처리
 															 for(int i=startPage; i<=endPage; i++){
-															System.out.println("성공"); 
+															
 														%>
 													    <li<% if(i == startRow );%>><a class="page-link" href="productDetail2.jsp?center=reviewMyList.jsp?pageNum=<%=i%>&pid=<%=pid%>&mid=<%=mid%>"><%=i%></a></li>
 													    <%        

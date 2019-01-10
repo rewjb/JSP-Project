@@ -65,7 +65,7 @@
          				             				             				    			Vector<ReviewDTO> vec = rdao.getAllReview(pid, startRow, endRow);
          				             				             				    			 //테이블에 표시할 번호를 지정
          				             				             				    		    number =count - (currentPage -1 ) * pageSize;
-         				             				             				    			System.out.print(count);
+         				             				             				    			
          				    %>
          				    
    <!-- 리뷰 상세보기시 회원 비회원 체크-->																         
@@ -93,8 +93,8 @@
 														<tbody>
 															<%
 																for (int i = 0; i < vec.size(); i++) {
-																																																								//벡터에 저장되어 있는 빈클래스를 하나씩 추출
-																																																								ReviewDTO bean = vec.get(i);
+																//벡터에 저장되어 있는 빈클래스를 하나씩 추출
+																ReviewDTO bean = vec.get(i);
 															%>
 															
 															<tr>
@@ -328,7 +328,7 @@
 													    	}
 															 //페이징 처리
 															 for(int i=startPage; i<=endPage; i++){
-															System.out.println("성공"); 
+															 
 														%>
 													    <li<% if(i == startRow);%>><a class="page-link" href="productDetail2.jsp?center=reviewTotal.jsp?pageNum=<%=i%>&pid=<%=pid %>"><%=i%></a></li>
 													    <%        

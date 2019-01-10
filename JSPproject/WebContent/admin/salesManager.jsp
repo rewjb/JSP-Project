@@ -1,3 +1,9 @@
+<%@page import="java.util.Vector"%>
+<%@page import="dtodao.SalesManagerDAO"%>
+<%@page import="dtodao.SalesManagerDTO"%>
+<%@page import="dtodao.DealDAO"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -11,6 +17,10 @@
 </head>
 <body>
 <jsp:include page="adminTop.jsp"></jsp:include>
+
+<jsp:useBean id="sdto" class="dtodao.SalesManagerDTO">
+	<jsp:setProperty name="sdto" property="*"/>
+</jsp:useBean>
 
 
 
@@ -43,22 +53,53 @@
 </head>
 <body>
 
-<form action="adminPageSell.jsp" method="post">
+<%
+	/* Date now = new Date();
+	 SimpleDateFormat sf = new SimpleDateFormat("yyyy년MM월dd일 E요일 a hh:mm:ss");	 
+	 String today = sf.format(now);  */
+
+	 
+	// 이번달을 구하는 메소드
+	Date now = new Date();
+	SimpleDateFormat sf = new SimpleDateFormat("MM");	 
+	String today = sf.format(now);
+	
+	
+	String month = request.getParameter("month");
+
+	
+	if(month == null){
+		
+		month = today;
+	}
+	
+	System.out.println(month+"월");
+	
+	
+	SalesManagerDAO sdao = new SalesManagerDAO();
+	 
+	Vector<SalesManagerDTO> vec = sdao.getMonthDeal();
+	System.out.println("성공1");
+	 
+%>
+
+<form action="salesManagerAnalysis.jsp" method="post">
 		<select class="custom-select" style="position: relative; top: 200px; right: 30px; width: 200px;" name="month">
 			<option selected>월별 구매내역</option>
-			<option value="anchorBoxId_24734">1월</option>
-			<option value="anchorBoxId_24734">2월</option>
-			<option value="anchorBoxId_24734">3월</option>
-			<option value="anchorBoxId_24734">4월</option>
-			<option value="anchorBoxId_24734">5월</option>
-			<option value="anchorBoxId_24734">6월</option>
-			<option value="anchorBoxId_24734">7월</option>
-			<option value="anchorBoxId_24734">8월</option>
-			<option value="anchorBoxId_24734">9월</option>
-			<option value="anchorBoxId_24734">10월</option>
-			<option value="anchorBoxId_24734">11월</option>
-			<option value="anchorBoxId_24734">12월</option>
+			<option value="01">1월</option>
+			<option value="02">2월</option>
+			<option value="03">3월</option>
+			<option value="04">4월</option>
+			<option value="05">5월</option>
+			<option value="06">6월</option>
+			<option value="07">7월</option>
+			<option value="08">8월</option>
+			<option value="09">9월</option>
+			<option value="10">10월</option>
+			<option value="11">11월</option>
+			<option value="12">12월</option>
 		</select>
+		<input type="hidden" name="month">
 		<input type="submit" class="btn btn-dark" style="position: relative; top: 200px; right: 35px;" value="검색">
 </form>
 
@@ -88,42 +129,24 @@
 		                    </tr>
 		                </thead>
 		                <tbody>
+		                <%
+		                	for(int i =0; i < vec.size(); i++){
+		                		sdto = vec.get(i);
+		                	}
+		                %>
+		                
 		                    <tr>
 		                        <td><img src="../img/Cimage/anchorBoxId_12220.jpg" class="rounded float-left" alt="..." style="width: 100px; height: 100px;"></td>
 		                        <td style='text-align:center;vertical-align:middle'>GIGER</td>
 		                        <td style='text-align:center;vertical-align:middle'>GE1180MWRG</td>
-		                        <td style='text-align:center;vertical-align:middle'>1235</td>
-		                        <td style='text-align:center;vertical-align:middle'>장민</td>
-		                        <td style='text-align:center;vertical-align:middle'>1</td>
+		                        <td style='text-align:center;vertical-align:middle'><%=sdto.getDealNum()%></td>
+		                        <td style='text-align:center;vertical-align:middle'>><%=sdto.getMid() %></td>
+		                        <td style='text-align:center;vertical-align:middle'><%=sdto.getQuantity() %></td>
 		                        <td style='text-align:center;vertical-align:middle'>239000원</td>
 		                        <td style='text-align:center;vertical-align:middle'>3000원</td>
 		                        <td style='text-align:center;vertical-align:middle'>4780원</td>
-		                        <td style='text-align:center;vertical-align:middle'>2019-01-01</td>
-		                    </tr>
-		                    <tr>
-		                        <td><img src="../img/Cimage/anchorBoxId_12220.jpg" class="rounded float-left" alt="..." style="width: 100px; height: 100px;"></td>
-		                        <td style='text-align:center;vertical-align:middle'>GIGER</td>
-		                        <td style='text-align:center;vertical-align:middle'>GE1180MWRG</td>
-		                        <td style='text-align:center;vertical-align:middle'>1235</td>
-		                        <td style='text-align:center;vertical-align:middle'>장민</td>
-		                        <td style='text-align:center;vertical-align:middle'>1</td>
-		                        <td style='text-align:center;vertical-align:middle'>239000원</td>
-		                        <td style='text-align:center;vertical-align:middle'>3000원</td>
-		                        <td style='text-align:center;vertical-align:middle'>4780원</td>
-		                        <td style='text-align:center;vertical-align:middle'>2019-01-01</td>
-		                    </tr>
-		                  	 <tr>
-		                        <td><img src="../img/Cimage/anchorBoxId_12220.jpg" class="rounded float-left" alt="..." style="width: 100px; height: 100px;"></td>
-		                        <td style='text-align:center;vertical-align:middle'>GIGER</td>
-		                        <td style='text-align:center;vertical-align:middle'>GE1180MWRG</td>
-		                        <td style='text-align:center;vertical-align:middle'>1235</td>
-		                        <td style='text-align:center;vertical-align:middle'>장민</td>
-		                        <td style='text-align:center;vertical-align:middle'>1</td>
-		                        <td style='text-align:center;vertical-align:middle'>239000원</td>
-		                        <td style='text-align:center;vertical-align:middle'>3000원</td>
-		                        <td style='text-align:center;vertical-align:middle'>4780원</td>
-		                        <td style='text-align:center;vertical-align:middle'>2019-01-01</td>
-		                    </tr>	                    
+		                        <td style='text-align:center;vertical-align:middle'><%=sdto.getDealDate() %></td>
+		                    </tr>                   
 		                </tbody>
 		            </table>
 		            <hr>
@@ -140,14 +163,16 @@
 	<div class="relative1" id="chart_div" style="width: 400px; height: 300px;"></div>
 	<div class="relative2" id="chart_div2" style="width: 400px; height: 300px;"></div> -->
     <!--Table and divs that hold the pie charts-->
-    <table class="columns" style="position: relative; top: 300px; right: 50px;">
+<!--     <table class="columns" style="position: relative; top: 300px; right: 50px;">
       <tr>
         <td><div id="piechart_div" style="border: 1px solid #ccc"></div></td>
         <td><div id="chart_div" style="border: 1px solid #ccc; width: 500px; height: 300px;" ></div></td>
         <td><div id="Anthony_chart_div" style="border: 1px solid #ccc"></div></td>
       </tr>
-    </table>
-
+    </table> -->
+       <div id="brandRate" style="border: 0px solid #ccc; width: 1100px; height: 500px; position: relative; top: 300px; left: 30px;"></div>
+       <div id="monthRate" style="border: 0px solid #ccc; width: 600px; height: 400px; position: relative; top: 425px; right: 270px;"></div>
+       <div id="partRate" style="border: 0px solid #ccc; width: 500px; height: 400px; position: relative; top: 50px; left: 350px;"></div>
 
 
 <!-- ------------------------------------------------------------------------------------------- -->
@@ -166,22 +191,13 @@
       function drawBasic() {
 
           var data = new google.visualization.DataTable();
-          data.addColumn('number', 'X');
-          data.addColumn('number', 'Dogs');
+          data.addColumn('number', 'number');
+          data.addColumn('number', '판매금액');
 
           data.addRows([
-            [0, 0],   [1, 10],  [2, 23],  [3, 17],  [4, 18],  [5, 9],
-            [6, 11],  [7, 27],  [8, 33],  [9, 40],  [10, 32], [11, 35],
-            [12, 30], [13, 40], [14, 42], [15, 47], [16, 44], [17, 48],
-            [18, 52], [19, 54], [20, 42], [21, 55], [22, 56], [23, 57],
-            [24, 60], [25, 50], [26, 52], [27, 51], [28, 49], [29, 53],
-            [30, 55], [31, 60], [32, 61], [33, 59], [34, 62], [35, 65],
-            [36, 62], [37, 58], [38, 55], [39, 61], [40, 64], [41, 65],
-            [42, 63], [43, 66], [44, 67], [45, 69], [46, 69], [47, 70],
-            [48, 72], [49, 68], [50, 66], [51, 65], [52, 67], [53, 70],
-            [54, 71], [55, 72], [56, 73], [57, 75], [58, 70], [59, 68],
-            [60, 64], [61, 60], [62, 65], [63, 67], [64, 68], [65, 69],
-            [66, 70], [67, 72], [68, 75], [69, 80]
+            [1, 0],  [2, 1000],  [3, 2000],  [4, 3000],  [5, 4000],
+            [6, 5000],  [7, 6000],  [8, 7000],  [9, 8000],  [10, 9000], [11, 11000],
+            [12, 12000]
           ]);
 
           var options = {
@@ -189,60 +205,44 @@
               title: '1월~12월'
             },
             vAxis: {
-              title: '월별 판매액'
+              title: '2018년도 월별 판매액 단위 = 만원'
             }
           };
 
-          var chart = new google.visualization.LineChart(document.getElementById('piechart_div'));
+          var chart = new google.visualization.LineChart(document.getElementById('monthRate'));
 
           chart.draw(data, options);
         }
  /*------------------------------------------------------------------------------------------------------  */     
      function drawDualY() {
       var data = new google.visualization.DataTable();
-      data.addColumn('timeofday', 'Time of Day');
-      data.addColumn('number', '판매량');
-      data.addColumn('number', '판매금액');
+      data.addColumn('timeofday', '브랜드');
+      data.addColumn('number', '판매량(단위 : 개)');
+      data.addColumn('number', '판매금액(단위 : 1k = 1천만원)');
 
       data.addRows([
-        [{v: [8, 0, 0], f: '브랜드1'}, 1, .25],
-        [{v: [9, 0, 0], f: '브랜드2'}, 2, .5],
-        [{v: [10, 0, 0], f:'브랜드3'}, 3, 1],
-        [{v: [11, 0, 0], f: '브랜드4'}, 4, 2.25],
-        [{v: [12, 0, 0], f: '브랜드5'}, 5, 2.25],
-        [{v: [13, 0, 0], f: '브랜드6'}, 6, 3],
-        [{v: [14, 0, 0], f: '브랜드7'}, 7, 4],
-        [{v: [15, 0, 0], f: '브랜드8'}, 8, 5.25],
+        [{v: [0, 0, 0], f: '브랜드1'}, 100, 1000],
+        [{v: [1, 0, 0], f: '브랜드2'}, 200, 2000],
+        [{v: [2, 0, 0], f: '브랜드3'}, 300, 3000],
+        [{v: [3, 0, 0], f: '브랜드4'}, 400, 4000],
+        [{v: [4, 0, 0], f: '브랜드5'}, 500, 5000],
+        [{v: [5, 0, 0], f: '브랜드6'}, 600, 6000],
+        [{v: [6, 0, 0], f: '브랜드7'}, 700, 7000],
+        [{v: [7, 0, 0], f: '브랜드8'}, 800, 8000],
       ]);
 
       var options = {
         chart: {
-          title: '월별 브랜드 판매량과 판매 금액',
+          title: '[2019년도 1월 브랜드 판매량과 판매 금액]',
         },
-        series: {
+        /*우측 표시*/
+         series: {
           0: {axis: 'MotivationLevel'},
           1: {axis: 'EnergyLevel'}
-        },
-        axes: {
-          y: {
-            판매량: {label: '판매량 (1개-100개)'},
-            판매금액: {label: '판매금액 (10만-1000천만)'}
-          }
-        },
-        hAxis: {
-          title: '1월 판매량 및 판매금액',
-          format: 'h:mm a',
-          viewWindow: {
-            min: [7, 30, 0],
-            max: [17, 30, 0]
-          }
-        },
-        vAxis: {
-          title: 'Rating (scale of 1-10)'
-        }
-      };
+        }, 
+      }; 
 
-      var materialChart = new google.charts.Bar(document.getElementById('chart_div'));
+      var materialChart = new google.charts.Bar(document.getElementById('brandRate'));
       materialChart.draw(data, options);
     }
  
@@ -251,8 +251,8 @@
 
         // Create the data table for Anthony's pizza.
         var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Topping');
-        data.addColumn('number', 'Slices');
+        data.addColumn('string', 'string');
+        data.addColumn('number', 'number');
         data.addRows([
           ['1분기', 2],
           ['2분기', 2],
@@ -261,12 +261,12 @@
         ]);
 
         // Set options for Anthony's pie chart.
-        var options = {title:'[년간 분기별 판매금액]',
-                       width:400,
-                       height:300};
+        var options = {title:'- - - - -[2018년도 분기별 판매금액] - - - - -',
+                       width:600,
+                       height:450};
 
         // Instantiate and draw the chart for Anthony's pizza.
-        var chart = new google.visualization.PieChart(document.getElementById('Anthony_chart_div'));
+        var chart = new google.visualization.PieChart(document.getElementById('partRate'));
         chart.draw(data, options);
       }
            
