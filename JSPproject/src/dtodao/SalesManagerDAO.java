@@ -36,70 +36,139 @@ public class SalesManagerDAO {
 	}
 	
 	//거래 테이블에서 각 해당 월에 대한 회원들의 구매목록 출력
-    public Vector<SalesManagerDTO> getMonthDeal(){
-    	System.out.println("성공2");
+    public Vector<SalesManagerDTO> getMonthDeal(String month){
+    	
         //리턴타입 선언
     	Vector<SalesManagerDTO> v =new Vector<SalesManagerDTO>();
-        getCon();
-         
-        try{
 
+        getCon();
+
+        try{
+        	
+        	if(month.equals("01")){
             //쿼리준비
-            String sql = "select * from deal where (dealdate between '19/01/01' and '19/01/31')";
-            System.out.println("성공3");
+           	String sql = " select imgaddr, brand, modelname, num, mid, quantity, price, deliverprice, savemoney, dealdate \r\n" + 
+           			"from deal, product\r\n" + 
+           			"where deal.pid = product.id and dealdate BETWEEN TO_DATE('2019-01-01', 'YYYY-MM-DD') AND TO_DATE('2019-01-31', 'YYYY-MM-DD')";
             //쿼리실행객체
             pstmt=con.prepareStatement(sql);
+        	}else if(month.equals("02")) {
+        		String sql = " select imgaddr, brand, modelname, num, mid, quantity, price, deliverprice, savemoney, dealdate \r\n" + 
+               			"from deal, product\r\n" + 
+               			"where deal.pid = product.id and dealdate BETWEEN TO_DATE('2019-02-01', 'YYYY-MM-DD') AND TO_DATE('2019-02-28', 'YYYY-MM-DD') ";
+                //쿼리실행객체
+                pstmt=con.prepareStatement(sql);
+        	}else if(month.equals("03")) {
+        		String sql = " select imgaddr, brand, modelname, num, mid, quantity, price, deliverprice, savemoney, dealdate \r\n" + 
+               			"from deal, product\r\n" + 
+               			"where deal.pid = product.id and dealdate BETWEEN TO_DATE('2019-03-01', 'YYYY-MM-DD') AND TO_DATE('2019-03-31', 'YYYY-MM-DD') ";
+                //쿼리실행객체
+                pstmt=con.prepareStatement(sql);
+        	}else if(month.equals("04")) {
+        		String sql = " select imgaddr, brand, modelname, num, mid, quantity, price, deliverprice, savemoney, dealdate \r\n" + 
+               			"from deal, product\r\n" + 
+               			"where deal.pid = product.id and dealdate BETWEEN TO_DATE('2019-04-01', 'YYYY-MM-DD') AND TO_DATE('2019-04-30', 'YYYY-MM-DD') ";
+                //쿼리실행객체
+                pstmt=con.prepareStatement(sql);
+        	}else if(month.equals("05")) {
+        		String sql = " select imgaddr, brand, modelname, num, mid, quantity, price, deliverprice, savemoney, dealdate \r\n" + 
+               			"from deal, product\r\n" + 
+               			"where deal.pid = product.id and dealdate BETWEEN TO_DATE('2019-05-01', 'YYYY-MM-DD') AND TO_DATE('2019-05-31', 'YYYY-MM-DD') ";
+                //쿼리실행객체
+                pstmt=con.prepareStatement(sql);
+        	}else if(month.equals("06")) {
+        		String sql = " select imgaddr, brand, modelname, num, mid, quantity, price, deliverprice, savemoney, dealdate \r\n" + 
+               			"from deal, product\r\n" + 
+               			"where deal.pid = product.id and dealdate BETWEEN TO_DATE('2019-06-01', 'YYYY-MM-DD') AND TO_DATE('2019-06-30', 'YYYY-MM-DD') ";
+                //쿼리실행객체
+                pstmt=con.prepareStatement(sql);
+        	}else if(month.equals("07")) {
+        		String sql = " select imgaddr, brand, modelname, num, mid, quantity, price, deliverprice, savemoney, dealdate \r\n" + 
+               			"from deal, product\r\n" + 
+               			"where deal.pid = product.id and dealdate BETWEEN TO_DATE('2019-07-01', 'YYYY-MM-DD') AND TO_DATE('2019-07-31', 'YYYY-MM-DD') ";
+                //쿼리실행객체
+                pstmt=con.prepareStatement(sql);
+        	}else if(month.equals("08")) {
+        		String sql = " select imgaddr, brand, modelname, num, mid, quantity, price, deliverprice, savemoney, dealdate \r\n" + 
+               			"from deal, product\r\n" + 
+               			"where deal.pid = product.id and dealdate BETWEEN TO_DATE('2019-08-01', 'YYYY-MM-DD') AND TO_DATE('2019-08-30', 'YYYY-MM-DD') ";
+                //쿼리실행객체
+                pstmt=con.prepareStatement(sql);
+        	}else if(month.equals("09")) {
+        		String sql = " select imgaddr, brand, modelname, num, mid, quantity, price, deliverprice, savemoney, dealdate \r\n" + 
+               			"from deal, product\r\n" + 
+               			"where deal.pid = product.id and dealdate BETWEEN TO_DATE('2019-09-01', 'YYYY-MM-DD') AND TO_DATE('2019-09-30', 'YYYY-MM-DD') ";
+                //쿼리실행객체
+                pstmt=con.prepareStatement(sql);
+        	}else if(month.equals("10")) {
+        		String sql = " select imgaddr, brand, modelname, num, mid, quantity, price, deliverprice, savemoney, dealdate \r\n" + 
+               			"from deal, product\r\n" + 
+               			"where deal.pid = product.id and dealdate BETWEEN TO_DATE('2019-10-01', 'YYYY-MM-DD') AND TO_DATE('2019-10-31', 'YYYY-MM-DD') ";
+                //쿼리실행객체
+                pstmt=con.prepareStatement(sql);
+        	}else if(month.equals("11")) {
+        		String sql = " select imgaddr, brand, modelname, num, mid, quantity, price, deliverprice, savemoney, dealdate \r\n" + 
+               			"from deal, product\r\n" + 
+               			"where deal.pid = product.id and dealdate BETWEEN TO_DATE('2019-11-01', 'YYYY-MM-DD') AND TO_DATE('2019-11-30', 'YYYY-MM-DD') ";
+                //쿼리실행객체
+                pstmt=con.prepareStatement(sql);
+        	}else if(month.equals("12")) {
+        		String sql = " select imgaddr, brand, modelname, num, mid, quantity, price, deliverprice, savemoney, dealdate \r\n" + 
+               			"from deal, product\r\n" + 
+               			"where deal.pid = product.id and dealdate BETWEEN TO_DATE('2019-12-01', 'YYYY-MM-DD') AND TO_DATE('2019-12-31', 'YYYY-MM-DD') ";
+                //쿼리실행객체
+                pstmt=con.prepareStatement(sql);
+        	}
+        	
             
-/*            pstmt.setString(1, month);
-            pstmt.setString(2, month);*/
+            rs = pstmt.executeQuery();
+
+//            pstmt.setString(1, month);
+//            pstmt.setString(2, month);
+
+
             //쿼리 실행후 결과를 리턴
-            rs=pstmt.executeQuery();
+            
+            System.out.println(month);
             
             while(rs.next()){
-            	System.out.println("성공4");
-            	
-            	SalesManagerDTO dto = new SalesManagerDTO();
-            	
 
-            	dto.setDealNum(rs.getInt(1));
-            	System.out.println("성공5");
-            	dto.setMid(rs.getString(2));
-            	System.out.println("성공6");
-            	dto.setPid(rs.getString(3));
-            	System.out.println("성공7");
-            	dto.setQuantity(rs.getInt(4));
-            	System.out.println("성공8");
-            	dto.setDealDate(rs.getDate(5).toString());// 날짜를 스트링으로 받기 위해 toString을 사용
-            	System.out.println("성공9");
             	
-            	v.add(dto);
-            	System.out.println("성공10");
+	            	SalesManagerDTO dto = new SalesManagerDTO();
+	            	
+	            	dto.setImgAddr(rs.getString(1));
+	            	
+	            	dto.setBrand(rs.getString(2));
+	            	
+	            	dto.setModelName(rs.getString(3));
+	            	
+	            	dto.setDealNum(rs.getInt(4));
+	
+	            	dto.setMid(rs.getString(5));
+	
+	            	dto.setQuantity(rs.getInt(6));
+	            	
+	            	dto.setPrice(rs.getInt(7));
+	            	
+	            	dto.setDeliverPrice(rs.getInt(8));
+	            	
+	            	dto.setSaveMoney(rs.getInt(9));
+	
+	            	dto.setDealDate(rs.getDate(10).toString());// 날짜를 스트링으로 받기 위해 toString을 사용
+	
+	            	
+	            	v.add(dto);
+
             	
-            }
+            	}
+        
         }catch(Exception e){
             e.printStackTrace();
-        }finally{
-            //자원 반납
-            closed();
         }
-        System.out.println("성공16");
         return v;
-    	
+		
     }
-     
-     
-    //자원 반납 메소드
-    private void closed(){
-        try{
-            //자원 반납
-            if(rs!=null)con.close();
-            if(pstmt!=null)con.close();
-            if(con!=null)con.close();
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-    }
-    
+
     // 거래테이블의 pid를 참조해서 사진을 가져오는 메소드
     public Vector<ReviewDTO> getAllReview(String pid, int start, int end) {
 		

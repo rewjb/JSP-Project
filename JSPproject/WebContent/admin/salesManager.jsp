@@ -64,26 +64,37 @@
 	SimpleDateFormat sf = new SimpleDateFormat("MM");	 
 	String today = sf.format(now);
 	
-	
-	String month = request.getParameter("month");
-
+ 	String month = request.getParameter("month");
 	
 	if(month == null){
 		
 		month = today;
 	}
 	
+	
+/* 	 int month ;
+
+	
+	try{
+		month = Integer.parseInt(request.getParameter("month"));
+		}
+		catch(Exception e){
+			month = 01;
+			//month = Integer.parseInt(today);
+			System.out.println(month);
+			e.printStackTrace();
+		}  */
+	
 	System.out.println(month+"월");
 	
 	
 	SalesManagerDAO sdao = new SalesManagerDAO();
 	 
-	Vector<SalesManagerDTO> vec = sdao.getMonthDeal();
-	System.out.println("성공1");
+	Vector<SalesManagerDTO> vec = sdao.getMonthDeal(month);
 	 
 %>
 
-<form action="salesManagerAnalysis.jsp" method="post">
+<form action="salesManager.jsp" method="post">
 		<select class="custom-select" style="position: relative; top: 200px; right: 30px; width: 200px;" name="month">
 			<option selected>월별 구매내역</option>
 			<option value="01">1월</option>
@@ -129,6 +140,7 @@
 		                    </tr>
 		                </thead>
 		                <tbody>
+		         
 		                <%
 		                	for(int i =0; i < vec.size(); i++){
 		                		sdto = vec.get(i);
@@ -136,15 +148,15 @@
 		                %>
 		                
 		                    <tr>
-		                        <td><img src="../img/Cimage/anchorBoxId_12220.jpg" class="rounded float-left" alt="..." style="width: 100px; height: 100px;"></td>
-		                        <td style='text-align:center;vertical-align:middle'>GIGER</td>
-		                        <td style='text-align:center;vertical-align:middle'>GE1180MWRG</td>
+		                        <td><img src="<%=sdto.getImgAddr() %>" class="rounded float-left" alt="..." style="width: 100px; height: 100px;"></td>
+		                        <td style='text-align:center;vertical-align:middle'><%=sdto.getBrand() %></td>
+		                        <td style='text-align:center;vertical-align:middle'><%=sdto.getModelName() %></td>
 		                        <td style='text-align:center;vertical-align:middle'><%=sdto.getDealNum()%></td>
-		                        <td style='text-align:center;vertical-align:middle'>><%=sdto.getMid() %></td>
+		                        <td style='text-align:center;vertical-align:middle'><%=sdto.getMid() %></td>
 		                        <td style='text-align:center;vertical-align:middle'><%=sdto.getQuantity() %></td>
-		                        <td style='text-align:center;vertical-align:middle'>239000원</td>
-		                        <td style='text-align:center;vertical-align:middle'>3000원</td>
-		                        <td style='text-align:center;vertical-align:middle'>4780원</td>
+		                        <td style='text-align:center;vertical-align:middle'><%=sdto.getPrice()%></td>
+		                        <td style='text-align:center;vertical-align:middle'><%=sdto.getDeliverPrice() %></td>
+		                        <td style='text-align:center;vertical-align:middle'><%=sdto.getSaveMoney() %></td>
 		                        <td style='text-align:center;vertical-align:middle'><%=sdto.getDealDate() %></td>
 		                    </tr>                   
 		                </tbody>
