@@ -62,13 +62,78 @@
 	// 이번달을 구하는 메소드
 	Date now = new Date();
 	SimpleDateFormat sf = new SimpleDateFormat("MM");	 
-	String today = sf.format(now);
+	String thisMonth = sf.format(now);
 	
+	SimpleDateFormat sf2 = new SimpleDateFormat("YYYY");	 
+	String thisYear = sf2.format(now);
+	
+ 	String year = request.getParameter("year");
  	String month = request.getParameter("month");
-	
+ 	
+ 	System.out.println(year);
+ 	System.out.println(month);
+ 	
+ 	String mStart ="";
+ 	String mEnd ="";
+ 	
+ 	// 처음 페이지가 매출관리 페이지가 열리면 널값이기 때문에 널값처리로 이번달을 기본으로 보여줌.
 	if(month == null){
 		
-		month = today;
+		month = thisMonth;
+		
+	}
+	if(year == null){
+		year = thisYear;
+	}
+	// dao에 매게변수로 해당 기간을 넘겨주는 변수
+ 	if(month.equals("1")){
+		
+		mStart = "2019-01-01";
+		mEnd = "2019-01-31";		
+	}else if(month.equals("2")){
+		
+		mStart = "2019-02-01";
+		mEnd = "2019-02-28";	
+	}else if(month.equals("3")){
+		
+		mStart = "2019-01-01";
+		mEnd = "2019-01-31";	
+	}else if(month.equals("4")){
+		
+		mStart = "2019-01-01";
+		mEnd = "2019-01-31";	
+	}else if(month.equals("5")){
+		
+		mStart = "2019-01-01";
+		mEnd = "2019-01-31";	
+	}else if(month.equals("6")){
+		
+		mStart = "2019-01-01";
+		mEnd = "2019-01-31";	
+	}else if(month.equals("7")){
+		
+		mStart = "2019-01-01";
+		mEnd = "2019-01-31";	
+	}else if(month.equals("8")){
+		
+		mStart = "2019-01-01";
+		mEnd = "2019-01-31";	
+	}else if(month.equals("9")){
+		
+		mStart = "2019-01-01";
+		mEnd = "2019-01-31";	
+	}else if(month.equals("10")){
+		
+		mStart = "2019-01-01";
+		mEnd = "2019-01-31";	
+	}else if(month.equals("11")){
+		
+		mStart = "2019-01-01";
+		mEnd = "2019-01-31";	
+	}else if(month.equals("12")){
+		
+		mStart = "2019-01-01";
+		mEnd = "2019-01-31";	
 	}
 	
 	
@@ -90,12 +155,21 @@
 	
 	SalesManagerDAO sdao = new SalesManagerDAO();
 	 
-	Vector<SalesManagerDTO> vec = sdao.getMonthDeal(month);
+	Vector<SalesManagerDTO> vec = sdao.getMonthDeal(mStart, mEnd);
+	Vector<SalesManagerDTO> geiger = sdao.getBrandGiger(month);
+/* 	Vector<SalesManagerDTO> diesel = sdao.getMonthDeal(month);
+	Vector<SalesManagerDTO> dwm = sdao.getMonthDeal(month);
+	Vector<SalesManagerDTO> dww = sdao.getMonthDeal(month);
+	Vector<SalesManagerDTO> gucci = sdao.getMonthDeal(month);
+	Vector<SalesManagerDTO> dkny = sdao.getMonthDeal(month);
+	Vector<SalesManagerDTO> luminox = sdao.getMonthDeal(month);
+	Vector<SalesManagerDTO> mj = sdao.getMonthDeal(month); */
+	
 	 
 %>
 
 <form action="salesManager.jsp" method="post">
-		<select class="custom-select" style="position: relative; top: 200px; right: 30px; width: 200px;" name="month">
+		<select class="custom-select" style="position: relative; top: 200px; left: 94px; width: 150px;" name="month">
 			<option selected>월별 구매내역</option>
 			<option value="01">1월</option>
 			<option value="02">2월</option>
@@ -110,7 +184,17 @@
 			<option value="11">11월</option>
 			<option value="12">12월</option>
 		</select>
+		<select class="custom-select" style="position: relative; top: 200px; right: 180px; width: 120px;" name="year">
+			<option selected>년도 선택</option>
+			<option value="2019">2019년</option>
+			<option value="2018">2018년</option>
+			<option value="2017">2017년</option>
+			<option value="2016">2016년</option>
+			<option value="2015">2015년</option>
+
+		</select>
 		<input type="hidden" name="month">
+		<input type="hidden" name="year">
 		<input type="submit" class="btn btn-dark" style="position: relative; top: 200px; right: 35px;" value="검색">
 </form>
 
@@ -127,9 +211,9 @@
 		            <table class="table" id="table" style=" margin: auto; text-align: center;">
 		                <thead>
 		                    <tr>
-		                        <th>제품</th>
-		                        <th>브랜드</th>
-		                        <th>모델</th>
+		                        <th width="50px;">제품</th>
+		                        <th width="100px;">브랜드</th>
+		                        <th width="100px;">모델</th>
 		                        <th>구매번호</th>
 		                        <th>고객이름</th>
 		                        <th>수량</th>
@@ -141,10 +225,13 @@
 		                </thead>
 		                <tbody>
 		         
-		                <%
+		                <%		                
+		                	
 		                	for(int i =0; i < vec.size(); i++){
 		                		sdto = vec.get(i);
-		                	}
+		                		int totalPrice = sdto.getPrice() * sdto.getQuantity();
+		                		int saveMoney = sdto.getQuantity() * sdto.getSaveMoney();
+		                		
 		                %>
 		                
 		                    <tr>
@@ -154,11 +241,14 @@
 		                        <td style='text-align:center;vertical-align:middle'><%=sdto.getDealNum()%></td>
 		                        <td style='text-align:center;vertical-align:middle'><%=sdto.getMid() %></td>
 		                        <td style='text-align:center;vertical-align:middle'><%=sdto.getQuantity() %></td>
-		                        <td style='text-align:center;vertical-align:middle'><%=sdto.getPrice()%></td>
+		                        <td style='text-align:center;vertical-align:middle'><%=totalPrice%></td>
 		                        <td style='text-align:center;vertical-align:middle'><%=sdto.getDeliverPrice() %></td>
-		                        <td style='text-align:center;vertical-align:middle'><%=sdto.getSaveMoney() %></td>
+		                        <td style='text-align:center;vertical-align:middle'><%=saveMoney %></td>
 		                        <td style='text-align:center;vertical-align:middle'><%=sdto.getDealDate() %></td>
-		                    </tr>                   
+		                    </tr> 
+		                      <%
+		                	}
+		                      %>             
 		                </tbody>
 		            </table>
 		            <hr>
@@ -231,21 +321,36 @@
       data.addColumn('timeofday', '브랜드');
       data.addColumn('number', '판매량(단위 : 개)');
       data.addColumn('number', '판매금액(단위 : 1k = 1천만원)');
+      <%
+      
+      int price = 0;
+      int totalQuantity = 0;
+      int totalPrice = 0;
+      
+      for(int i =0; i < geiger.size(); i++){
+  		sdto = geiger.get(i);
+  		price = sdto.getQuantity() * sdto.getPrice();
+  		totalQuantity = totalQuantity + sdto.getQuantity();
+  		totalPrice = totalPrice + price;		
+      }
+  	  %>
+     
 
       data.addRows([
-        [{v: [0, 0, 0], f: '브랜드1'}, 100, 1000],
-        [{v: [1, 0, 0], f: '브랜드2'}, 200, 2000],
-        [{v: [2, 0, 0], f: '브랜드3'}, 300, 3000],
-        [{v: [3, 0, 0], f: '브랜드4'}, 400, 4000],
-        [{v: [4, 0, 0], f: '브랜드5'}, 500, 5000],
-        [{v: [5, 0, 0], f: '브랜드6'}, 600, 6000],
-        [{v: [6, 0, 0], f: '브랜드7'}, 700, 7000],
-        [{v: [7, 0, 0], f: '브랜드8'}, 800, 8000],
+        [{v: [0, 0, 0], f: '가이거'}, <%=totalQuantity%>, <%=totalPrice%>],
+        [{v: [1, 0, 0], f: '<%=sdto.getBrand()%>'}, 200, 2000],
+        [{v: [2, 0, 0], f: '<%=sdto.getBrand()%>'}, 300, 3000],
+        [{v: [3, 0, 0], f: '<%=sdto.getBrand()%>'}, 400, 4000],
+        [{v: [4, 0, 0], f: '<%=sdto.getBrand()%>'}, 500, 5000],
+        [{v: [5, 0, 0], f: '<%=sdto.getBrand()%>'}, 600, 6000],
+        [{v: [6, 0, 0], f: '<%=sdto.getBrand()%>'}, 700, 7000],
+        [{v: [7, 0, 0], f: '<%=sdto.getBrand()%>'}, 800, 8000],
       ]);
+      
 
       var options = {
         chart: {
-          title: '[2019년도 1월 브랜드 판매량과 판매 금액]',
+          title: '[2019년도 <%=month%>월 브랜드 판매량과 판매 금액]',
         },
         /*우측 표시*/
          series: {
@@ -308,7 +413,5 @@ $(function () {
     })
 });
 </script>
-
-
 </body>
 </html>
