@@ -1,3 +1,4 @@
+<%@page import="java.util.Calendar"%>
 <%@page import="java.util.Vector"%>
 <%@page import="dtodao.SalesManagerDAO"%>
 <%@page import="dtodao.SalesManagerDTO"%>
@@ -64,99 +65,58 @@
 	SimpleDateFormat sf = new SimpleDateFormat("MM");	 
 	String thisMonth = sf.format(now);
 	
+	
+	// 올해를 구하는 메소드	
 	SimpleDateFormat sf2 = new SimpleDateFormat("YYYY");	 
 	String thisYear = sf2.format(now);
 	
- 	String year = request.getParameter("year");
- 	String month = request.getParameter("month");
- 	
- 	System.out.println(year);
- 	System.out.println(month);
- 	
- 	String mStart ="";
- 	String mEnd ="";
- 	
- 	// 처음 페이지가 매출관리 페이지가 열리면 널값이기 때문에 널값처리로 이번달을 기본으로 보여줌.
-	if(month == null){
-		
-		month = thisMonth;
-		
-	}
-	if(year == null){
-		year = thisYear;
-	}
-	// dao에 매게변수로 해당 기간을 넘겨주는 변수
- 	if(month.equals("1")){
-		
-		mStart = "2019-01-01";
-		mEnd = "2019-01-31";		
-	}else if(month.equals("2")){
-		
-		mStart = "2019-02-01";
-		mEnd = "2019-02-28";	
-	}else if(month.equals("3")){
-		
-		mStart = "2019-01-01";
-		mEnd = "2019-01-31";	
-	}else if(month.equals("4")){
-		
-		mStart = "2019-01-01";
-		mEnd = "2019-01-31";	
-	}else if(month.equals("5")){
-		
-		mStart = "2019-01-01";
-		mEnd = "2019-01-31";	
-	}else if(month.equals("6")){
-		
-		mStart = "2019-01-01";
-		mEnd = "2019-01-31";	
-	}else if(month.equals("7")){
-		
-		mStart = "2019-01-01";
-		mEnd = "2019-01-31";	
-	}else if(month.equals("8")){
-		
-		mStart = "2019-01-01";
-		mEnd = "2019-01-31";	
-	}else if(month.equals("9")){
-		
-		mStart = "2019-01-01";
-		mEnd = "2019-01-31";	
-	}else if(month.equals("10")){
-		
-		mStart = "2019-01-01";
-		mEnd = "2019-01-31";	
-	}else if(month.equals("11")){
-		
-		mStart = "2019-01-01";
-		mEnd = "2019-01-31";	
-	}else if(month.equals("12")){
-		
-		mStart = "2019-01-01";
-		mEnd = "2019-01-31";	
-	}
+
+	// 문자열을 인트로 변환해서 날짜 계산을 하기 위해 달력 메소드 호출
+	Calendar calendar = Calendar.getInstance();
 	
 	
-/* 	 int month ;
+	String year1 = request.getParameter("year");
+	String month1 = request.getParameter("month");
 
 	
-	try{
-		month = Integer.parseInt(request.getParameter("month"));
-		}
-		catch(Exception e){
-			month = 01;
-			//month = Integer.parseInt(today);
-			System.out.println(month);
-			e.printStackTrace();
-		}  */
-	
-	System.out.println(month+"월");
+	// 널값 처리를 위해 최초 실행시 널값이기 때문에 년도는 올해와, 월은 이번달
+	if(year1 == null){
+		
+		year1 = thisYear;
+	}
+	if(month1 == null){
+		month1 = thisMonth;
+	}
 	
 	
+	// 날짜를 계산하기 위해 문자열 을 인트로 변환
+	int yearS = Integer.parseInt(year1);	
+	int monthS = Integer.parseInt(month1);
+
+		
+	calendar.set(yearS, monthS, 0);
+	
+	//매월 그 달의 마지막날을 계산
+	int DayOfMonthS = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+	
+	// DAO로 인자로 전달하기 위해 계산된 인트형 숫자를 다시 스트링으로 변환시켜주는 과정이 필요
+	String year = Integer.toString(yearS);
+	String month = Integer.toString(monthS);
+	String DayOfMonth = Integer.toString(DayOfMonthS);
+	
+	
+	String mStart = "";
+	String mEnd = "";
+	
+	// 전달시 YYYY-MM-DD 형태로 전달될 수 있게 
+	mStart = year+"-"+"0"+month+"-"+"01";
+	mEnd = year+"-"+"0"+month+"-"+DayOfMonth;
+	
+		
 	SalesManagerDAO sdao = new SalesManagerDAO();
 	 
 	Vector<SalesManagerDTO> vec = sdao.getMonthDeal(mStart, mEnd);
-	Vector<SalesManagerDTO> geiger = sdao.getBrandGiger(month);
+	Vector<SalesManagerDTO> geiger = sdao.getBrandGiger(mStart, mEnd);
 /* 	Vector<SalesManagerDTO> diesel = sdao.getMonthDeal(month);
 	Vector<SalesManagerDTO> dwm = sdao.getMonthDeal(month);
 	Vector<SalesManagerDTO> dww = sdao.getMonthDeal(month);
@@ -259,19 +219,6 @@
 
 
 
-
-
-<!-- 
-	<div class="relative1" id="chart_div" style="width: 400px; height: 300px;"></div>
-	<div class="relative2" id="chart_div2" style="width: 400px; height: 300px;"></div> -->
-    <!--Table and divs that hold the pie charts-->
-<!--     <table class="columns" style="position: relative; top: 300px; right: 50px;">
-      <tr>
-        <td><div id="piechart_div" style="border: 1px solid #ccc"></div></td>
-        <td><div id="chart_div" style="border: 1px solid #ccc; width: 500px; height: 300px;" ></div></td>
-        <td><div id="Anthony_chart_div" style="border: 1px solid #ccc"></div></td>
-      </tr>
-    </table> -->
        <div id="brandRate" style="border: 0px solid #ccc; width: 1100px; height: 500px; position: relative; top: 300px; left: 30px;"></div>
        <div id="monthRate" style="border: 0px solid #ccc; width: 600px; height: 400px; position: relative; top: 425px; right: 270px;"></div>
        <div id="partRate" style="border: 0px solid #ccc; width: 500px; height: 400px; position: relative; top: 50px; left: 350px;"></div>

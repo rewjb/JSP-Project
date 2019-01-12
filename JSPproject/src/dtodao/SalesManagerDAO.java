@@ -99,7 +99,7 @@ public class SalesManagerDAO {
     }
     
   // 가이거 브랜드에 대한 통계
-  public Vector<SalesManagerDTO> getBrandGiger(String month){
+  public Vector<SalesManagerDTO> getBrandGiger(String mStart, String mEnd){
     	
         //리턴타입 선언
     	Vector<SalesManagerDTO> v =new Vector<SalesManagerDTO>();
@@ -107,93 +107,21 @@ public class SalesManagerDAO {
         getCon();
 
         try{
-        	
-        	if(month.equals("01")){
+        	   
             //쿼리준비
            	String sql = " select quantity, price from deal, product "+
-           			"where deal.pid = product.id and brand = '가이거' and dealdate BETWEEN TO_DATE('2019-01-01', 'YYYY-MM-DD') AND TO_DATE('2019-01-31', 'YYYY-MM-DD')";
+           			"where deal.pid = product.id and brand = '가이거' and dealdate BETWEEN TO_DATE(?, 'YYYY-MM-DD') AND TO_DATE(?, 'YYYY-MM-DD')";
             //쿼리실행객체
             pstmt=con.prepareStatement(sql);
-        	}else if(month.equals("02")){
-                //쿼리준비
-               	String sql = " select quantity, price from deal, product "+
-               			"where deal.pid = product.id and brand = '가이거' and dealdate BETWEEN TO_DATE('2019-02-01', 'YYYY-MM-DD') AND TO_DATE('2019-02-28', 'YYYY-MM-DD')";
-                //쿼리실행객체
-                pstmt=con.prepareStatement(sql);
-            }else if(month.equals("03")){
-                //쿼리준비
-               	String sql = " select quantity, price from deal, product "+
-               			"where deal.pid = product.id and brand = '가이거' and dealdate BETWEEN TO_DATE('2019-03-01', 'YYYY-MM-DD') AND TO_DATE('2019-03-31', 'YYYY-MM-DD')";
-                //쿼리실행객체
-                pstmt=con.prepareStatement(sql);
-            }else if(month.equals("04")){
-                //쿼리준비
-               	String sql = " select quantity, price from deal, product "+
-               			"where deal.pid = product.id and brand = '가이거' and dealdate BETWEEN TO_DATE('2019-04-01', 'YYYY-MM-DD') AND TO_DATE('2019-04-30', 'YYYY-MM-DD')";
-                //쿼리실행객체
-                pstmt=con.prepareStatement(sql);
-            }else if(month.equals("05")){
-                //쿼리준비
-               	String sql = " select quantity, price from deal, product "+
-               			"where deal.pid = product.id and brand = '가이거' and dealdate BETWEEN TO_DATE('2019-05-01', 'YYYY-MM-DD') AND TO_DATE('2019-05-31', 'YYYY-MM-DD')";
-                //쿼리실행객체
-                pstmt=con.prepareStatement(sql);
-            }else if(month.equals("06")){
-                //쿼리준비
-               	String sql = " select quantity, price from deal, product "+
-               			"where deal.pid = product.id and brand = '가이거' and dealdate BETWEEN TO_DATE('2019-06-01', 'YYYY-MM-DD') AND TO_DATE('2019-06-30', 'YYYY-MM-DD')";
-                //쿼리실행객체
-                pstmt=con.prepareStatement(sql);
-            }else if(month.equals("07")){
-                //쿼리준비
-               	String sql = " select quantity, price from deal, product "+
-               			"where deal.pid = product.id and brand = '가이거' and dealdate BETWEEN TO_DATE('2019-01-01', 'YYYY-MM-DD') AND TO_DATE('2019-01-31', 'YYYY-MM-DD')";
-                //쿼리실행객체
-                pstmt=con.prepareStatement(sql);
-            }else if(month.equals("08")){
-                //쿼리준비
-               	String sql = " select quantity, price from deal, product "+
-               			"where deal.pid = product.id and brand = '가이거' and dealdate BETWEEN TO_DATE('2019-01-01', 'YYYY-MM-DD') AND TO_DATE('2019-01-31', 'YYYY-MM-DD')";
-                //쿼리실행객체
-                pstmt=con.prepareStatement(sql);
-            }else if(month.equals("09")){
-                //쿼리준비
-               	String sql = " select quantity, price from deal, product "+
-               			"where deal.pid = product.id and brand = '가이거' and dealdate BETWEEN TO_DATE('2019-01-01', 'YYYY-MM-DD') AND TO_DATE('2019-01-31', 'YYYY-MM-DD')";
-                //쿼리실행객체
-                pstmt=con.prepareStatement(sql);
-            }else if(month.equals("10")){
-                //쿼리준비
-               	String sql = " select quantity, price from deal, product "+
-               			"where deal.pid = product.id and brand = '가이거' and dealdate BETWEEN TO_DATE('2019-01-01', 'YYYY-MM-DD') AND TO_DATE('2019-01-31', 'YYYY-MM-DD')";
-                //쿼리실행객체
-                pstmt=con.prepareStatement(sql);
-            }else if(month.equals("11")){
-                //쿼리준비
-               	String sql = " select quantity, price from deal, product "+
-               			"where deal.pid = product.id and brand = '가이거' and dealdate BETWEEN TO_DATE('2019-01-01', 'YYYY-MM-DD') AND TO_DATE('2019-01-31', 'YYYY-MM-DD')";
-                //쿼리실행객체
-                pstmt=con.prepareStatement(sql);
-            }else if(month.equals("12")){
-                //쿼리준비
-               	String sql = " select quantity, price from deal, product "+
-               			"where deal.pid = product.id and brand = '가이거' and dealdate BETWEEN TO_DATE('2019-01-01', 'YYYY-MM-DD') AND TO_DATE('2019-01-31', 'YYYY-MM-DD')";
-                //쿼리실행객체
-                pstmt=con.prepareStatement(sql);
-            }
-        	
-        	
-            
-            rs = pstmt.executeQuery();
-
-//            pstmt.setString(1, month);
-//            pstmt.setString(2, month);
 
 
-            //쿼리 실행후 결과를 리턴
-            
-            System.out.println(month);
-            
+           pstmt.setString(1, mStart);
+           pstmt.setString(2, mEnd);
+
+
+           //쿼리 실행후 결과를 리턴
+           rs = pstmt.executeQuery();
+
             while(rs.next()){
 
             	
