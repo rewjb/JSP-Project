@@ -121,10 +121,10 @@
 		
 	SalesManagerDAO sdao = new SalesManagerDAO();
 	 
+	//각 월별 브랜드 판매량과 판매액 메소드
 	Vector<SalesManagerDTO> vec = sdao.getMonthDeal(mStart, mEnd);
-	
-	
-	
+		
+	//월별 총 판매액 메소드
 	Vector<SalesManagerDTO> vec2 = sdao.getYearRate(mStart2, mEnd2);
 
 
@@ -289,6 +289,7 @@
 		        </div>
 		    </div>
 		</div>
+		
 		<%
 		
 		System.out.println("가이거 토탈 판매량  : "+totalQuantityGeiger+"개");
@@ -386,6 +387,13 @@
     		
 		
 		}
+		
+		// 각 분비결 판매액 
+		int part1 = monthTotal1 + monthTotal2 + monthTotal3;
+		int part2 = monthTotal4 + monthTotal5 + monthTotal6;
+		int part3 = monthTotal7 + monthTotal8 + monthTotal9;
+		int part4 = monthTotal10 + monthTotal11 + monthTotal12;
+
     	System.out.println(year+"년"+"1월 총액 : " + monthTotal1+"원");
     	System.out.println(year+"년"+"2월 총액 : " + monthTotal2+"원");
     	System.out.println(year+"년"+"3월 총액 : " + monthTotal3+"원");
@@ -398,14 +406,183 @@
     	System.out.println(year+"년"+"10월 총액 : " + monthTotal10+"원");
     	System.out.println(year+"년"+"11월 총액 : " + monthTotal11+"원");
     	System.out.println(year+"년"+"12월 총액 : " + monthTotal12+"원");
+    	
+    	
+    	System.out.println(year+"년  1 분기 :(1월~ 3월 판매액) :  " + part1+"원");
+    	System.out.println(year+"년  2 분기 :(4월~ 6월 판매액) :  " + part2+"원");
+    	System.out.println(year+"년  3 분기 :(7월~ 9월 판매액) :  "  + part3+"원");
+    	System.out.println(year+"년  4 분기 :(10월~ 12월 판매액) :  " + part4+"원");
+    	
+    	
+    	
 		%>
 		
+	<div class="cotainer" style="border-radius: 10px; border: 3px solid gray; height:610px; position: relative; top: 300px; left: 12px;">
+		<br>
+		<h5><%=year%>년도 <%=month%>월 브랜드별 판매 현황</h5>
+       <div id="brandRate" style="border: 0px solid #ccc; width: 1000px; height: 450px; position: relative; top: 50px; rigth: 50px;"></div>
+		<table  style="position: relative; left: 400px; bottom: 330px;">
+			<tr>
+				<td style="color: blue;">가이거 <%=month %>월 판매량 : </td>
+				<td style="color: blue;"><%=totalQuantityGeiger%>개<td>
+			</tr>
+			<tr>
+				<td style="color: red;">가이거 <%=month %>월  판매액 : </td>
+				<td style="color: red;"><%=totalPriceGeiger %>원</td>				
+			</tr>
+			<tr>
+				<td style="color: blue;">디젤 <%=month %>월  판매량 : </td>
+				<td style="color: blue;"><%=totalQuantityDiesel%>개<td>
+			</tr>
+			<tr>
+				<td style="color: red;">디젤 <%=month %>월  판매액 : </td>
+				<td style="color: red;"><%=totalPriceDiesel %>원</td>				
+			</tr>
+			<tr>
+				<td style="color: blue;">루미눅스 <%=month %>월  판매량 : </td>
+				<td style="color: blue;"><%=totalQuantityLuminox%>개<td>
+			</tr>
+			<tr>
+				<td style="color: red;">루미눅스 <%=month %>월  판매액 : </td>
+				<td style="color: red;"><%=totalPriceLuminox %>원</td>				
+			</tr><tr>
+				<td style="color: blue;">DW(M) <%=month %>월  판매량 : </td>
+				<td style="color: blue;"><%=totalQuantityDwM%>개<td>
+			</tr>
+			<tr>
+				<td style="color: red;">DW(M) <%=month %>월   판매액 : </td>
+				<td style="color: red;"><%=totalPriceDwM %>원</td>				
+			</tr><tr>
+				<td style="color: blue;">구찌 <%=month %>월  판매량 : </td>
+				<td style="color: blue;"><%=totalQuantityGucci%>개<td>
+			</tr>
+			<tr>
+				<td style="color: red;">구찌 <%=month %>월  판매액 : </td>
+				<td style="color: red;"><%=totalPriceGucci %>원</td>				
+			</tr><tr>
+				<td style="color: blue;">MJ <%=month %>월  판매량 : </td>
+				<td style="color: blue;"><%=totalQuantityMJ%>개<td>
+			</tr>
+			<tr>
+				<td style="color: red;">MJ <%=month %>월  판매액 : </td>
+				<td style="color: red;"><%=totalPriceMJ %>원</td>				
+			</tr>
+			<tr>
+				<td style="color: blue;">DKNY <%=month %>월  판매량 : </td>
+				<td style="color: blue;"><%=totalQuantityDKNY%>개<td>
+			</tr>
+			<tr>
+				<td style="color: red;">DKNY <%=month %>월  판매액 : </td>
+				<td style="color: red;"><%=totalPriceDKNY %>원</td>				
+			</tr>
+			<tr>
+				<td style="color: blue;">DW(W) <%=month %>월  판매량 : </td>
+				<td style="color: blue;"><%=totalQuantityDwW%>개<td>
+			</tr>
+			<tr>
+				<td style="color: red;">DW(W) <%=month %>월  판매액 : </td>
+				<td style="color: red;"><%=totalPriceDwW %>원</td>				
+			</tr>
 
-       <div id="brandRate" style="border: 0px solid #ccc; width: 1100px; height: 500px; position: relative; top: 300px; left: 30px;"></div>
-        <div id="monthRate" style="border: 0px solid #ccc; width: 600px; height: 400px; position: relative; top: 425px; right: 270px;"></div>
-       <div id="partRate" style="border: 0px solid #ccc; width: 500px; height: 400px; position: relative; top: 50px; left: 350px;"></div>
-
-
+		</table>
+		<table cellpadding = "20" style=" position: relative; bottom: 400px; right: 135px; ">
+		<th>가이거</th>
+		<th>디젤</th>
+		<th>루미눅스</th>
+		<th>DW(남)</th>
+		<th>구찌</th>
+		<th>DKNY</th>
+		<th>MJ</th>
+		<th>DW(여)</th>
+		</table>
+	</div>
+	<br>
+	<div class="cotainer" style="border-radius: 10px; border: 3px solid gray; height:510px; position: relative; top: 300px; left: 12px;">
+		<br>
+		<h5><%=year%>년도 월별 매출액 현황</h5>
+        <div id="monthRate" style="border: 0px solid #ccc; width: 750px; height: 450px; position: relative; bottom: 5px; right: 150px;"></div>
+        <table border= "1" cellpadding = "5" style=" position: relative; left: 385px; bottom: 450px;">
+			<tr>
+				<td><%=year %>년도 1월 판매액 : </td>
+				<td><%=monthTotal1%>원<br><td>				
+			</tr>			
+			<tr>
+				<td><%=year %>년도 2월 판매액 : </td>
+				<td><%=monthTotal2%>원<td>
+			</tr>
+			<tr>
+				<td><%=year %>년도 3월 판매액 : </td>
+				<td><%=monthTotal3%>원<td>
+			</tr>
+			<tr>
+				<td><%=year %>년도 4월 판매액 : </td>
+				<td><%=monthTotal4%>원<td>
+			</tr>
+			<tr>
+				<td><%=year %>년도 5월 판매액 : </td>
+				<td><%=monthTotal5%>원<td>
+			</tr>
+			<tr>
+				<td><%=year %>년도6월 판매액 : </td>
+				<td><%=monthTotal6%>원<td>
+			</tr>
+			<tr>
+				<td><%=year %>년도 7월 판매액 : </td>
+				<td><%=monthTotal7%>원<td>
+			</tr>
+			<tr>
+				<td><%=year %>년도 8월 판매액 : </td>
+				<td><%=monthTotal8%>원<td>
+			</tr>
+			<tr>
+				<td><%=year %>년도 9월 판매액 : </td>
+				<td><%=monthTotal9%>원<td>
+			</tr>
+			<tr>
+				<td><%=year %>년도 10월 판매액 : </td>
+				<td><%=monthTotal10%>원<td>
+			</tr>
+			<tr>
+				<td><%=year %>년도 11월 판매액 : </td>
+				<td><%=monthTotal11%>원<td>
+			</tr>
+			<tr>
+				<td><%=year %>년도 12월 판매액 : </td>
+				<td><%=monthTotal12%>원<td>
+			</tr>
+			
+		</table>
+	</div>
+	<br>
+	<div class="cotainer" style="border-radius: 10px; border: 3px solid gray; height:510px; position: relative; top: 300px; left: 12px;">
+		<br>
+	   	<h5 style="position: relative; left: 290px;"><%=year%>년도 분기별 매출액 현황</h5>
+       	<div id="partRate" style="border: 0px solid #ccc; width: 750px; height: 450px; position: relative; bottom: 43px; right:190px;"></div>
+       	        <table border= "1" cellpadding = "10" style=" position: relative; left: 300px; bottom: 380px;">
+			<tr>
+				<td style="color: blue;"><%=year %>년도 1분기 판매액 :<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(1월, 2월, 3월)
+				
+				</td>
+				<td style="color: blue;"><%=part1%>원<br><td>				
+			</tr>			
+			<tr>
+				<td style="color: red;"><%=year %>년도 2분기 판매액 :<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(4월, 5월, 6월)</td>
+				<td style="color: red;"><%=part2%>원<td>
+			</tr>
+			<tr>
+				<td style="color: #FACC2E;"><%=year %>년도 3분기 판매액 : <br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(7월, 8월, 9월)</td>
+				<td style="color: #FACC2E;"><%=part3%>원<td>
+			</tr>
+			<tr>
+				<td style="color: green;"><%=year %>년도 4분기 판매액 :<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(10월, 11월, 12월) </td>
+				<td style="color: green;"><%=part4%>원<td>
+			</tr>			
+		</table>
+	</div>
 <!-- ------------------------------------------------------------------------------------------- -->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
@@ -422,12 +599,12 @@
  
       function drawDualY() {
       var data = new google.visualization.DataTable();
-      data.addColumn('timeofday', '브랜드');
+      data.addColumn('timeofday', '');
       data.addColumn('number', '판매량(단위 : 개)');
       data.addColumn('number', '판매금액(단위 : 1k = 1천만원)');
    
      
-
+	
       data.addRows([
         [{v: [0, 0, 0], f: '가이거'}, <%=totalQuantityGeiger%>, <%=totalPriceGeiger%>],
         [{v: [1, 1, 1], f: '디젤'}, <%=totalQuantityDiesel%>, <%=totalPriceDiesel%>],
@@ -442,7 +619,7 @@
 
       var options = {
         chart: {
-          title: '[<%=year%>년도 <%=month%>월 브랜드 판매량과 판매 금액]',
+          title: '',
         },
         /*우측 표시*/
          series: {
@@ -469,7 +646,7 @@
 
           var options = {
             hAxis: {
-              title: '1월~12월'
+              title: ''
             },
             vAxis: {
               title: '<%=year%>년도 월별 판매액 단위 = 만원'
@@ -490,16 +667,16 @@
         data.addColumn('string', 'string');
         data.addColumn('number', 'number');
         data.addRows([
-          ['1분기', 2],
-          ['2분기', 2],
-          ['3분기', 2],
-          ['4분기', 5]
+          ['1분기', <%=part1%>],
+          ['2분기', <%=part2%>],
+          ['3분기', <%=part3%>],
+          ['4분기', <%=part4%>]
         ]);
 
         // Set options for Anthony's pie chart.
-        var options = {title:'- - - - -[2018년도 분기별 판매금액] - - - - -',
-                       width:600,
-                       height:450};
+        var options = {title:'',
+                       width:700,
+                       height:490};
 
         // Instantiate and draw the chart for Anthony's pizza.
         var chart = new google.visualization.PieChart(document.getElementById('partRate'));
