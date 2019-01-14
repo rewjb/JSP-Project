@@ -93,6 +93,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 		font-size: 20px;
 		font-weight: 500;
 }
+
 </style>
 
 

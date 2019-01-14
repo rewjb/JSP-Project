@@ -242,7 +242,7 @@
 						btn.readOnly = false;
 					}
 				}else{
-					alert("로그인 사용자만  상세리뷰를 볼 수 있습니다.");
+					alert("관리자가 아닙니다");
 					document.location.href="productDetail2.jsp?center=reviewTotal.jsp&pid=<%=pid%>";
 				}
 			}

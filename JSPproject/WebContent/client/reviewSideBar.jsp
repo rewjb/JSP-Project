@@ -5,9 +5,6 @@
     <%
     	String pid = request.getParameter("pid");
    		String mid = (String)session.getAttribute("id");
-   		
-   		System.out.println("사이드바pid"+pid);
-   		System.out.println("사이드바mid"+mid);
     
     %>
         <div class="col-xs-6 col-xs-3 sidebar-offcanvas" id="sidebar">
