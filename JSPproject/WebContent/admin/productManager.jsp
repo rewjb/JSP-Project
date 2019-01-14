@@ -1,5 +1,8 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="dtodao.ProductDAO"%>
+<%@ page import="dtodao.ProductDTO"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +11,13 @@
 </head>
 <body>
 	<jsp:include page="adminTop.jsp"></jsp:include>
+	
+	
+	<%
+	  
+	 ArrayList<ProductDTO> productList = ProductDAO.getInstance().selectAll();
+	
+	%>
 
 
 
@@ -80,36 +90,318 @@
 	</table>
   </form>
   
+  <script type="text/javascript">
+	var subjectch ;
+	var  inputPIDch ;
+	var pricech ;
+	var modelch ;
+	
+	var myFile ;
+	var img ;
+	var brand ;
+	var subject ;
+	var inputPID ;
+	var model ;
+	var components ;
+	var price ;
+	var saveMoney ;
+	var delMoney ;
+	var hiPID ;
+  </script>
+  
   
   
   </div>
-  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">제품목록</div>
+  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab"> 
+  <!-- 제품 목록  -->
+  
+  <%for(int i=0; i<30 ; ++i){ %>
+  <table style=";text-align: center;"   class="table table-striped" >
+		<!--1행 -->
+		<tr>
+			<td>
+			사진 : <input style="width:88px" type="file" id="myFile<%=i%>" name="myFile" accept="image/*" onchange="imgPreShow();" enctype="" disabled="disabled" >
+			</td>
+			<td style="width:90px">제목</td><td style="widows: 500px"><input value="<%=productList.get(i).getName()%>" type="subject" id="subject<%=i%>" name="subject" style="width:250px" placeholder="필수입력 사항입니다." onkeyup="subjectCheck2(inputCom<%=i%>.subject , checkCom<%=i%>.subjectch);" readonly="readonly"><br>
+			<font color="red" id="subjectch<%=i%>"></font>  </td>
+		</tr> 
+		<tr>
+			<td rowspan="8">
+			<img id="img<%=i%>" style="width: 300px;height: 300px;background: red"  src="<%=productList.get(i).getImgaddr()%>"> 
+			</td>
+		</tr>
+		<!--2행 -->      
+		<tr style="height: 50px">
+			<td style="height: 55px" >브랜드 <%=productList.get(i).getBrand()%></td>
+						<td><select name="brand"  id="brand<%=i%>" disabled="disabled">
+								<% if(productList.get(i).getBrand().equals("가이거")){ %><option value="가이거" selected="selected">가이거</option><%}else{%>
+                                <option value="가이거">가이거</option><%} %>
+                                <% if(productList.get(i).getBrand().equals("디젤")){ %><option value="가이거" selected="selected">디젤</option><%}else{%>
+                                <option value="가이거">디젤</option><%} %>
+                                <% if(productList.get(i).getBrand().equals("다니엘")){ %><option value="가이거" selected="selected">다니엘</option><%}else{%>
+                                <option value="가이거">다니엘</option><%} %>
+                                <% if(productList.get(i).getBrand().equals("루미눅스")){ %><option value="가이거" selected="selected">루미녹스</option><%}else{%>
+                                <option value="가이거">루미녹스</option><%} %>
+                                <% if(productList.get(i).getBrand().equals("구찌")){ %><option value="가이거" selected="selected">구찌</option><%}else{%>
+                                <option value="가이거">구찌</option><%} %>
+                                <% if(productList.get(i).getBrand().equals("DKNY")){ %><option value="가이거" selected="selected">DKNY</option><%}else{%>
+                                <option value="가이거">DKNY</option><%} %>
+                                <% if(productList.get(i).getBrand().equals("마크제이콥스")){ %><option value="가이거" selected="selected">마크제이콥스</option><%}else{%>
+                                <option value="가이거">마크제이콥스</option><%} %>
+                                  <% if(productList.get(i).getBrand().equals("커플시계")){ %><option value="가이거" selected="selected">커플시계</option><%}else{%>
+                                <option value="가이거">커플시계</option><%} %>
+						</select></td>
+					</tr>
+		<tr  style="height: 50px">
+			<td >아이디</td><td style="width:250px"><input  value="<%=productList.get(i).getId()%>" id="inputPID<%=i%>"  name="inputPID" type="text" style="width:250px" placeholder="필수입력 사항입니다." onkeyup="checkPID2( inputCom<%=i%>.inputPID , checkCom<%=i%>.inputPIDch ,inputCom<%=i%>.hiPID);" readonly="readonly" ><br>
+			<font color="red" id="inputPIDch<%=i%>"></font> </td><td style="text-align: left;"  ></td>
+		</tr>
+		<tr  style="height: 50px">
+			<td >모델</td><td style="width:250px"><input  value="<%=productList.get(i).getModelName()%>" id="model<%=i%>"  name="model" type="text" style="width:250px" placeholder="필수입력 사항입니다." onkeyup="modelCheck2( inputCom<%=i%>.model , checkCom<%=i%>.modelch);" readonly="readonly"><br>
+			<font color="red" id="modelch<%=i%>"></font> </td><td style="text-align: left;"></td>
+		</tr>
+		<tr style="height: 50px"> 
+			<td >구성품</td><td><input id="components<%=i%>" type="text" value="<%=productList.get(i).getComponents()%>" name="components"  style="width:250px" readonly="readonly"> </td>
+		</tr>
+		<tr style="height: 50px">
+			<td>판매가</td><td><input id="price<%=i%>" value="<%=productList.get(i).getPrice()%>" name="price" type="text" style="width:250px" onkeyup="calSaveMoney2(inputCom<%=i%>.price , inputCom<%=i%>.saveMoney ,checkCom<%=i%>.pricech);" placeholder="필수입력 사항입니다." readonly="readonly"><br>
+			<font color="red" id="pricech<%=i%>"></font> </td>
+		</tr>
+		<tr style="height: 50px">
+			<td>적립금</td><td><input id="saveMoney<%=i%>" value="<%=productList.get(i).getSaveMoney()%>" name="saveMoney" type="text" style="width:250px" readonly="readonly" > </td>
+		</tr>
+		<tr style="height: 50px">
+			<td>배송비</td><td><input type="text" value="<%=productList.get(i).getDeliverPrice()%>" name="delMoney" id="delMoney<%=i%>" style="width:250px" onkeyup="checkDelMoney2( inputCom<%=i%>.delMoney);" readonly="readonly"> </td>
+		</tr>
+		
+		<input type="hidden" id="hiPID<%=i%>"  value="<%=productList.get(i).getId()%>">
+		
+	<script type="text/javascript">
+	// 객체가 너무 많아서 배열로 정하는 과정
+	
+	 subjectch = document.getElementById('subjectch<%=i%>');
+	 inputPIDch= document.getElementById('inputPIDch<%=i%>');
+	 pricech= document.getElementById('pricech<%=i%>');
+	 modelch= document.getElementById('modelch<%=i%>');
+	
+	 myFile = document.getElementById('myFile<%=i%>');
+	 img = document.getElementById('img<%=i%>');
+	 brand = document.getElementById('brand<%=i%>');
+	 subject = document.getElementById('subject<%=i%>');
+	 inputPID = document.getElementById('inputPID<%=i%>');
+	 model= document.getElementById('model<%=i%>');
+	 components= document.getElementById('components<%=i%>');
+	 price= document.getElementById('price<%=i%>');
+	 saveMoney= document.getElementById('saveMoney<%=i%>');
+	 delMoney= document.getElementById('delMoney<%=i%>');
+	 hiPID = document.getElementById('hiPID<%=i%>');
+	 
+	
+     var inputCom<%=i%>  = { img : img , myFile : myFile, subject : subject , brand : brand, inputPID : inputPID, model : model , components : components , price : price , saveMoney : saveMoney , delMoney : delMoney , hiPID : hiPID} ;
+     var checkCom<%=i%>  = {subjectch : subjectch , inputPIDch : inputPIDch ,modelch : modelch , pricech : pricech};
+   
+	</script>
+	
+	
+		<tr>
+			<td colspan="3" style="text-align: right;">
+			<input type="submit" value="수정하기" onclick="changeTrue(inputCom<%=i%> ,checkCom<%=i%> );">
+			<input type="submit" value="삭제하기" onclick="return finalCheck();">
+			
+			</td>
+		</tr>
+	</table>
+	<%}%>
+  </div>
 </div>
 
 
-
-
 <script type="text/javascript">
+
+
+
+
+
+
+
 
  var modeltrue = false;
  var subjecttrue = false;
  var moneytrue = false;
  var PIDtrue = false;
  
- 
-            
-         
+
+	function changeTrue( inputCom, checkCom ) {
+		
+		
+		if (inputCom.myFile.disabled == true) {
+			inputCom.myFile.removeAttribute('disabled');
+			inputCom.subject.removeAttribute('readonly');
+			inputCom.brand.removeAttribute('readonly');
+			inputCom.inputPID.removeAttribute('readonly');
+			inputCom.model.removeAttribute('readonly');
+			inputCom.components.removeAttribute('readonly');
+			inputCom.price.removeAttribute('readonly');
+			inputCom.delMoney.removeAttribute('readonly');
+		}else{
+			inputCom.myFile.setAttribute('disabled', 'disabled');
+			inputCom.subject.setAttribute('readonly', 'readonly');
+			inputCom.brand.setAttribute('readonly', 'readonly');
+			inputCom.inputPID.setAttribute('readonly', 'readonly');
+			inputCom.model.setAttribute('readonly', 'readonly');
+			inputCom.components.setAttribute('readonly', 'readonly');
+			inputCom.price.setAttribute('readonly', 'readonly');
+			inputCom.delMoney.setAttribute('readonly', 'readonly');		
+		}
+		//disabled="disabled" 
+	}
+	
+	function finalCheck2() {
+
+		if (modeltrue == false || subjecttrue == false || moneytrue == false
+				|| PIDtrue == false) {
+
+			alert('입력 조건을 만족시켜 주세요.');
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	function modelCheck2(model , modelch) {
+
+
+		if (model.value.length > 3) {
+			modelch.setAttribute('color', 'green');
+			modelch.innerHTML = '사용이 가능한 모델명입니다.';
+			modeltrue = true;
+		} else {
+			modelch.setAttribute('color', 'red');
+			modelch.innerHTML = '4글자 이상부터 가능합니다.';
+			modeltrue = false;
+		}
+
+	}
+
+	function subjectCheck2(subject , subjectch) {
+		if (subject.value.length > 3) {
+			subjectch.setAttribute('color', 'green');
+			subjectch.innerHTML = '사용이 가능한 제목입니다.';
+			subjecttrue = true;
+		} else {
+			subjectch.setAttribute('color', 'red');
+			subjectch.innerHTML = '4글자 이상부터 가능합니다.';
+			subjecttrue = false;
+		}
+	}
+
+	function calSaveMoney2(price , saveMoney , pricech) {
+
+		price.value = price.value.replace(/[A-Za-z]/g, "");
+		// 영어입력 제한
+		price.value = price.value.replace(
+				/[\{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/g, '');
+		// 특수문자 제한
+		price.value = price.value.trim();
+		// 공백문자 제한
+		price.value = price.value.replace(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g, '');
+		// 한글입력 제한
+
+		saveMoney.value = Math.floor(Number(price.value) * 0.03);
+
+		if (price.value.length > 0) {
+			pricech.setAttribute('color', 'green');
+			pricech.innerHTML = '조건을 만족하셨습니다.';
+			moneytrue = true;
+		} else {
+			pricech.setAttribute('color', 'red');
+			pricech.innerHTML = '1글자 이상이어야 가능합니다.';
+			moneytrue = false;
+		}
+
+	}
+
+	function checkDelMoney2(delMoney) {
+
+		delMoney.value = delMoney.value.replace(/[A-Za-z]/g, "");
+		// 영어입력 제한
+		delMoney.value = delMoney.value.replace(
+				/[\{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/g, '');
+		// 특수문자 제한
+		delMoney.value = delMoney.value.trim();
+		// 공백문자 제한
+		delMoney.value = delMoney.value.replace(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g, '');
+		// 한글입력 제한
+
+	}
+
+	function imgPreShow2() {
+		//이미지 등록 !
+
+		var file = document.getElementById("myFile");
+
+		var fileList = file.files;
+		var Freader = new FileReader();
+		Freader.readAsDataURL(fileList[0]);
+
+		//파일을 다 읽으면  바로 실행!
+		Freader.onload = function() {
+			var img = document.getElementById('img');
+			img.src = Freader.result;
+		}
+	}
+
+	function checkPID2( inputID , inputCK , hiPID ) {
+		var request = new XMLHttpRequest();
+		var DBpid;
+		DBpid = null;
+		inputID.value = inputID.value.trim();
+		// 공백문자 제한
+		
+		if(hiPID.value != inputID.value){
+		
+		if (inputID.value.length > 3) {
+			request.open("Post", "/JSPproject/PIDSearchServlet?PID="+ inputID.value, false);
+			request.onreadystatechange = searchProcess2;
+			request.send(null);
+		} else {
+			inputCK.setAttribute('color', 'red');
+			inputCK.innerHTML = '4글자 이상이어야 합니다.';
+		 }
+		}else{
+			inputCK.setAttribute('color', 'red');
+			inputCK.innerHTML = '';
+		}
+		
+		function searchProcess2() {
+			if (request.readyState == 4 && request.status == 200) {
+				var object = eval('(' + request.responseText + ')');
+				var result = object.result;
+				DBpid = String(result);
+				if (DBpid == inputID.value) {
+					inputCK.color = 'red';
+					inputCK.innerHTML = '해당 아이디가 이미 존재합니다.';
+				} else {
+					inputCK.color = 'green';
+					inputCK.innerHTML = '사용 가능한 아이디입니다.';
+				}
+			}
+		}
 
 	
+	}
+	
+	//------------------------------------------------------------
+
 	function finalCheck() {
 
 		if (modeltrue == false || subjecttrue == false || moneytrue == false
 				|| PIDtrue == false) {
-			
+
 			alert('입력 조건을 만족시켜 주세요.');
-			  return false;
-		}else{
-			  return true;
+			return false;
+		} else {
+			return true;
 		}
 	}
 
@@ -206,11 +498,12 @@
 		}
 	}
 
-	var request = new XMLHttpRequest();
-	var DBpid;
-	var inputPid
-
 	function checkPID() {
+
+		var request = new XMLHttpRequest();
+		var DBpid;
+		var inputPi
+
 		DBpid = null;
 		inputPid = document.getElementById('inputPID');
 		inputPid.value = inputPid.value.trim();
@@ -226,29 +519,27 @@
 			inputPidch.innerHTML = '4글자 이상이어야 합니다.';
 			PIDtrue = false;
 		}
-	}
 
-	function searchProcess() {
+		function searchProcess() {
 
-		if (request.readyState == 4 && request.status == 200) {
-			var object = eval('(' + request.responseText + ')');
-			var result = object.result;
-			DBpid = String(result);
-			if (DBpid == inputPid.value) {
-				var inputPidch = document.getElementById('inputPIDch');
-				inputPidch.color = 'red';
-				inputPidch.innerHTML = '해당 아이디가 이미 존재합니다.';
-				PIDtrue = false;
-			} else {
-				var inputPidch = document.getElementById('inputPIDch');
-				inputPidch.color = 'green';
-				inputPidch.innerHTML = '사용 가능한 아이디입니다.';
-				PIDtrue = true;
+			if (request.readyState == 4 && request.status == 200) {
+				var object = eval('(' + request.responseText + ')');
+				var result = object.result;
+				DBpid = String(result);
+				if (DBpid == inputPid.value) {
+					var inputPidch = document.getElementById('inputPIDch');
+					inputPidch.color = 'red';
+					inputPidch.innerHTML = '해당 아이디가 이미 존재합니다.';
+					PIDtrue = false;
+				} else {
+					var inputPidch = document.getElementById('inputPIDch');
+					inputPidch.color = 'green';
+					inputPidch.innerHTML = '사용 가능한 아이디입니다.';
+					PIDtrue = true;
+				}
 			}
 		}
 	}
-
-	//inputPid = document.querySelector('#inputPID');
 </script>
 
 

@@ -466,7 +466,7 @@
 					<script type="text/javascript">
 					//유효성을 검사하는 자바스크립트
 					
-					
+					 
 					   var request = new XMLHttpRequest();
 		               var id;
 		               
