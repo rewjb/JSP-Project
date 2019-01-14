@@ -134,5 +134,44 @@ public class SalesManagerDAO {
 		return v;
 
 	}
+	
+	public Vector<SalesManagerDTO> getRecommend() {
+
+		// 리턴타입 선언
+		Vector<SalesManagerDTO> v = new Vector<SalesManagerDTO>();
+
+		getCon();
+
+		try {
+			// 거래 테이블과 상품 테이블의 pid를 참조해서 매달 첫 날과 마지막날 사이의 거래 내역에 해당하는 제품을 출력하는 쿼리
+			String sql = "select distinct modelname, pid, price, quantity "
+					+ "from deal, product "
+					+ "where deal.pid = product.id and  dealdate between '2019/01/01' and '2019/01/31' order by quantity desc, price asc";
+
+			pstmt = con.prepareStatement(sql);
+
+			rs = pstmt.executeQuery();
+
+			// 쿼리 실행후 결과를 리턴
+
+			while (rs.next()) {
+
+				SalesManagerDTO dto = new SalesManagerDTO();
+
+				
+				dto.setModelName(rs.getString(1));
+				dto.setPid(rs.getString(2));
+
+				v.add(dto);
+
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return v;
+
+	}
 
 }
+;

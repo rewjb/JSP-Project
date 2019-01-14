@@ -1,3 +1,6 @@
+<%@page import="dtodao.SalesManagerDTO"%>
+<%@page import="java.util.Vector"%>
+<%@page import="dtodao.SalesManagerDAO"%>
 <%@ page import="java.net.URLEncoder"%>
 <%@ page import="java.security.SecureRandom"%>
 <%@ page import="java.math.BigInteger"%>
@@ -43,6 +46,12 @@
 		apiURL += "&redirect_uri=" + redirectURI;
 		apiURL += "&state=" + state;
 		session.setAttribute("state", state);
+		
+		/* ------------추천 순위-------------------- */
+		
+		SalesManagerDAO sdao = new SalesManagerDAO();
+		
+		Vector<SalesManagerDTO> vec = sdao.getRecommend();
 	%>
 
 
@@ -167,23 +176,21 @@
 						<div class="row">
 							<div class="col-4">
 								<div style="width: 150px" class="list-group" id="list-tab"
-									role="tablist">
-									<a class="list-group-item list-group-item-action active"
-										data-toggle="list" href="#list-home" role="tab"
-										aria-controls="home">Home</a> <a
-										class="list-group-item list-group-item-action"
-										data-toggle="list" href="#list-profile" role="tab"
-										aria-controls="profile">Profile</a> <a
-										class="list-group-item list-group-item-action"
-										data-toggle="list" href="#list-messages" role="tab"
-										aria-controls="messages">Messages</a> <a
-										class="list-group-item list-group-item-action"
-										data-toggle="list" href="#list-settings" role="tab"
-										aria-controls="settings">Settings</a> <a
-										class="list-group-item list-group-item-action"
-										data-toggle="list" href="#list-settings" role="tab"
-										aria-controls="settings">Settings</a>
-								</div>
+											role="tablist">
+											<%
+											int count = 0;
+											for(int i = 0; i <5; i++){
+												SalesManagerDTO sdto = vec.get(i);
+												count++;
+											%>
+											<button type="button" class="btn btn-default " onclick="location.href='/JSPproject/client/productDetail2.jsp?pid=<%=sdto.getPid()%>'"><%=count%>위 :<br> <%=sdto.getModelName() %></button>
+<%-- 											<a class="list-group-item list-group-item-action active" data-toggle="list" href="productDetail2.jsp?pid=<%=sdto.getPid()%>" role="tab" aria-controls="home">
+											<%=count%>위 : <%=sdto.getModelName() %>
+											</a>  --%>
+											<%
+											}
+											%>
+									</div>
 							</div>
 							<!--로그인 전 추천순위 끝-->
 						</div>
