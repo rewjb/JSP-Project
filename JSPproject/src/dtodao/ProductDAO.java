@@ -306,37 +306,45 @@ public class ProductDAO {
 
 	}// selectAll() : 메서드 종료
 	
-	public String updateProduct(String pid , ProductDTO productDTO) {
+	public void updateProduct(String pid , ProductDTO productDTO) {
 		// 제품 페이지 이동시 제품 검색을 하는 기본적 메서드
 
 		Connection con = DBconnectMethod();
 		// DB 연결
-		String sql = "SELECT ID FROM PRODUCT WHERE ID=?";
-		String sql = "UPDATE PRODUCT  SET EMP_DEPT = '인사부' WHERE EMP_ID = '10006'";
+		StringBuffer sqlBuffer = new StringBuffer();
+		sqlBuffer.append("UPDATE PRODUCT SET ");
+		sqlBuffer.append(" ID=? ,"); //1
+		sqlBuffer.append(" BRAND=? ,");//2
+		sqlBuffer.append(" MODELNAME=? ,");//3
+		sqlBuffer.append(" NAME=? ,");//4
+		sqlBuffer.append(" PRICE=? ,");//5
+		sqlBuffer.append(" DELIVERPRICE=? ,");//6
+		sqlBuffer.append(" SAVEMONEY=? ,");//7
+		sqlBuffer.append(" COMPONENTS=? ,");//8
+		sqlBuffer.append(" IMGADDR=? ");//9
 
-		String result = null;
 		try {
 			// 오류 처리
-			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setString(1, pid);
+			PreparedStatement ps = con.prepareStatement(sqlBuffer.toString());
+			ps.setString(1, productDTO.getId());
+			ps.setString(2, productDTO.getBrand());
+			ps.setString(3, productDTO.getModelName());
+			ps.setString(4, productDTO.getName());
+			ps.setInt(5, productDTO.getPrice());
+			ps.setInt(6, productDTO.getDeliverPrice());
+			ps.setInt(7, productDTO.getSaveMoney());
+			ps.setString(8, productDTO.getComponents());
+			ps.setString(9, productDTO.getImgaddr());
 			// 모든 값 세팅
-
-			ResultSet rs = ps.executeQuery();
+			ps.executeUpdate();
 			// 삽입
 
-			if (rs.next()) {
-				result = rs.getString("ID");
-			} else {
-				result = null;
-			}
-
 			ps.close();
-			rs.close();
 			con.close();
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
 		}
-		return result;
 
 	}// updateProduct() : 메서드 종료
 
