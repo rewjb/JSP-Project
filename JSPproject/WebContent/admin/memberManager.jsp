@@ -66,7 +66,7 @@ Vector<MemberDTO> vec = mdao.getAllMember();
 
 									<div class="modal-dialog" role="document">
 									
-										<form action="updateMember.jsp">
+										<form action="memberUpdate.jsp">
 											<div class="modal-content" style="width: 500px; height: 600px;">
 												<div class="modal-header">
 													<h5 class="modal-title" id="exampleModalLongTitle" style="position: relative; left: 150px;">회원  상세 정보</h5>
@@ -188,7 +188,7 @@ Vector<MemberDTO> vec = mdao.getAllMember();
 													<input type="hidden" name="addr1">
 													<input type="hidden" name="addr2">													
 													<button type="submit" class="btn btn-secondary">수정완료</button>
-													<button type="button" class="btn btn-secondary" onclick="location.href='deleteMember.jsp?id=<%=mdto.getId()%>'">탈퇴처리</button>
+													<button type="button" class="btn btn-secondary" onclick="location.href='memberDelete.jsp?id=<%=mdto.getId()%>'">탈퇴처리</button>
 													<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
 												</div>
 											</div>
@@ -196,7 +196,7 @@ Vector<MemberDTO> vec = mdao.getAllMember();
 									</div>
 								</div></td>
 							<td style='text-align: center; vertical-align: middle'><%=mdto.getName() %></td>
-							<td style='text-align: center; vertical-align: middle'><%=mdto.getPw() %>***</td>
+							<td style='text-align: center; vertical-align: middle'><input type="password" value="<%=mdto.getPw() %>" style=" border: 0px; width: 70px;" readonly="readonly"></td>
 							<td style='text-align: center; vertical-align: middle'><%=mdto.getBirthDay() %></td>
 							<td style='text-align: center; vertical-align: middle'><%=mdto.getTel() %></td>
 							<td style='text-align: center; vertical-align: middle'><%=mdto.getAddr() %></td>
