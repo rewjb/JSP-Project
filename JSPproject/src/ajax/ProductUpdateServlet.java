@@ -27,22 +27,21 @@ public class ProductUpdateServlet extends HttpServlet {
 		MultipartRequest mr = new MultipartRequest(request, path, 1100 * 6000, "UTF-8",new DefaultFileRenamePolicy());
 		Enumeration asd = mr.getParameterNames();	
 		
-		
-//		hiPID
-//		model
-//		subject
-//		price
-//		components
-//		inputPID
-//		delMoney
-//		saveMoney
+
 	}
-	
-	
-	
 	
 	
 	
 	
 
 }
+
+
+//hiPID
+//model
+//subject
+//price
+//components
+//inputPID
+//delMoney
+//saveMoney
