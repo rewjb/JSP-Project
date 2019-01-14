@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -206,5 +207,70 @@ public class MemberDAO {
 		}
 	}// updateMember() : 메서드 종료
 
+	
+	//------------관리자가 관리하는 멤버 DAO 작성부분 bymin----------------
+	
+	// 멤버  전체를 가져오는 메소드
+	public Vector<MemberDTO> getAllMember() {
+		
+		Vector<MemberDTO> v = new Vector<MemberDTO>();
+		
+		Connection con = DBconnectMethod();
+		
+		
+		try {
+			
+			// 쿼리 준비
+			String sql ="select * from member";
+			PreparedStatement pstmt = con.prepareStatement(sql);
+
+			ResultSet rs = pstmt.executeQuery();
+			
+			System.out.println("쿼리성공");
+
+			while (rs.next()) {
+
+				MemberDTO dto = new MemberDTO();
+								
+				dto.setId(rs.getString("id"));
+				dto.setName(rs.getString("name"));
+				dto.setPw(rs.getString("pw"));
+				dto.setBirthDay(rs.getString("birthday"));
+				dto.setTel(rs.getString("tel"));
+				dto.setAddr(rs.getString("addr"));
+				dto.setEmail(rs.getString("email"));
+
+				v.add(dto);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return v;
+		
+	}
+	
+	//한명의 멤버를 삭제하는 메소드 입니다.
+    public void deleteMember(String id){
+         
+    	Connection con = DBconnectMethod();
+    	
+        try{
+            //쿼리 준비
+            String sql ="delete from member where id=?";
+            
+			PreparedStatement pstmt = con.prepareStatement(sql);
+
+	
+            //?
+            pstmt.setString(1, id);
+            //쿼리 실행
+            pstmt.executeUpdate();
+            //자원 반납
+            con.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 
 }// 클래스 종료

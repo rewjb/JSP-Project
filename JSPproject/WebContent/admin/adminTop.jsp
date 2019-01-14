@@ -75,7 +75,7 @@
 										<a class="dropdown-item"
 											href="/JSPproject/admin/productManager.jsp">제품관리
 											</a> <a class="dropdown-item"
-											href="/JSPproject/admin/salsesManager.jsp">매출관리</a>
+											href="/JSPproject/admin/salesManager.jsp">매출관리</a>
 										<a class="dropdown-item"
 											href="list.jsp">공지사항</a>
 									</div>
