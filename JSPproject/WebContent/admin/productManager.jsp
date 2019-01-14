@@ -107,6 +107,7 @@
 	var saveMoney ;
 	var delMoney ;
 	var hiPID ;
+	var form;
   </script>
   
   
@@ -116,11 +117,12 @@
   <!-- 제품 목록  -->
   
   <%for(int i=0; i<30 ; ++i){ %>
+  <form id="form<%=i%>" enctype="multipart/form-data">
   <table style=";text-align: center;"   class="table table-striped" >
 		<!--1행 -->
 		<tr>
 			<td>
-			사진 : <input style="width:88px" type="file" id="myFile<%=i%>" name="myFile" accept="image/*" onchange="imgPreShow();" enctype="" disabled="disabled" >
+			사진 : <input style="width:88px" type="file" id="myFile<%=i%>" name="myFile" accept="image/*" onchange="imgPreShow2( inputCom<%=i%>.img , this);" enctype="" disabled="disabled" >
 			</td>
 			<td style="width:90px">제목</td><td style="widows: 500px"><input value="<%=productList.get(i).getName()%>" type="subject" id="subject<%=i%>" name="subject" style="width:250px" placeholder="필수입력 사항입니다." onkeyup="subjectCheck2(inputCom<%=i%>.subject , checkCom<%=i%>.subjectch);" readonly="readonly"><br>
 			<font color="red" id="subjectch<%=i%>"></font>  </td>
@@ -174,8 +176,8 @@
 			<td>배송비</td><td><input type="text" value="<%=productList.get(i).getDeliverPrice()%>" name="delMoney" id="delMoney<%=i%>" style="width:250px" onkeyup="checkDelMoney2( inputCom<%=i%>.delMoney);" readonly="readonly"> </td>
 		</tr>
 		
-		<input type="hidden" id="hiPID<%=i%>"  value="<%=productList.get(i).getId()%>">
-		
+		<input type="hidden" id="hiPID<%=i%>" name="hiPID" value="<%=productList.get(i).getId()%>">
+		</form>
 	<script type="text/javascript">
 	// 객체가 너무 많아서 배열로 정하는 과정
 	
@@ -195,22 +197,22 @@
 	 saveMoney= document.getElementById('saveMoney<%=i%>');
 	 delMoney= document.getElementById('delMoney<%=i%>');
 	 hiPID = document.getElementById('hiPID<%=i%>');
+	 form =  document.getElementById('form<%=i%>');
 	 
 	
-     var inputCom<%=i%>  = { img : img , myFile : myFile, subject : subject , brand : brand, inputPID : inputPID, model : model , components : components , price : price , saveMoney : saveMoney , delMoney : delMoney , hiPID : hiPID} ;
+     var inputCom<%=i%>  = { form : form , img : img , myFile : myFile, subject : subject , brand : brand, inputPID : inputPID, model : model , components : components , price : price , saveMoney : saveMoney , delMoney : delMoney , hiPID : hiPID} ;
      var checkCom<%=i%>  = {subjectch : subjectch , inputPIDch : inputPIDch ,modelch : modelch , pricech : pricech};
    
 	</script>
 	
-	
 		<tr>
 			<td colspan="3" style="text-align: right;">
-			<input type="submit" value="수정하기" onclick="changeTrue(inputCom<%=i%> ,checkCom<%=i%> );">
+		<button type="button" onclick="changeTrue(inputCom<%=i%> ,checkCom<%=i%>);">수정하기</button>
 			<input type="submit" value="삭제하기" onclick="return finalCheck();">
-			
 			</td>
 		</tr>
 	</table>
+	
 	<%}%>
   </div>
 </div>
@@ -224,15 +226,19 @@
 
 
 
-
  var modeltrue = false;
  var subjecttrue = false;
  var moneytrue = false;
  var PIDtrue = false;
  
-
+//	var file = document.getElementById("myFile");
+//	var fileList = file.files;
+//	var data = new FormData();
+//	data.append( 'img'  ,  fileList[0] );
+	
 	function changeTrue( inputCom, checkCom ) {
 		
+		var requestUpdate = new XMLHttpRequest();
 		
 		if (inputCom.myFile.disabled == true) {
 			inputCom.myFile.removeAttribute('disabled');
@@ -244,6 +250,19 @@
 			inputCom.price.removeAttribute('readonly');
 			inputCom.delMoney.removeAttribute('readonly');
 		}else{
+			
+			var file  = inputCom.myFile;
+			var fileList = file.files;
+			
+			var data = new FormData(document.getElementById(inputCom.form.id));
+//          이거 .. 오류는 없지만 작동이 안된다..
+//			var data = new FormData();
+//			data.append('img', fileList[0]);
+			
+			requestUpdate.open("POST", "/JSPproject/ProductUpdateServlet", false);
+			requestUpdate.onreadystatechange = searchProcess;
+			requestUpdate.send(data);
+			
 			inputCom.myFile.setAttribute('disabled', 'disabled');
 			inputCom.subject.setAttribute('readonly', 'readonly');
 			inputCom.brand.setAttribute('readonly', 'readonly');
@@ -252,9 +271,19 @@
 			inputCom.components.setAttribute('readonly', 'readonly');
 			inputCom.price.setAttribute('readonly', 'readonly');
 			inputCom.delMoney.setAttribute('readonly', 'readonly');		
+			
+			
+		
 		}
-		//disabled="disabled" 
+		
+		function searchProcess() {
+			if (requestUpdate.readyState == 4 && requestUpdate.status == 200) {
+				alert('수정이 완료되었습니다.');
+			}
+		}
 	}
+	
+
 	
 	function finalCheck2() {
 
@@ -335,10 +364,10 @@
 
 	}
 
-	function imgPreShow2() {
+	function imgPreShow2(img , myFile) {
 		//이미지 등록 !
 
-		var file = document.getElementById("myFile");
+		var file = myFile;
 
 		var fileList = file.files;
 		var Freader = new FileReader();
@@ -346,7 +375,6 @@
 
 		//파일을 다 읽으면  바로 실행!
 		Freader.onload = function() {
-			var img = document.getElementById('img');
 			img.src = Freader.result;
 		}
 	}
