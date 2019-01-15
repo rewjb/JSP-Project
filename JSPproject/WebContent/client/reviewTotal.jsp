@@ -100,6 +100,9 @@
 															<tr>
 																<td><span style="FONT-SIZE: 11pt;"><%=number--%></span></td>
 																<td><span style="FONT-SIZE: 11pt;"><%=bean.getMid()%></span></td>
+																<%
+																	String checkId = bean.getMid();
+																%>
 																<td>
 																<span style="FONT-SIZE: 11pt;" >
 																<!-- 모달기능을 이용하여 리뷰 내용이 버튼으로 안으로 들어가게  만듬 -->
@@ -128,22 +131,23 @@
 																				<div class="modal-body">
 																					 <table>
 																				        <tr>
-																				            <th width="150">작성일</th>
-																				            <td width="500"><input type="text" name="mtext1" id="mtext1<%=i%> %>" value="<%=bean.getReg_date()%>" style="border: 0;"></td>
+																				            <th style="width: 200px;">작성일</th>
+																				            <td width="500"><input type="text" name="date" value="<%=bean.getReg_date()%>" style="border: 0;" readonly="readonly"></td>
 																				        </tr>
 																				        <tr>
 																				            <th width="150">글번호</th>
-																				            <td width="500"><input type="text" name="mtext2" id="mtext2<%=i%>" value="<%=bean.getNum()%>" style="border: 0;"></td>
+																				            <td width="500"><input type="text" name="num" value="<%=bean.getNum()%>" style="border: 0;" readonly="readonly"></td>
 																				        </tr>
 																				        <tr>
 
 																				            <th width="150">작성자</th>
-																				            <td width="500"><input type="text" name="mtext3" id="mtext3<%=i%>" value="<%=bean.getMid()%>" style="border: 0;"></td>
+																				            <td width="500"><input type="text" name="mid" value="<%=bean.getMid()%>" style="border: 0;" readonly="readonly"></td>
+																				       		
 																				        </tr>
 																				           
 																				        <tr>
 																				            <th width="300">제품번호</th>
-																				            <td width="500"><input type="text" name="mtext4" id="mtext4<%=i%>" value="<%=bean.getPid()%>" style="border: 0;"></td>
+																				            <td width="500"><input type="text" name="pid" value="<%=bean.getPid()%>" style="border: 0;" readonly="readonly"></td>
 																				        </tr>
 																				         
 																				        <tr>
@@ -194,24 +198,25 @@
 																				         
 																				        <tr>
 																				            <th width="150">글 내용</th>
-																				            <td width="1000"><textarea rows="3" cols="40" name="content<%=i%>" id="content" style="border: 0;"><%=bean.getContent()%></textarea></td>
+																				            <td width="1000"><textarea rows="3" cols="40" name="content" id="content<%=i%>" style="border: 0;"><%=bean.getContent()%></textarea></td>
 																				        </tr>
 																				        </table>
 
 																				</div>
 																				<div class="modal-footer">
 																				
-																					<input type="hidden" name="mtext1<%=i%>" value="<%=bean.getReg_date()%>">
-																					<input type="hidden" name="mtext2<%=i%>" value="<%=bean.getNum()%>">
-																					<input type="hidden" name="mtext3<%=i%>" value="<%=bean.getMid()%>">
-																					<input type="hidden" name="mtext4<%=i%>" value="<%=bean.getPid()%>">
-																					<input type="hidden" name="grade"  value="<%=bean.getGrade()%>">
-																					<input type="hidden" name="content<%=i%>"  value="<%=bean.getContent()%>">
-																					<button type="button" class="btn btn-secondary" onclick="logcheck(document.getElementById('adminContent<%=i%>'))"  onloadstart="logcheck(document.getElementById('adminContent<%=i%>'))">수정하기</button>
+																					<input type="hidden" name="date" >
+																					<input type="hidden" name="num" >
+																					<input type="hidden" name="mid">
+																					<input type="hidden" name="pid">
+																					<input type="hidden" name="grade">
+																					<input type="hidden" name="content">
+																					<button type="button" class="btn btn-secondary" onclick="location.href='reviewDelete.jsp?mid=<%=bean.getMid()%>&num=<%=bean.getNum()%>&pid=<%=bean.getPid() %>'" >삭제하기</button>
+																					<button type="button" class="btn btn-secondary" onclick="logcheck(document.getElementById('content<%=i%>') , '<%=bean.getMid()%>' )"  onloadstart="logcheck(document.getElementById('content<%=i%>'))">수정하기</button>
 																					<button type="submit" class="btn btn-secondary" >수정완료</button>
 																					<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
 																					<script type="text/javascript">
-																						document.getElementById('mtext1<%=i%>','mtext2<%=i%>','mtext3<%=i%>','mtext4<%=i%>','content<%=i%>').readOnly = true;
+																						document.getElementById('content<%=i%>').readOnly = true;
 																					</script>											
 																				</div>
 																			</div>														
@@ -267,8 +272,11 @@
 																<td><span style="FONT-SIZE: 11pt;"><%=bean.getReg_date()%></span></td>
 															
 																<%
+															
 																 }
 																%>
+																
+																
 															</tr>
 														</tbody>
 													</table>
@@ -277,10 +285,13 @@
 																	/*본인의 글인지 아닌지 판별해서 수정을 할 수 있는 조건을 생성*/
 																	
 																	var mid = '<%=session.getAttribute("id")%>';
+																	var id ;													
 																	
 														
-																	function logcheck(btn) {
-																		if (mid !='min1234') {
+																	function logcheck(btn , inputid) {
+																		id=inputid;
+																		
+																		if (mid === id) {
 														
 																			if (btn.readOnly == false) {
 																				btn.readOnly = true;

@@ -483,6 +483,53 @@ public class ReviewDAO {
 	        return count;
 	    }
 	    
+		public void updateReview(ReviewDTO reviewdto) {
+
+
+		    getCon();
+		
+			// DB 연결
+			String sql = "UPDATE review SET content=? WHERE num=?";
+			// sql 문 작성
+			try {
+				// 오류 처리
+				PreparedStatement ps = con.prepareStatement(sql);
+				
+				ps.setString(1, reviewdto.getContent());
+				ps.setInt(2, reviewdto.getNum());
+	
+				
+				ps.executeUpdate();
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}// updateMember() : 메서드 종료
+		
+		//하나의 글을 삭제하는 메소드 입니다.
+	    public void deleteReivew(String id, int num){
+	         
+	    	getCon();
+	    	
+	        try{
+	            //쿼리 준비
+	            String sql ="delete from review where mid=? and num = ?";
+	            
+				PreparedStatement pstmt = con.prepareStatement(sql);
+
+		
+	            //?
+	            pstmt.setString(1, id);
+	            pstmt.setInt(2, num);
+	            //쿼리 실행
+	            pstmt.executeUpdate();
+	            //자원 반납
+	            con.close();
+	        }catch(Exception e){
+	            e.printStackTrace();
+	        }
+	    }
+	    
 	    
 	    
 	
