@@ -81,14 +81,19 @@
 		</table>
 
 
-		<form name="form" method="get" style="position: relative; left: 650px; bottom: 450px;">
+		<form  action="productDetailToCart.jsp" name="form" method="get" style="position: relative; left: 650px; bottom: 450px;">
 			수량 : <input type=hidden name="sell_price" value="<%=pdto.getPrice() %>"> 
 			<input type="text" name="amount" value="1" size="3" onchange="change();">
 			<input type="button" value=" + " onclick="add();"> 
 			<input type="button" value=" - " onclick="del();"><br> 금액 : 
 			<input type="text" name="sum" size="11" readonly>원 <br> <br>
 			<br>
-			<button type="button" class="btn btn-secondary" style="width: 400px;">카트추가</button>
+			
+			<input type="hidden" name="mid" value="<%=session.getAttribute("id")%>">
+			<input type="hidden" name="pid" value="<%=pid%>">
+			<button type="submit" class="btn btn-secondary" style="width: 400px;">카트추가</button>
+			<button type="button" class="btn btn-secondary" style="width: 400px;" 
+			onclick="location.href='payment2.jsp?mid=<%=session.getAttribute("id")%>&pid=<%=pid%>&price=<%=pdto.getPrice() %>&amount&snum'" >바로 결제</button>
 		</form>
 
 		

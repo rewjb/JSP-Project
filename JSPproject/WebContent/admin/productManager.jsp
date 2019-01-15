@@ -157,22 +157,32 @@
 		</tr>
 		<!--2행 -->      
 		<tr style="height: 50px">
-			<td style="height: 55px" >브랜드 <%=productList.get(i).getBrand()%></td>
+			<td style="height: 55px" >브랜드</td>
 						<td><select name="brand"  id="brand<%=i%>" disabled="disabled">
 								<% if(productList.get(i).getBrand().equals("가이거")){ %><option value="가이거" selected="selected">가이거</option><%}else{%>
                                 <option value="가이거">가이거</option><%} %>
-                                <% if(productList.get(i).getBrand().equals("디젤")){ %><option value="디젤" selected="selected">디젤</option><%}else{%>
-                                <option value="디젤">디젤</option><%} %>
-                                <% if(productList.get(i).getBrand().equals("다니엘")){ %><option value="다니엘" selected="selected">다니엘</option><%}else{%>
-                                <option value="다니엘">다니엘</option><%} %>
+                                
+                                <% if(productList.get(i).getBrand().equals("다니엘 웰링턴(남)")){ %><option value="다니엘 웰링턴(남)" selected="selected">다니엘 웰링턴(남)</option><%}else{%>
+                                <option value="다니엘 웰링턴(남)">다니엘 웰링턴(남)</option><%} %>
+                                
+                                <% if(productList.get(i).getBrand().equals("다니엘 웰링턴(여)")){ %><option value="다니엘 웰링턴(여)" selected="selected">다니엘 웰링턴(여)</option><%}else{%>
+                                <option value="다니엘 웰링턴(여)">다니엘 웰링턴(여)</option><%} %>
+                                
                                 <% if(productList.get(i).getBrand().equals("루미눅스")){ %><option value="루미눅스" selected="selected">루미눅스</option><%}else{%>
                                 <option value="루미눅스">루미눅스</option><%} %>
+                                
+                                <% if(productList.get(i).getBrand().equals("디젤")){ %><option value="디젤" selected="selected">디젤</option><%}else{%>
+                                <option value="디젤">디젤</option><%} %>
+                                
                                 <% if(productList.get(i).getBrand().equals("구찌")){ %><option value="구찌" selected="selected">구찌</option><%}else{%>
                                 <option value="구찌">구찌</option><%} %>
+                                
                                 <% if(productList.get(i).getBrand().equals("DKNY")){ %><option value="DKNY" selected="selected">DKNY</option><%}else{%>
                                 <option value="DKNY">DKNY</option><%} %>
+                                
                                 <% if(productList.get(i).getBrand().equals("마크제이콥스")){ %><option value="마크제이콥스" selected="selected">마크제이콥스</option><%}else{%>
                                 <option value="마크제이콥스">마크제이콥스</option><%} %>
+                                
                                   <% if(productList.get(i).getBrand().equals("커플시계")){ %><option value="커플시계" selected="selected">커플시계</option><%}else{%>
                                 <option value="커플시계">커플시계</option><%} %>
 						</select></td>
@@ -328,6 +338,11 @@ window.onload = function () {
 			inputCom.price.removeAttribute('readonly');
 			inputCom.delMoney.removeAttribute('readonly');
 		}else{
+			
+			
+			inputCom.price.value = Number(inputCom.price.value);
+			inputCom.saveMoney.value = Number(inputCom.saveMoney.value);
+			inputCom.delMoney.value = Number(inputCom.delMoney.value);
 			
 			var file  = inputCom.myFile;
 			var fileList = file.files;

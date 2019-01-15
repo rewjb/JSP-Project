@@ -63,6 +63,37 @@ public class CartDAO {
 			e.printStackTrace();
 		}
 	}// registerCart() : 메서드 종료
+	
+	
+	public void registerCart2(CartDTO cartdto) { //상품 디테일 페이지에서 카트에 추가하는 메소드
+
+		// 제품 아이디
+		// 회원 아이디
+		// 디테일 페이지에서 원하는 수량을 넘김
+		// 찜 및 장바구니 등록 날짜
+
+		Connection con = DBconnectMethod();
+		// DB 연결
+		String sql = "INSERT INTO CART VALUES(?,?,?,sysdate)";
+
+		// sql 문 작성
+		try {
+			// 오류 처리
+			PreparedStatement ps = con.prepareStatement(sql);
+
+			ps.setString(1, cartdto.getPid());
+			ps.setString(2, cartdto.getMid());
+			ps.setInt(3, cartdto.getQuantity());
+			
+			// 모든 값 세팅
+			ps.executeUpdate();
+			// 삽입
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}// registerCart() : 메서드 종료
+	
 
 	public ArrayList<String> selectPinfo(String mid) {
 		

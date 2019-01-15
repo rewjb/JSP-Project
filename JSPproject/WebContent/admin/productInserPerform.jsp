@@ -13,11 +13,12 @@
 <title>제품관리</title>
 </head>
 <body>
+
 	<jsp:include page="adminTop.jsp"></jsp:include>
 
 	<%
-		String path = "C:\\Users\\user\\git\\JSP-Project\\JSPproject\\WebContent\\img\\Dimage";
-
+		String path = "D:\\WebDeveloper-Jangmin2\\workspace\\JSP-Project\\JSPproject\\WebContent\\img\\Dimage";
+	
 		ProductDTO productDTO = new ProductDTO();
 
 		MultipartRequest mr = new MultipartRequest(request, path, 1100 * 6000, "UTF-8",
@@ -66,7 +67,7 @@
 	%>
 
 	<!-- 확인용  -->
-    s<!-- 	<div style="margin-top: 300px">
+    	<div style="margin-top: 300px">
 		1.
 		<%=brand%><br> 2.
 		<%=modelName%><br> 3.
@@ -78,12 +79,12 @@
 		<%=delMoney%><br> 9.
 		<%=path + "\\" + mr.getFilesystemName("myFile")%><br>
 		<%="/JSPproject/img/Dimage/" + mr.getFilesystemName("myFile")%><br>
-	</div> -->
+	</div> 
 	
 	
 	
 <script type="text/javascript">
-location.href = '/JSPproject/admin/productManager.jsp';
+//location.href = '/JSPproject/admin/productManager.jsp';
 </script>
 	
 	

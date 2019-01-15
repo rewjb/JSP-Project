@@ -27,7 +27,7 @@ public class ProductUpdateServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String path = "C:\\Users\\user\\git\\JSP-Project\\JSPproject\\WebContent\\img\\Dimage";
+		String path = "D:\\WebDeveloper-Jangmin2\\workspace\\JSP-Project\\JSPproject\\WebContent\\img\\Dimage";
 
 		MultipartRequest mr = new MultipartRequest(request, path, 1100 * 6000, "UTF-8", new DefaultFileRenamePolicy());
 
@@ -57,12 +57,12 @@ public class ProductUpdateServlet extends HttpServlet {
 
 			if (mr.getParameter("hiImgAddr").contains("Cimage")) {
 //				System.out.println("Cimage에 이미지가 있습니다.");
-				checkPath = "C:\\Users\\user\\git\\JSP-Project\\JSPproject\\WebContent\\img\\Cimage\\"
+				checkPath = "D:\\WebDeveloper-Jangmin2\\workspace\\JSP-Project\\JSPproject\\WebContent\\img\\Cimage"
 						+ mr.getParameter("hiImgAddr").split("/")[4];
 //				System.out.println("이미 저장되어 있는 이미지 주소" + checkPath);
 			} else if (mr.getParameter("hiImgAddr").contains("Dimage")) {
 //				System.out.println("Dimage에 이미지가 있습니다.");
-				checkPath = "C:\\Users\\user\\git\\JSP-Project\\JSPproject\\WebContent\\img\\Dimage\\"
+				checkPath = "D:\\WebDeveloper-Jangmin2\\workspace\\JSP-Project\\JSPproject\\WebContent\\img\\Cimage"
 						+ mr.getParameter("hiImgAddr").split("/")[4];
 //				System.out.println("이미 저장되어 있는 이미지 주소" + checkPath);
 			} else {
@@ -77,7 +77,6 @@ public class ProductUpdateServlet extends HttpServlet {
 		int price;
 		int deliverPrice;
 		int saveMoney;
-
 		if (mr.getParameter("price").equals("")) {
 			price = 0;
 		} else {
@@ -85,7 +84,7 @@ public class ProductUpdateServlet extends HttpServlet {
 		}
 
 		if (mr.getParameter("delMoney").equals("")) {
-			deliverPrice = 0;
+			deliverPrice = 0; 
 		} else {
 			deliverPrice = Integer.parseInt(mr.getParameter("delMoney"));
 		}
@@ -117,7 +116,7 @@ public class ProductUpdateServlet extends HttpServlet {
 //		System.out.println("9 :  제품 이미지 주소=" + productDTO.getImgaddr());
 //		DAO에 넘기기 전에 마지막으로 확인하는 출력
 		
-//		ProductDAO.getInstance().updateProduct(mr.getParameter("hiPID") , productDTO);
+		ProductDAO.getInstance().updateProduct(mr.getParameter("hiPID") , productDTO);
 
 	}
 

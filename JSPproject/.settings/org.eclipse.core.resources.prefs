@@ -2,6 +2,7 @@ eclipse.preferences.version=1
 encoding//WebContent/\uC1FC\uD551\uBAB0\ \uAE30\uB2A5.txt=utf8
 encoding//src/ajax/ProductUpdateServlet.java=UTF-8
 encoding//src/crawlingUtil/PullData.java=UTF-8
+encoding//src/dtodao/CartDAO.java=UTF-8
 encoding//src/dtodao/DealDAO.java=UTF-8
 encoding//src/dtodao/DealDTO.java=UTF-8
 encoding//src/dtodao/MemberDAO.java=UTF-8
