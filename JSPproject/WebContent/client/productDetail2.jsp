@@ -101,7 +101,6 @@
 
 		<ul class="tabs">
 			<li><a href="#tab1">리뷰게시판</a></li>
-			<li><a href="#tab2">문의게시판</a></li>
 		</ul>
 
 		<div class="tab_container">
@@ -175,34 +174,6 @@
 					</div>
 				</div>
 			</div>
-		
-			<div id="tab2" class="tab_content">
-			
-			<!-- 문의게시판 등록 작성 부분 -->
-					<div class="container">
-						<div class="row">
-							<div class="col-sm-4 col-md-4">
-								<div class="panel panel-default" style="width: 835px; height: 700px;">
-									<div class="panel-body">
-										<form accept-charset="UTF-8" action="QnAInsert.jsp" method="POST">
-											<textarea class="form-control counted" name="content"
-												placeholder="320자 까지 입력 가능합니다." rows="5"
-												style="margin-bottom: 10px; width: 800px; height: 130px;"></textarea>
-											<h6 class="pull-right" id="counter"></h6>
-											<input type="hidden" name="subject" value=""> <input
-												type="hidden" name="mid" value="min">
-											<input type="hidden" name="pid" value=""> <input
-												type="hidden" name="mid" value="min">
-											<button class="btn btn-info" type="submit">등록</button>
-										</form>
-										<hr style="border: double 4px lightgray;">
-
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
 			</div>
 		</div>
 

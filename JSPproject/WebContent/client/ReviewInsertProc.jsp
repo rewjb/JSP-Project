@@ -34,9 +34,9 @@
 	    document.location.href='productDetail2.jsp?center=reviewTotal.jsp&pid=<%=pid %>';
 	</script>		<%}else{%>
 		
-		<%if(session.getAttribute("mid") != null){%>
+		<%if(session.getAttribute("id") == null){%>
 			<script>
-		    alert("로그인된 사용자만 리뷰를 등록 할 수 있습니다.");
+		    alert("로그인된 사용자만 리뷰 및 문의 를 등록 할 수 있습니다.");
 		    document.location.href='productDetail2.jsp?center=reviewTotal.jsp&pid=<%=pid %>';
 			</script>
 		<%}else{%>
