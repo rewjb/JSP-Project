@@ -322,6 +322,7 @@ public class ProductDAO {
 		sqlBuffer.append(" SAVEMONEY=? ,");//7
 		sqlBuffer.append(" COMPONENTS=? ,");//8
 		sqlBuffer.append(" IMGADDR=? ");//9
+		sqlBuffer.append(" WHERE ID = ? ");//10
 
 		try {
 			// 오류 처리
@@ -335,6 +336,7 @@ public class ProductDAO {
 			ps.setInt(7, productDTO.getSaveMoney());
 			ps.setString(8, productDTO.getComponents());
 			ps.setString(9, productDTO.getImgaddr());
+			ps.setString(10, pid);
 			// 모든 값 세팅
 			ps.executeUpdate();
 			// 삽입
@@ -347,5 +349,29 @@ public class ProductDAO {
 		}
 
 	}// updateProduct() : 메서드 종료
+	
+	public void dropProduct(String pid) {
+		// 제품 페이지 이동시 제품 검색을 하는 기본적 메서드
+
+		Connection con = DBconnectMethod();
+		// DB 연결
+		
+		String sql = "DELETE FROM PRODUCT WHERE ID= ?";
+
+		try {
+			// 오류 처리
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, pid);
+			// 모든 값 세팅
+			ps.executeUpdate();
+			// 삽입
+
+			ps.close();
+			con.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}// dropProduct() : 메서드 종료
 
 }// 클래스 종료

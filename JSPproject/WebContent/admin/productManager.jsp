@@ -15,7 +15,30 @@
 	
 	<%
 	  
-	 ArrayList<ProductDTO> productList = ProductDAO.getInstance().selectAll();
+	ArrayList<ProductDTO> productList = ProductDAO.getInstance().selectAll();
+	int MaxShowCount = 30;
+	
+	int lastPage = productList.size()/MaxShowCount +1;
+	
+	int nowpage  ;
+			
+	try{
+		nowpage = Integer.parseInt(request.getParameter("page")); 
+	} catch(Exception e){
+		nowpage=1;
+	}
+	
+	int startIndex = (nowpage-1)*MaxShowCount;
+	
+	int showLastIndex;
+	
+	if(lastPage ==  nowpage){
+		showLastIndex =   startIndex + productList.size()%MaxShowCount;
+	}else{
+		showLastIndex = startIndex + MaxShowCount;
+	} 
+	
+	
 	
 	%>
 
@@ -29,8 +52,6 @@
 </nav>
 <div class="tab-content" id="nav-tabContent">
   <div class="tab-pane fade show active" id="productJoinForm" role="tabpanel" aria-labelledby="nav-home-tab">
-  
-  
   
   <form action="productInserPerform.jsp" enctype="multipart/form-data" method="POST">
   	<!--제품 등록 테이블 -->
@@ -52,7 +73,7 @@
 		<!--2행 -->      
 		<tr style="height: 50px">
 			<td style="height: 55px" >브랜드</td>
-						<td><select name="brand">
+						<td><select name="brand" >
 								<option value="가이거" selected="selected">가이거</option>
 								<option value="다니엘">다니엘</option>
 								<option value="웰링턴 디젤(남)" >웰링턴 디젤(남)</option>
@@ -92,7 +113,7 @@
   
   <script type="text/javascript">
 	var subjectch ;
-	var  inputPIDch ;
+	var inputPIDch ;
 	var pricech ;
 	var modelch ;
 	
@@ -113,12 +134,14 @@
   
   
   </div>
-  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab"> 
+  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" > 
   <!-- 제품 목록  -->
   
-  <%for(int i=0; i<30 ; ++i){ %>
+  
+  
+  <%for(int i=startIndex; i<showLastIndex ; ++i){ %>
   <form id="form<%=i%>" enctype="multipart/form-data">
-  <table style=";text-align: center;"   class="table table-striped" >
+  <table   id="table<%=i%>"  style=";text-align: center;"   class="table table-striped" >
 		<!--1행 -->
 		<tr>
 			<td>
@@ -135,7 +158,7 @@
 		<!--2행 -->      
 		<tr style="height: 50px">
 			<td style="height: 55px" >브랜드 <%=productList.get(i).getBrand()%></td>
-						<td><select name="brand"  id="brand<%=i%>" readonl>
+						<td><select name="brand"  id="brand<%=i%>" disabled="disabled">
 								<% if(productList.get(i).getBrand().equals("가이거")){ %><option value="가이거" selected="selected">가이거</option><%}else{%>
                                 <option value="가이거">가이거</option><%} %>
                                 <% if(productList.get(i).getBrand().equals("디젤")){ %><option value="디젤" selected="selected">디젤</option><%}else{%>
@@ -176,6 +199,7 @@
 			<td>배송비</td><td><input type="text" value="<%=productList.get(i).getDeliverPrice()%>" name="delMoney" id="delMoney<%=i%>" style="width:250px" onkeyup="checkDelMoney2( inputCom<%=i%>.delMoney);" readonly="readonly"> </td>
 		</tr>
 		
+		<input type="hidden" id="hiImgAddr<%=i%>" name="hiImgAddr" value="<%=productList.get(i).getImgaddr()%>">
 		<input type="hidden" id="hiPID<%=i%>" name="hiPID" value="<%=productList.get(i).getId()%>">
 		</form>
 	<script type="text/javascript">
@@ -199,6 +223,7 @@
 	 hiPID = document.getElementById('hiPID<%=i%>');
 	 form =  document.getElementById('form<%=i%>');
 	 
+	 
 	
      var inputCom<%=i%>  = { form : form , img : img , myFile : myFile, subject : subject , brand : brand, inputPID : inputPID, model : model , components : components , price : price , saveMoney : saveMoney , delMoney : delMoney , hiPID : hiPID} ;
      var checkCom<%=i%>  = {subjectch : subjectch , inputPIDch : inputPIDch ,modelch : modelch , pricech : pricech};
@@ -208,17 +233,70 @@
 		<tr>
 			<td colspan="3" style="text-align: right;">
 		<button type="button" onclick="changeTrue(inputCom<%=i%> ,checkCom<%=i%>);">수정하기</button>
-			<input type="submit" value="삭제하기" onclick="return finalCheck();">
+		<button type="button" onclick="removeProductFuntion(inputCom<%=i%>.form);">삭제하기</button>
 			</td>
 		</tr>
 	</table>
-	
 	<%}%>
+<div align="center" >
+<h1 style="display: inline-block;"><span class="badge badge-pill badge-warning"><a href="#" id="prePage">0 </a></span></h1>
+<h1 style=";display: inline-block;"><span class="badge badge-pill badge-warning"><a href="#" id="nowPage">1 </a></span></h1>
+<h1 style="display: inline-block;"><span class="badge badge-pill badge-warning"><a href="#" id="nextPage">2 </a></span></h1>
+</div>
   </div>
 </div>
 
-
 <script type="text/javascript">
+
+
+
+window.onload = function () {
+	
+	var prePageBtn = document.getElementById('prePage');
+	var nowPageBtn = document.getElementById('nowPage');
+	var nextPageBtn = document.getElementById('nextPage');
+	
+	
+	nowPageBtn.innerHTML = <%=nowpage%>;
+	
+	
+	if ( <%=nowpage%> == 1 ) {
+		prePageBtn.innerHTML = '';
+	}else {
+		prePageBtn.innerHTML = <%=nowpage%> - 1 ;
+		prePageBtn.setAttribute('href', 'productManager.jsp?page='+(<%=nowpage%> - 1));
+	}
+	
+	if (<%=nowpage%> ==  <%=lastPage%> ) {
+		nextPageBtn.innerHTML =  '';
+	}else {
+		nextPageBtn.innerHTML =  <%=nowpage%> +1 ;
+		nextPageBtn.setAttribute('href', 'productManager.jsp?page='+(<%=nowpage%> +1));
+	}
+}
+
+
+
+  function removeProductFuntion(form) {
+	  
+	  alert(form.hiPID.value);
+	  
+	  var requestRemove = new XMLHttpRequest();
+	  
+	  requestRemove.open("POST", "/JSPproject/ProductRemoveServlet?PID="+form.hiPID.value, false);
+	  requestRemove.onreadystatechange = searchProcess;
+	  requestRemove.send(null);
+	
+	  function searchProcess() {
+		  if (requestRemove.readyState == 4 && requestRemove.status == 200) {
+				alert('해당 상품이 삭제되었습니다.');
+				form.removeChild(form.firstChild);
+				form.removeChild(form.firstChild);
+			}
+	}
+  }
+
+
 
 
 
@@ -242,8 +320,8 @@
 		
 		if (inputCom.myFile.disabled == true) {
 			inputCom.myFile.removeAttribute('disabled');
+			inputCom.brand.removeAttribute('disabled');
 			inputCom.subject.removeAttribute('readonly');
-			inputCom.brand.removeAttribute('readonly');
 			inputCom.inputPID.removeAttribute('readonly');
 			inputCom.model.removeAttribute('readonly');
 			inputCom.components.removeAttribute('readonly');
@@ -263,16 +341,16 @@
 			requestUpdate.onreadystatechange = searchProcess;
 			requestUpdate.send(data);
 			
+			inputCom.hiPID.value= inputCom.inputPID.value;
+			
 			inputCom.myFile.setAttribute('disabled', 'disabled');
 			inputCom.subject.setAttribute('readonly', 'readonly');
-			inputCom.brand.setAttribute('readonly', 'readonly');
+			inputCom.brand.setAttribute('disabled', 'disabled');
 			inputCom.inputPID.setAttribute('readonly', 'readonly');
 			inputCom.model.setAttribute('readonly', 'readonly');
 			inputCom.components.setAttribute('readonly', 'readonly');
 			inputCom.price.setAttribute('readonly', 'readonly');
 			inputCom.delMoney.setAttribute('readonly', 'readonly');		
-			
-			
 		
 		}
 		
