@@ -1,3 +1,7 @@
+<%@page import="java.nio.channels.SeekableByteChannel"%>
+<%@page import="dtodao.MemberDAO"%>
+<%@page import="dtodao.ProductDetailDAO"%>
+<%@page import="dtodao.ProductDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -5,8 +9,41 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<jsp:include page="Top.jsp"></jsp:include>
 </head>
 <body>
+
+
+<jsp:useBean id="pdto" class="dtodao.ProductDTO">
+  <jsp:setProperty name="pdto" property="*" />
+</jsp:useBean>
+
+<jsp:useBean id="mdto" class="dtodao.MemberDTO">
+  <jsp:setProperty name="mdto" property="*" />
+</jsp:useBean>
+
+<%
+
+String pid = request.getParameter("pid");
+String mid = request.getParameter("mid");
+
+
+
+System.out.println(pid);
+
+
+
+ProductDetailDAO pdao = new ProductDetailDAO();
+MemberDAO mdao = new MemberDAO();
+
+pdto = pdao.getOneProduct(pid);
+mdto = mdao.getOneMember(mid);
+
+
+
+System.out.println("성공3");
+
+%>
 
 <script src="https://cdn.bootpay.co.kr/js/bootpay-2.0.20.min.js" type="application/javascript"></script>
 
@@ -15,28 +52,28 @@
 
 //실제 복사하여 사용시에는 모든 주석을 지운 후 사용하세요
 BootPay.request({
-	price: '1000', //실제 결제되는 가격
+	price: <%=pdto.getPrice()%>,//실제 결제되는 가격
 	application_id: "5c231992b6d49c67e7bf6f72",
-	name: '블링블링 마스카라', //결제창에서 보여질 이름
+	name: <%=pdto.getName()%>, //결제창에서 보여질 이름
 	pg: 'inicis',
 	method: 'card', //결제수단, 입력하지 않으면 결제수단 선택부터 화면이 시작합니다.
 	show_agree_window: 0, // 부트페이 정보 동의 창 보이기 여부
 	items: [
 		{
-			item_name: '나는 아이템', //상품명
-			qty: 1, //수량
+			item_name: <%=pdto.getName()%>, //상품명
+			qty: '1', //수량
 			unique: '123', //해당 상품을 구분짓는 primary key
-			price: 1000, //상품 단가
-			cat1: 'TOP', // 대표 상품의 카테고리 상, 50글자 이내
-			cat2: '티셔츠', // 대표 상품의 카테고리 중, 50글자 이내
-			cat3: '라운드 티', // 대표상품의 카테고리 하, 50글자 이내
+			price: <%=pdto.getPrice()%>, //상품 단가
+			cat1: '손목시계', // 대표 상품의 카테고리 상, 50글자 이내
+			cat2: '시계', // 대표 상품의 카테고리 중, 50글자 이내
+			cat3: '', // 대표상품의 카테고리 하, 50글자 이내
 		}
 	],
 	user_info: {
-		username: '장민',
-		email: 'wkdals1474@naver.com',
-		addr: '서울시 중랑구 면목동 13-16',
-		phone: '010-9049-1474'
+		username: <%=mdto.getName()%>,
+		email: <%=mdto.getEmail()%>,
+		addr: <%=mdto.getAddr()%>,
+		phone: <%=mdto.getTel()%>
 	},
 	order_id: '고유order_id_1234', //고유 주문번호로, 생성하신 값을 보내주셔야 합니다.
 	params: {callback1: '그대로 콜백받을 변수 1', callback2: '그대로 콜백받을 변수 2', customvar1234: '변수명도 마음대로'},

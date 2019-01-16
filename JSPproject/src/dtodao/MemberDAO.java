@@ -272,5 +272,41 @@ public class MemberDAO {
             e.printStackTrace();
         }
     }
+    
+    public MemberDTO getOneMember(String id) {
+		// 아이디각 존재하는지 검색
+
+		Connection con = DBconnectMethod();
+		// DB 연결
+		// sql 문 작성
+		MemberDTO memberDTO = null;
+		try {
+			// 오류 처리
+			String sql = "SELECT * FROM MEMBER  WHERE ID = ?";
+			
+			
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, id);
+			
+			ResultSet result = ps.executeQuery();
+
+
+			while (result.next()) {
+				memberDTO = new MemberDTO();
+				memberDTO.setId(result.getString("ID"));
+				memberDTO.setPw(result.getString("PW"));
+				memberDTO.setName(result.getString("NAME"));
+				memberDTO.setBirthDay(result.getString("BIRTHDAY"));
+				memberDTO.setAddr(result.getString("ADDR"));
+				memberDTO.setEmail(result.getString("EMAIL"));
+				memberDTO.setTel(result.getString("TEL"));
+			} // 비밀번호 존재시 비밀번호 반환
+
+			// 비밀번호 반환
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return memberDTO;
+	}// loginMember() : 메서드 종료
 
 }// 클래스 종료

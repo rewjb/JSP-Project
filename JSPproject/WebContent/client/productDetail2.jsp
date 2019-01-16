@@ -91,9 +91,9 @@
 			
 			<input type="hidden" name="mid" value="<%=session.getAttribute("id")%>">
 			<input type="hidden" name="pid" value="<%=pid%>">
-			<button type="submit" class="btn btn-secondary" style="width: 400px;">카트추가</button>
-			<button type="button" class="btn btn-secondary" style="width: 400px;" 
-			onclick="location.href='payment2.jsp?mid=<%=session.getAttribute("id")%>&pid=<%=pid%>&price=<%=pdto.getPrice() %>&amount&snum'" >바로 결제</button>
+			<button type="submit" class="btn btn-secondary" style="width: 400px; position: relative; left: 235px;">카트추가</button>
+			<button type="button" class="btn btn-primary" style="width: 400px; position: relative; top: 50px; right: 170px;"  
+			onclick="location.href='payment2.jsp?mid=<%=session.getAttribute("id")%>&pid=<%=pid%>'" >바로 결제</button>
 		</form>
 
 		

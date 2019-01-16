@@ -89,21 +89,27 @@
 																																																								//벡터에 저장되어 있는 빈클래스를 하나씩 추출
 																																																								ReviewDTO bean = vec.get(i);
 															%>
-															<tr>
-																<td><span style="FONT-SIZE: 12pt"><%=number--%></span></td>
-																<td><span style="FONT-SIZE: 12pt"><%=bean.getMid()%></span></td>
-<td>
+																	<tr>
+																<td><span style="FONT-SIZE: 11pt;"><%=number--%></span></td>
+																<td><span style="FONT-SIZE: 11pt;"><%=bean.getMid()%></span></td>
+																<%
+																	String checkId = bean.getMid();
+																%>
+																<td>
 																<span style="FONT-SIZE: 11pt;" >
 																<!-- 모달기능을 이용하여 리뷰 내용이 버튼으로 안으로 들어가게  만듬 -->
-																<button type="button" class="btn btn-link btn-xs" data-toggle="modal" data-target="#<%=bean.getNum()%>" onclick="checkLog();">
+																
+																<button type="button" class="btn btn-link btn-xs" data-toggle="modal" data-target="#<%=bean.getNum()%>" onclick="checkLog();" >
 																  <p><%=bean.getContent()%></p>
 																</button>
 																</span>	
 																	<div class="modal fade" id="<%=bean.getNum()%>" tabindex="-1"
 																		role="dialog" aria-labelledby="exampleModalLongTitle"
 																		aria-hidden="true">	
+																		
 																		<div class="modal-dialog" role="document">
-																			<div class="modal-content">
+																	<form action="reviewUpdate.jsp">
+																			<div class="modal-content" style="width: 680px;">
 																				<div class="modal-header">
 																					<h5 class="modal-title" id="exampleModalLongTitle">상세 리뷰</h5>
 																					<button type="button" class="close" data-dismiss="modal"
@@ -111,32 +117,35 @@
 																						<span aria-hidden="true"></span>
 																					</button>
 																				</div>
+																					
+																				
 																				<!--모달 바디에 세뷰 리뷰 내용 출력-->
 																				<div class="modal-body">
 																					 <table>
 																				        <tr>
-																				            <th width="150">작성일</th>
-																				            <td width="500"><%=bean.getReg_date()%></td>
+																				            <th style="width: 200px;">작성일</th>
+																				            <td width="500"><input type="text" name="date" value="<%=bean.getReg_date()%>" style="border: 0;" readonly="readonly"></td>
 																				        </tr>
 																				        <tr>
 																				            <th width="150">글번호</th>
-																				            <td width="500"><%=bean.getNum()%></td>
+																				            <td width="500"><input type="text" name="num" value="<%=bean.getNum()%>" style="border: 0;" readonly="readonly"></td>
 																				        </tr>
 																				        <tr>
 
 																				            <th width="150">작성자</th>
-																				            <td width="500"><%=bean.getMid()%></td>
+																				            <td width="500"><input type="text" name="mid" value="<%=bean.getMid()%>" style="border: 0;" readonly="readonly"></td>
+																				       		
 																				        </tr>
 																				           
 																				        <tr>
 																				            <th width="300">제품번호</th>
-																				            <td width="500"><%= bean.getPid() %></td>
+																				            <td width="500"><input type="text" name="pid" value="<%=bean.getPid()%>" style="border: 0;" readonly="readonly"></td>
 																				        </tr>
 																				         
 																				        <tr>
 																				            <th width="150">평점</th>
-																				            <td width="500">
-																				             <!-- 평점을 별 모양으로 바꿔주는 부분-->
+																				            <td width="500">														
+																				            <!-- 평점을 별 모양으로 바꿔주는 부분-->
 																				           		<%
 																				            
 																									if(bean.getGrade().equals(gradeNum1)){
@@ -181,67 +190,85 @@
 																				         
 																				        <tr>
 																				            <th width="150">글 내용</th>
-																				            <td width="1000"><%= bean.getContent()%></td>
+																				            <td width="1000"><textarea rows="3" cols="40" name="content" id="content<%=i%>" style="border: 0;"><%=bean.getContent()%></textarea></td>
 																				        </tr>
 																				        </table>
 
 																				</div>
 																				<div class="modal-footer">
-																					<h6>리뷰 수정과 삭제는 마이페이지 에서 하실 수 있습니다.</h6><br><br>
-																					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+																				
+																					<input type="hidden" name="date" >
+																					<input type="hidden" name="num" >
+																					<input type="hidden" name="mid">
+																					<input type="hidden" name="pid">
+																					<input type="hidden" name="grade">
+																					<input type="hidden" name="content">
+																					<button type="button" class="btn btn-secondary" onclick="location.href='reviewDelete.jsp?mid=<%=bean.getMid()%>&num=<%=bean.getNum()%>&pid=<%=bean.getPid() %>'" >삭제하기</button>
+																					<button type="button" class="btn btn-secondary" onclick="logcheck(document.getElementById('content<%=i%>') , '<%=bean.getMid()%>' )"  onloadstart="logcheck(document.getElementById('content<%=i%>'))">수정하기</button>
+																					<button type="submit" class="btn btn-secondary" >수정완료</button>
+																					<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+																					<script type="text/javascript">
+																						document.getElementById('content<%=i%>').readOnly = true;
+																					</script>											
 																				</div>
-																			</div>
+																			</div>														
+																		</form>
 																		</div>
-																	</div>															
+																	</div>
 																</td>
-																<td><span style="FONT-SIZE: 12pt"><%=bean.getGrade()%>점</span></td>
+																																	
 																<td>
-																<span style="FONT-SIZE: 12pt">
-																<!-- 평점을 별 모양으로 바꿔주는 부분-->
-																	<%
-																				            
-																		if(bean.getGrade().equals(gradeNum1)){
-																	%>
-																		<div style="CLEAR: both;	PADDING-RIGHT: 0px;	PADDING-LEFT: 0px;	BACKGROUND: url(../img/star2.gif) 0px 0px;	FLOAT: left;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	WIDTH: 90px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
-																		<p style="WIDTH: 20%; PADDING-RIGHT:0px;	PADDING-LEFT:0px;	BACKGROUND: url(../img/star.gif) 0px 0px;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
-																		</p>
-																		</div>
-																	<%
-																		}else if(bean.getGrade().equals(gradeNum2)){
-																	%>
-																		<div style="CLEAR: both;	PADDING-RIGHT: 0px;	PADDING-LEFT: 0px;	BACKGROUND: url(../img/star2.gif) 0px 0px;	FLOAT: left;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	WIDTH: 90px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
-																		<p style="WIDTH: 40%; PADDING-RIGHT:0px;	PADDING-LEFT:0px;	BACKGROUND: url(../img/star.gif) 0px 0px;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
-																		</p>
-																		</div>
-																	<%
-																		}else if(bean.getGrade().equals(gradeNum3)){
-																	%>
-																		<div style="CLEAR: both;	PADDING-RIGHT: 0px;	PADDING-LEFT: 0px;	BACKGROUND: url(../img/star2.gif) 0px 0px;	FLOAT: left;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	WIDTH: 90px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
-																		<p style="WIDTH: 60%; PADDING-RIGHT:0px;	PADDING-LEFT:0px;	BACKGROUND: url(../img/star.gif) 0px 0px;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
-																		</p>
-																		</div>
-																	<%
-																		}else if(bean.getGrade().equals(gradeNum4)){
-																	%>
-																		<div style="CLEAR: both;	PADDING-RIGHT: 0px;	PADDING-LEFT: 0px;	BACKGROUND: url(../img/star2.gif) 0px 0px;	FLOAT: left;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	WIDTH: 90px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
-																		<p style="WIDTH: 80%; PADDING-RIGHT:0px;	PADDING-LEFT:0px;	BACKGROUND: url(../img/star.gif) 0px 0px;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
-																		</p>
-																		</div>
-																	<%
-																		}else{
-																	%>
-																		<div style="CLEAR: both;	PADDING-RIGHT: 0px;	PADDING-LEFT: 0px;	BACKGROUND: url(../img/star2.gif) 0px 0px;	FLOAT: left;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	WIDTH: 90px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
-																		<p style="WIDTH: 100%; PADDING-RIGHT:0px;	PADDING-LEFT:0px;	BACKGROUND: url(../img/star.gif) 0px 0px;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
-																		</p>
-																		</div>
-																	<%
-																		}
-																	%>																
+																<span style="FONT-SIZE: 11pt;">
+																<!--  /*평점을 별 모양으로 바꿔주는 부분*/ -->
+																<%
+																	if(bean.getGrade().equals(gradeNum1)){
+																%>
+																	<div style="CLEAR: both;	PADDING-RIGHT: 0px;	PADDING-LEFT: 0px;	BACKGROUND: url(../img/star2.gif) 0px 0px;	FLOAT: left;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	WIDTH: 90px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
+																	<p style="WIDTH: 20%; PADDING-RIGHT:0px;	PADDING-LEFT:0px;	BACKGROUND: url(../img/star.gif) 0px 0px;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
+																	</p>
+																	</div>
+																<%
+																	}else if(bean.getGrade().equals(gradeNum2)){
+																%>
+																	<div style="CLEAR: both;	PADDING-RIGHT: 0px;	PADDING-LEFT: 0px;	BACKGROUND: url(../img/star2.gif) 0px 0px;	FLOAT: left;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	WIDTH: 90px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
+																	<p style="WIDTH: 40%; PADDING-RIGHT:0px;	PADDING-LEFT:0px;	BACKGROUND: url(../img/star.gif) 0px 0px;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
+																	</p>
+																	</div>
+																<%
+																	}else if(bean.getGrade().equals(gradeNum3)){
+																%>
+																	<div style="CLEAR: both;	PADDING-RIGHT: 0px;	PADDING-LEFT: 0px;	BACKGROUND: url(../img/star2.gif) 0px 0px;	FLOAT: left;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	WIDTH: 90px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
+																	<p style="WIDTH: 60%; PADDING-RIGHT:0px;	PADDING-LEFT:0px;	BACKGROUND: url(../img/star.gif) 0px 0px;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
+																	</p>
+																	</div>
+																<%
+																	}else if(bean.getGrade().equals(gradeNum4)){
+																%>
+																	<div style="CLEAR: both;	PADDING-RIGHT: 0px;	PADDING-LEFT: 0px;	BACKGROUND: url(../img/star2.gif) 0px 0px;	FLOAT: left;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	WIDTH: 90px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
+																	<p style="WIDTH: 80%; PADDING-RIGHT:0px;	PADDING-LEFT:0px;	BACKGROUND: url(../img/star.gif) 0px 0px;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
+																	</p>
+																	</div>
+																<%
+																	}else{
+																%>
+																	<div style="CLEAR: both;	PADDING-RIGHT: 0px;	PADDING-LEFT: 0px;	BACKGROUND: url(../img/star2.gif) 0px 0px;	FLOAT: left;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	WIDTH: 90px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
+																	<p style="WIDTH: 100%; PADDING-RIGHT:0px;	PADDING-LEFT:0px;	BACKGROUND: url(../img/star.gif) 0px 0px;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
+																	</p>
+																	</div>
+																<%
+																	}
+																%>
 																</span>
 																</td>
+																	
+																<td><span style="FONT-SIZE: 11pt;"><%=bean.getReg_date()%></span></td>
+															
 																<%
+															
 																 }
 																%>
+																
+																
 															</tr>
 														</tbody>
 													</table>
