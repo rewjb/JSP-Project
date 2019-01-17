@@ -17,7 +17,7 @@
 	<jsp:include page="adminTop.jsp"></jsp:include>
 
 	<%
-		String path = "D:\\WebDeveloper-Jangmin2\\workspace\\JSP-Project\\JSPproject\\WebContent\\img\\Dimage";
+		String path = "D:\\WebDeveloper-Jangmin2\\workspace\\JSP-Project\\JSPproject\\WebContent\\img\\Cimage";
 	
 		ProductDTO productDTO = new ProductDTO();
 
@@ -46,7 +46,7 @@
 		}
 
 		try {
-			productDTO.setImgaddr("/JSPproject/img/Dimage/"+ mr.getFilesystemName("myFile"));
+			productDTO.setImgaddr("/JSPproject/img/Cimage/"+ mr.getFilesystemName("myFile"));
 		} catch (Exception e) {
 			productDTO.setImgaddr("");
 		}

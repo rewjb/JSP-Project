@@ -144,7 +144,7 @@ public class SalesManagerDAO {
 
 		try {
 			// 거래 테이블과 상품 테이블의 pid를 참조해서 매달 첫 날과 마지막날 사이의 거래 내역에 해당하는 제품을 출력하는 쿼리
-			String sql = "select distinct modelname, pid, price, quantity "
+			String sql = "select distinct imgaddr, brand, modelname, price , pid, quantity "
 					+ "from deal, product "
 					+ "where deal.pid = product.id and  dealdate between '2019/01/01' and '2019/01/31' order by quantity desc, price asc";
 
@@ -159,8 +159,11 @@ public class SalesManagerDAO {
 				SalesManagerDTO dto = new SalesManagerDTO();
 
 				
-				dto.setModelName(rs.getString(1));
-				dto.setPid(rs.getString(2));
+				dto.setImgAddr(rs.getString(1));
+				dto.setBrand(rs.getString(2));
+				dto.setModelName(rs.getString(3));
+				dto.setPrice(rs.getInt(4));
+				dto.setPid(rs.getString(5));
 
 				v.add(dto);
 

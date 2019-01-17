@@ -314,6 +314,8 @@ function getRespone() {
 			</ul>
 		</nav>
 	</div>
+	
+			<jsp:include page="/footer.jsp"></jsp:include>
 
 
 	<script type="text/javascript">
@@ -348,8 +350,6 @@ function getRespone() {
 
 		}
 	}
-	
-	
 	
 	
 	

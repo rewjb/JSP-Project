@@ -38,9 +38,11 @@
 			
 			out.println("<script>");
 
-			out.println("alert('결제에 성공하셨습니다.');");
+			out.println("alert('결제 하시겠습니까?');");
+			/* out.println("alert('결제에 성공하셨습니다.');"); */
 			
-			out.println("location.href ='/JSPproject/client/privateCart.jsp';");
+			out.println("location.href ='/JSPproject/client/payment.jsp';");
+			/* out.println("location.href ='/JSPproject/client/privateCart.jsp';"); */
 
 			
 			out.println("</script>");

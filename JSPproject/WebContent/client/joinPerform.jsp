@@ -64,7 +64,7 @@
          
          // 사용자에게 보낼 메시지를 기입합니다.
 
-      	String host = "http://localhost:9999/JSPproject/";
+      	String host = "http://localhost:8080/JSPproject/";
           // 서버의 주소! 추후 변경해야 ㅎ
           
       	String from = "dbwnqls01@gmail.com";

@@ -21,9 +21,19 @@
 			if (pw.equals(realPw)) {
 
 				session.setAttribute("id", id);
-				out.println("<script type=\"text/javascript\">");
-				out.println("location.href=\"/JSPproject/index.jsp\";");
-				out.println("</script>");
+				
+				if(id.equals("root")){
+					out.println("<script type=\"text/javascript\">");
+					out.println("location.href=\"/JSPproject/admin/memberManager.jsp\";");
+					out.println("</script>");
+					
+				}else{
+					out.println("<script type=\"text/javascript\">");
+					out.println("location.href=\"/JSPproject/index.jsp\";");
+					out.println("</script>");
+				}
+				
+		
 				//다시 index 페이지로 이동
 			} else {
 				out.println("<script type=\"text/javascript\">");

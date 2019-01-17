@@ -5,16 +5,26 @@
 <%@ page import="java.net.URLEncoder"%>
 <%@ page import="java.security.SecureRandom"%>
 <%@ page import="java.math.BigInteger"%>
+<%@ page import="crawlingUtil.PullData"%>
+<%@ page import="dtodao.ProductDAO"%>
 <!DOCTYPE html>
 
 <html>
 <head>
+
+
+
 <title>제품 목록 리스트</title>
 
 <jsp:include page="/Header.jsp"></jsp:include>
 </head>
 <body>
 	<%
+	
+	    
+	
+	
+	
 		String clientId = "IcCXaLO3qfRlkqm3HRU0";//애플리케이션 클라이언트 아이디값";
 		String redirectURI = URLEncoder.encode("http://localhost:9999/JSPproject/client/loginNaverPerform.jsp",
 				"UTF-8");
@@ -140,7 +150,7 @@
 				<!-- 메인 위 화면 -->
 				<!--↓ 속성분류 , 주된 내용이 들어가는 테이블 시작-->
 
-				<table border="1" style="width: 1100px;">
+				<table style="width: 1100px;">
 					<tr>
 						<!--↓ 메인화면에 로그인 구역-->
 						<td width="200" valign="top" align="center" rowspan="2">
@@ -206,57 +216,107 @@
 						</td>
 
 						<!--로그인 하는 곳-->
-						<td valign="top"></td>
+						<td valign="top">
+						
+										<div id="autoslide" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#autoslide" data-slide-to="0" class="active"></li>
+    <li data-target="#autoslide" data-slide-to="1"></li>
+    <li data-target="#autoslide" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="img/main/slide1.png" class="img w-100">
+    </div>
+    <div class="carousel-item">
+      <img src="img/main/slide2.png" class="img w-100">
+    </div>
+    <div class="carousel-item">
+      <img src="img/main/slide3.png" class="img w-100">
+    </div>
+  </div>
+  <a class="carousel-control-prev btn-secondary" href="#autoslide" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon " aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next  btn-secondary" href="#autoslide" role="button" data-slide="next">
+    <span class="carousel-control-next-icon " aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+
+
+<table class="table table-sm">
+
+  <thead>
+    <tr>
+      <th style='text-align:center;' >순위</th>
+      <th >제품</th>
+	  <th style='text-align:center;'>브랜드</th>
+	  <th style='text-align:center;'>모델</th>
+      <th style='text-align:center;'>가격</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+  	<%
+  	int count2 = 0;
+	for(int i = 0; i <5; i++){
+		SalesManagerDTO sdto = vec.get(i);
+		count2++;
+  	%> 
+  	<tr>
+		<td style='text-align:center;vertical-align:middle'><%=count2 %>위</td>
+		<td><img src="<%=sdto.getImgAddr() %>" class="rounded float-left" alt="..." style="width: 50px; height: 50px;"></td>
+		<td style='text-align:center;vertical-align:middle'><%=sdto.getBrand() %></td>
+		<td style='text-align:center;vertical-align:middle'><%=sdto.getModelName() %></td>		                      		                        
+		<td style='text-align:center;vertical-align:middle'><%=sdto.getPrice()%></td>	                        
+	</tr>
+	<%
+		}
+	%>   
+  
+  
+<!--     <tr>
+      <th scope="row">1</th>
+      <td>TISSO</td>
+      <td>[티쏘 TISSOT] T006.408.11.057.00  르로끌 Le Locle 신형 39mm</td>
+      <td>952,000원</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>SEIKO</td>
+      <td>[세이코시계 SEIKO] 크로노그래프 Chronograph 42mm</td>
+      <td>952,000원</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>CITIZEN</td>
+      <td>[시티즌시계 CITIZEN]  / 43mm 에코드라이브 라디오컨트롤</td>
+      <td>952,000원</td>
+    </tr>
+        <tr>
+      <th scope="row">4</th>
+      <td>GUESS</td>
+      <td>[게스시계 GUESS]  남성용 메탈시계</td>
+      <td>952,000원</td>
+    </tr>
+        <tr>
+      <th scope="row">5</th>
+      <td>TISSO</td>
+      <td>[티쏘시계 TISSOT] T099.207.11.048.00  CHEMIN DES TOURELLES 슈망 데 뚜렐 여성용 32mm</td>
+      <td>952,000원</td>
+    </tr> -->
+  </tbody>
+
+</table>
+						</td>
+						
 					</tr>
 					<!--로그인 하는 곳-->
 				</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+				<jsp:include page="footer.jsp"></jsp:include>
 				</center>
-
-
 				<script>
 				<!--버튼 눌렀을 때 발생하는 색상 이벤트 -->
 					var MBest = document.getElementById('MBest');

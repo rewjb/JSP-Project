@@ -337,5 +337,6 @@
 			xBtn.className = "btn  btn-dark";
 		}
 	</script>
+		<jsp:include page="/footer.jsp"></jsp:include>
 </body>
 </html>

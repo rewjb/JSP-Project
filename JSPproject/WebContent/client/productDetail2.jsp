@@ -183,7 +183,8 @@
 			</div>
 			</div>
 		</div>
-
+		
+	
 	<script src="../js/productDetail/reviewList.js"></script>
 	<script src="../js/productDetail/jquery-1.11.3.min.js"></script>
 	<script src="../js/productDetail/star.js"></script>
@@ -191,7 +192,6 @@
 	<script src="../js/productDetail/tag.js"></script>
 	<script src="../js/productDetail/count.js"></script>
 	<script src="../js/productDetail/top.js"></script>
-	
 
 </body>
 </html>
