@@ -84,7 +84,7 @@
 	
 	
 <script type="text/javascript">
-//location.href = '/JSPproject/admin/productManager.jsp';
+location.href = '/JSPproject/admin/productManager.jsp';
 </script>
 	
 	
